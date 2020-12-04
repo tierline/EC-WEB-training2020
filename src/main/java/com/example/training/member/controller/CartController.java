@@ -1,4 +1,4 @@
-package com.example.training.controller;
+package com.example.training.member.controller;
 
 import javax.servlet.http.HttpSession;
 
@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.example.training.domain.Cart;
-import com.example.training.domain.Product;
-import com.example.training.repository.ProductRepository;
+import com.example.training.member.domain.Cart;
+import com.example.training.member.domain.Product;
+import com.example.training.member.repository.ProductRepository;
 
 /**
  * @author tsukamoto

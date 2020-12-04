@@ -1,4 +1,4 @@
-package com.example.training.domain;
+package com.example.training.member.domain;
 
 import java.util.ArrayList;
 import java.util.List;

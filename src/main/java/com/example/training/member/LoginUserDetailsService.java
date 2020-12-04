@@ -1,9 +1,9 @@
-package com.example.training;
+package com.example.training.member;
 
 import java.util.Optional;
 
-import com.example.training.domain.Member;
-import com.example.training.repository.MemberRepository;
+import com.example.training.member.domain.Member;
+import com.example.training.member.repository.MemberRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

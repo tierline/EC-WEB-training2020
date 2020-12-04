@@ -9,6 +9,10 @@ import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
+import com.example.training.member.domain.Cart;
+import com.example.training.member.domain.CartItem;
+import com.example.training.member.domain.Product;
+
 class CartTest {
 
 	@Test

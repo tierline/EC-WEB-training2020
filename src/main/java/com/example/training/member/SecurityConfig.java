@@ -1,4 +1,4 @@
-package com.example.training;
+package com.example.training.member;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;

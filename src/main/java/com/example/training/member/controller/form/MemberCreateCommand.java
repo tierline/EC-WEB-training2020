@@ -1,6 +1,6 @@
-package com.example.training.controller.form;
+package com.example.training.member.controller.form;
 
-import com.example.training.domain.Member;
+import com.example.training.member.domain.Member;
 
 public class MemberCreateCommand {
 

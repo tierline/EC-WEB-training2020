@@ -1,9 +1,9 @@
-package com.example.training;
-
-import com.example.training.domain.Member;
+package com.example.training.member;
 
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.User;
+
+import com.example.training.member.domain.Member;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
