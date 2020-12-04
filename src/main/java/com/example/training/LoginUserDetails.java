@@ -1,9 +1,9 @@
 package com.example.training;
 
+import com.example.training.domain.Employee;
+
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.User;
-
-import com.example.training.domain.Employee;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

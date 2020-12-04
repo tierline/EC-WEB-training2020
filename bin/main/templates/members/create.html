@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}">
+  <title>会員作成画面</title>
+</head>
+<body>
+  <!-- <p>会員作成画面</p>
+  <form method="POST" th:action="@{/users}" th:object="${user}">
+    <label>メールアドレス</label>
+    <input type="text" name="email" th:value="{email}" />
+    <label>パスワード</label>
+    <input type="text" name="password" th:value="*password}" />
+    <label>住所</label>
+    <input type="text" name="address" th:value="{address}" />
+  </form> -->
+  <p>会員作成画面</p>
+  <form method="POST" th:action="@{/users/create}">
+    <label>メールアドレス</label>
+    <input type="text" name="email" />
+  </form>
+</body>
+</html>
