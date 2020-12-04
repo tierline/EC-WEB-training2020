@@ -14,5 +14,5 @@ public interface MemberRepository {
 
 	public List<Member> findAll();
 
-	public void save(Member member);
+	public void create(Member member);
 }

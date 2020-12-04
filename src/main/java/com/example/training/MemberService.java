@@ -14,8 +14,8 @@ public class MemberService {
   private MemberRepository memberRepository;
 
   @Transactional
-  public void save(Member member) {
-    memberRepository.save(member);
+  public void create(Member member) {
+    memberRepository.create(member);
   }
 
 }
