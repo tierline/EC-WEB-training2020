@@ -4,6 +4,11 @@ create database training;
 
 use training;
 
+create table ADMIN (
+id int auto_increment primary key,
+password varchar(256),
+);
+
 create table MEMBERS (
 id int auto_increment primary key,
 email varchar(128),
