@@ -18,7 +18,7 @@
     </thead>
     <tbody>
       <tr th:each="member:${members}" th:object="${member}">
-        <th th:text="*{id}"></th>
+        <th th:text="*{id}" th:action="@{/members/edit}"></th>
         <th th:text="*{email}"></th>
         <th th:text="*{address}"></th>
         <th></th>
