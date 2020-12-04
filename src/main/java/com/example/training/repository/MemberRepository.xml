@@ -6,7 +6,7 @@
 <mapper
 	namespace="com.example.training.repository.MemberRepository">
 	<select id="findByEmail"
-		resultType="com.example.training.domain.Employee">
+		resultType="com.example.training.domain.Member">
 		select
 		*
 		from

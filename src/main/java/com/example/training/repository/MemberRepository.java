@@ -2,7 +2,6 @@ package com.example.training.repository;
 
 import java.util.Optional;
 
-import com.example.training.domain.Employee;
 import com.example.training.domain.Member;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -10,7 +9,7 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface MemberRepository {
 
-	Optional<Employee> findByEmail(String email);
+	Optional<Member> findByEmail(String email);
 
 	public void save(Member member);
 }

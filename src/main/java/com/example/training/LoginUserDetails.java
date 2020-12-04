@@ -1,6 +1,6 @@
 package com.example.training;
 
-import com.example.training.domain.Employee;
+import com.example.training.domain.Member;
 
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.User;
@@ -11,10 +11,10 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = false)
 public class LoginUserDetails extends User {
-	private final Employee employee;
+	private final Member member;
 
-	public LoginUserDetails(Employee employee, String role) {
-		super(employee.getEmail(), employee.getPassword(), AuthorityUtils.createAuthorityList(role));
-		this.employee = employee;
+	public LoginUserDetails(Member member, String role) {
+		super(member.getEmail(), member.getPassword(), AuthorityUtils.createAuthorityList(role));
+		this.member = member;
 	}
 }

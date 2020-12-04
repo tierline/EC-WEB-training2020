@@ -1,12 +1,12 @@
 package com.example.training.controller;
 
+import com.example.training.domain.Member;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import com.example.training.domain.Employee;
 
 @Controller
 @RequestMapping("/auth")
@@ -17,7 +17,7 @@ public class LoginController {
 	}
 
 	@PostMapping("/login")
-	public String login(@ModelAttribute("loginForm") Employee loginForm) {
+	public String login(@ModelAttribute("loginForm") Member loginForm) {
 		return "redirect:/";
 	}
 

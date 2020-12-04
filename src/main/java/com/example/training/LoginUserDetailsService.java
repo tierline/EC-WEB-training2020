@@ -2,7 +2,7 @@ package com.example.training;
 
 import java.util.Optional;
 
-import com.example.training.domain.Employee;
+import com.example.training.domain.Member;
 import com.example.training.repository.MemberRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,13 +24,13 @@ public class LoginUserDetailsService implements UserDetailsService {
 	 */
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-		Optional<Employee> employeeOpt = memberRepository.findByEmail(email);
+		Optional<Member> memberOpt = memberRepository.findByEmail(email);
 
-		if (employeeOpt.isEmpty()) {
+		if (memberOpt.isEmpty()) {
 			throw new UsernameNotFoundException("email or password");
 		}
 		String role = "ROLE_ADMIN";
 
-		return new LoginUserDetails(employeeOpt.get(), role);
+		return new LoginUserDetails(memberOpt.get(), role);
 	}
 }
