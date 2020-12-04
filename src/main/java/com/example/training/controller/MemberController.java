@@ -17,38 +17,39 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/users")
+@RequestMapping("/members")
 public class MemberController {
 
-  String redirect = "redirect:/users";
+  String redirect = "redirect:/members";
 
   @Autowired
-  private MemberService userService;
+  private MemberService memberService;
 
   @GetMapping
   public String index() {
-    return "users/index";
+    return "members/index";
   }
 
   @GetMapping("create")
   public String create() {
-    return "users/create";
+    return "members/create";
   }
 
   @GetMapping("edit")
   public String edit() {
-    return "users/edit";
+    return "members/edit";
   }
 
   /**
    * 会員（ユーザー）の作成
    */
   @PostMapping("/create")
-  public String create(@ModelAttribute("user") @Valid MemberCreateCommand command, BindingResult result, Model model) {
+  public String create(@ModelAttribute("member") @Valid MemberCreateCommand command, BindingResult result,
+      Model model) {
     if (result.hasErrors()) {
-      return ("users/create");
+      return ("members/create");
     } else {
-      userService.save(command.getMember());
+      memberService.save(command.getMember());
       return redirect;
     }
   }
