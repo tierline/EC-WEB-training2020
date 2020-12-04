@@ -3,9 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}">
   <title>会員一覧画面</title>
 </head>
 <body>
   <p>会員一覧画面</p>
+  <table class=table table-striped>
+    <thead>
+      <tr>
+        <th>id</th>
+        <th>メールアドレス</th>
+        <th>住所</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="member:${members}" th:object="${member}">
+        <th th:text="*{id}"></th>
+        <th th:text="*{email}"></th>
+        <th th:text="*{address}"></th>
+        <th></th>
+      </tr>
+    </tbody>
+  </table>
 </body>
 </html>

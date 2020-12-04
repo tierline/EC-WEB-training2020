@@ -5,6 +5,7 @@ import javax.validation.Valid;
 
 import com.example.training.MemberService;
 import com.example.training.controller.form.MemberCreateCommand;
+import com.example.training.repository.MemberRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,8 +26,12 @@ public class MemberController {
   @Autowired
   private MemberService memberService;
 
+  @Autowired
+  private MemberRepository memberRepository;
+
   @GetMapping
-  public String index() {
+  public String index(Model model) {
+    model.addAttribute("members", memberRepository.findAll());
     return "members/index";
   }
 
