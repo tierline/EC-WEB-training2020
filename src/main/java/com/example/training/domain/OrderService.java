@@ -1,4 +1,4 @@
-package com.example.training.member.domain;
+package com.example.training.domain;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.training.member.repository.OrderRepository;
+import com.example.training.repository.OrderRepository;
 
 @Service
 public class OrderService {

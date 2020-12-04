@@ -1,4 +1,4 @@
-package com.example.training.member.domain;
+package com.example.training.domain;
 
 public class CartItem {
 	private Product product;

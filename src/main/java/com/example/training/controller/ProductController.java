@@ -1,4 +1,4 @@
-package com.example.training.member.controller;
+package com.example.training.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.example.training.member.repository.ProductRepository;
+import com.example.training.repository.ProductRepository;
 
 @Controller
 @RequestMapping("/product")
