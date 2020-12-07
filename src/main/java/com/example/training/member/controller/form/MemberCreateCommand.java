@@ -1,14 +1,14 @@
-package com.example.training.member.controller.form;
+// package com.example.training.member.controller.form;
 
-import com.example.training.member.domain.Member;
+// import com.example.training.member.domain.Member;
 
-public class MemberCreateCommand {
+// public class MemberCreateCommand {
 
-  private String email;
-  private String password;
-  private String address;
+// private String email;
+// private String password;
+// private String address;
 
-  public Member getMember() {
-    return new Member();
-  }
-}
+// public Member getMember() {
+// return new Member();
+// }
+// }
