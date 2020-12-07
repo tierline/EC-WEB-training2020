@@ -1,4 +1,4 @@
-package com.example.training.member;
+package com.example.training.member.auth;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.annotation.Order;

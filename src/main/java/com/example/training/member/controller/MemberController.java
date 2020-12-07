@@ -1,7 +1,7 @@
 
 package com.example.training.member.controller;
 
-import com.example.training.member.MemberService;
+import com.example.training.member.Service.MemberService;
 import com.example.training.member.domain.Member;
 import com.example.training.member.repository.MemberRepository;
 

@@ -1,4 +1,4 @@
-package com.example.training.member;
+package com.example.training.member.auth;
 
 import java.io.IOException;
 

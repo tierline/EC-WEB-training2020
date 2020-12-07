@@ -1,7 +1,8 @@
-package com.example.training.member;
+package com.example.training.member.Service;
 
 import java.util.Optional;
 
+import com.example.training.member.auth.LoginUserDetails;
 import com.example.training.member.domain.Member;
 import com.example.training.member.repository.MemberRepository;
 

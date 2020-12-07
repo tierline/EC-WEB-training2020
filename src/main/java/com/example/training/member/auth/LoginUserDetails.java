@@ -1,4 +1,4 @@
-package com.example.training.member;
+package com.example.training.member.auth;
 
 import com.example.training.member.domain.Member;
 
