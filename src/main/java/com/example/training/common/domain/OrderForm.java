@@ -1,4 +1,4 @@
-package com.example.training.domain;
+package com.example.training.common.domain;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

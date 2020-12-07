@@ -1,4 +1,4 @@
-package com.example.training.controller;
+package com.example.training.common.controller;
 
 import java.util.List;
 
@@ -15,12 +15,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.example.training.domain.Cart;
-import com.example.training.domain.Order;
-import com.example.training.domain.OrderForm;
-import com.example.training.domain.OrderItem;
-import com.example.training.domain.OrderService;
-import com.example.training.repository.OrderRepository;
+import com.example.training.common.domain.Cart;
+import com.example.training.common.domain.Order;
+import com.example.training.common.domain.OrderForm;
+import com.example.training.common.domain.OrderItem;
+import com.example.training.common.domain.OrderService;
+import com.example.training.common.repository.OrderRepository;
 
 @Controller
 @RequestMapping("/order")

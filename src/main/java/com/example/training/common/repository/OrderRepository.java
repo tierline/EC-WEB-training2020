@@ -1,12 +1,12 @@
-package com.example.training.repository;
+package com.example.training.common.repository;
 
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import com.example.training.domain.Order;
-import com.example.training.domain.OrderItem;
+import com.example.training.common.domain.Order;
+import com.example.training.common.domain.OrderItem;
 
 @Mapper
 public interface OrderRepository {

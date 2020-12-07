@@ -1,4 +1,4 @@
-package com.example.training.repository;
+package com.example.training.common.repository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,7 +6,7 @@ import java.util.Optional;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.example.training.domain.Product;
+import com.example.training.common.domain.Product;
 
 @Mapper
 public interface ProductRepository {

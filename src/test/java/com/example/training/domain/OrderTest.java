@@ -2,6 +2,9 @@ package com.example.training.domain;
 
 import org.junit.jupiter.api.Test;
 
+import com.example.training.common.domain.Cart;
+import com.example.training.common.domain.Product;
+
 public class OrderTest {
 
 	@Test

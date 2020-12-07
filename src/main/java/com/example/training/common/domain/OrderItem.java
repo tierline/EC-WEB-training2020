@@ -1,4 +1,4 @@
-package com.example.training.domain;
+package com.example.training.common.domain;
 
 import lombok.Data;
 

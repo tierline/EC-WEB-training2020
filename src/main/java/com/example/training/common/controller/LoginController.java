@@ -1,4 +1,4 @@
-package com.example.training.controller;
+package com.example.training.common.controller;
 
 import com.example.training.member.domain.Member;
 
