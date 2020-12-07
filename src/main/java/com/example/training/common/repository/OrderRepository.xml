@@ -5,7 +5,7 @@
 
 
 <mapper
-	namespace="com.example.training.repository.OrderRepository">
+	namespace="com.example.training.common.repository.OrderRepository">
 
 	<insert id="save" useGeneratedKeys="true" keyProperty="id">
 		insert
@@ -31,7 +31,7 @@
 	</insert>
 
 	<select id="findItemsByOrder"
-		resultType="com.example.training.domain.OrderItem">
+		resultType="com.example.training.common.domain.OrderItem">
 		select
 		name, price, quantity
 		from
@@ -41,7 +41,7 @@
 	</select>
 
 	<select id="findById"
-		resultType="com.example.training.domain.Order">
+		resultType="com.example.training.common.domain.Order">
 		select
 		*
 		from

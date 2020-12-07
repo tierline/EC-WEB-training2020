@@ -1,3 +1,4 @@
+package com.example.training.admin.auth;
 // package com.example.training.admin.auth;
 
 // import com.example.training.member.LoginUserDetails;
