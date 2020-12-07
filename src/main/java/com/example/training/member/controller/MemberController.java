@@ -8,6 +8,7 @@ import com.example.training.member.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -54,13 +55,12 @@ public class MemberController {
    * 会員の作成
    */
   @PostMapping("/applicate")
-  public String create(@ModelAttribute("member") Member member) {
-    // if (result.hasErrors()) {
-    // return ("members/create");
-    // } else {
-    memberService.create(member);
-    // memberRepository.create(member, digest);
-    return redirect;
-    // }
+  public String create(@ModelAttribute("member") Member member, BindingResult bindingResult) {
+    if (bindingResult.hasErrors()) {
+      return ("members/create");
+    } else {
+      memberService.create(member);
+      return redirect;
+    }
   }
 }

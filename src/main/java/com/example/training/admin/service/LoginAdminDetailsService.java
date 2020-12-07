@@ -1,34 +1,34 @@
 package com.example.training.admin.service;
-// package com.example.training.admin.auth;
 
-// import com.example.training.member.LoginUserDetails;
-// import com.example.training.member.repository.MemberRepository;
+import java.util.Optional;
 
-// import org.springframework.beans.factory.annotation.Autowired;
-// import org.springframework.security.core.userdetails.UserDetails;
-// import org.springframework.security.core.userdetails.UserDetailsService;
-// import
-// org.springframework.security.core.userdetails.UsernameNotFoundException;
-// import org.springframework.stereotype.Service;
+import com.example.training.admin.auth.LoginAdminDetails;
+import com.example.training.admin.domain.Admin;
+import com.example.training.admin.repository.AdminRepository;
 
-// @Service
-// public class LoginAdminDetailsService implements UserDetailsService {
-// @Autowired
-// MemberRepository memberRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
-// /**
-// * 登録情報の取得
-// */
-// @Override
-// public UserDetails loadUserByUsername(String email) throws
-// UsernameNotFoundException {
-// // Optional<Member> memberOpt = memberRepository.findByEmail(email);
+@Service
+public class LoginAdminDetailsService implements UserDetailsService {
+  @Autowired
+  AdminRepository adminRepository;
 
-// // if (memberOpt.isEmpty()) {
-// // throw new UsernameNotFoundException("email or password");
-// // }
-// // String role = "ROLE_ADMIN";
+  /**
+   * 登録情報の取得
+   */
+  @Override
+  public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
+    Optional<Admin> memberOpt = adminRepository.findByName(name);
 
-// return new LoginUserDetails();
-// }
-// }
+    if (memberOpt.isEmpty()) {
+      throw new UsernameNotFoundException("email or password");
+    }
+    String role = "ROLE_ADMIN";
+
+    return new LoginAdminDetails(memberOpt.get(), role);
+  }
+}

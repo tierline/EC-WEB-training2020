@@ -20,7 +20,4 @@ public class Member {
     this.address = address;
   }
 
-  public String getEmail() {
-    return email;
-  }
 }
