@@ -3,9 +3,10 @@ package com.example.training.member.repository;
 import java.util.List;
 import java.util.Optional;
 
-import org.apache.ibatis.annotations.Mapper;
-
 import com.example.training.member.domain.Member;
+
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface MemberRepository {
@@ -14,5 +15,6 @@ public interface MemberRepository {
 
 	public List<Member> findAll();
 
-	public void create(Member member);
+	public void create(@Param("member") Member member, @Param("digest") String digest);
+	// public void create(Map<Member, String> parm);
 }

@@ -13,9 +13,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class LoginUserDetailsService implements UserDetailsService {
-	// @Autowired
-	// EmployeeExample employeeExample;
-
 	@Autowired
 	MemberRepository memberRepository;
 

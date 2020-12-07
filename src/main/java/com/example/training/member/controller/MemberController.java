@@ -1,6 +1,7 @@
 
 package com.example.training.member.controller;
 
+import com.example.training.member.MemberService;
 import com.example.training.member.domain.Member;
 import com.example.training.member.repository.MemberRepository;
 
@@ -9,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-// import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -19,11 +19,11 @@ public class MemberController {
 
   String redirect = "redirect:/members";
 
-  // @Autowired
-  // private MemberService memberService;
-
   @Autowired
   private MemberRepository memberRepository;
+
+  @Autowired
+  private MemberService memberService;
 
   /**
    * 会員一覧の表示
@@ -52,12 +52,9 @@ public class MemberController {
     // if (result.hasErrors()) {
     // return ("members/create");
     // } else {
-    // memberService.create(command.getMember());
-    memberRepository.create(member);
+    memberService.create(member);
+    // memberRepository.create(member, digest);
     return redirect;
     // }
   }
 }
-
-// @Valid MemberCreateCommand command, BindingResult
-// result

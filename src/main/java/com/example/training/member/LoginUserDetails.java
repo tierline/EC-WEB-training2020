@@ -1,9 +1,9 @@
 package com.example.training.member;
 
+import com.example.training.member.domain.Member;
+
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.User;
-
-import com.example.training.member.domain.Member;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -11,6 +11,9 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = false)
 public class LoginUserDetails extends User {
+
+	// DBより検索したMemberエンティティ
+	// アプリケーションから利用されるのでフィールドに定義
 	private final Member member;
 
 	public LoginUserDetails(Member member, String role) {

@@ -19,11 +19,11 @@
 		select * from MEMBERS
 	</select>
 
-	<insert id="create" useGeneratedKeys="true" keyProperty="id">
+	<insert id="create" useGeneratedKeys="true">
 		insert into MEMBERS (email, password, address) values (
-			"${email}",
-			"${password}",
-			"${address}"
+			"${member.email}",
+			"${digest}",
+			"${member.address}"
 		)
 	</insert>
 </mapper>
