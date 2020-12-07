@@ -34,11 +34,17 @@ public class MemberController {
     return "members/index";
   }
 
-  @GetMapping("create")
+  /**
+   * 会員作成画面の表示
+   */
+  @GetMapping("applicate")
   public String create(@ModelAttribute("member") Member member, Model model) {
-    return "members/create";
+    return "members/applicate";
   }
 
+  /**
+   * 会員編集画面の表示
+   */
   @GetMapping("edit")
   public String edit() {
     return "members/edit";
@@ -47,7 +53,7 @@ public class MemberController {
   /**
    * 会員の作成
    */
-  @PostMapping("/create")
+  @PostMapping("/applicate")
   public String create(@ModelAttribute("member") Member member) {
     // if (result.hasErrors()) {
     // return ("members/create");
