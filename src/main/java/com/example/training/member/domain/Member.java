@@ -19,4 +19,8 @@ public class Member {
     this.password = password;
     this.address = address;
   }
+
+  public String getEmail() {
+    return email;
+  }
 }

@@ -1,4 +1,4 @@
-package com.example.training.common.controller;
+package com.example.training.member.controller;
 
 import com.example.training.member.domain.Member;
 
@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/auth")
-public class LoginController {
+@RequestMapping("/auth/")
+public class MemberLoginController {
 	@GetMapping("/login")
 	public String loginForm(@ModelAttribute("member") Member member, Model model) {
 		return "/auth/login";
