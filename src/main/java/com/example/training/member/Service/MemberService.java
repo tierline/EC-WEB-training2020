@@ -21,10 +21,6 @@ public class MemberService {
   public void create(Member member) {
     String password = member.getPassword();
     String digest = passwordEncoder.encode(password);
-
-    // Map<Member, String> param = new HashMap<>();
-    // param.put("member", member);
-    // param.put("digest", digest);
     memberRepository.create(member, digest);
   }
 
