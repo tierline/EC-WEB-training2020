@@ -16,5 +16,4 @@ public interface MemberRepository {
 	public List<Member> findAll();
 
 	public void create(@Param("member") Member member, @Param("digest") String digest);
-	// public void create(Map<Member, String> parm);
 }
