@@ -15,3 +15,6 @@ use training;
 
 insert into MEMBERS(email, password, address)
 values("abc@example.com", "$2y$12$Y/SeZIzTiRji9ffrRLduFORb3p/JOzs87FfMgIaCVSBEy1XtprNLi", "hyogo");
+
+insert into ADMIN(password)
+values("$2y$12$Y/SeZIzTiRji9ffrRLduFORb3p/JOzs87FfMgIaCVSBEy1XtprNLi");

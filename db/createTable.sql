@@ -6,7 +6,7 @@ use training;
 
 create table ADMIN (
 id int auto_increment primary key,
-password varchar(256),
+password varchar(256)
 );
 
 create table MEMBERS (
