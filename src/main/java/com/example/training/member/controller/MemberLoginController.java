@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/auth/")
+@RequestMapping("/members/auth")
 public class MemberLoginController {
 	@GetMapping("/login")
 	public String loginForm(@ModelAttribute("member") Member member, Model model) {
-		return "/auth/login";
+		return "/members/auth/login";
 	}
 
 	@PostMapping("/login")

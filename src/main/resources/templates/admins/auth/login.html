@@ -19,8 +19,14 @@
       </div>
       <form th:action="@{/admins/auth/login}" th:object="${admin}" method="POST">
         <div class="form-group">
+          <label for="name">管理者名</label>
+          <!-- <input type="name" class="form-control" placeholder="Name" name="name" th:field="*{name}"> -->
+          <input type="name" class="form-control" placeholder="Name" name="name" value="admin">
+        </div>
+        <div class="form-group">
           <label for="password">パスワード</label>
-          <input type="password" class="form-control" placeholder="Password" name="password">
+          <!-- <input type="password" class="form-control" placeholder="Password" name="password" th:field="*{password}"> -->
+          <input type="password" class="form-control" placeholder="Password" name="password" value="1234">
         </div>
         <input type="submit" class="btn btn-primary" value="ログイン" />
       </form>

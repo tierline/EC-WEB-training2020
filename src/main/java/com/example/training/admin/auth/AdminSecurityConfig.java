@@ -20,18 +20,16 @@ public class AdminSecurityConfig extends WebSecurityConfigurerAdapter {
    */
   @Override
   public void configure(WebSecurity web) throws Exception {
-    web.ignoring().antMatchers("/static/**", "/webjars/**", "/js/**");
+    web.ignoring().antMatchers("/static/**", "/webjars/**", "/js/**", "/", "/members/auth/login");
   }
 
   @Override
   protected void configure(HttpSecurity http) throws Exception {
     http.csrf().disable();
-    http.sessionManagement().invalidSessionUrl("/auth/login");
-    http.authorizeRequests().antMatchers("/admins/auth/login", "/auth/login").permitAll().anyRequest().authenticated()
-        .and().formLogin().loginProcessingUrl("/auth/login").loginPage("/auth/login").failureUrl("/auth/login?error")
-        .defaultSuccessUrl("/", true).usernameParameter("name").passwordParameter("password").and().logout()
-        .logoutSuccessUrl("/auth/login");
-
+    http.sessionManagement().invalidSessionUrl("/admins/auth/login");
+    http.authorizeRequests().antMatchers("/admins/auth/login").permitAll().anyRequest().authenticated();
+    http.formLogin().loginPage("/admins/auth/login").defaultSuccessUrl("/", true).and().logout()
+        .logoutSuccessUrl("/admins/auth/login");
   }
 
   @Bean
