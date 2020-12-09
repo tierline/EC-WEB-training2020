@@ -30,7 +30,7 @@ public class MemberController {
    * 会員ログイン画面の表示
    */
   @GetMapping("/auth/login")
-  public String login() {
+  public String login(Model model) {
     return "/members/auth/login";
   }
 

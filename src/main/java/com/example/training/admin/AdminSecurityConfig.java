@@ -1,8 +1,13 @@
 package com.example.training.admin;
 
+import com.example.training.admin.auth.LoginAdminDetailsService;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -18,8 +23,12 @@ public class AdminSecurityConfig extends WebSecurityConfigurerAdapter {
   // アカウント登録時のパスワードエンコードで利用するためDI管理する。
   @Bean
   PasswordEncoder passwordEncoder() {
-  return new BCryptPasswordEncoder();
+    return new BCryptPasswordEncoder();
   }
+
+  @Autowired
+  @Qualifier("LoginAdminDetailsService")
+  private LoginAdminDetailsService service;
 
   /**
    * セキュリティの対象から外す
@@ -54,15 +63,20 @@ public class AdminSecurityConfig extends WebSecurityConfigurerAdapter {
 				.defaultSuccessUrl("/")
 			.and()
 			.logout()
-        .logoutUrl("/logout")
+        .logoutUrl("/admins/logout")
         .logoutSuccessUrl("/")
         .deleteCookies("JSESSINONID")
 				.invalidateHttpSession(true) // ログアウト時のセッション破棄を有効化
-      // .and()
-      //   .csrf()
-      //   .disable()
+      .and()
+        .csrf()
+        .disable()
 		;
 		// @formatter:on
+  }
+
+  @Override
+  protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+    auth.userDetailsService(service).passwordEncoder(new BCryptPasswordEncoder());
   }
 
 }

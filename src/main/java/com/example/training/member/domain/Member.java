@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class Member {
+  public static final String SESSION_NAME = "MEMBER";
   private int id;
   private String email;
   private String password;
