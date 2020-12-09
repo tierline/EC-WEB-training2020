@@ -41,9 +41,9 @@ public class MemberSecurityConfig extends WebSecurityConfigurerAdapter {
 		http
 			// .csrf().disable() // csrfを無効化
 			.authorizeRequests()
-				.mvcMatchers("/").permitAll()	// トップとログイン画面は誰でもアクセスできる。
-				.mvcMatchers("/members/**").hasRole("USER")	// members以下は USERロールを持つ認証ユーザのみアクセスできる。
-				.mvcMatchers("/admins/**", "/cart/list").hasRole("ADMIN") // admins以下は ADMINロールを持つ認証ユーザのみアクセスできる。
+				.mvcMatchers("/", "/search").permitAll()	// トップ画面は誰でもアクセスできる。
+				.mvcMatchers("/members/**", "/cart/list").hasRole("USER")	// members以下は USERロールを持つ認証ユーザのみアクセスできる。
+				.mvcMatchers("/admins/**").hasRole("ADMIN") // admins以下は ADMINロールを持つ認証ユーザのみアクセスできる。
 				.anyRequest().authenticated() // 上記以外は認証ユーザがアクセスできる
 			.and()
 			.formLogin()
