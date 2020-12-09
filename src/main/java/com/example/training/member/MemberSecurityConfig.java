@@ -12,7 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
-@Order(1)
+@Order(2)
 public class MemberSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	// アカウント登録時のパスワードエンコードで利用するためDI管理する。
@@ -39,24 +39,26 @@ public class MemberSecurityConfig extends WebSecurityConfigurerAdapter {
 
 		// @formatter:off
 		http
-			// .csrf().disable() // csrfを無効化
+			.mvcMatcher("/members/**")
 			.authorizeRequests()
-				.mvcMatchers("/", "/search").permitAll()	// トップ画面は誰でもアクセスできる。
-				.mvcMatchers("/members/**", "/cart/list").hasRole("USER")	// members以下は USERロールを持つ認証ユーザのみアクセスできる。
-				.mvcMatchers("/admins/**").hasRole("ADMIN") // admins以下は ADMINロールを持つ認証ユーザのみアクセスできる。
-				.anyRequest().authenticated() // 上記以外は認証ユーザがアクセスできる
+				.mvcMatchers("/members/**").hasRole("USER")	// members以下は USERロールを持つ認証ユーザのみアクセスできる。
+				.anyRequest()
+				.authenticated() // 上記以外は認証ユーザがアクセスできる
 			.and()
 			.formLogin()
+				.loginProcessingUrl("/members/auth/login")
 				.loginPage("/members/auth/login").permitAll()
 				.usernameParameter("email")
         .passwordParameter("password")
-				.loginProcessingUrl("/members/auth/login")
 				.defaultSuccessUrl("/")
 			.and()
 			.logout()
-				.invalidateHttpSession(true) // ログアウト時のセッション破棄を有効化
-				.deleteCookies("JSESSINONID")
 				.logoutSuccessUrl("/")
+				.deleteCookies("JSESSINONID")
+				.invalidateHttpSession(true) // ログアウト時のセッション破棄を有効化
+			.and()
+				.csrf()
+				.disable()
 		;
 		// @formatter:on
 	}
