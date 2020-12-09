@@ -9,7 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 
 @Configuration
 @EnableWebSecurity
-@Order(1)
+@Order(2)
 public class AdminSecurityConfig extends WebSecurityConfigurerAdapter {
 
   // // アカウント登録時のパスワードエンコードで利用するためDI管理する。
@@ -39,7 +39,7 @@ public class AdminSecurityConfig extends WebSecurityConfigurerAdapter {
       .mvcMatcher("/admins/**")
       .authorizeRequests()
         .mvcMatchers("/admins/auth/login").permitAll() // 管理者用ログイン画面は誰でもアクセス可能
-				.mvcMatchers("/admins/**", "/cart/list").hasRole("ADMIN") // admins以下は ADMINロールを持つ認証ユーザのみアクセスできる。
+				.mvcMatchers("/admins/**").hasRole("ADMIN") // admins以下は ADMINロールを持つ認証ユーザのみアクセスできる。
         .anyRequest()
         .authenticated() // 上記以外は認証ユーザのみアクセスできる
 			.and()
@@ -51,12 +51,13 @@ public class AdminSecurityConfig extends WebSecurityConfigurerAdapter {
 				.defaultSuccessUrl("/")
 			.and()
 			.logout()
+        .logoutUrl("/logout")
         .logoutSuccessUrl("/")
-				.invalidateHttpSession(true) // ログアウト時のセッション破棄を有効化
         .deleteCookies("JSESSINONID")
-      .and()
-        .csrf()
-        .disable()
+				.invalidateHttpSession(true) // ログアウト時のセッション破棄を有効化
+      // .and()
+      //   .csrf()
+      //   .disable()
 		;
 		// @formatter:on
   }

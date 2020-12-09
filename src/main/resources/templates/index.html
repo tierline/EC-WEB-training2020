@@ -18,7 +18,12 @@
         <p th:text="${#authentication.principal.password}">pasword</span>
         <p th:text="${#authentication.principal.authorities}">authorities</span>
     </div>
-    <a href="/members/auth/login">ログイン</a>
+    <p>
+        <a href="/members/auth/login">会員用ログインページ</a>
+    </p>
+    <p>
+        <a href="/admins/auth/login">管理者用ログインページ</a>
+    </p>
     <!--
     <th:block th:if="${#session != null}">
     <li class="list-group-item">sessionId: <span th:text="${#session.id}"></span></li>

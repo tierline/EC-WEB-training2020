@@ -12,7 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
-@Order(2)
+@Order(1)
 public class MemberSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	// アカウント登録時のパスワードエンコードで利用するためDI管理する。
@@ -41,24 +41,26 @@ public class MemberSecurityConfig extends WebSecurityConfigurerAdapter {
 		http
 			.mvcMatcher("/members/**")
 			.authorizeRequests()
+				.mvcMatchers("/members/auth/login").permitAll()
 				.mvcMatchers("/members/**").hasRole("USER")	// members以下は USERロールを持つ認証ユーザのみアクセスできる。
 				.anyRequest()
 				.authenticated() // 上記以外は認証ユーザがアクセスできる
 			.and()
 			.formLogin()
+				.loginPage("/members/auth/login")
 				.loginProcessingUrl("/members/auth/login")
-				.loginPage("/members/auth/login").permitAll()
 				.usernameParameter("email")
         .passwordParameter("password")
 				.defaultSuccessUrl("/")
 			.and()
 			.logout()
+			  .logoutUrl("/logout")
 				.logoutSuccessUrl("/")
 				.deleteCookies("JSESSINONID")
 				.invalidateHttpSession(true) // ログアウト時のセッション破棄を有効化
-			.and()
-				.csrf()
-				.disable()
+			// .and()
+			// 	.csrf()
+			// 	.disable()
 		;
 		// @formatter:on
 	}
