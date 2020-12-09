@@ -1,22 +1,25 @@
 package com.example.training.admin;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
-@Order(2)
+@Order(1)
 public class AdminSecurityConfig extends WebSecurityConfigurerAdapter {
 
-  // // アカウント登録時のパスワードエンコードで利用するためDI管理する。
-  // @Bean
-  // PasswordEncoder passwordEncoder() {
-  // return new BCryptPasswordEncoder();
-  // }
+  // アカウント登録時のパスワードエンコードで利用するためDI管理する。
+  @Bean
+  PasswordEncoder passwordEncoder() {
+  return new BCryptPasswordEncoder();
+  }
 
   /**
    * セキュリティの対象から外す

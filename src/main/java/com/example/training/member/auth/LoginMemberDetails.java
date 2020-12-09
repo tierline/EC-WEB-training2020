@@ -14,7 +14,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = false)
 public class LoginMemberDetails extends User {
-	// private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 	// DBより検索したMemberエンティティ
 	// アプリケーションから利用されるのでフィールドに定義
 	private Member member;
