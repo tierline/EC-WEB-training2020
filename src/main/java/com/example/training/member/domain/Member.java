@@ -8,16 +8,18 @@ public class Member {
   private String email;
   private String password;
   private String address;
+  private String roles;
 
   public Member() {
 
   }
 
-  public Member(int id, String email, String password, String address) {
+  public Member(int id, String email, String password, String address, String roles) {
     this.id = id;
     this.email = email;
     this.password = password;
     this.address = address;
+    this.roles = roles;
   }
 
 }

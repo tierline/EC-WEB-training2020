@@ -1,4 +1,4 @@
-package com.example.training.member.auth;
+package com.example.training.common;
 
 import java.io.IOException;
 
@@ -10,10 +10,10 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.example.training.common.domain.Cart;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import com.example.training.common.domain.Cart;
 
 @Component
 public class SessionFilter implements Filter {

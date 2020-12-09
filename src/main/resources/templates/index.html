@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
     <title>Hello</title>
@@ -11,7 +11,8 @@
 
     <div th:replace="header"></div>
     <div th:replace="home"></div>
-
+    <strong sec:authorize="isAuthenticated()">認証済み</strong>
+    <strong sec:authorize="!isAuthenticated()">未認証</strong>
 </body>
 
 </html>
