@@ -4,6 +4,14 @@ create database training;
 
 use training;
 
+create table ADMINS (
+id bigint auto_increment,
+name varchar(128),
+password varchar(256),
+PRIMARY KEY (id),
+UNIQUE(name)
+ );
+
 create table MEMBERS (
 id bigint auto_increment,
 email varchar(128),

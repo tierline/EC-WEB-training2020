@@ -21,12 +21,6 @@ public class MemberSecurityConfig extends WebSecurityConfigurerAdapter {
 		return new BCryptPasswordEncoder();
 	}
 
-	// // アカウント登録時のパスワードエンコードで利用するためDI管理する。
-	// @Bean
-	// PasswordEncoder passwordEncoder() {
-	// return PasswordEncoderFactories.createDelegatingPasswordEncoder();
-	// }
-
 	/**
 	 * セキュリティの対象から外す
 	 */
@@ -47,18 +41,22 @@ public class MemberSecurityConfig extends WebSecurityConfigurerAdapter {
 		http
 			// .csrf().disable() // csrfを無効化
 			.authorizeRequests()
-				.mvcMatchers("/", "/singup").permitAll()	// トップと登録画面は誰でもアクセスできる。
+				.mvcMatchers("/").permitAll()	// トップとログイン画面は誰でもアクセスできる。
 				.mvcMatchers("/members/**").hasRole("USER")	// members以下は USERロールを持つ認証ユーザのみアクセスできる。
 				.mvcMatchers("/admins/**", "/cart/list").hasRole("ADMIN") // admins以下は ADMINロールを持つ認証ユーザのみアクセスできる。
 				.anyRequest().authenticated() // 上記以外は認証ユーザがアクセスできる
 			.and()
 			.formLogin()
+				.loginPage("/members/auth/login").permitAll()
+				.usernameParameter("email")
+        .passwordParameter("password")
+				.loginProcessingUrl("/members/auth/login")
 				.defaultSuccessUrl("/")
 			.and()
 			.logout()
 				.invalidateHttpSession(true) // ログアウト時のセッション破棄を有効化
 				.deleteCookies("JSESSINONID")
-				.logoutSuccessUrl("/login")
+				.logoutSuccessUrl("/")
 		;
 		// @formatter:on
 	}

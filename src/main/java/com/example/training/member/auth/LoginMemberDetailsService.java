@@ -13,7 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
-public class LoginUserDetailsService implements UserDetailsService {
+public class LoginMemberDetailsService implements UserDetailsService {
 	@Autowired
 	MemberRepository memberRepository;
 
@@ -29,7 +29,7 @@ public class LoginUserDetailsService implements UserDetailsService {
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 		assert (email != null);
 		log.debug("loadUserByUsername(email):[{}]", email);
-		return memberRepository.findByEmail(email).map(LoginUserDetails::new)
+		return memberRepository.findByEmail(email).map(LoginMemberDetails::new)
 				.orElseThrow(() -> new UsernameNotFoundException("User not found by email:[" + email + "]"));
 	}
 }

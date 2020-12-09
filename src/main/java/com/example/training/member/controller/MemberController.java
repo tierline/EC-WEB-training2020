@@ -27,6 +27,14 @@ public class MemberController {
   private MemberService memberService;
 
   /**
+   * 会員ログイン画面の表示
+   */
+  @GetMapping("/auth/login")
+  public String login() {
+    return "/members/auth/login";
+  }
+
+  /**
    * 会員一覧の表示
    */
   @GetMapping
