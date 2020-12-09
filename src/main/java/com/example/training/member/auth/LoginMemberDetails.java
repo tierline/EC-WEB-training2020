@@ -1,14 +1,11 @@
 package com.example.training.member.auth;
 
-import java.util.Collections;
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.util.Collection;
 
 import com.example.training.member.domain.Member;
 
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.User;
 
 import lombok.Data;
@@ -28,7 +25,7 @@ public class LoginMemberDetails extends User {
 	 * @param member memberエンティティ
 	 */
 	public LoginMemberDetails(Member member) {
-		super(member.getEmail(), member.getPassword(), convertGrantedAuthorities(member.getRoles()));
+		super(member.getEmail(), member.getPassword(), createRole(member));
 		this.member = member;
 	}
 
@@ -36,19 +33,11 @@ public class LoginMemberDetails extends User {
 		return member;
 	}
 
-	/**
-	 * カンマ区切りのロールをSimpleGrantedAuthorityのコレクションへ交換する
-	 *
-	 * @parm roles カンマ区切りのロール
-	 * @return SimpleGrantedAuthorityのコレクション
-	 */
-	static Set<GrantedAuthority> convertGrantedAuthorities(String roles) {
-		if (roles == null || roles.isEmpty()) {
-			return Collections.emptySet();
-		}
-		Set<GrantedAuthority> authorities = Stream.of(roles.split(",")).map(SimpleGrantedAuthority::new)
-				.collect(Collectors.toSet());
-		return authorities;
+	private static Collection<? extends GrantedAuthority> createRole(Member member) {
+		// String authorityString = "ROLE_USER,ROLE_ADMIN";
+		String authorityString = member.getRoles();
+		return AuthorityUtils.commaSeparatedStringToAuthorityList(authorityString);
+		// return Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"));
 	}
 
 }

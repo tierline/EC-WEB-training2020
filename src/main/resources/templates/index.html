@@ -11,8 +11,21 @@
 
     <div th:replace="header"></div>
     <div th:replace="home"></div>
-    <strong sec:authorize="isAuthenticated()">認証済み</strong>
     <strong sec:authorize="!isAuthenticated()">未認証</strong>
+    <strong sec:authorize="isAuthenticated()">認証済み</strong>
+    <div sec:authorize="isAuthenticated()">
+        <p th:text="${#authentication.principal.username}">username</span>
+        <p th:text="${#authentication.principal.password}">pasword</span>
+        <p th:text="${#authentication.principal.authorities}">authorities</span>
+    </div>
+    <a href="/member/auth/login">ログイン</a>
+    <!--
+    <th:block th:if="${#session != null}">
+    <li class="list-group-item">sessionId: <span th:text="${#session.id}"></span></li>
+    <li class="list-group-item">lastAccessedTime: <span th:text="${#session.lastAccessedTime}"></span></li>
+    <li class="list-group-item">maxInactiveInterval: <span th:text="${#session.maxInactiveInterval}"></span></li>
+    </th:block> -->
+
 </body>
 
 </html>

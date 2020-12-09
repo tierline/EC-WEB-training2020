@@ -8,7 +8,7 @@ public class Member {
   private String email;
   private String password;
   private String address;
-  private String roles;
+  private String roles = "ROLE_USER";
 
   public Member() {
 
