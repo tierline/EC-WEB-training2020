@@ -7,6 +7,8 @@
 </head>
 <body>
     <div th:replace="header"></div>
+    <p sec:authorize="!isAuthenticated()">aa</p>
+    <dd sec:authentication="principal.username"></dd>
     <span>管理者用リンク</span>
     <ul>
         <li>

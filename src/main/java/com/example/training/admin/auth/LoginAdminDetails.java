@@ -34,10 +34,8 @@ public class LoginAdminDetails extends User {
   }
 
   private static Collection<? extends GrantedAuthority> createRole(Admin admin) {
-    // String authorityString = "ROLE_USER,ROLE_ADMIN";
     String authorityString = admin.getRoles();
     return AuthorityUtils.commaSeparatedStringToAuthorityList(authorityString);
-    // return Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"));
   }
 
 }
