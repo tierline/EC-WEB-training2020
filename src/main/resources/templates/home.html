@@ -15,7 +15,7 @@
           <div class="card-body">
             <h5 th:text="${item.name}" class="card-title"></h5>
             <a th:href="@{/product/detail/{id}(id=${item.id})}" class="btn btn-primary">詳細</a>
-            <a th:href="@{/cart/add/{id}(id=${item.id})}" class="btn btn-primary">カートに入れる</a>
+            <a th:href="@{/members/cart/add/{id}(id=${item.id})}" class="btn btn-primary">カートに入れる</a>
           </div>
         </div>
       </div>

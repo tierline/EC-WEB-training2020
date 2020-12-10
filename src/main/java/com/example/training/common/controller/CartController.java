@@ -18,9 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
  *
  */
 @Controller
-@RequestMapping("/cart")
+@RequestMapping("/members/cart")
 public class CartController {
-//	private Cart cart = new Cart();
+	// private Cart cart = new Cart();
 	@Autowired
 	protected HttpSession session;
 
@@ -49,7 +49,7 @@ public class CartController {
 		Product product = productRepository.findId(id).orElseThrow();
 		cart.remove(product);
 
-		return "redirect:/cart/list";
+		return "redirect:/members/cart/list";
 	}
 
 	/**
@@ -60,13 +60,13 @@ public class CartController {
 	public String doGet(Model model) {
 		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
 		model.addAttribute("cart", cart);
-		return "cart";
+		return "/members/cart";
 	}
 
 	@GetMapping("/clear")
 	public String clear() {
 		session.removeAttribute("cart");
-		return "redirect:/cart";
+		return "redirect:/members/cart";
 	}
 
 }

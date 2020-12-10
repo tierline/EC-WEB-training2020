@@ -1,22 +1,19 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Document</title>
-<link rel="stylesheet"
-	th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
 </head>
 
 <body>
 	<div th:replace="header"></div>
 	<div class="container">
-		<form action="/order/save" th:object="${orderForm}" method="post">
+		<form action="/members/order/save" th:object="${orderForm}" method="post">
 			<div class="form-row">
 				<div class="form-group col">
 					<label for="last_name">姓<span class="badge badge-danger">必須</span>

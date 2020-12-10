@@ -23,16 +23,12 @@
 				<th>削除</th>
 			</tr>
 			<tr th:each="item : ${cart.items}">
-				<td><img th:src="@{'/image/' + ${item.ProductImage}}" alt="" class="card-img-top"
-						style="width: 30%; height: 100px;"></td>
+				<td><img th:src="@{'/image/' + ${item.ProductImage}}" alt="" class="card-img-top" style="width: 30%; height: 100px;"></td>
 				<td th:text="${item.productName}"></td>
 				<td th:text="${item.ProductPrice}"></td>
 				<td th:text="${item.quantity}"></td>
 				<td>
-					<a th:href="@{/cart/delete/{id}(id=${item.productId})}" class="btn btn-primary">削除</a>
-					<!-- <form action="/cart/delete">
-						<input type="submit" name="delete" value="削除">
-					</form> -->
+					<a th:href="@{/members/cart/delete/{id}(id=${item.productId})}" class="btn btn-primary">削除</a>
 				</td>
 			</tr>
 		</table>
@@ -43,7 +39,7 @@
 	</div>
 
 	<div class="d-flex justify-content-center">
-		<a href="/order/form"><span class="btn btn-dark">注文する</span></a>
+		<a href="/members/order/form"><span class="btn btn-dark">注文する</span></a>
 	</div>
 </body>
 
