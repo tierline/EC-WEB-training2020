@@ -21,7 +21,7 @@
       </div>
     </div>
   </div>
-  <div class="text-center">
+  <div class="text-center" th:if="${session?.MEMBER?.email != null || session?.ADMIN?.name != null}">
     <form role="form" id="logout" th:action="@{/members/logout}" method="post">
       <button type="submit" class="btn btn-danger">ログアウト</button>
     </form>

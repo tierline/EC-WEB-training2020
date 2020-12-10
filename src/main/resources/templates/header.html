@@ -37,6 +37,12 @@
                 <a class="dropdown-item" href="#">サンプル</a>
             </div>
         </div>
+        <div　th:if="${session?.MEMBER?.email==null || session?.ADMIN?.name==null}">
+            <a href="/members/auth/applicate"><span class="btn btn-dark mx-2">ログイン</span></a>
+        </div>
+        <div　th:if="${session?.MEMBER?.email==null || session?.ADMIN?.name==null}">
+            <a href="/members/applicate"><span class="btn btn-dark mx-2">新規登録</span></a>
+        </div>
     </nav>
 </body>
 
