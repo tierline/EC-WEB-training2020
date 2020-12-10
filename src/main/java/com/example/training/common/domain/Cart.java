@@ -10,7 +10,7 @@ public class Cart {
 
 	/**
 	 * 商品をカートに追加する
-	 * 
+	 *
 	 * @param item 商品
 	 */
 	public void add(Product product) {
@@ -19,7 +19,7 @@ public class Cart {
 
 	/**
 	 * 商品をカートに追加する
-	 * 
+	 *
 	 * @param item     商品
 	 * @param quantity
 	 */
@@ -34,7 +34,7 @@ public class Cart {
 
 	/**
 	 * 商品をカートから削除する
-	 * 
+	 *
 	 * @param product
 	 */
 	public void remove(Product product) {
@@ -54,7 +54,7 @@ public class Cart {
 
 	/**
 	 * カートの中身の取得
-	 * 
+	 *
 	 * @return
 	 */
 	public List<CartItem> getItems() {
@@ -63,7 +63,7 @@ public class Cart {
 
 	/**
 	 * 商品が存在確認
-	 * 
+	 *
 	 * @param product
 	 * @return
 	 */
@@ -79,7 +79,7 @@ public class Cart {
 
 	/**
 	 * 合計金額の取得
-	 * 
+	 *
 	 * @return
 	 */
 	public int getTotalAmount() {

@@ -51,7 +51,7 @@ public class AdminSecurityConfig extends WebSecurityConfigurerAdapter {
   protected void configure(HttpSecurity http) throws Exception {
 
     // @formatter:off
-		http
+    http
       .mvcMatcher("/admins/**")
       .authorizeRequests()
         .mvcMatchers("/admins/auth/login").permitAll() // 管理者用ログイン画面は誰でもアクセス可能
@@ -66,7 +66,6 @@ public class AdminSecurityConfig extends WebSecurityConfigurerAdapter {
         .passwordParameter("password")
         .defaultSuccessUrl("/")
         .successHandler(adminSuccessHandler)
-
 			.and()
 			.logout()
         .logoutUrl("/admins/logout")

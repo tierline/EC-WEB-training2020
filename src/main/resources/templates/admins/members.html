@@ -7,23 +7,26 @@
   <title>会員一覧画面</title>
 </head>
 <body>
+  <div th:replace="header"></div>
   <p>会員一覧画面</p>
   <table class=table table-striped>
     <thead>
       <tr>
         <th style="width: 20%">id</th>
-        <th style="width: 60%">メールアドレス</th>
+        <th style="width: 40%">メールアドレス</th>
         <th style="width: 20%">住所</th>
+        <th style="width: 20%">権限</th>
       </tr>
     </thead>
     <tbody>
       <tr th:each="member:${members}" th:object="${member}">
-        <td th:text="*{id}" th:action="@{/members/edit}"></td>
+        <td th:text="*{id}"></td>
         <td th:text="*{email}"></td>
         <td th:text="*{address}"></td>
-      </tr>
+        <td th:text="*{roles}"></td>
     </tbody>
   </table>
   <a href="/members/applicate">新規会員登録</a>
+  <div th:replace="home"></div>
 </body>
 </html>

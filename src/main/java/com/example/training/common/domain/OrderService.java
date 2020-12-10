@@ -4,10 +4,10 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import com.example.training.common.repository.OrderRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.example.training.common.repository.OrderRepository;
 
 @Service
 public class OrderService {

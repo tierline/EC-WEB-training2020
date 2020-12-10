@@ -3,7 +3,6 @@ package com.example.training.member.controller;
 
 import com.example.training.member.Service.MemberService;
 import com.example.training.member.domain.Member;
-import com.example.training.member.repository.MemberRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,8 +19,6 @@ public class MemberController {
 
   String redirect = "redirect:/members";
 
-  @Autowired
-  private MemberRepository memberRepository;
 
   @Autowired
   private MemberService memberService;
@@ -32,15 +29,6 @@ public class MemberController {
   @GetMapping("/auth/login")
   public String login(Model model) {
     return "/members/auth/login";
-  }
-
-  /**
-   * 会員一覧の表示
-   */
-  @GetMapping
-  public String index(Model model) {
-    model.addAttribute("members", memberRepository.findAll());
-    return "members/index";
   }
 
   /**

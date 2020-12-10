@@ -8,14 +8,23 @@
 </head>
 
 <body>
-    <div th:replace=" header"></div>
+    <div th:replace="header"></div>
     <div th:replace="home"></div>
     <p>
         <a href="/members/auth/login">会員用ログインページ</a>
     </p>
-    <p>
-        <a href="/admins/auth/login">管理者用ログインページ</a>
-    </p>
+    <span>管理者用リンク</span>
+    <ul>
+        <li>
+            <a href="/admins/auth/login">管理者用ログインページ</a>
+        </li>
+        <li>
+            <a href="/admins/members">会員一覧画面</a>
+        </li>
+        <li>
+
+        </li>
+    </ul>
 </body>
 
 </html>
