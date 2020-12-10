@@ -2,16 +2,16 @@ package com.example.training.common.controller;
 
 import javax.servlet.http.HttpSession;
 
+import com.example.training.common.domain.Cart;
+import com.example.training.common.domain.Product;
+import com.example.training.common.repository.ProductRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import com.example.training.common.domain.Cart;
-import com.example.training.common.domain.Product;
-import com.example.training.common.repository.ProductRepository;
 
 /**
  * @author tsukamoto
@@ -54,7 +54,7 @@ public class CartController {
 
 	/**
 	 * 商品一覧画面の表示
-	 * 
+	 *
 	 */
 	@GetMapping("/list")
 	public String doGet(Model model) {

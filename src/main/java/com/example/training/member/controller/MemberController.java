@@ -31,6 +31,14 @@ public class MemberController {
   }
 
   /**
+   * 会員作成画面の表示
+   */
+  @GetMapping("applicate")
+  public String create(@ModelAttribute("member") Member member, Model model) {
+    return "members/applicate";
+  }
+
+  /**
    * 会員編集画面の表示
    */
   @GetMapping("edit")
@@ -42,9 +50,9 @@ public class MemberController {
    * 会員の作成
    */
   @PostMapping("/applicate")
-  public String applicate(@ModelAttribute("member") Member member, BindingResult bindingResult) {
+  public String create(@ModelAttribute("member") Member member, BindingResult bindingResult) {
     if (bindingResult.hasErrors()) {
-      return ("members/applicate");
+      return ("members/create");
     } else {
       memberService.create(member);
       return redirect;
