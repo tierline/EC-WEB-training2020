@@ -13,7 +13,12 @@ public interface MemberRepository {
 
 	Optional<Member> findByEmail(String email);
 
+	public Member findById(int id);
+
 	public List<Member> findAll();
 
 	public void create(@Param("member") Member member, @Param("digest") String digest);
+
+	public void update(@Param("member") Member member, @Param("digest") String digest,
+			@Param("lastUpdatedBy") String lastUpdatedBy);
 }

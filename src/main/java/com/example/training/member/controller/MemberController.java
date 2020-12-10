@@ -19,7 +19,6 @@ public class MemberController {
 
   String redirect = "redirect:/members";
 
-
   @Autowired
   private MemberService memberService;
 
@@ -29,14 +28,6 @@ public class MemberController {
   @GetMapping("/auth/login")
   public String login(Model model) {
     return "/members/auth/login";
-  }
-
-  /**
-   * 会員作成画面の表示
-   */
-  @GetMapping("applicate")
-  public String create(@ModelAttribute("member") Member member, Model model) {
-    return "members/applicate";
   }
 
   /**
@@ -51,9 +42,9 @@ public class MemberController {
    * 会員の作成
    */
   @PostMapping("/applicate")
-  public String create(@ModelAttribute("member") Member member, BindingResult bindingResult) {
+  public String applicate(@ModelAttribute("member") Member member, BindingResult bindingResult) {
     if (bindingResult.hasErrors()) {
-      return ("members/create");
+      return ("members/applicate");
     } else {
       memberService.create(member);
       return redirect;

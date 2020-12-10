@@ -17,6 +17,7 @@ id INT AUTO_INCREMENT,
 email VARCHAR(128),
 password VARCHAR(256),
 address VARCHAR(256),
+lastUpdatedBy VARCHAR(128),
 PRIMARY KEY (id),
 UNIQUE(email)
 );

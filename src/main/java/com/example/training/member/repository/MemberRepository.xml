@@ -15,15 +15,25 @@
 		email = "${email}"
 	</select>
 
+	<select id="findById" resultType="com.example.training.member.domain.Member">
+		select * from MEMBERS where id = "${id}"
+	</select>
+
 	<select id="findAll" resultType="com.example.training.member.domain.Member">
 		select * from MEMBERS
 	</select>
 
 	<insert id="create" useGeneratedKeys="true">
-		insert into MEMBERS (email, password, address) values (
+		insert into MEMBERS (email, password, address, lastUpdatedBy) values (
 			"${member.email}",
 			"${digest}",
 			"${member.address}"
+			""
 		)
 	</insert>
+
+	<update id="update">
+    update MEMBERS set email=#{member.email}, password=#{digest}, address=#{member.address}, lastUpdatedBy=#{lastUpdatedBy} where id= #{member.id}
+	</update>
+
 </mapper>

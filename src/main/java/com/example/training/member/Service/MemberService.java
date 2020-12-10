@@ -24,4 +24,11 @@ public class MemberService {
     memberRepository.create(member, digest);
   }
 
+  @Transactional
+  public void update(Member member, String lastUpdatedby) {
+    String password = member.getPassword();
+    String digest = passwordEncoder.encode(password);
+    memberRepository.update(member, digest, lastUpdatedby);
+  }
+
 }
