@@ -26,9 +26,8 @@ public class MainController {
 	@GetMapping("/")
 	public String index(Model model) {
 		Member member = (Member) session.getAttribute(Member.SESSION_NAME);
-		model.addAttribute("member", member);
-
 		List<Product> products = productRepository.findAll();
+		model.addAttribute("member", member);
 		model.addAttribute("products", products);
 		return "index";
 	}
