@@ -11,7 +11,8 @@
 <body>
     <nav th:fragment="header" class="navbar navbar-light bg-primary py-3 mb-3">
         <a href="/"><span class="badge badge-dark p-3">ホーム</span></a>
-        <span th:text="${member?.email}" class="navbar-text"></span>
+        <span th:text="${session?.MEMBER?.email}" class="navbar-text"></span>
+        <span th:text="${session?.ADMIN?.name}" class="navbar-text"></span>
         <form class="form-inline mx-auto" action="/search" th:object="${freeWord}" method="POST">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" name="freeWord" th:value="${value}" required>
             <button class="btn btn-dark my-2 my-sm-0" type="submit">Search</button>

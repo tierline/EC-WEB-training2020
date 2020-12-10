@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.example.training.member.domain.Member;
-import com.example.training.member.repository.MemberRepository;
+import com.example.training.admin.domain.Admin;
+import com.example.training.admin.repository.AdminRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -23,13 +23,13 @@ import org.springframework.stereotype.Component;
  *
  */
 @Component
-public class SuccessHandler implements AuthenticationSuccessHandler {
+public class AdminSuccessHandler implements AuthenticationSuccessHandler {
 
   @Autowired
   protected HttpSession session;
 
   @Autowired
-  private MemberRepository memberRepository;
+  private AdminRepository adminRepository;
 
   /**
    * 認証成功時
@@ -39,14 +39,14 @@ public class SuccessHandler implements AuthenticationSuccessHandler {
       Authentication authentication) throws IOException, ServletException {
 
     System.out.println(authentication);
+    //
     // 認証したユーザのemail
-    String email = authentication.getName();
-    Optional<Member> member = memberRepository.findByEmail(email);
-    if (member.isEmpty()) {
+    String name = authentication.getName();
+    Optional<Admin> admin = adminRepository.findByName(name);
+    if (admin.isEmpty()) {
     } else {
       // セッションにユーザ情報を格納する
-      session.setAttribute(Member.SESSION_NAME, member.get());
-      // 「/menu/」にリダイレクトする
+      session.setAttribute(Admin.SESSION_NAME, admin.get());
       response.sendRedirect(request.getContextPath() + "/");
     }
 

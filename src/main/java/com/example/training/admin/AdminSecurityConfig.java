@@ -1,5 +1,6 @@
 package com.example.training.admin;
 
+import com.example.training.AdminSuccessHandler;
 import com.example.training.admin.auth.LoginAdminDetailsService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,9 @@ public class AdminSecurityConfig extends WebSecurityConfigurerAdapter {
   PasswordEncoder passwordEncoder() {
     return new BCryptPasswordEncoder();
   }
+
+  @Autowired
+  private AdminSuccessHandler adminSuccessHandler;
 
   @Autowired
   @Qualifier("LoginAdminDetailsService")
@@ -60,7 +64,9 @@ public class AdminSecurityConfig extends WebSecurityConfigurerAdapter {
         .loginProcessingUrl("/admins/auth/login")
 				.usernameParameter("name")
         .passwordParameter("password")
-				.defaultSuccessUrl("/")
+        .defaultSuccessUrl("/")
+        .successHandler(adminSuccessHandler)
+
 			.and()
 			.logout()
         .logoutUrl("/admins/logout")
