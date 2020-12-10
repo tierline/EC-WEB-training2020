@@ -23,7 +23,7 @@ public class MemberController {
   private MemberService memberService;
 
   /**
-   * 会員ログイン画面の表示
+   * 会員のログイン画面を表示する
    */
   @GetMapping("/auth/login")
   public String login(Model model) {
@@ -31,7 +31,7 @@ public class MemberController {
   }
 
   /**
-   * 会員作成画面の表示
+   * 会員登録画面を表示する
    */
   @GetMapping("applicate")
   public String create(@ModelAttribute("member") Member member, Model model) {
@@ -39,15 +39,7 @@ public class MemberController {
   }
 
   /**
-   * 会員編集画面の表示
-   */
-  @GetMapping("edit")
-  public String edit() {
-    return "members/edit";
-  }
-
-  /**
-   * 会員の作成
+   * 会員を新規作成する
    */
   @PostMapping("/applicate")
   public String create(@ModelAttribute("member") Member member, BindingResult bindingResult) {

@@ -29,16 +29,6 @@ public class MainController {
 		return "index";
 	}
 
-	@GetMapping("/cart")
-	public String cart(Model model) {
-		return "cart";
-	}
-
-	@GetMapping("/product")
-	public String product(Model model) {
-		return "product";
-	}
-
 	/**
 	 * フリーワード検索
 	 *
