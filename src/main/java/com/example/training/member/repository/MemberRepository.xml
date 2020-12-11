@@ -24,16 +24,23 @@
 	</select>
 
 	<insert id="create" useGeneratedKeys="true">
-		insert into MEMBERS (email, password, address, lastUpdatedBy) values (
+		insert into MEMBERS (email, password, address, lastUpdatedBy, status) values (
 			"${member.email}",
 			"${digest}",
 			"${member.address}",
-			"none"
+			"none",
+			"unapproved"
 		)
 	</insert>
 
 	<update id="update">
-    update MEMBERS set email=#{member.email}, password=#{digest}, address=#{member.address}, lastUpdatedBy=#{lastUpdatedBy} where id= #{member.id}
+    update MEMBERS set
+			email=#{member.email},
+			password=#{digest},
+			address=#{member.address},
+			lastUpdatedBy=#{lastUpdatedBy},
+			status=#{member.status}
+			where id= #{member.id}
 	</update>
 
 </mapper>

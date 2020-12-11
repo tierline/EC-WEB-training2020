@@ -13,10 +13,11 @@
     <table class="table table-striped">
       <thead>
         <tr>
-          <th style="width: 20%">id</th>
+          <th style="width: 10%">id</th>
           <th style="width: 20%">メールアドレス</th>
           <th style="width: 20%">住所</th>
           <th style="width: 10%">最終編集者</th>
+          <th style="width: 10%">状態</th>
           <th style="width: 10%">権限</th>
           <th style="width: 20%"></th>
         </tr>
@@ -27,6 +28,7 @@
           <td th:text="*{email}"></td>
           <td th:text="*{address}"></td>
           <td th:text="*{lastUpdatedBy}"></td>
+          <td th:text="*{status}" class="text-danger"></td>
           <td th:text="*{roles}"></td>
           <td>
             <form>
@@ -36,7 +38,6 @@
       </tbody>
     </table>
     <div th:replace="home"></div>
-
   </div>
 </body>
 </html>

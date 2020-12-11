@@ -10,7 +10,7 @@ name VARCHAR(128),
 password VARCHAR(256),
 PRIMARY KEY (id),
 UNIQUE(name)
- );
+);
 
 CREATE TABLE members (
 id INT AUTO_INCREMENT,
@@ -18,6 +18,7 @@ email VARCHAR(128),
 password VARCHAR(256),
 address VARCHAR(256),
 lastUpdatedBy VARCHAR(128),
+status VARCHAR(32), -- 未承認:unapproved, 承認:approval --
 PRIMARY KEY (id),
 UNIQUE(email)
 );
