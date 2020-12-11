@@ -23,7 +23,7 @@ import org.springframework.stereotype.Component;
  *
  */
 @Component
-public class SuccessHandler implements AuthenticationSuccessHandler {
+public class MemberSuccessHandler implements AuthenticationSuccessHandler {
 
   @Autowired
   protected HttpSession session;
@@ -44,13 +44,11 @@ public class SuccessHandler implements AuthenticationSuccessHandler {
     Optional<Member> member = memberRepository.findByEmail(email);
     if (member.isEmpty()) {
     } else {
-
       // セッションにユーザ情報を格納する
       session.setAttribute(Member.SESSION_NAME, member.get());
       // "/"にリダイレクトする
       response.sendRedirect("/");
     }
-
   }
 
 }

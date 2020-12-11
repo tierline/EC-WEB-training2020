@@ -1,6 +1,8 @@
 
 package com.example.training.member.controller;
 
+import javax.servlet.http.HttpSession;
+
 import com.example.training.member.Service.MemberService;
 import com.example.training.member.domain.Member;
 
@@ -19,6 +21,9 @@ public class MemberController {
   String redirect = "redirect:/members";
 
   @Autowired
+  protected HttpSession session;
+
+  @Autowired
   private MemberService memberService;
 
   /**
@@ -26,7 +31,11 @@ public class MemberController {
    */
   @GetMapping("/auth/login")
   public String login(Model model) {
-    return "/members/auth/login";
+    if (session.getAttribute(Member.SESSION_NAME) == null) {
+      return "/members/auth/login";
+    } else {
+      return "redirect:/";
+    }
   }
 
   /**
@@ -34,7 +43,6 @@ public class MemberController {
    */
   @GetMapping("applicate")
   public String applicate(@ModelAttribute("member") Member member, Model model) {
-    // model.addAttribute("memberApplicateForm", memberApplicateForm);
     return "members/applicate";
   }
 
@@ -43,11 +51,7 @@ public class MemberController {
    */
   @PostMapping("/applicate")
   public String checkMemberInfo(@ModelAttribute("member") Member member) {
-    // if (bindingResult.hasErrors()) {
-    // return ("members/applicate");
-    // } else {
     memberService.create(member);
     return "redirect:/members/auth/login";
-    // }
   }
 }

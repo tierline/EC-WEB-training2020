@@ -1,6 +1,6 @@
 package com.example.training.member;
 
-import com.example.training.SuccessHandler;
+import com.example.training.MemberSuccessHandler;
 import com.example.training.member.auth.LoginMemberDetailsService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,7 @@ public class MemberSecurityConfig extends WebSecurityConfigurerAdapter {
 	private LoginMemberDetailsService service;
 
 	@Autowired
-	private SuccessHandler successHandler;
+	private MemberSuccessHandler successHandler;
 
 	/**
 	 * セキュリティの対象から外す
@@ -62,7 +62,7 @@ public class MemberSecurityConfig extends WebSecurityConfigurerAdapter {
 			.logout()
 			  .logoutUrl("/members/logout")
 				.logoutSuccessUrl("/")
-				.deleteCookies("JSESSINONID")
+				.deleteCookies("JSESSIONID")
 				.invalidateHttpSession(true) // ログアウト時のセッション破棄を有効化
 			.and()
 				.csrf()

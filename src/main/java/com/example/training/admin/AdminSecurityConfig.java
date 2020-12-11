@@ -15,6 +15,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.firewall.StrictHttpFirewall;
 
 @Configuration
 @EnableWebSecurity
@@ -39,6 +40,9 @@ public class AdminSecurityConfig extends WebSecurityConfigurerAdapter {
    */
   @Override
   public void configure(WebSecurity web) throws Exception {
+    StrictHttpFirewall firewall = new StrictHttpFirewall();
+    firewall.setAllowSemicolon(true);
+    web.httpFirewall(firewall);
     // @formatter:off
 		web
 			.ignoring()
@@ -70,7 +74,7 @@ public class AdminSecurityConfig extends WebSecurityConfigurerAdapter {
 			.logout()
         .logoutUrl("/admins/logout")
         .logoutSuccessUrl("/")
-        .deleteCookies("JSESSINONID")
+        .deleteCookies("JSESSIONID")
 				.invalidateHttpSession(true) // ログアウト時のセッション破棄を有効化
       .and()
         .csrf()
