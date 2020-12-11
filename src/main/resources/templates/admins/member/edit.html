@@ -9,22 +9,27 @@
 <body>
   <div th:replace="/admins/header :: admin-header"></div>
   <div class="container pt-5">
-    <form th:method="post" th:action="@{/admins/member/{id}/edit(id=*{id})}" th:object="${member}">
-      <div class="form-group">
-        <label>Email address</label>
-        <input type="email" class="form-control" name="email" aria-describedby="emailHelp" placeholder="Enter email" th:field="*{email}">
-        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-      </div>
-      <div class="form-group">
-        <label>Password</label>
-        <input type="password" class="form-control" name="password" placeholder="Password">
-      </div>
-      <div class="form-group">
-        <label>Address</label>
-        <input class="form-control" name="address" placeholder="Address" th:field="*{address}">
-      </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+    <div>
+      <h2>会員情報編集</h2>
+    </div>
+    <div class="pt-3">
+      <form th:method="post" th:action="@{/admins/member/{id}/edit(id=*{id})}" th:object="${member}">
+        <div class="form-group">
+          <label>Email address</label>
+          <input type="email" class="form-control" name="email" aria-describedby="emailHelp" placeholder="Enter email" th:field="*{email}">
+          <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" class="form-control" name="password" placeholder="Password">
+        </div>
+        <div class="form-group">
+          <label>Address</label>
+          <input class="form-control" name="address" placeholder="Address" th:field="*{address}">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
   </div>
   <div th:replace="home"></div>
 </body>
