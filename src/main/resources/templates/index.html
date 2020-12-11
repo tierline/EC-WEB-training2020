@@ -8,6 +8,7 @@
 <body>
 	<div th:replace="header"></div>
 	<span>管理者用リンク</span>
+	<!-- <span th:text="${#authentication?.principal?.LoginMemberDetails?.username}">username</span> -->
 	<ul>
 		<li>
 			<a href="/admins/auth/login">管理者用ログインページ</a>

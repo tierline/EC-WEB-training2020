@@ -1,6 +1,8 @@
 
 package com.example.training.member.controller;
 
+import javax.validation.Valid;
+
 import com.example.training.member.Service.MemberService;
 import com.example.training.member.domain.Member;
 import com.example.training.member.domain.MemberApplicateForm;
@@ -35,7 +37,9 @@ public class MemberController {
    * 会員登録画面を表示する
    */
   @GetMapping("applicate")
-  public String create(MemberApplicateForm memberApplicateForm, @ModelAttribute("member") Member member, Model model) {
+  public String applicate(MemberApplicateForm memberApplicateForm, @ModelAttribute("member") Member member,
+      Model model) {
+    model.addAttribute("memberApplicateForm", memberApplicateForm);
     return "members/applicate";
   }
 
@@ -43,13 +47,12 @@ public class MemberController {
    * 会員を新規登録する
    */
   @PostMapping("/applicate")
-  public String checkMemberInfo(MemberApplicateForm memberApplicateForm, @ModelAttribute("member") Member member,
+  public String checkMemberInfo(@Valid MemberApplicateForm memberApplicateForm, @ModelAttribute("member") Member member,
       BindingResult bindingResult) {
     if (bindingResult.hasErrors()) {
       return ("members/applicate");
     } else {
       memberService.create(member);
-      // return "redirect:/";
       return "redirect:/members/auth/login";
     }
   }
