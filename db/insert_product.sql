@@ -1,6 +1,6 @@
 use training;
 
-load data  local infile "./product.csv"
+load data  local infile "./test_data.csv"
 into table PRODUCT
 fields terminated by ',' enclosed by'"'
 lines terminated by '\r\n'
