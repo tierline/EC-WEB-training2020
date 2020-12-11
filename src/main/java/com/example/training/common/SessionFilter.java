@@ -30,7 +30,6 @@ public class SessionFilter implements Filter {
 			throws IOException, ServletException {
 		var cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
 		if (cart == null) {
-
 			cart = new Cart();
 			session.setAttribute(Cart.SESSION_NAME, cart);
 		}

@@ -38,7 +38,11 @@ public class AdminController {
    */
   @GetMapping("/auth/login")
   public String login() {
-    return "/admins/auth/login";
+    if (session.getAttribute(Admin.SESSION_NAME) == null) {
+      return "/admins/auth/login";
+    } else {
+      return "redirect:/";
+    }
   }
 
   /**

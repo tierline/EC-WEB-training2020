@@ -8,7 +8,6 @@ import com.example.training.member.domain.Member;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,7 +29,7 @@ public class MemberController {
    * 会員のログイン画面を表示する
    */
   @GetMapping("/auth/login")
-  public String login(Model model) {
+  public String login() {
     if (session.getAttribute(Member.SESSION_NAME) == null) {
       return "/members/auth/login";
     } else {
@@ -42,7 +41,7 @@ public class MemberController {
    * 会員登録画面を表示する
    */
   @GetMapping("applicate")
-  public String applicate(@ModelAttribute("member") Member member, Model model) {
+  public String applicate() {
     return "members/applicate";
   }
 
