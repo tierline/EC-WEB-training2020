@@ -7,19 +7,6 @@
 </head>
 <body>
 	<div th:replace="header"></div>
-	<span>管理者用リンク</span>
-	<!-- <span th:text="${#authentication?.principal?.LoginMemberDetails?.username}">username</span> -->
-	<ul>
-		<li>
-			<a href="/admins/auth/login">管理者用ログインページ</a>
-		</li>
-		<li>
-			<a href="/admins">管理者用画面</a>
-		</li>
-		<li>
-			<a href="/admins/members">会員一覧画面</a>
-		</li>
-	</ul>
 	<div th:replace="home"></div>
 </body>
 </html>
