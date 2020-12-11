@@ -1,12 +1,10 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-<title>Hello</title>
-<meta charset="utf-8" />
-<link rel="stylesheet"
-	th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}">
+	<title>Hello</title>
+	<meta charset="utf-8" />
+	<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}">
 <body>
 	<div th:replace="header"></div>
 
@@ -26,7 +24,7 @@
 							<td th:text="*{product.price}">単価</td>
 						</tr>
 						<tr>
-							<form action="/cart">
+							<form action="/members/cart">
 								<td>数量</td>
 								<td><input type="hidden" name="" id=""></td>
 								<td><input type="number" min="0"></td>

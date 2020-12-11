@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper
+	namespace="com.example.training.common.repository.OrderRepository">
+
+	<insert id="save" useGeneratedKeys="true" keyProperty="id">
+		insert
+		into ORDERS (phone, name, address, email, price, date)
+		values(
+		"${phone}",
+		"${name}",
+		"${address}",
+		"${email}",
+		${price},
+		"${date}")
+	</insert>
+
+	<insert id="saveItem">
+		insert into ORDER_ITEMS (order_id, name, price,
+		quantity)
+		values(
+		${id},
+		"${item.name}",
+		${item.price},
+		${item.quantity}
+		)
+	</insert>
+
+	<select id="findItemsByOrder"
+		resultType="com.example.training.common.domain.OrderItem">
+		select
+		name, price, quantity
+		from
+		ORDER_ITEMS
+		where order_id = ${id}
+
+	</select>
+
+	<select id="findById"
+		resultType="com.example.training.common.domain.Order">
+		select
+		*
+		from
+		ORDERS
+		where id = ${id}
+
+	</select>
+</mapper>

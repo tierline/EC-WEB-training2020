@@ -14,6 +14,3 @@ echo -------create table--------
 mysql --defaults-extra-file=root.conf < insert_product.txt
 
 echo ------- finish--------
-
-
-
