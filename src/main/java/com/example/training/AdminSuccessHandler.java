@@ -47,7 +47,7 @@ public class AdminSuccessHandler implements AuthenticationSuccessHandler {
     } else {
       // セッションにユーザ情報を格納する
       session.setAttribute(Admin.SESSION_NAME, admin.get());
-      response.sendRedirect(request.getContextPath() + "/");
+      response.sendRedirect("/admins");
     }
 
   }

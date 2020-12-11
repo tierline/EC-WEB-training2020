@@ -9,6 +9,7 @@ public class Member {
   private String email;
   private String password;
   private String address;
+  private String lastUpdatedBy;
   private String roles = "ROLE_USER";
 
   public Member() {
@@ -20,6 +21,7 @@ public class Member {
     this.email = email;
     this.password = password;
     this.address = address;
+    this.lastUpdatedBy = lastUpdatedBy;
     this.roles = roles;
   }
 

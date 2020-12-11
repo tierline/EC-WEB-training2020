@@ -1,26 +1,24 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-    <title>Hello</title>
-    <meta charset="utf-8" />
-    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}">
+	<title>Hello</title>
+	<meta charset="utf-8" />
+	<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}">
 </head>
 <body>
-    <div th:replace="header"></div>
-    <p sec:authorize="!isAuthenticated()">aa</p>
-    <dd sec:authentication="principal.username"></dd>
-    <span>管理者用リンク</span>
-    <ul>
-        <li>
-            <a href="/admins/auth/login">管理者用ログインページ</a>
-        </li>
-        <li>
-            <a href="/admins/members">会員一覧画面</a>
-        </li>
-        <li>
-
-        </li>
-    </ul>
-    <div th:replace="home"></div>
+	<div th:replace="header"></div>
+	<span>管理者用リンク</span>
+	<ul>
+		<li>
+			<a href="/admins/auth/login">管理者用ログインページ</a>
+		</li>
+		<li>
+			<a href="/admins">管理者用画面</a>
+		</li>
+		<li>
+			<a href="/admins/members">会員一覧画面</a>
+		</li>
+	</ul>
+	<div th:replace="home"></div>
 </body>
 </html>

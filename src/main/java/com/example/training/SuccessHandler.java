@@ -46,8 +46,8 @@ public class SuccessHandler implements AuthenticationSuccessHandler {
     } else {
       // セッションにユーザ情報を格納する
       session.setAttribute(Member.SESSION_NAME, member.get());
-      // 「/menu/」にリダイレクトする
-      response.sendRedirect(request.getContextPath() + "/");
+      // "/"にリダイレクトする
+      response.sendRedirect("/");
     }
 
   }

@@ -3,6 +3,7 @@ package com.example.training.member.controller;
 
 import com.example.training.member.Service.MemberService;
 import com.example.training.member.domain.Member;
+import com.example.training.member.domain.MemberApplicateForm;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,20 +35,22 @@ public class MemberController {
    * 会員登録画面を表示する
    */
   @GetMapping("applicate")
-  public String create(@ModelAttribute("member") Member member, Model model) {
+  public String create(MemberApplicateForm memberApplicateForm, @ModelAttribute("member") Member member, Model model) {
     return "members/applicate";
   }
 
   /**
-   * 会員を新規作成する
+   * 会員を新規登録する
    */
   @PostMapping("/applicate")
-  public String create(@ModelAttribute("member") Member member, BindingResult bindingResult) {
+  public String checkMemberInfo(MemberApplicateForm memberApplicateForm, @ModelAttribute("member") Member member,
+      BindingResult bindingResult) {
     if (bindingResult.hasErrors()) {
-      return ("members/create");
+      return ("members/applicate");
     } else {
       memberService.create(member);
-      return redirect;
+      // return "redirect:/";
+      return "redirect:/members/auth/login";
     }
   }
 }

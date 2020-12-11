@@ -28,7 +28,7 @@ public class AdminController {
   @Autowired
   private MemberService memberService;
 
-  @GetMapping("/")
+  @GetMapping()
   public String index() {
     return "/admins/index";
   }
@@ -67,7 +67,7 @@ public class AdminController {
     Admin admin = (Admin) session.getAttribute(Admin.SESSION_NAME);
     String lastUpdatedby = admin.getName();
     memberService.update(member, lastUpdatedby);
-    return "index";
+    return "redirect:/admins/members";
   }
 
 }

@@ -27,8 +27,8 @@
 		insert into MEMBERS (email, password, address, lastUpdatedBy) values (
 			"${member.email}",
 			"${digest}",
-			"${member.address}"
-			""
+			"${member.address}",
+			"none"
 		)
 	</insert>
 

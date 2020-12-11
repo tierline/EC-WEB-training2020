@@ -64,7 +64,7 @@ public class AdminSecurityConfig extends WebSecurityConfigurerAdapter {
         .loginProcessingUrl("/admins/auth/login")
 				.usernameParameter("name")
         .passwordParameter("password")
-        .defaultSuccessUrl("/")
+        .defaultSuccessUrl("/admins")
         .successHandler(adminSuccessHandler)
 			.and()
 			.logout()

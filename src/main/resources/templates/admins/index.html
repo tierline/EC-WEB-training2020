@@ -6,6 +6,14 @@
   <title>Document</title>
 </head>
 <body>
-  <p>管理者用ページ</p>
+  <div th:replace="/admins/header :: admin-header"></div>
+  <div class="container pt-5">
+    <h1>管理者権限</h1>
+    <ul class="list-group">
+      <li class="list-group-item"><a href="/admins/members">会員一覧画面</a></li>
+    </ul>
+    <div th:replace="home">
+    </div>
+  </div>
 </body>
 </html>
