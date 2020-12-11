@@ -8,41 +8,27 @@
 </head>
 <body>
   <div th:replace="header"></div>
-  <div class="container">
-    <div class="card card-primary mb-3">
-      <div class="card-header">
-        <h5 class="card-title">会員登録</h5>
-      </div>
-      <div class="card-body">
-        <form th:method="post" th:action="@{/members/applicate}" th:object="${member}">
-          <div class="form-group row">
-            <label class="col-md-2 control-label">メールアドレス</label>
-            <div class="col-md-10">
-              <input class="form-control" type="text" name="email" th:value="*{email}" />
-              <div class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
-            </div>
-          </div>
-          <div class="form-group row">
-            <label class="col-md-2 control-label">パスワード</label>
-            <div class="col-md-10">
-              <input class="form-control" type="text" name="password" th:value="*{password}" />
-              <div class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
-            </div>
-          </div>
-          <div class="form-group row">
-            <label class="col-md-2 control-label">住所</label>
-            <div class="col-md-10">
-              <input class="form-control" type="text" name="address" th:value="*{address}" />
-              <div class="text-danger" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></div>
-            </div>
-          </div>
-          <div class="form-group row">
-            <div class="offset-md-10">
-              <button class="btn btn-primary">作成</button>
-            </div>
-          </div>
-        </form>
-      </div>
+  <div class="container pt-5">
+    <div>
+      <h2>会員登録</h2>
+    </div>
+    <div class="pt-3">
+      <form th:method="post" th:action="@{/members/applicate}" th:object="${member}">
+        <div class="form-group">
+          <label>Email address</label>
+          <input type="email" class="form-control" name="email" aria-describedby="emailHelp" placeholder="Enter email" th:value="*{email}">
+          <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" class="form-control" name="password" placeholder="Password" th:value="*{password}">
+        </div>
+        <div class="form-group">
+          <label>Address</label>
+          <input class="form-control" name="address" placeholder="Address" th:value="*{address}">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
     </div>
   </div>
   <div th:replace="home"></div>
