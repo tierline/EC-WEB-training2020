@@ -8,6 +8,7 @@ import com.example.training.common.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -27,5 +28,10 @@ public class RestApiController {
 	public List<Product> product() {
 		List<Product> items = productRepository.findAll();
 		return items;
+	}
+
+	@PostMapping("/post")
+	public String post() {
+		return "posted";
 	}
 }
