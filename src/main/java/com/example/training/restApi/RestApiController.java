@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,7 +33,7 @@ public class RestApiController {
 	private MemberRepository memberRepository;
 
 	@Autowired
-	private PasswordEncoder passwordEncoder;
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	@GetMapping("/common/products")
 	public List<Product> product() {
@@ -51,9 +51,13 @@ public class RestApiController {
 	@PostMapping("/members/auth/login")
 	@ResponseBody
 	public Boolean login(@RequestBody Member member) {
+		String password = member.getPassword();
 		Optional<Member> memberDetail = memberRepository.findByEmail(member.getEmail());
 		if (memberDetail.isPresent()) {
-			return true;
+			var result = bCryptPasswordEncoder.matches(password, memberDetail.get().getPassword());
+			if (result) {
+				return true;
+			}
 		}
 		return false;
 	}
