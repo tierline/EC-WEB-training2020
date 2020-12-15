@@ -42,12 +42,12 @@ public class ApiMembersAuthConntroller {
 		String password = member.getPassword();
 		Optional<Member> memberDetail = memberRepository.findByEmail(member.getEmail());
 		if (memberDetail.isPresent()) {
-			var result = bCryptPasswordEncoder.matches(password, memberDetail.get().getPassword());
-			if (result) {
-				return true;
-			}
+			String hashPassword = memberDetail.get().getPassword();
+			Boolean result = bCryptPasswordEncoder.matches(password, hashPassword);
+			return result;
 		}
 		return false;
+
 	}
 
 }
