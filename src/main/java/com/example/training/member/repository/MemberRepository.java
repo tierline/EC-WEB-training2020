@@ -3,10 +3,10 @@ package com.example.training.member.repository;
 import java.util.List;
 import java.util.Optional;
 
-import com.example.training.member.domain.Member;
-
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+
+import com.example.training.member.domain.Member;
 
 @Mapper
 public interface MemberRepository {
@@ -21,4 +21,5 @@ public interface MemberRepository {
 
 	public void update(@Param("member") Member member, @Param("digest") String digest,
 			@Param("lastUpdatedBy") String lastUpdatedBy);
+
 }

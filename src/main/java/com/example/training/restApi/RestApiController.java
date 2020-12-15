@@ -19,14 +19,10 @@ public class RestApiController {
 	@Autowired
 	private ProductRepository productRepository;
 
-	@GetMapping("/hello")
-	public String hello() {
-		return "hello";
-	}
-
-	@GetMapping("/products")
+	@GetMapping("/common/products")
 	public List<Product> product() {
 		List<Product> items = productRepository.findAll();
 		return items;
 	}
+
 }
