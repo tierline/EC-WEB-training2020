@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import org.apache.ibatis.annotations.Mapper;
-
 import com.example.training.common.domain.Product;
+
+import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface ProductRepository {
