@@ -26,7 +26,7 @@ public class MemberController {
   private MemberService memberService;
 
   /**
-   * 会員のログイン画面を表示する
+   * 会員のログインページを表示する
    */
   @GetMapping("/auth/login")
   public String login() {
@@ -38,7 +38,7 @@ public class MemberController {
   }
 
   /**
-   * 会員登録画面を表示する
+   * 会員登録ページを表示する
    */
   @GetMapping("applicate")
   public String applicate() {
