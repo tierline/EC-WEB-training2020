@@ -17,7 +17,7 @@ import com.example.training.member.repository.MemberRepository;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/api/members/auth")
+@RequestMapping("/api/member")
 public class ApiMembersAuthConntroller {
 
 	@Autowired

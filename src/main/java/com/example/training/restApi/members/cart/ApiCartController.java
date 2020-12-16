@@ -2,10 +2,6 @@ package com.example.training.restApi.members.cart;
 
 import javax.servlet.http.HttpSession;
 
-import com.example.training.common.domain.Cart;
-import com.example.training.common.domain.Product;
-import com.example.training.common.repository.ProductRepository;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,36 +10,40 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.training.common.domain.Cart;
+import com.example.training.common.domain.Product;
+import com.example.training.common.repository.ProductRepository;
+
 @CrossOrigin
 @RestController
-@RequestMapping("/api/members/cart")
+@RequestMapping("/api/member/cart")
 public class ApiCartController {
 
-  @Autowired
-  private HttpSession session;
+	@Autowired
+	private HttpSession session;
 
-  @Autowired
-  private ProductRepository productRepository;
+	@Autowired
+	private ProductRepository productRepository;
 
-  /**
-   * @return カートに商品の追加
-   */
-  @PostMapping("/add/{id}")
-  public String add(@PathVariable int id) {
-    Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
-    Product product = productRepository.findId(id).orElseThrow();
-    cart.add(product);
+	/**
+	 * @return カートに商品の追加
+	 */
+	@PostMapping("/add/{id}")
+	public String add(@PathVariable int id) {
+		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
+		Product product = productRepository.findId(id).orElseThrow();
+		cart.add(product);
 
-    session.setAttribute(Cart.SESSION_NAME, cart);
-    return "id番号" + id + "の商品" + product + "をカートに保存しました";
-  }
+		session.setAttribute(Cart.SESSION_NAME, cart);
+		return "id番号" + id + "の商品" + product + "をカートに保存しました";
+	}
 
-  /**
-   * @return セッション情報を見る
-   */
-  @GetMapping("/show")
-  public Object show() {
-    Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
-    return cart;
-  }
+	/**
+	 * @return セッション情報を見る
+	 */
+	@GetMapping("/show")
+	public Object show() {
+		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
+		return cart;
+	}
 }
