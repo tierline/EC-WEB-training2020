@@ -52,10 +52,10 @@ public class ApiCartController {
   }
 
   /**
-   * @return セッション情報を見る
+   * @return カート内の商品
    */
-  @GetMapping("/show")
-  public Object show() {
+  @GetMapping("/list")
+  public Object list() {
     Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
     return cart;
   }

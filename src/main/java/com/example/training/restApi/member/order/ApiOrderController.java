@@ -1,17 +1,18 @@
 package com.example.training.restApi.member.order;
 
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 
-import com.example.training.common.domain.OrderForm;
 import com.example.training.common.domain.OrderService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+@CrossOrigin
+@RestController
+@RequestMapping("/api/member/order")
 public class ApiOrderController {
 
   @Autowired
@@ -23,9 +24,9 @@ public class ApiOrderController {
   /**
    * 注文処理を行う
    */
-  @PostMapping("/api/member/order/save")
-  public String save(@ModelAttribute("orderForm") @Valid OrderForm orderForm, BindingResult result, Model model) {
-    return "注文処理を行いました";
+  @PostMapping("/save")
+  public String save() {
+    return "注文処理を行いました 住所は...";
   }
 
   // /**
