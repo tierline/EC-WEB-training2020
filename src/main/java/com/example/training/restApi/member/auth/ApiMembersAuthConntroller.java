@@ -1,4 +1,4 @@
-package com.example.training.restApi.members.auth;
+package com.example.training.restApi.member.auth;
 
 import java.util.Optional;
 
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/api/members/auth")
+@RequestMapping("/api/member")
 public class ApiMembersAuthConntroller {
 
   @Autowired

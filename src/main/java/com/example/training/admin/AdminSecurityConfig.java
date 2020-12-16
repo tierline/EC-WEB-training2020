@@ -56,23 +56,23 @@ public class AdminSecurityConfig extends WebSecurityConfigurerAdapter {
 
     // @formatter:off
     http
-      .mvcMatcher("/admins/**")
+      .mvcMatcher("/admin/**")
       .authorizeRequests()
-        .mvcMatchers("/admins/auth/login").permitAll() // 管理者用ログイン画面は誰でもアクセス可能
-				.mvcMatchers("/admins/**").hasRole("ADMIN") // admins以下は ADMINロールを持つ認証ユーザのみアクセスできる。
+        .mvcMatchers("/admin/login").permitAll() // 管理者用ログイン画面は誰でもアクセス可能
+				.mvcMatchers("/admin/**").hasRole("ADMIN") // admin以下は ADMINロールを持つ認証ユーザのみアクセスできる。
         .anyRequest()
         .authenticated() // 上記以外は認証ユーザのみアクセスできる
 			.and()
 			.formLogin()
-        .loginPage("/admins/auth/login")
-        .loginProcessingUrl("/admins/auth/login")
+        .loginPage("/admin/login")
+        .loginProcessingUrl("/admin/login")
 				.usernameParameter("name")
         .passwordParameter("password")
-        .defaultSuccessUrl("/admins")
+        .defaultSuccessUrl("/admin")
         .successHandler(adminSuccessHandler)
 			.and()
 			.logout()
-        .logoutUrl("/admins/logout")
+        .logoutUrl("/admin/logout")
         .logoutSuccessUrl("/")
         .deleteCookies("JSESSIONID")
 				.invalidateHttpSession(true) // ログアウト時のセッション破棄を有効化

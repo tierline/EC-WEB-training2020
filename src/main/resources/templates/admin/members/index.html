@@ -7,7 +7,7 @@
   <title>会員一覧画面</title>
 </head>
 <body>
-  <div th:replace="/admins/header :: admin-header"></div>
+  <div th:replace="/admin/header :: admin-header"></div>
   <div class="container pt-5">
     <h2>会員一覧画面</h2>
     <table class="table table-striped">
@@ -32,7 +32,7 @@
           <td th:text="*{roles}"></td>
           <td>
             <form>
-              <a class="btn btn-primary btn-sm" th:href="@{/admins/member/{id}/edit(id=*{id})}">編集</a>
+              <a class="btn btn-primary btn-sm" th:href="@{/admin/members/{id}/edit(id=*{id})}">編集</a>
             </form>
           </td>
       </tbody>

@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/members")
+@RequestMapping("/member")
 public class MemberController {
 
-  String redirect = "redirect:/members";
+  String redirect = "redirect:/member";
 
   @Autowired
   protected HttpSession session;
@@ -28,10 +28,10 @@ public class MemberController {
   /**
    * 会員のログインページを表示する
    */
-  @GetMapping("/auth/login")
+  @GetMapping("/login")
   public String login() {
     if (session.getAttribute(Member.SESSION_NAME) == null) {
-      return "/members/auth/login";
+      return "/member/login";
     } else {
       return "redirect:/";
     }
@@ -42,7 +42,7 @@ public class MemberController {
    */
   @GetMapping("applicate")
   public String applicate() {
-    return "members/applicate";
+    return "member/applicate";
   }
 
   /**
@@ -51,6 +51,6 @@ public class MemberController {
   @PostMapping("/applicate")
   public String checkMemberInfo(@ModelAttribute("member") Member member) {
     memberService.create(member);
-    return "redirect:/members/auth/login";
+    return "redirect:/member/login";
   }
 }

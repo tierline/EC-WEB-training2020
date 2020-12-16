@@ -1,4 +1,4 @@
-package com.example.training.restApi.members.cart;
+package com.example.training.restApi.member.cart;
 
 import javax.servlet.http.HttpSession;
 
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/api/members/cart")
+@RequestMapping("/api/member/cart")
 public class ApiCartController {
 
   @Autowired

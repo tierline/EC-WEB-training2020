@@ -1,4 +1,4 @@
-package com.example.training.restApi.members.order;
+package com.example.training.restApi.member.order;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -23,7 +23,7 @@ public class ApiOrderController {
   /**
    * 注文処理を行う
    */
-  @PostMapping("/api/members/order/save")
+  @PostMapping("/api/member/order/save")
   public String save(@ModelAttribute("orderForm") @Valid OrderForm orderForm, BindingResult result, Model model) {
     return "注文処理を行いました";
   }
@@ -40,7 +40,7 @@ public class ApiOrderController {
   // Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
   // int orderId = orderService.order(orderForm, cart);
   // session.setAttribute(Cart.SESSION_NAME, new Cart());
-  // return "redirect:/members/order/complete/" + orderId;
+  // return "redirect:/member/order/complete/" + orderId;
   // }
   // }
 
