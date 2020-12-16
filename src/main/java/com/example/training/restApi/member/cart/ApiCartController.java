@@ -1,4 +1,4 @@
-package com.example.training.restApi.members.cart;
+package com.example.training.restApi.member.cart;
 
 import javax.servlet.http.HttpSession;
 
@@ -39,11 +39,25 @@ public class ApiCartController {
 	}
 
 	/**
-	 * @return セッション情報を見る
+	 * @param id
+	 * @return カート内の商品の削除
 	 */
-	@GetMapping("/show")
-	public Object show() {
+	@PostMapping("/delete/{id}")
+	public String delete(@PathVariable int id) {
+		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
+		Product product = productRepository.findId(id).orElseThrow();
+		cart.remove(product);
+
+		return "id番号" + id + "の商品" + product + "をカートから削除しました";
+	}
+
+	/**
+	 * @return カート内の商品
+	 */
+	@GetMapping("/list")
+	public Object list() {
 		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
 		return cart;
 	}
+
 }

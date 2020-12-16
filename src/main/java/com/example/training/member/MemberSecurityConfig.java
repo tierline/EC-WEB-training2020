@@ -44,23 +44,23 @@ public class MemberSecurityConfig extends WebSecurityConfigurerAdapter {
 
 		// @formatter:off
 		http
-			.mvcMatcher("/members/**")
+			.mvcMatcher("/member/**")
 			.authorizeRequests()
-				.mvcMatchers("/members/auth/login", "/members/applicate").permitAll()
-				.mvcMatchers("/members/**").hasRole("USER")	// members以下は USERロールを持つ認証ユーザのみアクセスできる。
+				.mvcMatchers("/member/login", "/member/applicate").permitAll()
+				.mvcMatchers("/member/**").hasRole("USER")	// member以下は USERロールを持つ認証ユーザのみアクセスできる。
 				.anyRequest()
 				.authenticated() // 上記以外は認証ユーザがアクセスできる
 			.and()
 			.formLogin()
-				.loginPage("/members/auth/login")
-				.loginProcessingUrl("/members/auth/login")
+				.loginPage("/member/login")
+				.loginProcessingUrl("/member/login")
 				.usernameParameter("email")
         .passwordParameter("password")
 				.defaultSuccessUrl("/")
 				.successHandler(successHandler)
 			.and()
 			.logout()
-			  .logoutUrl("/members/logout")
+			  .logoutUrl("/member/logout")
 				.logoutSuccessUrl("/")
 				.deleteCookies("JSESSIONID")
 				.invalidateHttpSession(true) // ログアウト時のセッション破棄を有効化

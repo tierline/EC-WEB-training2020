@@ -1,4 +1,4 @@
-package com.example.training.restApi.members.auth;
+package com.example.training.restApi.member;
 
 import java.util.Optional;
 
@@ -18,7 +18,8 @@ import com.example.training.member.repository.MemberRepository;
 @CrossOrigin
 @RestController
 @RequestMapping("/api/member")
-public class ApiMembersAuthConntroller {
+
+public class ApiMemberController {
 
 	@Autowired
 	private MemberService memberService;

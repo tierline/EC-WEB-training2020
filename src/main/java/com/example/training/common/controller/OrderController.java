@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/members/order")
+@RequestMapping("/member/order")
 public class OrderController {
 
 	@Autowired
@@ -43,7 +43,7 @@ public class OrderController {
 		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
 		model.addAttribute("cart", cart);
 		model.addAttribute("orderForm", orderForm);
-		return "/members/order/detail";
+		return "/member/order/detail";
 	}
 
 	/**
@@ -57,7 +57,7 @@ public class OrderController {
 			Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
 			int orderId = orderService.order(orderForm, cart);
 			session.setAttribute(Cart.SESSION_NAME, new Cart());
-			return "redirect:/members/order/complete/" + orderId;
+			return "redirect:/member/order/complete/" + orderId;
 		}
 	}
 
@@ -70,6 +70,6 @@ public class OrderController {
 		List<OrderItem> items = orderRepository.findItemsByOrder(order);
 		model.addAttribute("order", order);
 		model.addAttribute("items", items);
-		return "/members/order/complete";
+		return "/member/order/complete";
 	}
 }

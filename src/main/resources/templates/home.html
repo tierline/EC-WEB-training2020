@@ -15,14 +15,14 @@
           <div class="card-body">
             <h5 th:text="${item.name}" class="card-title"></h5>
             <a th:href="@{/product/detail/{id}(id=${item.id})}" class="btn btn-primary">詳細</a>
-            <a th:href="@{/members/cart/add/{id}(id=${item.id})}" class="btn btn-primary">カートに入れる</a>
+            <a th:href="@{/member/cart/add/{id}(id=${item.id})}" class="btn btn-primary">カートに入れる</a>
           </div>
         </div>
       </div>
     </div>
   </div>
   <div class="text-center" th:if="${session?.MEMBER?.email != null || session?.ADMIN?.name != null}">
-    <form role="form" id="logout" th:action="@{/members/logout}" method="post">
+    <form role="form" id="logout" th:action="@{/member/logout}" method="post">
       <button type="submit" class="btn btn-danger">ログアウト</button>
     </form>
   </div>
