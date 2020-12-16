@@ -39,6 +39,19 @@ public class ApiCartController {
   }
 
   /**
+   * @param id
+   * @return カート内の商品の削除
+   */
+  @PostMapping("/delete/{id}")
+  public String delete(@PathVariable int id) {
+    Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
+    Product product = productRepository.findId(id).orElseThrow();
+    cart.remove(product);
+
+    return "id番号" + id + "の商品" + product + "をカートから削除しました";
+  }
+
+  /**
    * @return セッション情報を見る
    */
   @GetMapping("/show")
