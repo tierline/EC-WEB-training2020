@@ -29,13 +29,10 @@ public class ApiCartController {
    * @return カートに商品の追加
    */
   @PostMapping("/add/{id}")
-  public String add(@PathVariable int id) {
+  public void add(@PathVariable int id) {
     Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
     Product product = productRepository.findId(id).orElseThrow();
     cart.add(product);
-
-    session.setAttribute(Cart.SESSION_NAME, cart);
-    return "id番号" + id + "の商品" + product + "をカートに保存しました";
   }
 
   /**
@@ -43,12 +40,10 @@ public class ApiCartController {
    * @return カート内の商品の削除
    */
   @PostMapping("/delete/{id}")
-  public String delete(@PathVariable int id) {
+  public void delete(@PathVariable int id) {
     Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
     Product product = productRepository.findId(id).orElseThrow();
     cart.remove(product);
-
-    return "id番号" + id + "の商品" + product + "をカートから削除しました";
   }
 
   /**

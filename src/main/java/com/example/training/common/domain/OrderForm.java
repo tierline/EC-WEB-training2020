@@ -8,8 +8,12 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
+@AllArgsConstructor
+@RequiredArgsConstructor
 @Data
 public class OrderForm {
 
@@ -50,4 +54,5 @@ public class OrderForm {
 	public Order createOrder() {
 		return new Order(this);
 	}
+
 }
