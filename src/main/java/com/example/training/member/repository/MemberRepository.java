@@ -11,7 +11,7 @@ import com.example.training.member.domain.Member;
 @Mapper
 public interface MemberRepository {
 
-	Optional<Member> findByEmail(String email);
+	public Optional<Member> findByEmail(String email);
 
 	public Member findById(int id);
 
