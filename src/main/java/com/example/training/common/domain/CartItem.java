@@ -37,6 +37,10 @@ public class CartItem {
 		this.quantity = this.quantity - quantity;
 	}
 
+	public void removeAll() {
+		this.quantity = 0;
+	}
+
 	public boolean isEmpty() {
 		return this.quantity <= 0;
 	}
