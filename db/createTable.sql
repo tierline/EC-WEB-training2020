@@ -52,6 +52,7 @@ CREATE TABLE order_items (
 
 CREATE TABLE orders (
   id INT(11) NOT NULL AUTO_INCREMENT,
+  member_id INT(11) NOT NULL,
   phone VARCHAR(12) DEFAULT NULL,
   name VARCHAR(12) DEFAULT NULL,
   address TEXT,

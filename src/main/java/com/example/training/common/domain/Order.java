@@ -9,6 +9,7 @@ import lombok.Data;
 public class Order {
 
 	private int id;
+	private int memberId;
 	private String name;
 	private String address;
 	private String email;
@@ -17,6 +18,7 @@ public class Order {
 	private String date;
 
 	public Order(OrderForm orderForm) {
+		this.memberId = orderForm.getMemberId();
 		this.name = orderForm.getFullName();
 		this.address = orderForm.getFullAddress();
 		this.email = orderForm.getEmail();

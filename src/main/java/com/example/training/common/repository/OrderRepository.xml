@@ -9,8 +9,9 @@
 
 	<insert id="save" useGeneratedKeys="true" keyProperty="id">
 		insert
-		into ORDERS (phone, name, address, email, price, date)
+		into ORDERS (member_id, phone, name, address, email, price, date)
 		values(
+		"${memberId}",
 		"${phone}",
 		"${name}",
 		"${address}",
@@ -36,7 +37,8 @@
 		name, price, quantity
 		from
 		ORDER_ITEMS
-		where order_id = ${id}
+		where order_id =
+		${id}
 
 	</select>
 
@@ -48,5 +50,26 @@
 		ORDERS
 		where id = ${id}
 
+	</select>
+
+	<select id="findItemByOrderHistory"
+		resultType="com.example.training.common.domain.OrderHistory">
+		select
+		m.id as "memberId",
+		o.id as "orderId",
+		oi.name,
+		oi.price as "unitPrice",
+		oi.quantity,
+		o.`date`
+		from
+		ORDERS as o
+		left join
+		ORDER_ITEMS as oi
+		on o.id = oi.order_id
+		left
+		join
+		MEMBERS as m
+		on m.id = o.member_id
+		where m.id = ${id}
 	</select>
 </mapper>

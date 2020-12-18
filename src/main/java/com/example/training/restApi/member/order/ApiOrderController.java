@@ -3,16 +3,9 @@ package com.example.training.restApi.member.order;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
-
-import com.example.training.common.domain.Cart;
-import com.example.training.common.domain.Order;
-import com.example.training.common.domain.OrderForm;
-import com.example.training.common.domain.OrderItem;
-import com.example.training.common.domain.OrderService;
-import com.example.training.common.repository.OrderRepository;
-import com.example.training.member.domain.Member;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -21,7 +14,18 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.example.training.common.domain.Cart;
+import com.example.training.common.domain.Order;
+import com.example.training.common.domain.OrderForm;
+import com.example.training.common.domain.OrderHistory;
+import com.example.training.common.domain.OrderItem;
+import com.example.training.common.domain.OrderService;
+import com.example.training.common.repository.OrderRepository;
+import com.example.training.member.domain.Member;
+import com.example.training.member.repository.MemberRepository;
 
 @CrossOrigin
 @RestController
@@ -37,11 +41,15 @@ public class ApiOrderController {
 	@Autowired
 	private OrderService orderService;
 
+	@Autowired
+	private MemberRepository memberRepository;
+
 	/**
 	 * 注文処理を行う
 	 */
 	@PostMapping("/save")
 	public Integer save(@RequestBody LinkedHashMap<String, String> order) {
+
 		String lastName = order.get("lastName");
 		String firstName = order.get("firstName");
 		String email = order.get("email");
@@ -80,5 +88,16 @@ public class ApiOrderController {
 
 		return items;
 
+	}
+
+	@PostMapping("/history")
+	@ResponseBody
+	public List<OrderHistory> fetch(@RequestBody Member member) {
+		Optional<Member> memberId = memberRepository.findByEmail(member.getEmail());
+		if (memberId.isEmpty()) {
+		}
+		int id = memberId.get().getId();
+		List<OrderHistory> list = orderRepository.findItemByOrderHistory(id);
+		return list;
 	}
 }
