@@ -45,9 +45,9 @@ public class ApiOrderController {
 		String lastName = order.get("lastName");
 		String firstName = order.get("firstName");
 		String email = order.get("email");
-		String phone = "phone";
-		String address1 = "address1";
-		String address2 = "address2";
+		String phone = order.get("phone");
+		String address1 = order.get("address1");
+		String address2 = order.get("address2");
 		Date dateNow = new Date();
 		Member member = (Member) session.getAttribute(Member.SESSION_NAME);
 		int memberId = member.getId();
