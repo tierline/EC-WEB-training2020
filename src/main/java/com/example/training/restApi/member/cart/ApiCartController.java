@@ -54,4 +54,17 @@ public class ApiCartController {
 		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
 		return cart;
 	}
+
+	/**
+	 * @return カートに商品がないか確認する
+	 */
+	@GetMapping("/hasItem")
+	public Boolean cartHasItem() {
+		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
+		if (0 < cart.getSize()) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }
