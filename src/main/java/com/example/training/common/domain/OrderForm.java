@@ -17,6 +17,8 @@ import lombok.RequiredArgsConstructor;
 @Data
 public class OrderForm {
 
+	private int memberId;
+
 	@NotEmpty
 	@Size(min = 1, max = 6, message = "1文字以上、6文字以内で入力して下さい。")
 	private String lastName;
