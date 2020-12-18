@@ -5,6 +5,7 @@ import java.util.Date;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
@@ -16,8 +17,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Data
 public class OrderForm {
-
-	private int memberId;
 
 	@NotEmpty
 	@Size(min = 1, max = 6, message = "1文字以上、6文字以内で入力して下さい。")
@@ -37,6 +36,8 @@ public class OrderForm {
 	@NotEmpty
 	@Size(max = 100, message = "長すぎます。")
 	private String address2;// 番地
+	@NotNull
+	private int memberId;
 
 	private Date dateNow = new Date();
 

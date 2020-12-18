@@ -33,7 +33,7 @@ public class Cart {
 	}
 
 	/**
-	 * 商品をカートから削除する
+	 * カートから商品を1つ削除する
 	 *
 	 * @param product
 	 */
@@ -48,6 +48,27 @@ public class Cart {
 		}
 	}
 
+	/**
+	 * カートに入っている特定の商品を削除する（個数を零にする）
+	 *
+	 * @param product
+	 */
+	public void removeAll(Product product) {
+		Optional<CartItem> itemOpt = getItem(product);
+		if (itemOpt.isPresent()) {
+			CartItem item = itemOpt.get();
+			item.removeAll();
+			if (item.isEmpty()) {
+				this.items.remove(item);
+			}
+		}
+	}
+
+	/**
+	 * カート内の商品の数を返す
+	 *
+	 * @return items.size
+	 */
 	public int getSize() {
 		return items.size();
 	}

@@ -47,7 +47,9 @@
 					<span th:if="${#fields.hasErrors('*{address2}')}" th:errors="*{address2}" class="col-sm-offset-2 text-danger"></span>
 				</label> <input type="text" class="form-control" placeholder="xxx丁目xxx番地" th:field="*{address2}">
 			</div>
-			<input type="submit" class="btn btn-primary" value="確定する"></input>
+			<input type="hidden" name="memberId" th:value="*{memberId}"></input>
+
+			<input type="submit" class="btn btn-primary" value="確定する"></form>
 		</form>
 	</div>
 
