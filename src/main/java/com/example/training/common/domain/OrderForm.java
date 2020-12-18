@@ -5,6 +5,7 @@ import java.util.Date;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
@@ -35,6 +36,8 @@ public class OrderForm {
 	@NotEmpty
 	@Size(max = 100, message = "長すぎます。")
 	private String address2;// 番地
+	@NotNull
+	private int memberId;
 
 	private Date dateNow = new Date();
 

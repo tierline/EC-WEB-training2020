@@ -2,6 +2,12 @@ package com.example.training.restApi.member;
 
 import java.util.Optional;
 
+import javax.servlet.http.HttpSession;
+
+import com.example.training.member.Service.MemberService;
+import com.example.training.member.domain.Member;
+import com.example.training.member.repository.MemberRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -11,15 +17,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.training.member.Service.MemberService;
-import com.example.training.member.domain.Member;
-import com.example.training.member.repository.MemberRepository;
-
 @CrossOrigin
 @RestController
 @RequestMapping("/api/member")
 
 public class ApiMemberController {
+
+	@Autowired
+	private HttpSession session;
 
 	@Autowired
 	private MemberService memberService;
@@ -45,8 +50,10 @@ public class ApiMemberController {
 		if (memberDetail.isPresent()) {
 			String hashPassword = memberDetail.get().getPassword();
 			Boolean result = bCryptPasswordEncoder.matches(password, hashPassword);
+			session.setAttribute(Member.SESSION_NAME, memberDetail.get());
 			return result;
 		}
+
 		return false;
 
 	}

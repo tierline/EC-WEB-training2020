@@ -47,7 +47,7 @@ public class ApiCartController {
 	}
 
 	/**
-	 * @return カート内の商品
+	 * @return カート内の商品を表示する
 	 */
 	@GetMapping("/list")
 	public Object list() {

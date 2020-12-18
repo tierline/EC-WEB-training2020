@@ -6,6 +6,14 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import com.example.training.common.domain.Cart;
+import com.example.training.common.domain.Order;
+import com.example.training.common.domain.OrderForm;
+import com.example.training.common.domain.OrderItem;
+import com.example.training.common.domain.OrderService;
+import com.example.training.common.repository.OrderRepository;
+import com.example.training.member.domain.Member;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,13 +22,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.example.training.common.domain.Cart;
-import com.example.training.common.domain.Order;
-import com.example.training.common.domain.OrderForm;
-import com.example.training.common.domain.OrderItem;
-import com.example.training.common.domain.OrderService;
-import com.example.training.common.repository.OrderRepository;
 
 @CrossOrigin
 @RestController
@@ -44,12 +45,14 @@ public class ApiOrderController {
 		String lastName = order.get("lastName");
 		String firstName = order.get("firstName");
 		String email = order.get("email");
-		String phone = "00000000000";
-		String address1 = "xx";
-		String address2 = "zz";
+		String phone = "phone";
+		String address1 = "address1";
+		String address2 = "address2";
 		Date dateNow = new Date();
+		Member member = (Member) session.getAttribute(Member.SESSION_NAME);
+		int memberId = member.getId();
 
-		OrderForm orderForm = new OrderForm(lastName, firstName, email, phone, address1, address2, dateNow);
+		OrderForm orderForm = new OrderForm(lastName, firstName, email, phone, address1, address2, memberId, dateNow);
 
 		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
 		int orderId = orderService.order(orderForm, cart);
@@ -63,8 +66,6 @@ public class ApiOrderController {
 	@GetMapping("/orderDetails/{id}")
 	public Order orderDetails(@PathVariable Integer id) {
 		Order order = orderRepository.findById(id);
-		// List<String> orderedList = new ArrayList<String>();
-		// orderedList.
 
 		return order;
 	}
