@@ -14,7 +14,7 @@
           <img class="card-img-top" th:src="@{'/image/' + ${item.image_path}}" alt="" style="width: 100%; height: 200px;">
           <div class="card-body">
             <h5 th:text="${item.name}" class="card-title"></h5>
-            <a th:href="@{/product/detail/{id}(id=${item.id})}" class="btn btn-primary">詳細</a>
+            <a th:href="@{/product/detail/{id}(id=${item.id})}" class="btn btn-info">詳細</a>
             <a th:href="@{/member/cart/add/{id}(id=${item.id})}" class="btn btn-primary">カートに入れる</a>
           </div>
         </div>

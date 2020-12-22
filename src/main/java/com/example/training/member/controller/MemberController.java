@@ -31,7 +31,7 @@ public class MemberController {
   @GetMapping("/login")
   public String login() {
     if (session.getAttribute(Member.SESSION_NAME) == null) {
-      return "/member/login";
+      return "member/login";
     } else {
       return "redirect:/";
     }

@@ -46,7 +46,7 @@ public class OrderController {
 		orderForm.setMemberId(member.getId());
 		model.addAttribute("cart", cart);
 		model.addAttribute("orderForm", orderForm);
-		return "/member/order/detail";
+		return "member/order/detail";
 	}
 
 	/**
@@ -73,6 +73,6 @@ public class OrderController {
 		List<OrderItem> items = orderRepository.findItemsByOrder(order);
 		model.addAttribute("order", order);
 		model.addAttribute("items", items);
-		return "/member/order/complete";
+		return "member/order/complete";
 	}
 }
