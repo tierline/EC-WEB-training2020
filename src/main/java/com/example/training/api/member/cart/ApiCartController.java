@@ -1,4 +1,4 @@
-package com.example.training.restApi.member.cart;
+package com.example.training.api.member.cart;
 
 import javax.servlet.http.HttpSession;
 
@@ -26,32 +26,57 @@ public class ApiCartController {
 	private ProductRepository productRepository;
 
 	/**
-	 * @return カートに商品の追加
+	 *
+	 * カートに商品の追加する
+	 *
+	 * @return
 	 */
-	@PostMapping("/add/{id}")
-	public void add(@PathVariable int id) {
+	@PostMapping("/add/{productId}")
+	public void add(@PathVariable int productId) {
 		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
-		Product product = productRepository.findId(id).orElseThrow();
+		Product product = productRepository.findId(productId).orElseThrow();
 		cart.add(product);
 	}
 
 	/**
+	 *
+	 * カートから特定の商品をすべて削除する
+	 *
 	 * @param id
-	 * @return カート内の商品の削除を削除する
+	 * @return
 	 */
-	@PostMapping("/delete/{id}")
-	public void delete(@PathVariable int id) {
+	@PostMapping("/delete/{productId}")
+	public void cartFromParticularProductsAllDelete(@PathVariable int productId) {
 		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
-		Product product = productRepository.findId(id).orElseThrow();
+		Product product = productRepository.findId(productId).orElseThrow();
 		cart.removeAll(product);
 	}
 
 	/**
-	 * @return カート内の商品を表示する
+	 *
+	 * カート内の商品を返す
+	 *
+	 * @return
 	 */
 	@GetMapping("/list")
 	public Object list() {
 		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
 		return cart;
+	}
+
+	/**
+	 *
+	 * カートに商品がないか確認する
+	 *
+	 * @return
+	 */
+	@GetMapping("/hasItem")
+	public Boolean cartHasItem() {
+		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
+		if (0 < cart.getSize()) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 }

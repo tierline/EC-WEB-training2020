@@ -8,9 +8,9 @@
 	namespace="com.example.training.common.repository.OrderRepository">
 
 	<insert id="save" useGeneratedKeys="true" keyProperty="id">
-		insert
-		into ORDERS (member_id, phone, name, address, email, price, date)
-		values(
+		INSERT
+		INTO orders (member_id, phone, name, address, email, price, date)
+		VALUES(
 		"${memberId}",
 		"${phone}",
 		"${name}",
@@ -21,9 +21,9 @@
 	</insert>
 
 	<insert id="saveItem">
-		insert into ORDER_ITEMS (order_id, name, price,
-		quantity, image_path)
-		values(
+		INSERT INTO order_items (order_id, name, price,
+		quantity)
+		VALUES(
 		${id},
 		"${item.name}",
 		${item.price},
@@ -34,52 +34,63 @@
 
 	<select id="findItemsByOrder"
 		resultType="com.example.training.common.domain.OrderItem">
-		select
+		SELECT
 		name, price, quantity
-		from
-		ORDER_ITEMS
-		where order_id =
+		FROM
+		order_items
+		WHERE order_id =
 		${id}
 
 	</select>
 
 	<select id="findById"
 		resultType="com.example.training.common.domain.Order">
-		select
+		SELECT
 		*
-		from
-		ORDERS
-		where id = ${id}
+		FROM
+		orders
+		WHERE id = ${id}
 
 	</select>
 
 	<select id="findByOrderDate"
 		resultType="com.example.training.common.domain.OrderHistory">
-		select
+		SELECT
 		m.id,
-		o.id as "orderId",
-		date_format(o.`date`, "%Y年%m月") as orderMonth,
-		date_format(o.`date`, "%m月%d日") as orderDay
-		from
-		ORDERS as o
-		left join
-		MEMBERS as m
-		on m.id = o.member_id
-		where m.id =
+		o.id AS "orderId",
+		date_format(o.`date`,
+		"%Y年%m月") AS orderMonth,
+		date_format(o.`date`, "%m月%d日") AS orderDay
+		FROM
+		ORDERS AS o
+		LEFT JOIN
+		MEMBERS AS m
+		ON m.id = o.member_id
+		WHERE m.id =
 		${id}
 	</select>
 
 	<select id="findItemByOrderHistory"
 		resultType="com.example.training.common.domain.OrderHistory">
-		select
-		name,
-		price as "unitPrice",
-		quantity,
-		image_path as
-		"imagePath"
-		from
-		ORDER_ITEMS
-		where order_id = ${id}
+		SELECT
+		m.id AS "memberId",
+		o.id AS "orderId",
+		oi.name,
+		oi.price AS "unitPrice",
+		oi.quantity,
+		o.`date`
+		FROM
+		orders AS o
+		LEFT JOIN
+		order_items AS oi
+		on o.id = oi.order_id
+		LEFT
+		JOIN
+		member AS m
+		on m.id =
+		o.member_id
+		WHERE m.id = ${id}
+
 	</select>
-	
+
 </mapper>

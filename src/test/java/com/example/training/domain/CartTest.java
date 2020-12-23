@@ -7,11 +7,11 @@ import static org.junit.Assert.assertTrue;
 import java.util.List;
 import java.util.Optional;
 
-import org.junit.jupiter.api.Test;
-
 import com.example.training.common.domain.Cart;
 import com.example.training.common.domain.CartItem;
 import com.example.training.common.domain.Product;
+
+import org.junit.jupiter.api.Test;
 
 class CartTest {
 
@@ -57,7 +57,7 @@ class CartTest {
 
 	@Test
 	void list() {
-		Product product = new Product(１, "ガム");
+		Product product = new Product(1, "ガム");
 		Product product2 = new Product(2, "チョコ");
 		Cart cart = new Cart();
 		cart.add(product);

@@ -60,7 +60,7 @@ public class CartController {
 	public String doGet(Model model) {
 		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
 		model.addAttribute("cart", cart);
-		return "/member/cart";
+		return "member/cart";
 	}
 
 	@GetMapping("/clear")

@@ -7,24 +7,24 @@
 	namespace="com.example.training.member.repository.MemberRepository">
 	<select id="findByEmail"
 		resultType="com.example.training.member.domain.Member">
-		select
+		SELECT
 		*
-		from
-		MEMBERS
-		where
+		FROM
+		members
+		WHERE
 		email = "${email}"
 	</select>
 
 	<select id="findById" resultType="com.example.training.member.domain.Member">
-		select * from MEMBERS where id = "${id}"
+		SELECT * FROM members WHERE id = "${id}"
 	</select>
 
 	<select id="findAll" resultType="com.example.training.member.domain.Member">
-		select * from MEMBERS
+		SELECT * FROM members
 	</select>
 
 	<insert id="create" useGeneratedKeys="true">
-		insert into MEMBERS (email, password, address, lastUpdatedBy, status) values (
+		INSERT INTO members (email, password, address, lastUpdatedBy, status) VALUES (
 			"${member.email}",
 			"${digest}",
 			"${member.address}",
@@ -34,13 +34,13 @@
 	</insert>
 
 	<update id="update">
-    update MEMBERS set
+    UPDATE members SET
 			email=#{member.email},
 			password=#{digest},
 			address=#{member.address},
 			lastUpdatedBy=#{lastUpdatedBy},
 			status=#{member.status}
-			where id= #{member.id}
+			WHERE id= #{member.id}
 	</update>
 
 </mapper>

@@ -49,7 +49,7 @@ public class Cart {
 	}
 
 	/**
-	 * カートに入っている特定の商品を削除する（個数を零にする）
+	 * カートの特定の商品をすべて取り除く
 	 *
 	 * @param product
 	 */
@@ -83,7 +83,7 @@ public class Cart {
 	}
 
 	/**
-	 * 商品が存在確認
+	 * 商品が存在するか確認
 	 *
 	 * @param product
 	 * @return

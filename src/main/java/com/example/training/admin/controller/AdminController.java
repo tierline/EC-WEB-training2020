@@ -30,7 +30,7 @@ public class AdminController {
 
   @GetMapping()
   public String index() {
-    return "/admin/index";
+    return "admin/index";
   }
 
   /**
@@ -39,7 +39,7 @@ public class AdminController {
   @GetMapping("/login")
   public String login() {
     if (session.getAttribute(Admin.SESSION_NAME) == null) {
-      return "/admin/login";
+      return "admin/login";
     } else {
       return "redirect:/";
     }
@@ -51,7 +51,7 @@ public class AdminController {
   @GetMapping("/members")
   public String list(Model model) {
     model.addAttribute("members", memberRepository.findAll());
-    return "/admin/members/index";
+    return "admin/members/index";
   }
 
   /**
@@ -60,7 +60,7 @@ public class AdminController {
   @GetMapping("/members/{id}/edit")
   public String editForm(@PathVariable int id, Model model) {
     model.addAttribute("member", memberRepository.findById(id));
-    return "/admin/members/edit";
+    return "admin/members/edit";
   }
 
   /**
