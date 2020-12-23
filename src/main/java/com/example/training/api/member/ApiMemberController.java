@@ -1,4 +1,4 @@
-package com.example.training.restApi.member;
+package com.example.training.api.member;
 
 import java.util.Optional;
 
@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-@CrossOrigin
 @RestController
 @RequestMapping("/api/member")
 
@@ -35,6 +34,7 @@ public class ApiMemberController {
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
+	@CrossOrigin
 	@PostMapping("/applicate")
 	@ResponseBody
 	public Member create(@RequestBody Member member) {
@@ -42,6 +42,7 @@ public class ApiMemberController {
 		return member;
 	}
 
+	@CrossOrigin
 	@PostMapping("/login")
 	@ResponseBody
 	public Boolean login(@RequestBody Member member) {
