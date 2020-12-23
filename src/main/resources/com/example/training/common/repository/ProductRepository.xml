@@ -10,7 +10,7 @@
 		select
 		*
 		from
-		product;
+		product
 	</select>
 
 	<select id="findId"
