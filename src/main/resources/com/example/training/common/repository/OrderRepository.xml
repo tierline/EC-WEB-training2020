@@ -8,9 +8,9 @@
 	namespace="com.example.training.common.repository.OrderRepository">
 
 	<insert id="save" useGeneratedKeys="true" keyProperty="id">
-		insert
-		into orders (member_id, phone, name, address, email, price, date)
-		values(
+		INSERT
+		INTO orders (member_id, phone, name, address, email, price, date)
+		VALUES(
 		"${memberId}",
 		"${phone}",
 		"${name}",
@@ -21,9 +21,9 @@
 	</insert>
 
 	<insert id="saveItem">
-		insert into order_items (order_id, name, price,
+		INSERT INTO order_items (order_id, name, price,
 		quantity)
-		values(
+		VALUES(
 		${id},
 		"${item.name}",
 		${item.price},
@@ -33,43 +33,43 @@
 
 	<select id="findItemsByOrder"
 		resultType="com.example.training.common.domain.OrderItem">
-		select
+		SELECT
 		name, price, quantity
-		from
+		FROM
 		order_items
-		where order_id =
+		WHERE order_id =
 		${id}
 
 	</select>
 
 	<select id="findById"
 		resultType="com.example.training.common.domain.Order">
-		select
+		SELECT
 		*
-		from
+		FROM
 		orders
-		where id = ${id}
+		WHERE id = ${id}
 
 	</select>
 
 	<select id="findItemByOrderHistory"
 		resultType="com.example.training.common.domain.OrderHistory">
-		select
-		m.id as "memberId",
-		o.id as "orderId",
+		SELECT
+		m.id AS "memberId",
+		o.id AS "orderId",
 		oi.name,
-		oi.price as "unitPrice",
+		oi.price AS "unitPrice",
 		oi.quantity,
 		o.`date`
-		from
-		orders as o
-		left join
-		order_items as oi
+		FROM
+		orders AS o
+		LEFT JOIN
+		order_items AS oi
 		on o.id = oi.order_id
-		left
-		join
-		member as m
+		LEFT
+		JOIN
+		member AS m
 		on m.id = o.member_id
-		where m.id = ${id}
+		WHERE m.id = ${id}
 	</select>
 </mapper>

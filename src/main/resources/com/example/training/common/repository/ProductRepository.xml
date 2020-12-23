@@ -7,30 +7,30 @@
 	namespace="com.example.training.common.repository.ProductRepository">
 	<select id="findAll"
 		resultType="com.example.training.common.domain.Product">
-		select
+		SELECT
 		*
-		from
+		FROM
 		product
 	</select>
 
 	<select id="findId"
 		resultType="com.example.training.common.domain.Product">
-		select
+		SELECT
 		*
-		from
+		FROM
 		product
-		where
+		WHERE
 		id = ${id}
 	</select>
 
 	<select id="findIdList"
 		resultType="com.example.training.common.domain.Product">
-		select
+		SELECT
 		*
-		from
+		FROM
 		product
-		where
-		id in
+		WHERE
+		id IN
 		<foreach item="id" collection="list" open="(" separator=","
 			close=")">
 			${id}
@@ -39,12 +39,12 @@
 
 	<select id="findName"
 		resultType="com.example.training.common.domain.Product">
-		select
+		SELECT
 		*
-		from
+		FROM
 		product
-		where
-		name like
+		WHERE
+		name LIKE
 		'%${word}%'
 	</select>
 
