@@ -92,12 +92,25 @@ public class ApiOrderController {
 
 	@PostMapping("/history")
 	@ResponseBody
-	public List<OrderHistory> fetch(@RequestBody Member member) {
+	public List<OrderHistory> history(@RequestBody Member member) {
 		Optional<Member> memberId = memberRepository.findByEmail(member.getEmail());
 		if (memberId.isEmpty()) {
 		}
 		int id = memberId.get().getId();
+		List<OrderHistory> list = orderRepository.findByOrderDate(id);
+		return list;
+	}
+
+	@GetMapping("/history/{id}")
+	public List<OrderHistory> itemHistory(@PathVariable Integer id) {
 		List<OrderHistory> list = orderRepository.findItemByOrderHistory(id);
 		return list;
 	}
+
+//	@GetMapping("/history/{id}")
+//	@ResponseBody
+//	public List<OrderHistory> fetch(@PathVariable Integer id) {
+//		List<OrderHistory> list = orderRepository.findItemByOrderHistory(id);
+//		return list;
+//	}
 }

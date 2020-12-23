@@ -53,25 +53,33 @@
 
 	</select>
 
-	<select id="findItemByOrderHistory"
+	<select id="findByOrderDate"
 		resultType="com.example.training.common.domain.OrderHistory">
 		select
-		m.id as "memberId",
+		m.id,
 		o.id as "orderId",
-		oi.name,
-		oi.price as "unitPrice",
-		oi.quantity,
-		oi.image_path as "imagePath",
-		o.`date`
+		date_format(o.`date`, "%Y年%m月") as orderMonth,
+		date_format(o.`date`, "%m月%d日") as orderDay
 		from
 		ORDERS as o
 		left join
-		ORDER_ITEMS as oi
-		on o.id = oi.order_id
-		left
-		join
 		MEMBERS as m
 		on m.id = o.member_id
-		where m.id = ${id}
+		where m.id =
+		${id}
 	</select>
+
+	<select id="findItemByOrderHistory"
+		resultType="com.example.training.common.domain.OrderHistory">
+		select
+		name,
+		price as "unitPrice",
+		quantity,
+		image_path as
+		"imagePath"
+		from
+		ORDER_ITEMS
+		where order_id = ${id}
+	</select>
+	
 </mapper>

@@ -10,5 +10,6 @@ public class OrderHistory {
 	private int unitPrice;
 	private int quantity;
 	private String imagePath;
-	private String date;
+	private String orderMonth;
+	private String orderDay;
 }
