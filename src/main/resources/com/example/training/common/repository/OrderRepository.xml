@@ -9,7 +9,7 @@
 
 	<insert id="save" useGeneratedKeys="true" keyProperty="id">
 		insert
-		into ORDERS (member_id, phone, name, address, email, price, date)
+		into orders (member_id, phone, name, address, email, price, date)
 		values(
 		"${memberId}",
 		"${phone}",
@@ -21,7 +21,7 @@
 	</insert>
 
 	<insert id="saveItem">
-		insert into ORDER_ITEMS (order_id, name, price,
+		insert into order_items (order_id, name, price,
 		quantity)
 		values(
 		${id},
@@ -36,7 +36,7 @@
 		select
 		name, price, quantity
 		from
-		ORDER_ITEMS
+		order_items
 		where order_id =
 		${id}
 
@@ -47,7 +47,7 @@
 		select
 		*
 		from
-		ORDERS
+		orders
 		where id = ${id}
 
 	</select>
@@ -62,13 +62,13 @@
 		oi.quantity,
 		o.`date`
 		from
-		ORDERS as o
+		orders as o
 		left join
-		ORDER_ITEMS as oi
+		order_items as oi
 		on o.id = oi.order_id
 		left
 		join
-		MEMBERS as m
+		member as m
 		on m.id = o.member_id
 		where m.id = ${id}
 	</select>

@@ -10,21 +10,21 @@
 		select
 		*
 		from
-		MEMBERS
+		members
 		where
 		email = "${email}"
 	</select>
 
 	<select id="findById" resultType="com.example.training.member.domain.Member">
-		select * from MEMBERS where id = "${id}"
+		select * from members where id = "${id}"
 	</select>
 
 	<select id="findAll" resultType="com.example.training.member.domain.Member">
-		select * from MEMBERS
+		select * from members
 	</select>
 
 	<insert id="create" useGeneratedKeys="true">
-		insert into MEMBERS (email, password, address, lastUpdatedBy, status) values (
+		insert into members (email, password, address, lastUpdatedBy, status) values (
 			"${member.email}",
 			"${digest}",
 			"${member.address}",
@@ -34,7 +34,7 @@
 	</insert>
 
 	<update id="update">
-    update MEMBERS set
+    update members set
 			email=#{member.email},
 			password=#{digest},
 			address=#{member.address},

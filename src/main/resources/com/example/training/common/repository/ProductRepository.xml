@@ -10,7 +10,7 @@
 		select
 		*
 		from
-		PRODUCT;
+		product;
 	</select>
 
 	<select id="findId"
@@ -18,7 +18,7 @@
 		select
 		*
 		from
-		PRODUCT
+		product
 		where
 		id = ${id}
 	</select>
@@ -28,7 +28,7 @@
 		select
 		*
 		from
-		PRODUCT
+		product
 		where
 		id in
 		<foreach item="id" collection="list" open="(" separator=","
@@ -42,7 +42,7 @@
 		select
 		*
 		from
-		PRODUCT
+		product
 		where
 		name like
 		'%${word}%'
