@@ -101,18 +101,6 @@ public class ApiOrderController {
 		return list;
 	}
 
-//	@GetMapping("/history/{id}")
-//	public List<String> itemHistory(@PathVariable int id) {
-//		List<String> monthList = new ArrayList<String>();
-//		List<OrderMonth> orderlist = orderRepository.findByOrderMonth(id);
-//		for (OrderMonth list : orderlist) {
-//			monthList.add(list.getOrderMonth());
-//		}
-//		List<String> month = new ArrayList<String>(new LinkedHashSet<>(monthList));
-//
-//		return month;
-//	}
-
 	@GetMapping("/history/{id}")
 	@ResponseBody
 	public List<OrderHistory> fetch(@PathVariable Integer id) {
