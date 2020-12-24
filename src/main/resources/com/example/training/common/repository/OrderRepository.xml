@@ -61,9 +61,9 @@
 		"%Y年%m月") AS orderMonth,
 		date_format(o.`date`, "%m月%d日") AS orderDay
 		FROM
-		ORDERS AS o
+		orders AS o
 		LEFT JOIN
-		MEMBERS AS m
+		members AS m
 		ON m.id = o.member_id
 		WHERE m.id =
 		${id}
