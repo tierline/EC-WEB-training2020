@@ -42,7 +42,7 @@ public class OrderForm {
 	private Date dateNow = new Date();
 
 	public String getDateNow() {
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy年MM月dd日HH時mm分ss秒");
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd-HH時mm分ss秒");
 		return dateFormat.format(this.dateNow);
 	}
 

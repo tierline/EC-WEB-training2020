@@ -20,6 +20,8 @@ public interface OrderRepository {
 
 	public Order findById(int id);
 
+	public List<OrderHistory> findByOrderDate(int orderId);
+
 	public List<OrderHistory> findItemByOrderHistory(int memberId);
 
 }

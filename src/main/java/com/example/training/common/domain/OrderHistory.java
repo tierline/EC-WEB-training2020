@@ -9,5 +9,7 @@ public class OrderHistory {
 	private String name;
 	private int unitPrice;
 	private int quantity;
-	private String date;
+	private String imagePath;
+	private String orderMonth;
+	private String orderDay;
 }
