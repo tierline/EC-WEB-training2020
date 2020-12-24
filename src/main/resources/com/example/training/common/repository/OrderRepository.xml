@@ -55,11 +55,29 @@
 	<select id="findByOrderDate"
 		resultType="com.example.training.common.domain.OrderHistory">
 		SELECT
+		m.id,
+		o.id AS "orderId",
+		date_format(o.`date`,
+		"%Y年%m月") AS orderMonth,
+		date_format(o.`date`, "%m月%d日") AS orderDay
+		FROM
+		ORDERS AS o
+		LEFT JOIN
+		MEMBERS AS m
+		ON m.id = o.member_id
+		WHERE m.id =
+		${id}
+	</select>
+
+	<select id="findItemByOrderHistory"
+		resultType="com.example.training.common.domain.OrderHistory">
+		SELECT
 		m.id AS "memberId",
 		o.id AS "orderId",
 		oi.name,
 		oi.price AS "unitPrice",
 		oi.quantity,
+		oi.image_path AS "imagePath",
 		o.`date`
 		FROM
 		orders AS o
@@ -69,8 +87,19 @@
 		LEFT
 		JOIN
 		members AS m
-		on m.id = o.member_id
-		WHERE m.id = ${id}
+		on m.id =
+		o.member_id
+		WHERE o.id = ${id}
+
+	</select>
+	<select id="findByOrderMonth"
+		resultType="com.example.training.common.domain.OrderMonth">
+		SELECT
+		id AS orderId,
+		date_format(o.`date`, '%Y年%m月') AS orderMonth,
+		date_format(o.`date`, '%m月%d日') AS orderDay
+		FROM orders AS o
+		WHERE member_id = ${id}
 	</select>
 
 </mapper>

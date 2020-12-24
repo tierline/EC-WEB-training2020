@@ -39,6 +39,8 @@ public class ApiMemberController {
 	@ResponseBody
 	public Member create(@RequestBody Member member) {
 		memberService.create(member);
+		Optional<Member> memberDetail = memberRepository.findByEmail(member.getEmail());
+		session.setAttribute(Member.SESSION_NAME, memberDetail.get());
 		return member;
 	}
 
