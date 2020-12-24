@@ -68,7 +68,7 @@
 		on o.id = oi.order_id
 		LEFT
 		JOIN
-		member AS m
+		members AS m
 		on m.id = o.member_id
 		WHERE m.id = ${id}
 	</select>
