@@ -12,13 +12,15 @@ fields terminated by ',' enclosed by'"'
 lines terminated by '\r\n'
 ignore 1 lines;
 
-INSERT IGNORE INTO members(email, password, postcode, prefecture, city, block,  phone_number, lastUpdatedBy, status)
-VALUES("test@example.com", "$2a$10$uhuqnvtjTayBhSjs7ezeB.2DG5GlIERAawzRoCROyTxWpzwKy7T.e", 
-"012-2211", "北海道", "夕張市", "2-4-3", "012-113-2258", "none", "approval");
+INSERT INTO members(email, password, postcode, prefecture, city, block, phoneNumber, lastUpdatedBy, status)
+VALUES("test@example.com", "$2a$10$uhuqnvtjTayBhSjs7ezeB.2DG5GlIERAawzRoCROyTxWpzwKy7T.e", "655-0053", "兵庫県", "神戸市東灘区", "56番地", "078-555-5525", "none", "approval");
 
 -- INSERT INTO members(email, password, address, lastUpdatedBy, status)
--- VALUES("test2@example.com", "$2a$10$EQyVZTFajqzPEHVtmFXW2O7tq.czJbKO/Jf1EMYWziD26CaGzthTi", 
--- "kyoto", "none", "unapproved");
+-- VALUES("test@example.com", "$2a$10$uhuqnvtjTayBhSjs7ezeB.2DG5GlIERAawzRoCROyTxWpzwKy7T.e", "hyogo", "none", "approval");
+
+-- INSERT INTO members(email, password, address, lastUpdatedBy, status)
+-- VALUES("test2@example.com", "$2a$10$EQyVZTFajqzPEHVtmFXW2O7tq.czJbKO/Jf1EMYWziD26CaGzthTi", "kyoto", "none", "unapproved");
+>>>>>>> origin/kato
 
 INSERT INTO admins(name, password)
 VALUES("admin", "$2a$10$uhuqnvtjTayBhSjs7ezeB.2DG5GlIERAawzRoCROyTxWpzwKy7T.e");
