@@ -1,7 +1,6 @@
 package com.example.training.common.domain;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -39,12 +38,12 @@ public class OrderForm {
 	@NotNull
 	private int memberId;
 
-	private Date dateNow = new Date();
+	private LocalDate dateNow = LocalDate.now();
 
-	public String getDateNow() {
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd-HH時mm分ss秒");
-		return dateFormat.format(this.dateNow);
-	}
+//	public LocalDate getDateNow() {
+//		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd-HH時mm分ss秒");
+//		return dateFormat.format(this.dateNow);
+//	}
 
 	public String getFullName() {
 		return this.lastName + this.firstName;

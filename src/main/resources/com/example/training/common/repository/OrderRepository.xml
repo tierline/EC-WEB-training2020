@@ -52,54 +52,26 @@
 		WHERE id = ${id}
 	</select>
 
-	<select id="findByOrderDate"
-		resultType="com.example.training.common.domain.OrderHistory">
-		SELECT
-		m.id,
-		o.id AS "orderId",
-		date_format(o.`date`,
-		"%Y年%m月") AS orderMonth,
-		date_format(o.`date`, "%m月%d日") AS orderDay
-		FROM
-		orders AS o
-		LEFT JOIN
-		members AS m
-		ON m.id = o.member_id
-		WHERE m.id =
-		${id}
-	</select>
-
-	<select id="findItemByOrderHistory"
-		resultType="com.example.training.common.domain.OrderHistory">
-		SELECT
-		m.id AS "memberId",
-		o.id AS "orderId",
-		oi.name,
-		oi.price AS "unitPrice",
-		oi.quantity,
-		oi.image_path AS "imagePath",
-		o.`date`
-		FROM
-		orders AS o
-		LEFT JOIN
-		order_items AS oi
-		on o.id = oi.order_id
-		LEFT
-		JOIN
-		members AS m
-		on m.id =
-		o.member_id
-		WHERE o.id = ${id}
-
-	</select>
 	<select id="findByOrderMonth"
-		resultType="com.example.training.common.domain.OrderMonth">
+		resultType="com.example.training.common.domain.Order">
 		SELECT
-		id AS orderId,
-		date_format(o.`date`, '%Y年%m月') AS orderMonth,
-		date_format(o.`date`, '%m月%d日') AS orderDay
+		id,
+		`date`
 		FROM orders AS o
 		WHERE member_id = ${id}
+		ORDER BY `date` DESC
+	</select>
+
+	<select id="findByOrderItem"
+		resultType="com.example.training.common.domain.OrderItem">
+		SELECT
+		name,
+		price,
+		quantity,
+		image_path as "imagePath"
+		FROM
+		order_items
+		WHERE order_id = ${id}
 	</select>
 
 </mapper>

@@ -1,14 +1,21 @@
 package com.example.training.common.domain;
 
+import java.util.List;
+
 import lombok.Data;
 
 @Data
 public class OrderMonth {
 	private int orderId;
-	private String orderMonth;
-	private String orderDay;
+	private int orderMonth;
+	private List<Order> orderDay;
 
-	public OrderMonth(OrderMonth order) {
-
+	public void setOrderMonth(int month) {
+		this.orderMonth = month;
 	}
+
+	public void add(List<Order> day) {
+		this.orderDay = day;
+	}
+
 }

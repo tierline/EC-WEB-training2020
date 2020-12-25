@@ -1,5 +1,6 @@
 package com.example.training.common.domain;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +16,7 @@ public class Order {
 	private String email;
 	private String phone;
 	private int price;
-	private String date;
+	private LocalDate date;
 
 	public Order(OrderForm orderForm) {
 		this.memberId = orderForm.getMemberId();
@@ -24,6 +25,12 @@ public class Order {
 		this.email = orderForm.getEmail();
 		this.phone = orderForm.getPhone();
 		this.date = orderForm.getDateNow();
+	}
+
+	public Order(int orderId, int memberId, LocalDate date) {
+		this.id = orderId;
+		this.memberId = memberId;
+		this.date = date;
 	}
 
 	public Order() {
