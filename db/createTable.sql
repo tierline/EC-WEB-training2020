@@ -21,7 +21,7 @@ prefecture VARCHAR(256),
 city VARCHAR(256),
 block	 VARCHAR(256),
 phoneNumber VARCHAR(16),
-lastUpdatedBy VARCHAR(128),
+lastUpdatedBy VARCHAR(128), -- default: "none", changed: "変更した管理者の名前" --
 status VARCHAR(32), -- 未承認:unapproved, 承認:approval --
 PRIMARY KEY (id),
 UNIQUE(email)
