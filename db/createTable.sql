@@ -16,7 +16,9 @@ CREATE TABLE members (
 id INT AUTO_INCREMENT,
 email VARCHAR(128),
 password VARCHAR(256),
+zip_code VARCHAR(12),
 address VARCHAR(256),
+phone_number VARCHAR(12),
 lastUpdatedBy VARCHAR(128),
 status VARCHAR(32), -- 未承認:unapproved, 承認:approval --
 PRIMARY KEY (id),
@@ -41,23 +43,24 @@ PRIMARY KEY (id)
 
 CREATE TABLE order_items (
   id INT(11) NOT NULL AUTO_INCREMENT,
-  order_id INT(11) DEFAULT NULL,
-  name VARCHAR(128) DEFAULT NULL,
-  price INT(11) DEFAULT NULL,
-  image_path VARCHAR(20) DEFAULT NULL,
+  order_id INT(11),
+  name VARCHAR(128),
+  price INT(11),
+  image_path VARCHAR(20),
   description TEXT,
-  quantity INT(11) DEFAULT NULL,
+  quantity INT(11),
   PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE orders (
   id INT(11) NOT NULL AUTO_INCREMENT,
   member_id INT(11) NOT NULL,
-  phone VARCHAR(12) DEFAULT NULL,
-  name VARCHAR(12) DEFAULT NULL,
-  address TEXT,
-  email TEXT,
+  name VARCHAR(12),
+  email VARCHAR(256),
+  phone VARCHAR(12),
+  zip_code VARCHAR(12),
+  address VARCHAR(256),
   price INT(12),
-  date VARCHAR(48) DEFAULT NULL,
+  date DATE,
   PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
