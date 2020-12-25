@@ -25,10 +25,10 @@ public class MemberService {
   }
 
   @Transactional
-  public void update(Member member, String lastUpdatedby) {
+  public void update(Member member, String lastUpdatedBy) {
     String password = member.getPassword();
     String digest = passwordEncoder.encode(password);
-    memberRepository.update(member, digest, lastUpdatedby);
+    memberRepository.update(member, digest, lastUpdatedBy);
   }
 
 }

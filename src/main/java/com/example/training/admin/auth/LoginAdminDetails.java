@@ -15,7 +15,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false)
 public class LoginAdminDetails extends User {
   private static final long serialVersionUID = 1L;
-  // DBより検索したAdminrエンティティ
+  // DBより検索したAdminエンティティ
   // アプリケーションから利用されるのでフィールドに定義
   private Admin admin;
 

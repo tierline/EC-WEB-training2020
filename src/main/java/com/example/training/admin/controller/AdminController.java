@@ -69,8 +69,8 @@ public class AdminController {
   @PostMapping("/members/{id}/edit")
   public String edit(@PathVariable int id, Member member, Model model) {
     Admin admin = (Admin) session.getAttribute(Admin.SESSION_NAME);
-    String lastUpdatedby = admin.getName();
-    memberService.update(member, lastUpdatedby);
+    String lastUpdatedBy = admin.getName();
+    memberService.update(member, lastUpdatedBy);
     return "redirect:/admin/members";
   }
 
