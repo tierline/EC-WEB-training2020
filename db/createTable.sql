@@ -5,42 +5,47 @@ create database training;
 use training;
 
 CREATE TABLE admins (
-id INT AUTO_INCREMENT,
-name VARCHAR(128),
-password VARCHAR(256),
-PRIMARY KEY (id),
-UNIQUE(name)
+  id INT AUTO_INCREMENT,
+  name VARCHAR(128),
+  password VARCHAR(256),
+  PRIMARY KEY (id),
+  UNIQUE(name)
 );
 
 CREATE TABLE members (
-id INT AUTO_INCREMENT,
-email VARCHAR(128),
-password VARCHAR(256),
-postcode VARCHAR(256),
-prefecture VARCHAR(256),
-city VARCHAR(256),
-block	 VARCHAR(256),
-phoneNumber VARCHAR(16),
-lastUpdatedBy VARCHAR(128), -- default: "none", changed: "変更した管理者の名前" --
-status VARCHAR(32), -- 未承認:unapproved, 承認:approval --
-PRIMARY KEY (id),
-UNIQUE(email)
+  id INT AUTO_INCREMENT,
+  password VARCHAR(256),
+  email VARCHAR(128),
+  phone_number VARCHAR(16),
+
+  last_name VARCHAR(32),
+  first_name VARCHAR(32),
+
+  postcode VARCHAR(16),
+  prefecture VARCHAR(16),
+  city VARCHAR(256),
+  block	 VARCHAR(256),
+
+  last_updated_by VARCHAR(32), -- default: "none", changed: "変更した管理者の名前" --
+  status VARCHAR(32), -- 未承認:unapproved, 承認:approval --
+  PRIMARY KEY (id),
+  UNIQUE(email)
 );
 
 CREATE TABLE category(
-id INT AUTO_INCREMENT,
-name VARCHAR(16),
-PRIMARY KEY (id)
+  id INT AUTO_INCREMENT,
+  name VARCHAR(16),
+  PRIMARY KEY (id)
 );
 
 CREATE TABLE product(
-id INT AUTO_INCREMENT,
-category_id INT,
-name VARCHAR(128),
-price INT,
-image_path VARCHAR(20),
-description TEXT,
-PRIMARY KEY (id)
+  id INT AUTO_INCREMENT,
+  category_id INT,
+  name VARCHAR(128),
+  price INT,
+  image_path VARCHAR(20),
+  description TEXT,
+  PRIMARY KEY (id)
 );
 
 CREATE TABLE order_items (
