@@ -18,9 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.training.common.domain.Cart;
 import com.example.training.common.domain.Order;
-import com.example.training.common.domain.OrderForm;
 import com.example.training.common.domain.OrderHistoryAssembler;
 import com.example.training.common.domain.OrderItem;
 import com.example.training.common.domain.OrderMonth;
@@ -73,13 +71,12 @@ public class ApiOrderController {
 		LocalDate dateNow = LocalDate.now();
 		Member member = (Member) session.getAttribute(Member.SESSION_NAME);
 		int memberId = member.getId();
-
-		OrderForm orderForm = new OrderForm(lastName, firstName, email, phone, address1, address2, memberId, dateNow);
-
-		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
-		int orderId = orderService.order(orderForm, cart);
-		session.setAttribute(Cart.SESSION_NAME, new Cart());
-		return orderId;
+//		 OrderForm orderForm = new OrderForm(lastName, firstName, email, phone,
+//		 address1, address2, memberId, dateNow;)0
+//		 Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
+//		 int orderId = orderService.order(orderForm, cart);
+//		 session.setAttribute(Cart.SESSION_NAME, new Cart());
+		return 0;
 	}
 
 	/**

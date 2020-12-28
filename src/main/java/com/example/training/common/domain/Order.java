@@ -23,7 +23,7 @@ public class Order {
 		this.name = orderForm.getFullName();
 		this.address = orderForm.getFullAddress();
 		this.email = orderForm.getEmail();
-		this.phone = orderForm.getPhone();
+		this.phone = orderForm.getPhoneNumber();
 		this.date = orderForm.getDateNow();
 	}
 

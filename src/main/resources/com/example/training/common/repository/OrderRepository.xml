@@ -55,7 +55,7 @@
 	<select id="findByOrderMonth"
 		resultType="com.example.training.common.domain.OrderMonth">
 		SELECT
-		id,
+		id as orderId,
 		`date`
 		FROM orders AS o
 		WHERE member_id = ${id}

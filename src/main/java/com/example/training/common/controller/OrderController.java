@@ -44,6 +44,7 @@ public class OrderController {
 		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
 		Member member = (Member) session.getAttribute(Member.SESSION_NAME);
 		orderForm.setMemberId(member.getId());
+		orderForm.setLastName(member.getLastName());
 		model.addAttribute("cart", cart);
 		model.addAttribute("orderForm", orderForm);
 		return "member/order/detail";

@@ -7,6 +7,5 @@ import lombok.Data;
 @Data
 public class OrderMonth {
 	private int orderId;
-	private int orderMonth;
 	private LocalDate date;
 }

@@ -5,16 +5,22 @@ import lombok.Data;
 @Data
 public class Member {
 	public static final String SESSION_NAME = "MEMBER";
+
+	// 基本情報
 	private int id;
-	private String email;
 	private String password;
+	// 連絡先
+	private String email;
+	private String phoneNumber;
+	// 名前
 	private String lastName;
 	private String firstName;
+	// 住所
 	private String postcode;
 	private String prefecture;
 	private String city;
 	private String block;
-	private String phoneNumber;
+	// その他
 	private String lastUpdatedBy;
 	private String status;
 	private String roles = "ROLE_USER";
@@ -23,22 +29,16 @@ public class Member {
 
 	}
 
-	public Member(int id, String email, String password, String lastName, String firstName, String postcode,
-			String city, String block, String phoneNumber, String prefecture, String roles, String lastUpdatedBy,
-			String status) {
+	public Member(int id, String email, String phone_number, String last_name, String first_name, String postcode,
+			String prefecture, String city, String block) {
 		this.id = id;
 		this.email = email;
-		this.password = password;
-		this.lastName = lastName;
-		this.firstName = firstName;
+		this.phoneNumber = phone_number;
+		this.lastName = last_name;
+		this.firstName = first_name;
 		this.postcode = postcode;
 		this.prefecture = prefecture;
 		this.city = city;
 		this.block = block;
-		this.phoneNumber = phoneNumber;
-		this.lastUpdatedBy = lastUpdatedBy;
-		this.status = status;
-		this.roles = roles;
 	}
-
 }
