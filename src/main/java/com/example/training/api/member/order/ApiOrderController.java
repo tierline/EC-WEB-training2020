@@ -1,10 +1,9 @@
 package com.example.training.api.member.order;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
@@ -22,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.training.common.domain.Cart;
 import com.example.training.common.domain.Order;
 import com.example.training.common.domain.OrderForm;
+import com.example.training.common.domain.OrderHistoryAssembler;
 import com.example.training.common.domain.OrderItem;
 import com.example.training.common.domain.OrderMonth;
 import com.example.training.common.domain.OrderService;
@@ -45,6 +45,18 @@ public class ApiOrderController {
 
 	@Autowired
 	private MemberRepository memberRepository;
+
+	@Autowired
+	private OrderHistoryAssembler orderHistoryAssembler;
+
+	/*
+	 * 住所情報があったら表示する
+	 */
+	@GetMapping("/{id}")
+	public Member order(@PathVariable int id) {
+		Member member = memberRepository.findByAddress(id);
+		return member;
+	}
 
 	/**
 	 * 注文処理を行う
@@ -109,29 +121,10 @@ public class ApiOrderController {
 	}
 
 	@GetMapping("/history/{id}")
-	public List<OrderMonth> orderList(@PathVariable int id) {
-		List<Order> order = orderRepository.findByOrderMonth(id);
-		List<Integer> monthList = new ArrayList<Integer>();
-		List<OrderMonth> result = new ArrayList<OrderMonth>();
-		for (Order o : order) {
-			int month = o.getDate().getMonthValue();
-			monthList.add(month);
-		}
-		List<Integer> month = new ArrayList<Integer>(new LinkedHashSet<>(monthList));
-		List<Order> day = new ArrayList<>();
-		// 同じ月を一つの配列に入れる
-		for (int m : month) {
-			for (Order o : order) {
-				if (m == o.getDate().getMonthValue()) {
-					day.add(o);
-				}
-			}
-			OrderMonth orderMonth = new OrderMonth();
-			orderMonth.setOrderMonth(m);
-			orderMonth.add(day);
-			result.add(orderMonth);
-			day = new ArrayList<>();
-		}
+	public Map<Integer, List<OrderMonth>> orderList(@PathVariable int id) {
+		List<OrderMonth> list = orderRepository.findByOrderMonth(id);
+		Map<Integer, List<OrderMonth>> result = orderHistoryAssembler.create(list);
+
 		return result;
 	}
 

@@ -15,13 +15,15 @@ UNIQUE(name)
 CREATE TABLE members (
 id INT AUTO_INCREMENT,
 email VARCHAR(128),
+last_name VARCHAR(32),
+first_name VARCHAR(32),
 password VARCHAR(256),
 postcode VARCHAR(256),
 prefecture VARCHAR(256),
 city VARCHAR(256),
-block	 VARCHAR(256),
-phoneNumber VARCHAR(16),
-lastUpdatedBy VARCHAR(128),
+block  VARCHAR(256),
+phone_number VARCHAR(16),
+last_updated_by VARCHAR(128), -- default: “none”, changed: “変更した管理者の名前” --
 status VARCHAR(32), -- 未承認:unapproved, 承認:approval --
 PRIMARY KEY (id),
 UNIQUE(email)

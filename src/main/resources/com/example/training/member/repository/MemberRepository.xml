@@ -15,32 +15,52 @@
 		email = "${email}"
 	</select>
 
-	<select id="findById" resultType="com.example.training.member.domain.Member">
+	<select id="findById"
+		resultType="com.example.training.member.domain.Member">
 		SELECT * FROM members WHERE id = "${id}"
 	</select>
 
-	<select id="findAll" resultType="com.example.training.member.domain.Member">
+	<select id="findAll"
+		resultType="com.example.training.member.domain.Member">
 		SELECT * FROM members
 	</select>
 
+	<select id="findByAddress"
+		resultType="com.example.training.member.domain.Member">
+		SELECT
+		last_name as lastName,
+		first_name as firstName,
+		email,
+		postcode,
+		prefecture,
+		city,
+		block,
+		phone_number as phoneNumber
+		FROM
+		members m
+		WHERE m.id = ${id}
+	</select>
+
 	<insert id="create" useGeneratedKeys="true">
-		INSERT INTO members (email, password, address, lastUpdatedBy, status) VALUES (
-			"${member.email}",
-			"${digest}",
-			"${member.address}",
-			"none",
-			"unapproved"
+		INSERT INTO members (email,
+		password, address, lastUpdatedBy, status) VALUES (
+		"${member.email}",
+		"${digest}",
+		"${member.address}",
+		"none",
+		"unapproved"
 		)
 	</insert>
 
 	<update id="update">
-    UPDATE members SET
-			email=#{member.email},
-			password=#{digest},
-			address=#{member.address},
-			lastUpdatedBy=#{lastUpdatedBy},
-			status=#{member.status}
-			WHERE id= #{member.id}
+		UPDATE members SET
+		email=#{member.email},
+		password=#{digest},
+		address=#{member.address},
+		lastUpdatedBy=#{lastUpdatedBy},
+		status=#{member.status}
+		WHERE id=
+		#{member.id}
 	</update>
 
 </mapper>

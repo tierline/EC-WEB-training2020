@@ -22,4 +22,5 @@ public interface MemberRepository {
 	public void update(@Param("member") Member member, @Param("digest") String digest,
 			@Param("lastUpdatedBy") String lastUpdatedBy);
 
+	public Member findByAddress(int id);
 }

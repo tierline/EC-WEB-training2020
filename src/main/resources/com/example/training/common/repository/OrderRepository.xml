@@ -53,7 +53,7 @@
 	</select>
 
 	<select id="findByOrderMonth"
-		resultType="com.example.training.common.domain.Order">
+		resultType="com.example.training.common.domain.OrderMonth">
 		SELECT
 		id,
 		`date`

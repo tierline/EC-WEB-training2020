@@ -1,6 +1,6 @@
 package com.example.training.common.domain;
 
-import java.util.List;
+import java.time.LocalDate;
 
 import lombok.Data;
 
@@ -8,14 +8,5 @@ import lombok.Data;
 public class OrderMonth {
 	private int orderId;
 	private int orderMonth;
-	private List<Order> orderDay;
-
-	public void setOrderMonth(int month) {
-		this.orderMonth = month;
-	}
-
-	public void add(List<Order> day) {
-		this.orderDay = day;
-	}
-
+	private LocalDate date;
 }
