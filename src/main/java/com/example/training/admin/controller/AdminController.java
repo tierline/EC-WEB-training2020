@@ -1,5 +1,7 @@
 package com.example.training.admin.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import com.example.training.admin.domain.Admin;
@@ -50,7 +52,8 @@ public class AdminController {
    */
   @GetMapping("/members")
   public String list(Model model) {
-    model.addAttribute("members", memberRepository.findAll());
+    List<Member> member = memberRepository.findAll();
+    model.addAttribute("members", member);
     return "admin/members/index";
   }
 

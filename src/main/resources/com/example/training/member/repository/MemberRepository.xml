@@ -24,10 +24,9 @@
 	</select>
 
 	<insert id="create" useGeneratedKeys="true">
-		INSERT INTO members (email, password, address, lastUpdatedBy, status) VALUES (
+		INSERT INTO members (email, password, last_updated_by, status) VALUES (
 			"${member.email}",
 			"${digest}",
-			"${member.address}",
 			"none",
 			"unapproved"
 		)
@@ -37,8 +36,7 @@
     UPDATE members SET
 			email=#{member.email},
 			password=#{digest},
-			address=#{member.address},
-			lastUpdatedBy=#{lastUpdatedBy},
+			last_updated_by=#{lastUpdatedBy},
 			status=#{member.status}
 			WHERE id= #{member.id}
 	</update>

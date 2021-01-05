@@ -13,7 +13,7 @@ CREATE TABLE admins (
 );
 
 CREATE TABLE members (
-  id INT AUTO_INCREMENT,
+  id INT(11) NOT NULL AUTO_INCREMENT,
   password VARCHAR(256),
   email VARCHAR(128),
   phone_number VARCHAR(16),
