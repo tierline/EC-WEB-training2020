@@ -44,7 +44,15 @@ public class OrderController {
 		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
 		Member member = (Member) session.getAttribute(Member.SESSION_NAME);
 		orderForm.setMemberId(member.getId());
+		orderForm.setEmail(member.getEmail());
+		orderForm.setPhoneNumber(member.getPhoneNumber());
 		orderForm.setLastName(member.getLastName());
+		orderForm.setFirstName(member.getFirstName());
+		orderForm.setPostcode(member.getPostcode());
+		orderForm.setPrefecture(member.getPrefecture());
+		orderForm.setCity(member.getCity());
+		orderForm.setBlock(member.getBlock());
+
 		model.addAttribute("cart", cart);
 		model.addAttribute("orderForm", orderForm);
 		return "member/order/detail";

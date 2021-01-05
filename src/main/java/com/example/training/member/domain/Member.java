@@ -25,8 +25,8 @@ public class Member {
 	private String status;
 	private String roles = "ROLE_USER";
 
-	public Member(int id, String email, String phone_number, String last_name, String first_name, String postcode,
-			String prefecture, String city, String block) {
+	public Member(int id, String password, String email, String phone_number, String last_name, String first_name,
+			String postcode, String prefecture, String city, String block, String last_updated_by, String status) {
 		this.id = id;
 		this.email = email;
 		this.phoneNumber = phone_number;
@@ -36,19 +36,5 @@ public class Member {
 		this.prefecture = prefecture;
 		this.city = city;
 		this.block = block;
-
 	}
-
-	// public Member(int id, String email, String password, String address, String
-	// roles, String lastUpdatedBy,
-	// String status) {
-	// this.id = id;
-	// this.email = email;
-	// this.password = password;
-	// this.address = address;
-	// this.lastUpdatedBy = lastUpdatedBy;
-	// this.status = status;
-	// this.roles = roles;
-	// }
-
 }

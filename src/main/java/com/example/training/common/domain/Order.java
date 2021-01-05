@@ -14,7 +14,7 @@ public class Order {
 	private String name;
 	private String address;
 	private String email;
-	private String phone;
+	private String phoneNumber;
 	private int price;
 	private LocalDate date;
 
@@ -23,17 +23,26 @@ public class Order {
 		this.name = orderForm.getFullName();
 		this.address = orderForm.getFullAddress();
 		this.email = orderForm.getEmail();
-		this.phone = orderForm.getPhoneNumber();
+		this.phoneNumber = orderForm.getPhoneNumber();
 		this.date = orderForm.getDateNow();
+	}
+
+	public Order(int orderId, int memberId, String email, String phone_number, String name, String address, int price,
+			LocalDate date) {
+		this.id = orderId;
+		this.memberId = memberId;
+		this.email = email;
+		this.phoneNumber = phone_number;
+		this.name = name;
+		this.address = address;
+		this.price = price;
+		this.date = date;
 	}
 
 	public Order(int orderId, int memberId, LocalDate date) {
 		this.id = orderId;
 		this.memberId = memberId;
 		this.date = date;
-	}
-
-	public Order() {
 	}
 
 	public List<OrderItem> createItems(Cart cart) {
