@@ -12,6 +12,7 @@ import com.example.training.common.domain.OrderItem;
 import com.example.training.common.domain.OrderService;
 import com.example.training.common.repository.OrderRepository;
 import com.example.training.member.domain.Member;
+import com.example.training.member.repository.MemberRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,6 +30,9 @@ public class OrderController {
 
 	@Autowired
 	private HttpSession session;
+
+	@Autowired
+	private MemberRepository memberRepository;
 
 	@Autowired
 	private OrderRepository orderRepository;
@@ -68,6 +72,9 @@ public class OrderController {
 		} else {
 			Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
 			int orderId = orderService.order(orderForm, cart);
+			memberRepository.updateAtOrder(orderForm);
+
+			session.setAttribute(Member.SESSION_NAME, memberRepository.findById(orderForm.getMemberId()));
 			session.setAttribute(Cart.SESSION_NAME, new Cart());
 			return "redirect:/member/order/complete/" + orderId;
 		}
