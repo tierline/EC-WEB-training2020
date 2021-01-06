@@ -25,10 +25,6 @@ public class Member {
 	private String status;
 	private String roles = "ROLE_USER";
 
-	public Member() {
-
-	}
-
 	public Member(int id, String email, String phone_number, String last_name, String first_name, String postcode,
 			String prefecture, String city, String block) {
 		this.id = id;
@@ -40,5 +36,30 @@ public class Member {
 		this.prefecture = prefecture;
 		this.city = city;
 		this.block = block;
+	}
+	// public Member(int id, String password, String email, String phone_number,
+	// String last_name, String first_name,
+	// String postcode, String prefecture, String city, String block, String
+	// last_updated_by, String status) {
+	// this.id = id;
+	// this.email = email;
+	// this.phoneNumber = phone_number;
+	// this.lastName = last_name;
+	// this.firstName = first_name;
+	// this.postcode = postcode;
+	// this.prefecture = prefecture;
+	// this.city = city;
+	// this.block = block;
+	// }
+
+	public Member(MemberApplicateForm memberApplicateForm) {
+		this.password = memberApplicateForm.getPassword();
+		this.email = memberApplicateForm.getEmail();
+		this.lastUpdatedBy = "none";
+		this.status = "unapproved";
+	}
+
+	public Member() {
+
 	}
 }

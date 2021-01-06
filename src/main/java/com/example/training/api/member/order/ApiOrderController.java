@@ -71,11 +71,13 @@ public class ApiOrderController {
 		LocalDate dateNow = LocalDate.now();
 		Member member = (Member) session.getAttribute(Member.SESSION_NAME);
 		int memberId = member.getId();
+
 //		 OrderForm orderForm = new OrderForm(lastName, firstName, email, phone,
 //		 address1, address2, memberId, dateNow;)0
 //		 Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
 //		 int orderId = orderService.order(orderForm, cart);
 //		 session.setAttribute(Cart.SESSION_NAME, new Cart());
+
 		return 0;
 	}
 

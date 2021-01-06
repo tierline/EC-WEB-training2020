@@ -37,18 +37,20 @@
 		block,
 		phone_number as phoneNumber
 		FROM
-		members m
-		WHERE m.id = ${id}
+		members
+		m
+		WHERE m.email = ${email}
 	</select>
 
 	<insert id="create" useGeneratedKeys="true">
+
 		INSERT INTO members (email,
-		password, address, lastUpdatedBy, status) VALUES (
+		password, last_updated_by, status) VALUES (
 		"${member.email}",
 		"${digest}",
-		"${member.address}",
 		"none",
 		"unapproved"
+
 		)
 	</insert>
 
@@ -56,11 +58,21 @@
 		UPDATE members SET
 		email=#{member.email},
 		password=#{digest},
-		address=#{member.address},
-		lastUpdatedBy=#{lastUpdatedBy},
+		last_updated_by=#{lastUpdatedBy},
 		status=#{member.status}
-		WHERE id=
-		#{member.id}
+		WHERE id= #{member.id}
+	</update>
+
+	<update id="updateAtOrder">
+		UPDATE members SET
+		first_name=#{orderForm.firstName},
+		last_name=#{orderForm.lastName},
+		phone_number=#{orderForm.phoneNumber},
+		postcode=#{orderForm.postcode},
+		prefecture=#{orderForm.prefecture},
+		city=#{orderForm.city},
+		block=#{orderForm.block}
+		WHERE id= #{orderForm.memberId}
 	</update>
 
 </mapper>

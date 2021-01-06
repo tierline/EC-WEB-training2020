@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import com.example.training.common.domain.OrderForm;
 import com.example.training.member.domain.Member;
 
 @Mapper
@@ -22,5 +23,8 @@ public interface MemberRepository {
 	public void update(@Param("member") Member member, @Param("digest") String digest,
 			@Param("lastUpdatedBy") String lastUpdatedBy);
 
-	public Member findByAddress(int id);
+	public Member findByAddress(String email);
+
+	public void updateAtOrder(@Param("orderForm") OrderForm orderForm);
+
 }

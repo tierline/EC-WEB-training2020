@@ -9,10 +9,10 @@
 
 	<insert id="save" useGeneratedKeys="true" keyProperty="id">
 		INSERT
-		INTO orders (member_id, phone, name, address, email, price, date)
+		INTO orders (member_id, phone_number, name, address, email, price, date)
 		VALUES(
 		"${memberId}",
-		"${phone}",
+		"${phoneNumber}",
 		"${name}",
 		"${address}",
 		"${email}",

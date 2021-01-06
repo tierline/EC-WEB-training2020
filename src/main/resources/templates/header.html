@@ -1,42 +1,154 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+      integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css"
+      rel="stylesheet"
+    />
+    <link th:href="@{/css/header.css}" rel="stylesheet" />
+  </head>
 
-<head>
-    <meta charset="UTF-8">
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-</head>
-
-<body>
-    <nav th:fragment="header" class="navbar navbar-light bg-primary py-3 mb-3">
-        <a href="/"><span class="badge badge-dark p-3">ホーム</span></a>
-        <b th:text="${session?.ADMIN?.name}" class="navbar-text"></b>
-        <form class="form-inline mx-auto" action="/search" th:object="${freeWord}" method="POST">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" name="freeWord" th:value="${value}" required>
-            <button class="btn btn-dark my-2 my-sm-0" type="submit">Search</button>
-        </form>
-        <div>
-            <!-- アイコンに変更する -->
-            <a href="/member/cart/list"><span class="btn btn-dark mx-2">カート</span></a>
-        </div>
-        <div class="dropdown">
-            <a class="btn btn-dark dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                メニュー
-            </a>
-            <div class="dropdown-menu">
-                <a class="dropdown-item" th:href="@{/member/cart/list}">カート</a>
-                <a class="dropdown-item" href="#">サンプル</a>
-                <a class="dropdown-item" href="#">サンプル</a>
-                <a class="dropdown-item" href="#">サンプル</a>
-                <a class="dropdown-item" href="#">サンプル</a>
-                <a class="dropdown-item" href="#">サンプル</a>
+  <body>
+    <nav class="navbar navbar-expand-sm navbar-custom py-2.5">
+      <div class="container-fluid">
+        <div class="collapse navbar-collapse justify-content-start">
+          <a class="navbar-brand" href="/">T&K</a>
+          <span class="navbar-text mr-3" th:if="${session?.MEMBER?.email}">
+            ようこそ！
+            <!-- <b th:text="${session?.MEMBER?.lastName}" class="navbar-text"></b> -->
+            <!-- 様 -->
+          </span>
+          <form
+            class="d-flex"
+            action="/search"
+            th:object="${freeWord}"
+            method="POST"
+          >
+            <div class="input-group">
+              <input
+                type="search"
+                class="form-control"
+                placeholder="Search"
+                aria-describedby="button-addon"
+                name="freeWord"
+                th:value="${value}"
+                required
+              />
+              <button class="btn btn-custom" type="submit" id="button-addon">
+                <i class="fi-magnifying-glass"></i>
+              </button>
             </div>
+          </form>
         </div>
-        <div class="text-center" th:if="${session?.ADMIN?.name == null && session?.MEMBER?.email == null}">
-            <a href="/member/login"><span class="btn btn-dark mx-2">ログイン</span></a>
-            <a href="/member/applicate"><span class="btn btn-dark mx-2">新規登録</span></a>
+
+        <div
+          class="collapse navbar-collapse justify-content-end"
+          id="navbarSupportedContent"
+        >
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active fs-5" href="/member/cart/list">
+                <i class="fi-shopping-cart"></i>
+                カート
+              </a>
+            </li>
+            <li
+              class="nav-item"
+              th:if="${session?.ADMIN?.name == null && session?.MEMBER?.email == null}"
+            >
+              <a class="nav-link active" href="/member/login">ログイン</a>
+            </li>
+            <li
+              class="nav-item"
+              th:if="${session?.ADMIN?.name == null && session?.MEMBER?.email == null}"
+            >
+              <a class="nav-link active" href="/member/applicate">新規登録</a>
+            </li>
+          </ul>
         </div>
+      </div>
     </nav>
-</body>
+
+    <!--
+
+    <nav th:fragment="header" class="navbar navbar-light bg-primary py-3 mb-3">
+      <a href="/"><span class="badge badge-dark p-3">ホーム</span></a>
+      <p>
+        ようこそ！
+        <b th:text="${session?.MEMBER?.lastName}" class="navbar-text"></b>
+        様
+      </p>
+      <b th:text="${session?.ADMIN?.name}" class="navbar-text"></b>
+      <form
+        class="form-inline mx-auto"
+        action="/search"
+        th:object="${freeWord}"
+        method="POST"
+      >
+        <input
+          class="form-control mr-sm-2"
+          type="search"
+          placeholder="Search"
+          name="freeWord"
+          th:value="${value}"
+          required
+        />
+        <button class="btn btn-dark my-2 my-sm-0" type="submit">Search</button>
+      </form>
+      <div>
+        <a href="/member/cart/list"
+          ><span class="btn btn-dark mx-2">カート</span></a
+        >
+      </div>
+      <div class="dropdown">
+        <a
+          class="btn btn-dark dropdown-toggle"
+          href="#"
+          role="button"
+          id="dropdownMenuLink"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          メニュー
+        </a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" th:href="@{/member/cart/list}">カート</a>
+          <a class="dropdown-item" href="#">サンプル</a>
+          <a class="dropdown-item" href="#">サンプル</a>
+          <a class="dropdown-item" href="#">サンプル</a>
+          <a class="dropdown-item" href="#">サンプル</a>
+          <a class="dropdown-item" href="#">サンプル</a>
+        </div>
+      </div>
+      <div
+        class="text-center"
+        th:if="${session?.ADMIN?.name == null && session?.MEMBER?.email == null}"
+      >
+        <a href="/member/login"
+          ><span class="btn btn-dark mx-2">ログイン</span></a
+        >
+        <a href="/member/applicate"
+          ><span class="btn btn-dark mx-2">新規登録</span></a
+        >
+      </div>
+    </nav>
+ -->
+  </body>
 </html>

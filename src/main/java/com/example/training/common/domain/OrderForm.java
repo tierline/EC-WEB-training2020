@@ -70,7 +70,7 @@ public class OrderForm {
 	}
 
 	public String getFullAddress() {
-		return this.prefecture + this.city + this.block;
+		return this.postcode + this.prefecture + this.city + this.block;
 	}
 
 	public Order createOrder() {

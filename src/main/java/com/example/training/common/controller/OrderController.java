@@ -12,6 +12,7 @@ import com.example.training.common.domain.OrderItem;
 import com.example.training.common.domain.OrderService;
 import com.example.training.common.repository.OrderRepository;
 import com.example.training.member.domain.Member;
+import com.example.training.member.repository.MemberRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,6 +32,9 @@ public class OrderController {
 	private HttpSession session;
 
 	@Autowired
+	private MemberRepository memberRepository;
+
+	@Autowired
 	private OrderRepository orderRepository;
 
 	@Autowired
@@ -44,7 +48,15 @@ public class OrderController {
 		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
 		Member member = (Member) session.getAttribute(Member.SESSION_NAME);
 		orderForm.setMemberId(member.getId());
+		orderForm.setEmail(member.getEmail());
+		orderForm.setPhoneNumber(member.getPhoneNumber());
 		orderForm.setLastName(member.getLastName());
+		orderForm.setFirstName(member.getFirstName());
+		orderForm.setPostcode(member.getPostcode());
+		orderForm.setPrefecture(member.getPrefecture());
+		orderForm.setCity(member.getCity());
+		orderForm.setBlock(member.getBlock());
+
 		model.addAttribute("cart", cart);
 		model.addAttribute("orderForm", orderForm);
 		return "member/order/detail";
@@ -60,6 +72,9 @@ public class OrderController {
 		} else {
 			Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
 			int orderId = orderService.order(orderForm, cart);
+			memberRepository.updateAtOrder(orderForm);
+
+			session.setAttribute(Member.SESSION_NAME, memberRepository.findById(orderForm.getMemberId()));
 			session.setAttribute(Cart.SESSION_NAME, new Cart());
 			return "redirect:/member/order/complete/" + orderId;
 		}
