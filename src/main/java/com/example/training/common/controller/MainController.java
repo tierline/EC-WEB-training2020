@@ -1,6 +1,7 @@
 package com.example.training.common.controller;
 
 import java.util.List;
+import java.util.Locale;
 
 import javax.servlet.http.HttpSession;
 
@@ -8,6 +9,7 @@ import com.example.training.common.domain.Product;
 import com.example.training.common.repository.ProductRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +23,9 @@ public class MainController {
 
 	@Autowired
 	protected HttpSession session;
+
+	@Autowired
+	protected MessageSource messageSource;
 
 	@GetMapping("/")
 	public String index(Model model) {
@@ -39,8 +44,12 @@ public class MainController {
 	@PostMapping("/search")
 	public String search(Model model, @RequestParam("freeWord") String word) {
 		List<Product> products = productRepository.findName(word);
+		model.addAttribute("word", word);
 		model.addAttribute("products", products);
-		return "index";
+		if (products.size() == 0) {
+			model.addAttribute("errorMessage", messageSource.getMessage("error.search.noProduct", null, Locale.JAPAN));
+		}
+		return "search";
 	}
 
 }
