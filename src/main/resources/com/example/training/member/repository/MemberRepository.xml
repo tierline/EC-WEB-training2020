@@ -25,20 +25,23 @@
 
 	<insert id="create" useGeneratedKeys="true">
 		INSERT INTO members (email, password, last_updated_by, status) VALUES (
-			"${member.email}",
+			"${memberApplicateForm.email}",
 			"${digest}",
 			"none",
 			"unapproved"
 		)
 	</insert>
 
+	<select id="countByEmail" resultType="int">
+		SELECT COUNT(*) FROM members WHERE email = #{email}
+	</select>
+
 	<update id="update">
     UPDATE members SET
-			email=#{member.email},
-			password=#{digest},
+			email=#{memberEditForm.email},
 			last_updated_by=#{lastUpdatedBy},
-			status=#{member.status}
-			WHERE id= #{member.id}
+			status=#{memberEditForm.status}
+			WHERE id= #{memberEditForm.id}
 	</update>
 
 	<update id="updateAtOrder">

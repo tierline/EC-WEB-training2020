@@ -5,8 +5,8 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import com.example.training.admin.domain.Admin;
-import com.example.training.member.Service.MemberService;
 import com.example.training.member.domain.Member;
+import com.example.training.member.domain.MemberEditForm;
 import com.example.training.member.repository.MemberRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,9 +26,6 @@ public class AdminController {
 
   @Autowired
   MemberRepository memberRepository;
-
-  @Autowired
-  private MemberService memberService;
 
   @GetMapping()
   public String index() {
@@ -61,8 +58,12 @@ public class AdminController {
    * 会員情報編集画面を表示する
    */
   @GetMapping("/members/{id}/edit")
-  public String editForm(@PathVariable int id, Model model) {
-    model.addAttribute("member", memberRepository.findById(id));
+  public String editForm(@PathVariable int id, Model model, MemberEditForm memberEditForm) {
+    Member member = memberRepository.findById(id);
+    memberEditForm.setEmail(member.getEmail());
+    memberEditForm.setStatus(member.getStatus());
+    memberEditForm.setId(member.getId());
+    model.addAttribute("memberEditForm", memberEditForm);
     return "admin/members/edit";
   }
 
@@ -70,10 +71,10 @@ public class AdminController {
    * 会員情報を編集する
    */
   @PostMapping("/members/{id}/edit")
-  public String edit(@PathVariable int id, Member member, Model model) {
+  public String edit(@PathVariable int id, MemberEditForm memberEditForm, Model model) {
     Admin admin = (Admin) session.getAttribute(Admin.SESSION_NAME);
     String lastUpdatedBy = admin.getName();
-    memberService.update(member, lastUpdatedBy);
+    memberRepository.update(memberEditForm, lastUpdatedBy);
     return "redirect:/admin/members";
   }
 

@@ -46,6 +46,7 @@ public class OrderController {
 	@GetMapping("/form")
 	public String form(OrderForm orderForm, Model model) {
 		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
+		// もっとスマートに書く
 		Member member = (Member) session.getAttribute(Member.SESSION_NAME);
 		orderForm.setMemberId(member.getId());
 		orderForm.setEmail(member.getEmail());

@@ -1,5 +1,10 @@
+body {
+  /* background-color: #feeabc !important; */
+}
+
 .navbar-custom {
-  background-color: #ef866b;
+  /* background-color: #ef866b; */
+  background-color: #fcaa00;
 }
 /* change the brand and text color */
 .navbar-custom .navbar-brand,
@@ -18,4 +23,13 @@
 .btn-custom {
   background-color: #bcb5b5 !important;
   border-color: #bcb5b5 !important;
+}
+
+.btn-custom2 {
+  background-color: #61c359 !important;
+  border-color: #61c359 !important;
+}
+.btn-custom3 {
+  background-color: #fcaa00 !important;
+  border-color: #fcaa00 !important;
 }

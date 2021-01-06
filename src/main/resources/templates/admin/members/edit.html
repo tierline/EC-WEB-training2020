@@ -19,8 +19,8 @@
       <div class="pt-3">
         <form
           th:method="post"
+          th:object="${memberEditForm}"
           th:action="@{/admin/members/{id}/edit(id=*{id})}"
-          th:object="${member}"
         >
           <div class="form-group">
             <label>メールアドレス</label>
@@ -34,18 +34,8 @@
             />
           </div>
           <div class="form-group">
-            <label>パスワード</label>
-            <input
-              type="password"
-              class="form-control"
-              name="password"
-              placeholder="Password"
-              required
-            />
-          </div>
-          <div class="form-group">
             <label>承認状態</label>
-            <select class="form-control" 　th:field="*{status}">
+            <select class="form-control" th:field="*{status}">
               <option th:value="unapproved" th:text="未承認"></option>
               <option th:value="approval" th:text="承認"></option>
             </select>

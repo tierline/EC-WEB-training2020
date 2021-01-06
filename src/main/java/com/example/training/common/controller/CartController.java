@@ -1,5 +1,7 @@
 package com.example.training.common.controller;
 
+import java.util.Locale;
+
 import javax.servlet.http.HttpSession;
 
 import com.example.training.common.domain.Cart;
@@ -7,6 +9,7 @@ import com.example.training.common.domain.Product;
 import com.example.training.common.repository.ProductRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,12 +23,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/member/cart")
 public class CartController {
-	// private Cart cart = new Cart();
 	@Autowired
 	protected HttpSession session;
 
 	@Autowired
 	private ProductRepository productRepository;
+
+	@Autowired
+	protected MessageSource messageSource;
 
 	/**
 	 * @param id
@@ -59,6 +64,11 @@ public class CartController {
 	@GetMapping("/list")
 	public String doGet(Model model) {
 		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
+		if (cart.getSize() == 0) {
+			model.addAttribute("errorMessage", messageSource.getMessage("error.cart.noProduct", null, Locale.JAPAN));
+			model.addAttribute("cart", cart);
+			return "member/cart";
+		}
 		model.addAttribute("cart", cart);
 		return "member/cart";
 	}

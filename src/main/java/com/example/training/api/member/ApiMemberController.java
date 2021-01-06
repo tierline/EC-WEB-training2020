@@ -4,6 +4,11 @@ import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 
+import com.example.training.member.Service.MemberService;
+import com.example.training.member.domain.Member;
+import com.example.training.member.domain.MemberApplicateForm;
+import com.example.training.member.repository.MemberRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -12,10 +17,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.example.training.member.Service.MemberService;
-import com.example.training.member.domain.Member;
-import com.example.training.member.repository.MemberRepository;
 
 @RestController
 @RequestMapping("/api/member")
@@ -37,11 +38,13 @@ public class ApiMemberController {
 	@CrossOrigin
 	@PostMapping("/applicate")
 	@ResponseBody
-	public Member create(@RequestBody Member member) {
-		memberService.create(member);
-		Optional<Member> memberDetail = memberRepository.findByEmail(member.getEmail());
+	public Member create(@RequestBody MemberApplicateForm memberApplicateForm) {
+		// 要修正
+		// create の引数に memberApplicateForm を指定したため。Member型をとりあえず返している。
+		memberService.create(memberApplicateForm);
+		Optional<Member> memberDetail = memberRepository.findByEmail(memberApplicateForm.getEmail());
 		session.setAttribute(Member.SESSION_NAME, memberDetail.get());
-		return member;
+		return memberDetail.get();
 	}
 
 	@CrossOrigin

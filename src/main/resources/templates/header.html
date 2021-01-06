@@ -31,8 +31,8 @@
           <a class="navbar-brand" href="/">T&K</a>
           <span class="navbar-text mr-3" th:if="${session?.MEMBER?.email}">
             ようこそ！
-            <!-- <b th:text="${session?.MEMBER?.lastName}" class="navbar-text"></b> -->
-            <!-- 様 -->
+            <b th:text="${session?.MEMBER?.lastName}" class="navbar-text"></b>
+            様
           </span>
           <form
             class="d-flex"
@@ -84,71 +84,5 @@
         </div>
       </div>
     </nav>
-
-    <!--
-
-    <nav th:fragment="header" class="navbar navbar-light bg-primary py-3 mb-3">
-      <a href="/"><span class="badge badge-dark p-3">ホーム</span></a>
-      <p>
-        ようこそ！
-        <b th:text="${session?.MEMBER?.lastName}" class="navbar-text"></b>
-        様
-      </p>
-      <b th:text="${session?.ADMIN?.name}" class="navbar-text"></b>
-      <form
-        class="form-inline mx-auto"
-        action="/search"
-        th:object="${freeWord}"
-        method="POST"
-      >
-        <input
-          class="form-control mr-sm-2"
-          type="search"
-          placeholder="Search"
-          name="freeWord"
-          th:value="${value}"
-          required
-        />
-        <button class="btn btn-dark my-2 my-sm-0" type="submit">Search</button>
-      </form>
-      <div>
-        <a href="/member/cart/list"
-          ><span class="btn btn-dark mx-2">カート</span></a
-        >
-      </div>
-      <div class="dropdown">
-        <a
-          class="btn btn-dark dropdown-toggle"
-          href="#"
-          role="button"
-          id="dropdownMenuLink"
-          data-toggle="dropdown"
-          aria-haspopup="true"
-          aria-expanded="false"
-        >
-          メニュー
-        </a>
-        <div class="dropdown-menu">
-          <a class="dropdown-item" th:href="@{/member/cart/list}">カート</a>
-          <a class="dropdown-item" href="#">サンプル</a>
-          <a class="dropdown-item" href="#">サンプル</a>
-          <a class="dropdown-item" href="#">サンプル</a>
-          <a class="dropdown-item" href="#">サンプル</a>
-          <a class="dropdown-item" href="#">サンプル</a>
-        </div>
-      </div>
-      <div
-        class="text-center"
-        th:if="${session?.ADMIN?.name == null && session?.MEMBER?.email == null}"
-      >
-        <a href="/member/login"
-          ><span class="btn btn-dark mx-2">ログイン</span></a
-        >
-        <a href="/member/applicate"
-          ><span class="btn btn-dark mx-2">新規登録</span></a
-        >
-      </div>
-    </nav>
- -->
   </body>
 </html>

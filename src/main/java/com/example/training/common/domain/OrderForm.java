@@ -46,7 +46,7 @@ public class OrderForm {
 	 */
 	@NotEmpty
 	@Pattern(regexp = "^[0-9]{3}[0-9]{4}$", message = "郵便番号の形式が間違っています")
-	private String postcode;
+	private String postcode; // 郵便番号(ハイフンなし)
 
 	@NotEmpty
 	@Size(max = 16, message = "入力できる文字数を超過しています。")

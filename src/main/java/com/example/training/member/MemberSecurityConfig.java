@@ -46,7 +46,7 @@ public class MemberSecurityConfig extends WebSecurityConfigurerAdapter {
 		http
 			.mvcMatcher("/member/**")
 			.authorizeRequests()
-				.mvcMatchers("/member/login", "/member/applicate").permitAll()
+				.mvcMatchers("/member/login", "/member/applicate", "/member/applicated").permitAll()
 				.mvcMatchers("/member/**").hasRole("USER")	// member以下は USERロールを持つ認証ユーザのみアクセスできる。
 				.anyRequest()
 				.authenticated() // 上記以外は認証ユーザがアクセスできる
