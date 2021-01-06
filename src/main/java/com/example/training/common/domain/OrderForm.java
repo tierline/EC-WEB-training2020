@@ -27,7 +27,7 @@ public class OrderForm {
 
 	@NotEmpty
 	@Size(min = 10, max = 11, message = "電話番号は10桁〜11桁の間で入力してください")
-	@Pattern(regexp = "[0-9]*", message = "ハイフンなしの半角英数字で入力してください")
+	@Pattern(regexp = "[0-9]*", message = "電話番号の形式が間違っています")
 	private String phoneNumber;
 
 	/**

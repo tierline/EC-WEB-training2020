@@ -41,6 +41,8 @@
 			<div class="form-group">
 						<label for="phoneNumber">電話番号
 							<span class="badge badge-danger">必須</span>
+							<small>（ハイフンなしで数字のみ入力してください）</small>
+							<br>
 							<span th:if="${#fields.hasErrors('*{phoneNumber}')}" th:errors="*{phoneNumber}" class="col-sm-offset-2 text-danger"></span>
 						</label>
 						<input type="text" class="form-control" th:field="*{phoneNumber}">
@@ -90,8 +92,7 @@
 
 			<input type="hidden" name="memberId" th:value="*{memberId}"></input>
 			<div class="py-2 text-right">
-				<!-- <input type="submit" class="btn btn-primary" value="注文を確定する"> -->
-				<button type="submit" class="btn btn-primary">注文を確定する　<i class="fi-check"></i></button>
+				<button type="submit" class="btn btn-primary">注文を確定する  <i class="fi-check"></i></button>
 			</form>
 			</div>
 		</form>
