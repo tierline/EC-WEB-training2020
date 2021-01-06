@@ -51,6 +51,14 @@ public class MemberController {
   }
 
   /**
+   * 会員登録完了ページを表示する
+   */
+  @GetMapping("applicated")
+  public String applicated() {
+    return "member/applicated";
+  }
+
+  /**
    * 会員を新規登録する
    */
   @PostMapping("applicate")
@@ -60,7 +68,7 @@ public class MemberController {
       return applicate(memberApplicateForm, model);
     } else {
       memberService.create(member);
-      return "redirect:/member/login";
+      return "redirect:/member/applicated";
     }
   }
 }
