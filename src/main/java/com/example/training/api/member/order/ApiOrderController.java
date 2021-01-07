@@ -1,7 +1,5 @@
 package com.example.training.api.member.order;
 
-import java.time.LocalDate;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -18,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.training.common.domain.Cart;
 import com.example.training.common.domain.Order;
+import com.example.training.common.domain.OrderForm;
 import com.example.training.common.domain.OrderHistoryAssembler;
 import com.example.training.common.domain.OrderItem;
 import com.example.training.common.domain.OrderMonth;
@@ -50,35 +50,27 @@ public class ApiOrderController {
 	/*
 	 * 住所情報があったら表示する
 	 */
-	@GetMapping("/{id}")
-	public Member order(@PathVariable int id) {
-		Member member = memberRepository.findByAddress(id);
-		return member;
+	@PostMapping("/address")
+	@ResponseBody
+	public Member order(@RequestBody Member member) {
+		Member address = memberRepository.findAddress(member.getEmail());
+		return address;
 	}
 
 	/**
 	 * 注文処理を行う
 	 */
 	@PostMapping("/save")
-	public Integer save(@RequestBody LinkedHashMap<String, String> order) {
-
-		String lastName = order.get("lastName");
-		String firstName = order.get("firstName");
-		String email = order.get("email");
-		String phone = order.get("phone");
-		String address1 = order.get("address1");
-		String address2 = order.get("address2");
-		LocalDate dateNow = LocalDate.now();
+	public Integer save(@RequestBody OrderForm order) {
 		Member member = (Member) session.getAttribute(Member.SESSION_NAME);
 		int memberId = member.getId();
+		OrderForm orderForm = new OrderForm(order, memberId);
+		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
+		int orderId = orderService.order(orderForm, cart);
+		memberRepository.updateAtOrder(orderForm);
+		session.setAttribute(Cart.SESSION_NAME, new Cart());
 
-//		 OrderForm orderForm = new OrderForm(lastName, firstName, email, phone,
-//		 address1, address2, memberId, dateNow;)0
-//		 Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
-//		 int orderId = orderService.order(orderForm, cart);
-//		 session.setAttribute(Cart.SESSION_NAME, new Cart());
-
-		return 0;
+		return orderId;
 	}
 
 	/**

@@ -23,7 +23,7 @@ public interface MemberRepository {
 	public void update(@Param("member") Member member, @Param("digest") String digest,
 			@Param("lastUpdatedBy") String lastUpdatedBy);
 
-	public Member findByAddress(String email);
+	public Member findAddress(String email);
 
 	public void updateAtOrder(@Param("orderForm") OrderForm orderForm);
 

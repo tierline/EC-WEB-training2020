@@ -8,14 +8,26 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
 
-@AllArgsConstructor
-@RequiredArgsConstructor
 @Data
 public class OrderForm {
+
+	public OrderForm(OrderForm form, int id) {
+		this.lastName = form.getLastName();
+		this.firstName = form.getFirstName();
+		this.email = form.getEmail();
+		this.phoneNumber = form.getPhoneNumber();
+		this.postcode = form.getPostcode();
+		this.prefecture = form.getPrefecture();
+		this.city = form.getCity();
+		this.block = form.getBlock();
+		this.dateNow = getDateNow();
+		this.memberId = id;
+	}
+
+	public OrderForm() {
+	}
 
 	/**
 	 * 連絡先情報

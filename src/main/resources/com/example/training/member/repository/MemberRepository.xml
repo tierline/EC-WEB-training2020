@@ -25,7 +25,8 @@
 		SELECT * FROM members
 	</select>
 
-	<select id="findByAddress"
+
+	<select id="findAddress"
 		resultType="com.example.training.member.domain.Member">
 		SELECT
 		last_name as lastName,
@@ -39,7 +40,7 @@
 		FROM
 		members
 		m
-		WHERE m.email = ${email}
+		WHERE m.email = "${email}"
 	</select>
 
 	<insert id="create" useGeneratedKeys="true">
