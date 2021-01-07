@@ -25,6 +25,7 @@ public class Member {
 	private String status;
 	private String roles = "ROLE_USER";
 
+	// キャメルケースとスネークケースの調整のためのコンストラクタ
 	public Member(int id, String password, String email, String phone_number, String last_name, String first_name,
 			String postcode, String prefecture, String city, String block, String last_updated_by, String status) {
 		this.id = id;
@@ -59,6 +60,10 @@ public class Member {
 		this.email = memberApplicateForm.getEmail();
 		this.lastUpdatedBy = "none";
 		this.status = "unapproved";
+	}
+
+	public Member() {
+
 	}
 
 }
