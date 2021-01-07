@@ -13,7 +13,7 @@
     <div class="container pt-5">
       <div class="row">
         <div class="col">
-          <img th:src="@{'/image/' + ${product.image_path}}" alt="" style="width: 100%; height: 250px; object-fit: contain">
+          <img th:src="@{'/image/' + ${product.imagePath}}" alt="" style="width: 100%; height: 250px; object-fit: contain">
         </div>
         <div class="col pt-3">
           <h3 th:text="*{product.name}"></h3>
@@ -24,7 +24,7 @@
           <span class="pt-3 font-weight-bold" th:text="*{product.price + '円'}"></span>
           <div class="pt-3">
             <a th:href="@{/member/cart/add/{id} (id=${product.id})}">
-              <button type="submit" class="btn btn-primary">カートに入れる</button>
+              <button type="submit" class="btn btn-custom2">カートに入れる</button>
             </a>
           </div>
         </div>

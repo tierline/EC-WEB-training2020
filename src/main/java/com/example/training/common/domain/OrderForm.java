@@ -8,14 +8,28 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import com.example.training.member.domain.Member;
 
-@AllArgsConstructor
-@RequiredArgsConstructor
+import lombok.Data;
+
 @Data
 public class OrderForm {
+
+	public OrderForm(OrderForm form, int id) {
+		this.lastName = form.getLastName();
+		this.firstName = form.getFirstName();
+		this.email = form.getEmail();
+		this.phoneNumber = form.getPhoneNumber();
+		this.postcode = form.getPostcode();
+		this.prefecture = form.getPrefecture();
+		this.city = form.getCity();
+		this.block = form.getBlock();
+		this.dateNow = getDateNow();
+		this.memberId = id;
+	}
+
+	public OrderForm() {
+	}
 
 	/**
 	 * 連絡先情報
@@ -65,11 +79,6 @@ public class OrderForm {
 
 	private LocalDate dateNow = LocalDate.now();
 
-	// public LocalDate getDateNow() {
-	// SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd-HH時mm分ss秒");
-	// return dateFormat.format(this.dateNow);
-	// }
-
 	public String getFullName() {
 		return this.lastName + this.firstName;
 	}
@@ -80,6 +89,18 @@ public class OrderForm {
 
 	public Order createOrder() {
 		return new Order(this);
+	}
+
+	public void setMemberInfo(Member member) {
+		this.lastName = member.getLastName();
+		this.firstName = member.getFirstName();
+		this.email = member.getEmail();
+		this.phoneNumber = member.getPhoneNumber();
+		this.postcode = member.getPostcode();
+		this.prefecture = member.getPrefecture();
+		this.city = member.getCity();
+		this.block = member.getBlock();
+		this.memberId = member.getId();
 	}
 
 }

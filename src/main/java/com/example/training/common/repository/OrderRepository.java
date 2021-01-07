@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.example.training.common.domain.Order;
 import com.example.training.common.domain.OrderItem;
+import com.example.training.common.domain.OrderMonth;
 
 @Mapper
 public interface OrderRepository {
@@ -19,7 +20,7 @@ public interface OrderRepository {
 
 	public Order findById(int id);
 
-	public List<Order> findByOrderMonth(int id);
+	public List<OrderMonth> findByOrderMonth(int id);
 
 	public List<OrderItem> findByOrderItem(int id);
 

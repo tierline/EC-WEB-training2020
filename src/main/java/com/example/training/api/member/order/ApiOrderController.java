@@ -1,15 +1,15 @@
 package com.example.training.api.member.order;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 
+import com.example.training.common.domain.Cart;
 import com.example.training.common.domain.Order;
+import com.example.training.common.domain.OrderForm;
+import com.example.training.common.domain.OrderHistoryAssembler;
 import com.example.training.common.domain.OrderItem;
 import com.example.training.common.domain.OrderMonth;
 import com.example.training.common.domain.OrderService;
@@ -44,27 +44,23 @@ public class ApiOrderController {
 	@Autowired
 	private MemberRepository memberRepository;
 
+	@Autowired
+	private OrderHistoryAssembler orderHistoryAssembler;
+
 	/**
 	 * 注文処理を行う
 	 */
 	@PostMapping("/save")
-	public Integer save(@RequestBody LinkedHashMap<String, String> order) {
-
-		String lastName = order.get("lastName");
-		String firstName = order.get("firstName");
-		String email = order.get("email");
-		String phone = order.get("phone");
-		String address1 = order.get("address1");
-		String address2 = order.get("address2");
-		LocalDate dateNow = LocalDate.now();
+	public Integer save(@RequestBody OrderForm order) {
 		Member member = (Member) session.getAttribute(Member.SESSION_NAME);
 		int memberId = member.getId();
-		// OrderForm orderForm = new OrderForm(lastName, firstName, email, phone,
-		// address1, address2, memberId, dateNow;)
-		// Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
-		// int orderId = orderService.order(orderForm, cart);
-		// session.setAttribute(Cart.SESSION_NAME, new Cart());
-		return 0;
+		OrderForm orderForm = new OrderForm(order, memberId);
+		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
+		int orderId = orderService.order(orderForm, cart);
+		memberRepository.updateAtOrder(orderForm);
+		session.setAttribute(Cart.SESSION_NAME, new Cart());
+
+		return orderId;
 	}
 
 	/**
@@ -106,29 +102,10 @@ public class ApiOrderController {
 	}
 
 	@GetMapping("/history/{id}")
-	public List<OrderMonth> orderList(@PathVariable int id) {
-		List<Order> order = orderRepository.findByOrderMonth(id);
-		List<Integer> monthList = new ArrayList<Integer>();
-		List<OrderMonth> result = new ArrayList<OrderMonth>();
-		for (Order o : order) {
-			int month = o.getDate().getMonthValue();
-			monthList.add(month);
-		}
-		List<Integer> month = new ArrayList<Integer>(new LinkedHashSet<>(monthList));
-		List<Order> day = new ArrayList<>();
-		// 同じ月を一つの配列に入れる
-		for (int m : month) {
-			for (Order o : order) {
-				if (m == o.getDate().getMonthValue()) {
-					day.add(o);
-				}
-			}
-			OrderMonth orderMonth = new OrderMonth();
-			orderMonth.setOrderMonth(m);
-			orderMonth.add(day);
-			result.add(orderMonth);
-			day = new ArrayList<>();
-		}
+	public Map<Integer, List<OrderMonth>> orderList(@PathVariable int id) {
+		List<OrderMonth> list = orderRepository.findByOrderMonth(id);
+		Map<Integer, List<OrderMonth>> result = orderHistoryAssembler.create(list);
+
 		return result;
 	}
 

@@ -53,9 +53,9 @@
 	</select>
 
 	<select id="findByOrderMonth"
-		resultType="com.example.training.common.domain.Order">
+		resultType="com.example.training.common.domain.OrderMonth">
 		SELECT
-		id,
+		id as orderId,
 		`date`
 		FROM orders AS o
 		WHERE member_id = ${id}
@@ -68,7 +68,7 @@
 		name,
 		price,
 		quantity,
-		image_path as "imagePath"
+		image_path
 		FROM
 		order_items
 		WHERE order_id = ${id}
