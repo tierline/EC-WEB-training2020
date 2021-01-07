@@ -25,7 +25,10 @@ public interface MemberRepository {
 
 	public int countByEmail(String email);
 
-	public void update(@Param("memberEditForm") MemberEditForm memberEditForm, @Param("lastUpdatedBy") String lastUpdatedBy);
+	public void update(@Param("memberEditForm") MemberEditForm memberEditForm,
+			@Param("lastUpdatedBy") String lastUpdatedBy);
+
+	public Member findAddress(String email);
 
 	public void updateAtOrder(@Param("orderForm") OrderForm orderForm);
 

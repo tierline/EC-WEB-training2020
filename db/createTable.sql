@@ -70,3 +70,4 @@ CREATE TABLE orders (
   date DATE,
   PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
