@@ -60,7 +60,20 @@ public class OrderController {
 
 		model.addAttribute("cart", cart);
 		model.addAttribute("orderForm", orderForm);
-		return "member/order/detail";
+		return "member/order/form";
+	}
+
+	// // 注文内容確認画面を表示する
+	// @GetMapping("/confirmation")
+	// public String confirmation(OrderForm orderForm, Model model) {
+	// model.addAttribute("orderForm", orderForm);
+	// return "member/order/confirmation";
+	// }
+
+	// 注文内容確認画面を表示する
+	@GetMapping("/confirmation")
+	public String confirmation() {
+		return "member/order/confirmation";
 	}
 
 	/**

@@ -21,7 +21,7 @@
 		<hr />
 		<a href="/member/cart/list"><i class="fi-arrow-left"></i> 戻る</a>
 		<div class="d-flex justify-content-center">
-		<form action="/member/order/save" th:object="${orderForm}" method="post">
+		<form action="/member/order/confirmation" th:object="${orderForm}" method="post">
 			<div class="form-group">
 						<label for="lastName">姓
 							<span class="badge badge-danger">必須</span>
@@ -92,8 +92,9 @@
 
 			<input type="hidden" name="memberId" th:value="*{memberId}"></input>
 			<div class="py-2 text-right">
-				<button type="submit" class="btn btn-primary">注文を確定する  <i class="fi-check"></i></button>
+				<button type="submit" class="btn btn-primary">確認画面へ進む  <i class="fi-arrow-right"></i></button>
 			</form>
+			<a href="/member/order/confirmation">確認画面へ</a>
 			</div>
 		</form>
 	</div>
