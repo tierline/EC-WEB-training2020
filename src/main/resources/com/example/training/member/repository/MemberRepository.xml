@@ -29,14 +29,14 @@
 	<select id="findAddress"
 		resultType="com.example.training.member.domain.Member">
 		SELECT
-		last_name as lastName,
-		first_name as firstName,
+		last_name,
+		first_name,
 		email,
 		postcode,
 		prefecture,
 		city,
 		block,
-		phone_number as phoneNumber
+		phone_number
 		FROM
 		members
 		m

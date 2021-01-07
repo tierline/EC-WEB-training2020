@@ -47,16 +47,6 @@ public class ApiOrderController {
 	@Autowired
 	private OrderHistoryAssembler orderHistoryAssembler;
 
-	/*
-	 * 住所情報があったら表示する
-	 */
-	@PostMapping("/address")
-	@ResponseBody
-	public Member order(@RequestBody Member member) {
-		Member address = memberRepository.findAddress(member.getEmail());
-		return address;
-	}
-
 	/**
 	 * 注文処理を行う
 	 */

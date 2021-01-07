@@ -60,4 +60,15 @@ public class ApiMemberController {
 		return false;
 
 	}
+
+	/*
+	 * 住所情報があったら表示する
+	 */
+	@PostMapping("/address")
+	@ResponseBody
+	public Member memberAddress(@RequestBody Member member) {
+		Member result = (Member) session.getAttribute(Member.SESSION_NAME);
+		Member address = memberRepository.findAddress(member.getEmail());
+		return address;
+	}
 }

@@ -68,7 +68,7 @@
 		name,
 		price,
 		quantity,
-		image_path as "imagePath"
+		image_path
 		FROM
 		order_items
 		WHERE order_id = ${id}
