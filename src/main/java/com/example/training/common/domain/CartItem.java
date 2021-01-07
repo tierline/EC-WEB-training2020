@@ -14,7 +14,7 @@ public class CartItem {
 	}
 
 	public String getProductImage() {
-		return product.getImage_path();
+		return product.getImagePath();
 	}
 
 	public String getProductName() {

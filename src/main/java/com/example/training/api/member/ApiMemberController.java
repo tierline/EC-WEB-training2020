@@ -5,8 +5,10 @@ import java.util.Optional;
 import javax.servlet.http.HttpSession;
 
 import com.example.training.member.Service.MemberService;
+import com.example.training.member.domain.Email;
 import com.example.training.member.domain.Member;
 import com.example.training.member.domain.MemberApplicateForm;
+import com.example.training.member.domain.MemberLoginForm;
 import com.example.training.member.repository.MemberRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,9 +52,9 @@ public class ApiMemberController {
 	@CrossOrigin
 	@PostMapping("/login")
 	@ResponseBody
-	public Boolean login(@RequestBody Member member) {
-		String password = member.getPassword();
-		Optional<Member> memberDetail = memberRepository.findByEmail(member.getEmail());
+	public Boolean login(@RequestBody MemberLoginForm memberLoginForm) {
+		String password = memberLoginForm.getPassword();
+		Optional<Member> memberDetail = memberRepository.findByEmail(memberLoginForm.getEmail());
 		if (memberDetail.isPresent()) {
 			String hashPassword = memberDetail.get().getPassword();
 			Boolean result = bCryptPasswordEncoder.matches(password, hashPassword);
@@ -63,4 +65,15 @@ public class ApiMemberController {
 		return false;
 
 	}
+
+	/*
+	 * 住所情報があったら表示する
+	 */
+	@PostMapping("/address")
+	@ResponseBody
+	public Member fetchMemberAddress(@RequestBody Email email) {
+		Member address = memberRepository.findAddress(email.getEmail());
+		return address;
+	}
+
 }

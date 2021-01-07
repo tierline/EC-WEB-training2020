@@ -8,6 +8,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import com.example.training.member.domain.Member;
+
 import lombok.Data;
 
 @Data
@@ -87,6 +89,18 @@ public class OrderForm {
 
 	public Order createOrder() {
 		return new Order(this);
+	}
+
+	public void setMemberInfo(Member member) {
+		this.lastName = member.getLastName();
+		this.firstName = member.getFirstName();
+		this.email = member.getEmail();
+		this.phoneNumber = member.getPhoneNumber();
+		this.postcode = member.getPostcode();
+		this.prefecture = member.getPrefecture();
+		this.city = member.getCity();
+		this.block = member.getBlock();
+		this.memberId = member.getId();
 	}
 
 }

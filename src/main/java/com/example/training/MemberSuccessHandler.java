@@ -43,6 +43,7 @@ public class MemberSuccessHandler implements AuthenticationSuccessHandler {
     String email = authentication.getName();
     Optional<Member> member = memberRepository.findByEmail(email);
     if (member.isEmpty()) {
+      // 会員が見つからなかった場合、エラーを返す
     } else {
       // セッションにユーザ情報を格納する
       session.setAttribute(Member.SESSION_NAME, member.get());
