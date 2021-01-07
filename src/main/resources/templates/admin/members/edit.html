@@ -7,20 +7,25 @@
       rel="stylesheet"
       th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}"
     />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css"
+      rel="stylesheet"
+    />
     <title>会員編集画面</title>
   </head>
   <body>
     <div th:replace="admin/header :: admin-header"></div>
     <div class="container py-5">
-      <div>
+      <a href="/admin/members"><i class="fi-arrow-left"></i>戻る</a>
+      <div class="pt-3">
         <h2>会員情報編集</h2>
         <hr />
       </div>
       <div class="pt-3">
         <form
           th:method="post"
+          th:object="${memberEditForm}"
           th:action="@{/admin/members/{id}/edit(id=*{id})}"
-          th:object="${member}"
         >
           <div class="form-group">
             <label>メールアドレス</label>
@@ -34,18 +39,8 @@
             />
           </div>
           <div class="form-group">
-            <label>パスワード</label>
-            <input
-              type="password"
-              class="form-control"
-              name="password"
-              placeholder="Password"
-              required
-            />
-          </div>
-          <div class="form-group">
             <label>承認状態</label>
-            <select class="form-control" 　th:field="*{status}">
+            <select class="form-control" th:field="*{status}">
               <option th:value="unapproved" th:text="未承認"></option>
               <option th:value="approval" th:text="承認"></option>
             </select>

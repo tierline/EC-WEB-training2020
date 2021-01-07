@@ -11,7 +11,10 @@ import lombok.RequiredArgsConstructor;
 @AllArgsConstructor
 @RequiredArgsConstructor
 @Data
-public class MemberApplicateForm {
+public class MemberEditForm {
+
+  @NotEmpty
+  private int id;
 
   @NotEmpty
   @Email
@@ -19,7 +22,6 @@ public class MemberApplicateForm {
   private String email;
 
   @NotEmpty
-  @Size(max = 16, message = "パスワードは16文字以内で入力してください")
-  private String password;
+  private String status;
 
 }

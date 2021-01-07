@@ -8,6 +8,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import com.example.training.member.domain.Member;
+
 import lombok.Data;
 
 @Data
@@ -39,7 +41,7 @@ public class OrderForm {
 
 	@NotEmpty
 	@Size(min = 10, max = 11, message = "電話番号は10桁〜11桁の間で入力してください")
-	@Pattern(regexp = "[0-9]*", message = "ハイフンなしの半角英数字で入力してください")
+	@Pattern(regexp = "[0-9]*", message = "電話番号の形式が間違っています")
 	private String phoneNumber;
 
 	/**
@@ -58,7 +60,7 @@ public class OrderForm {
 	 */
 	@NotEmpty
 	@Pattern(regexp = "^[0-9]{3}[0-9]{4}$", message = "郵便番号の形式が間違っています")
-	private String postcode;
+	private String postcode; // 郵便番号(ハイフンなし)
 
 	@NotEmpty
 	@Size(max = 16, message = "入力できる文字数を超過しています。")
@@ -87,6 +89,18 @@ public class OrderForm {
 
 	public Order createOrder() {
 		return new Order(this);
+	}
+
+	public void setMemberInfo(Member member) {
+		this.lastName = member.getLastName();
+		this.firstName = member.getFirstName();
+		this.email = member.getEmail();
+		this.phoneNumber = member.getPhoneNumber();
+		this.postcode = member.getPostcode();
+		this.prefecture = member.getPrefecture();
+		this.city = member.getCity();
+		this.block = member.getBlock();
+		this.memberId = member.getId();
 	}
 
 }

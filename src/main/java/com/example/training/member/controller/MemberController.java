@@ -1,19 +1,22 @@
 
 package com.example.training.member.controller;
 
+import java.util.Locale;
+
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import com.example.training.member.Service.MemberService;
 import com.example.training.member.domain.Member;
 import com.example.training.member.domain.MemberApplicateForm;
+import com.example.training.member.repository.MemberRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -28,6 +31,12 @@ public class MemberController {
 
   @Autowired
   private MemberService memberService;
+
+  @Autowired
+  private MemberRepository memberRepository;
+
+  @Autowired
+  protected MessageSource messageSource;
 
   /**
    * 会員のログインページを表示する
@@ -62,13 +71,19 @@ public class MemberController {
    * 会員を新規登録する
    */
   @PostMapping("applicate")
-  public String applicate(@ModelAttribute("member") Member member, @Valid MemberApplicateForm memberApplicateForm,
-      BindingResult result, Model model) {
+  public String applicate(@Valid MemberApplicateForm memberApplicateForm, BindingResult result, Model model) {
     if (result.hasErrors()) {
       return applicate(memberApplicateForm, model);
     } else {
-      memberService.create(member);
-      return "redirect:/member/applicated";
+      int count = memberRepository.countByEmail(memberApplicateForm.getEmail());
+      if (count == 1) {
+        model.addAttribute("errorMessage", messageSource.getMessage("error.applicate.duplicate", null, Locale.JAPAN));
+        return "member/applicate";
+      } else {
+        memberService.create(memberApplicateForm);
+        return "redirect:/member/applicated";
+      }
     }
   }
+
 }

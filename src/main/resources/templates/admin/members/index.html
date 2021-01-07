@@ -7,12 +7,19 @@
       rel="stylesheet"
       th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}"
     />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css"
+      rel="stylesheet"
+    />
     <title>会員一覧画面</title>
   </head>
   <body>
     <div th:replace="admin/header :: admin-header"></div>
     <div class="container pt-5">
-      <h2>会員一覧画面</h2>
+      <a href="/admin"><i class="fi-arrow-left"></i>戻る</a>
+      <div class="pt-3">
+        <h2>会員一覧画面</h2>
+      </div>
       <table class="table table-striped">
         <thead>
           <tr>
