@@ -13,7 +13,7 @@ public interface ProductRepository {
 
 	public List<Product> findAll();
 
-	Optional<Product> findId(int id);
+	Optional<Product> findId(Long id);
 
 	public List<Product> findIdList(ArrayList<Integer> id);
 

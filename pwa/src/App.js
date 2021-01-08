@@ -3,6 +3,7 @@ import { Route } from 'react-router-dom';
 import { IonApp, IonRouterOutlet } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import Home from './Home';
+import Detail from './Detail';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -25,6 +26,7 @@ const App = () => (
     <IonReactRouter>
       <IonRouterOutlet>
         <Route path="/" component={Home} exact={true} />
+        <Route path="/detail/:id" component={Detail} exact={true} />
       </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { IonList, IonItem, IonLabel, IonContent } from '@ionic/react';
+import { IonButton, IonList, IonItem, IonLabel, IonContent } from '@ionic/react';
 import Action from "./Action";
 
 class Home extends React.Component {
@@ -18,6 +18,7 @@ class Home extends React.Component {
         const items = this.state.data.map((item) =>
             <IonItem>
                 <IonLabel>{item.name}</IonLabel>
+                <IonButton color="primary" href={"/detail/" + item.id}>詳細</IonButton>
             </IonItem>);
         return (
             <IonContent>

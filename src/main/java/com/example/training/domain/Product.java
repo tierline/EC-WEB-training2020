@@ -5,12 +5,12 @@ import lombok.Data;
 @Data
 public class Product {
 
-	public Product(int id, String name) {
+	public Product(Long id, String name) {
 		this.id = id;
 		this.name = name;
 	}
 
-	public Product(int id, String name, int price) {
+	public Product(Long id, String name, Integer price) {
 		this.id = id;
 		this.name = name;
 		this.price = price;
@@ -20,9 +20,9 @@ public class Product {
 
 	}
 
-	private int id;
+	private Long id;
 	private String name;
-	private int price;
+	private Integer price;
 	private String image_path;
 	private String description;
 }
