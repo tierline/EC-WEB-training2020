@@ -1,6 +1,6 @@
 const axiosBase = require('axios');
 const axios = axiosBase.create({
-    baseURL: 'http://localhost:8080',
+    //baseURL: 'http://localhost:8080',
     headers: {
         'Content-Type': 'application/json',
         'X-Requested-With': 'XMLHttpRequest'
@@ -21,7 +21,7 @@ class Client {
     }
 
     static post(url, params, successHandler, errorHandler) {
-        axios.get(url, { params: params })
+        axios.post(url, params)
             .then(function (response) {
                 successHandler(response.data);
             })
