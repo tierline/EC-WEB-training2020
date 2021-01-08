@@ -15,13 +15,14 @@ class Home extends React.Component {
     }
 
     render() {
+        const items = this.state.data.map((item) =>
+            <IonItem>
+                <IonLabel>{item.name}</IonLabel>
+            </IonItem>);
         return (
             <IonContent>
                 <IonList>
-                    {this.state.data.map((item) =>
-                        <IonItem>
-                            <IonLabel>item.name</IonLabel>
-                        </IonItem>)}
+                    {items}
                 </IonList>
             </IonContent >
         );

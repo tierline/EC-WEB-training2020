@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,6 +18,7 @@ public class MainController {
 	@Autowired
 	private ProductRepository productRepository;
 
+	@CrossOrigin
 	@GetMapping("/index")
 	public List<Product> index() {
 		var products = productRepository.findAll();

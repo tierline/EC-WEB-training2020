@@ -2,24 +2,22 @@ import Client from "./Client";
 
 class Action {
     static findList(component) {
-        Client.post(
+        Client.get(
             `/index`,
-            {},
             response => {
                 component.setState(() => ({
-                    data: response.data
+                    data: response
                 }));
             }, err => { }
         );
     }
 
     static findDetail(id, component) {
-        Client.post(
+        Client.get(
             `/product/detail/${id}`,
-            {},
             response => {
                 component.setState(() => ({
-                    data: response.data
+                    data: response
                 }));
             }, err => { }
         );
