@@ -15,8 +15,8 @@ class Home extends React.Component {
     }
 
     render() {
-        const items = this.state.data.map((item) =>
-            <IonItem>
+        const items = this.state.data.map((item, key) =>
+            <IonItem key={key}>
                 <IonLabel>{item.name}</IonLabel>
                 <IonButton color="primary" href={"/detail/" + item.id}>詳細</IonButton>
             </IonItem>);

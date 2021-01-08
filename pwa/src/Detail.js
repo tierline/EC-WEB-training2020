@@ -12,9 +12,7 @@ class Detail extends React.Component {
 
     componentDidMount() {
         const { params } = this.props.match
-        console.log(params);
         const id = parseInt(params.id, 10)
-        console.log(id);
         Action.findDetail(id, this);
     }
 
