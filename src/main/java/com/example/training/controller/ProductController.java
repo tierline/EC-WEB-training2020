@@ -1,15 +1,15 @@
 package com.example.training.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+import com.example.training.domain.Product;
 import com.example.training.repository.ProductRepository;
 
-@Controller
+@RestController
 @RequestMapping("/product")
 public class ProductController {
 
@@ -20,9 +20,8 @@ public class ProductController {
 	 * 商品詳細画面に遷移
 	 */
 	@GetMapping("detail/{id}")
-	public String detail(@PathVariable("id") int id, Model model) {
+	public Product detail(@PathVariable("id") int id) {
 		var product = productRepository.findId(id).orElseThrow(() -> new IllegalArgumentException());
-		model.addAttribute("product", product);
-		return "product/detail";
+		return product;
 	}
 }
