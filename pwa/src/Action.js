@@ -3,7 +3,7 @@ import Client from "./Client";
 class Action {
     static findList(component) {
         Client.post(
-            `/`,
+            `/index`,
             {},
             response => {
                 component.setState(() => ({

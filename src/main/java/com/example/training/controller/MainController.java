@@ -17,7 +17,7 @@ public class MainController {
 	@Autowired
 	private ProductRepository productRepository;
 
-	@GetMapping("/")
+	@GetMapping("/index")
 	public List<Product> index() {
 		var products = productRepository.findAll();
 		return products;
