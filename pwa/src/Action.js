@@ -1,9 +1,6 @@
 import Client from "./Client";
 
 class Action {
-    constructor() {
-    }
-
     static findList(component) {
         Client.post(
             `/`,

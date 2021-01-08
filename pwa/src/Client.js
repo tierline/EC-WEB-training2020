@@ -5,10 +5,6 @@ axios.create({
 });
 
 class Client {
-    constructor() {
-    }
-
-
     static get BASEURL() {
         return "";
     }
