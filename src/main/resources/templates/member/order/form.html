@@ -25,6 +25,7 @@
 			<div class="form-group">
 						<label for="lastName">姓
 							<span class="badge badge-danger">必須</span>
+							<br>
 							<span th:if="${#fields.hasErrors('*{lastName}')}" th:errors="*{lastName}" class="col-sm-offset-2 text-danger"></span>
 						</label>
 						<input type="text" class="form-control" th:field="*{lastName}">
@@ -33,6 +34,7 @@
 			<div class="form-group">
 						<label for="firstName">名
 							<span class="badge badge-danger">必須</span>
+							<br>
 							<span th:if="${#fields.hasErrors('*{firstName}')}" th:errors="*{firstName}" class="col-sm-offset-2 text-danger"></span>
 						</label>
 						<input type="text" class="form-control" th:field="*{firstName}">
@@ -61,6 +63,7 @@
 			<div class="form-group">
 						<label for="email">メールアドレス
 							<span class="badge badge-danger">必須</span>
+							<br>
 							<span th:if="${#fields.hasErrors('*{email}')}" th:errors="*{email}" class="col-sm-offset-2 text-danger"></span>
 						</label>
 						<input type="text" class="form-control" size="40" th:field="*{email}">
@@ -69,6 +72,7 @@
 			<div class="form-group">
 						<label for="prefecture">都道府県
 							<span class="badge badge-danger">必須</span>
+							<br>
 							<span th:if="${#fields.hasErrors('*{prefecture}')}" th:errors="*{prefecture}" class="col-sm-offset-2 text-danger"></span>
 						</label>
 						<input type="text" class="form-control" size="40" th:field="*{prefecture}">
@@ -77,6 +81,7 @@
 			<div class="form-group">
 						<label for="city">市区町村
 							<span class="badge badge-danger">必須</span>
+							<br>
 							<span th:if="${#fields.hasErrors('*{city}')}" th:errors="*{city}" class="col-sm-offset-2 text-danger"></span>
 						</label>
 						<input type="text" class="form-control" size="40" th:field="*{city}">
@@ -85,6 +90,7 @@
 			<div class="form-group">
 						<label for="block">番地
 							<span class="badge badge-danger">必須</span>
+							<br>
 							<span th:if="${#fields.hasErrors('*{block}')}" th:errors="*{block}" class="col-sm-offset-2 text-danger"></span>
 						</label>
 						<input type="text" class="form-control" size="40" th:field="*{block}">
@@ -94,7 +100,6 @@
 			<div class="py-2 text-right">
 				<button type="submit" class="btn btn-primary">確認画面へ進む  <i class="fi-arrow-right"></i></button>
 			</form>
-			<a href="/member/order/confirmation">確認画面へ</a>
 			</div>
 		</form>
 	</div>

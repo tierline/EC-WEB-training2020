@@ -23,9 +23,7 @@
           </span>
           <span class="pt-3 font-weight-bold" th:text="*{product.price + '円'}"></span>
           <div class="pt-3">
-            <a th:href="@{/member/cart/add/{id} (id=${product.id})}">
-              <button type="submit" class="btn btn-custom2">カートに入れる</button>
-            </a>
+            <a th:href="@{/member/cart/add/{id} (id=${product.id})}" class="btn btn-custom2">カートに追加 <i class="fi-plus"></i></button></a>
           </div>
         </div>
       </div>

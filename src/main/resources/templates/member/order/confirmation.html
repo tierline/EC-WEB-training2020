@@ -3,9 +3,100 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="js/bootstrap.min.js"></script>
+    <link
+      rel="stylesheet"
+      th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}"
+    />
     <title>注文確認画面</title>
   </head>
   <body>
-    <p>確認画面</p>
+    <div th:replace="header"></div>
+    <div class="d-flex justify-content-center mt-4">
+      <h4 d-flex justify-content-center>ご注文内容の確認</h4>
+    </div>
+    <div class="container pb-5">
+      <div class="mt-4">
+        <form
+          action="/member/order/save"
+          th:object="${orderForm}"
+          method="post"
+        >
+          <table class="table table-bordered table-light">
+            <tbody>
+              <tr>
+                <td class="table-secondary">注文日</td>
+                <td th:text="${orderForm.dateNow}"></td>
+              </tr>
+              <tr>
+                <td class="table-secondary">お名前</td>
+                <td th:text="${orderForm.lastName + orderForm.firstName}"></td>
+              </tr>
+              <tr>
+                <td class="table-secondary">お届け先</td>
+                <td
+                  th:text="${'〒' + orderForm.postcode + ' ' + orderForm.prefecture + orderForm.city + orderForm.block}"
+                ></td>
+              </tr>
+              <tr>
+                <td class="table-secondary">メールアドレス</td>
+                <td th:text="${orderForm.email}"></td>
+              </tr>
+              <tr>
+                <td class="table-secondary">電話番号</td>
+                <td th:text="${orderForm.phoneNumber}"></td>
+              </tr>
+            </tbody>
+          </table>
+          <table class="table table-striped table-light">
+            <thead>
+              <tr>
+                <th scope="col">商品画像</th>
+                <th scope="col">商品名</th>
+                <th scope="col">数量</th>
+                <th scope="col">単価</th>
+                <th scope="col">金額</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr th:each="item : ${items}">
+                <td>
+                  <img
+                    th:src="@{'/image/' + ${item.ProductImage}}"
+                    alt=""
+                    class="card-img-top"
+                    style="width: 100px; height: 100px; object-fit: contain"
+                  />
+                </td>
+                <td th:text="${item.productName}"></td>
+                <td th:text="${item.quantity}"></td>
+                <td th:text="${item.productPrice}"></td>
+                <td th:text="${item.productPrice * item.quantity}"></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="d-flex justify-content-end">
+            <span>
+              合計注文金額：￥
+              <span th:text="${totalAmount}" class="h5 font-weight-bold"></span>
+              円
+            </span>
+          </div>
+          <a href="/member/order/form"
+            ><i class="fi-arrow-left"></i> お届け先を変更する</a
+          >
+          <p>
+            <a href="/member/cart/list"
+              ><i class="fi-arrow-left"></i> カートの内容を変更する</a
+            >
+          </p>
+          <div class="py-2 text-center">
+            <button type="submit" class="btn btn-success">
+              この内容で注文する <i class="fi-check"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
   </body>
 </html>
