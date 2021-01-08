@@ -11,11 +11,15 @@
       rel="stylesheet"
       th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}"
     />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <div th:replace="header"></div>
     <div class="container py-5">
-      <h1 class="text-center pb-3">商品一覧</h1>
+      <h1 class="text-center pb-3"><i class="fi-lightbulb"></i> 商品一覧</h1>
       <div th:replace="home"></div>
     </div>
   </body>
