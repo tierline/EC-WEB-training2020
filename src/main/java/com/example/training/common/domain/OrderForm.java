@@ -14,6 +14,7 @@ import lombok.Data;
 
 @Data
 public class OrderForm {
+	public static final String SESSION_NAME = "ORDER_FORM";
 
 	public OrderForm(OrderForm form, int id) {
 		this.lastName = form.getLastName();

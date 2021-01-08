@@ -4,7 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Document</title>
+	<title>お届け先入力フォーム | T&K</title>
 	<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
@@ -17,14 +17,17 @@
 <body>
 	<div th:replace="header"></div>
 	<div class="container py-5">
-		<h2>お届け先入力フォーム</h2>
+		<div class="text-center">
+			<h1>お届け先入力フォーム</h1>
+		</div>
 		<hr />
 		<a href="/member/cart/list"><i class="fi-arrow-left"></i> 戻る</a>
 		<div class="d-flex justify-content-center">
-		<form action="/member/order/save" th:object="${orderForm}" method="post">
+		<form action="/member/order/confirmation" th:object="${orderForm}" method="post">
 			<div class="form-group">
 						<label for="lastName">姓
 							<span class="badge badge-danger">必須</span>
+							<br>
 							<span th:if="${#fields.hasErrors('*{lastName}')}" th:errors="*{lastName}" class="col-sm-offset-2 text-danger"></span>
 						</label>
 						<input type="text" class="form-control" th:field="*{lastName}">
@@ -33,6 +36,7 @@
 			<div class="form-group">
 						<label for="firstName">名
 							<span class="badge badge-danger">必須</span>
+							<br>
 							<span th:if="${#fields.hasErrors('*{firstName}')}" th:errors="*{firstName}" class="col-sm-offset-2 text-danger"></span>
 						</label>
 						<input type="text" class="form-control" th:field="*{firstName}">
@@ -61,6 +65,7 @@
 			<div class="form-group">
 						<label for="email">メールアドレス
 							<span class="badge badge-danger">必須</span>
+							<br>
 							<span th:if="${#fields.hasErrors('*{email}')}" th:errors="*{email}" class="col-sm-offset-2 text-danger"></span>
 						</label>
 						<input type="text" class="form-control" size="40" th:field="*{email}">
@@ -69,6 +74,7 @@
 			<div class="form-group">
 						<label for="prefecture">都道府県
 							<span class="badge badge-danger">必須</span>
+							<br>
 							<span th:if="${#fields.hasErrors('*{prefecture}')}" th:errors="*{prefecture}" class="col-sm-offset-2 text-danger"></span>
 						</label>
 						<input type="text" class="form-control" size="40" th:field="*{prefecture}">
@@ -77,6 +83,7 @@
 			<div class="form-group">
 						<label for="city">市区町村
 							<span class="badge badge-danger">必須</span>
+							<br>
 							<span th:if="${#fields.hasErrors('*{city}')}" th:errors="*{city}" class="col-sm-offset-2 text-danger"></span>
 						</label>
 						<input type="text" class="form-control" size="40" th:field="*{city}">
@@ -85,6 +92,7 @@
 			<div class="form-group">
 						<label for="block">番地
 							<span class="badge badge-danger">必須</span>
+							<br>
 							<span th:if="${#fields.hasErrors('*{block}')}" th:errors="*{block}" class="col-sm-offset-2 text-danger"></span>
 						</label>
 						<input type="text" class="form-control" size="40" th:field="*{block}">
@@ -92,7 +100,7 @@
 
 			<input type="hidden" name="memberId" th:value="*{memberId}"></input>
 			<div class="py-2 text-right">
-				<button type="submit" class="btn btn-primary">注文を確定する  <i class="fi-check"></i></button>
+				<button type="submit" class="btn btn-primary">確認画面へ進む  <i class="fi-arrow-right"></i></button>
 			</form>
 			</div>
 		</form>

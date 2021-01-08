@@ -38,7 +38,6 @@ public class MemberSuccessHandler implements AuthenticationSuccessHandler {
   public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
       Authentication authentication) throws IOException, ServletException {
 
-    System.out.println(authentication);
     // 認証したユーザのemail
     String email = authentication.getName();
     Optional<Member> member = memberRepository.findByEmail(email);

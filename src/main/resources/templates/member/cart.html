@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
   <head>
-    <title>Cart</title>
+    <title>カート内容 | T&K</title>
     <meta charset="utf-8" />
     <link
       rel="stylesheet"
@@ -13,18 +13,25 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css"
       rel="stylesheet"
     />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css"
+      rel="stylesheet"
+    />
   </head>
 
   <body>
     <div th:replace="header"></div>
     <div class="container py-5">
+      <div class="text-center">
+        <h1>カート<i class="fi-shopping-cart"></i></h1>
+      </div>
       <a href="/"><i class="fi-arrow-left"></i> 戻る</a>
       <h2 th:text="${errorMessage}">XXXXX</h2>
       <div th:if="${session?.CART?.size}">
-        <table class="table">
+        <table class="table table-striped table-light">
           <thead class="thead-light">
             <tr>
-              <th>画像</th>
+              <th>商品画像</th>
               <th>商品名</th>
               <th>単価</th>
               <th>個数</th>
@@ -37,7 +44,7 @@
                 th:src="@{'/image/' + ${item.ProductImage}}"
                 alt=""
                 class="card-img-top"
-                style="width: 200px; height: 200px; object-fit: contain"
+                style="width: 150px; height: 150px; object-fit: contain"
               />
             </td>
             <td th:text="${item.productName}"></td>
@@ -58,8 +65,9 @@
         </div>
         <div class="d-flex justify-content-center pt-3">
           <a href="/member/order/form"
-            ><span class="btn btn-dark">入力フォームに進む</span></a
-          >
+            ><span class="btn btn-primary"
+              >注文フォームに進む <i class="fi-arrow-right"></i></span
+          ></a>
         </div>
       </div>
     </div>

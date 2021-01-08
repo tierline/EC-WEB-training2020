@@ -11,7 +11,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css"
       rel="stylesheet"
     />
-    <title>会員編集画面</title>
+    <title>会員編集画面 | T&K</title>
   </head>
   <body>
     <div th:replace="admin/header :: admin-header"></div>
@@ -45,10 +45,14 @@
               <option th:value="approval" th:text="承認"></option>
             </select>
           </div>
-          <button type="submit" class="btn btn-primary">編集</button>
+          <button type="submit" class="btn btn-primary">保存</button>
         </form>
       </div>
     </div>
-    <div th:replace="home"></div>
+    <div class="text-center pt-3">
+      <form role="form" id="logout" th:action="@{/member/logout}" method="post">
+        <button type="submit" class="btn btn-danger">ログアウト</button>
+      </form>
+    </div>
   </body>
 </html>

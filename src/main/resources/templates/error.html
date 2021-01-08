@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html
+  lang="ja"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+  <head>
+    <meta
+      charset="UTF-8"
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <link
+      rel="stylesheet"
+      th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css"
+      rel="stylesheet"
+    />
+
+    <title>Error</title>
+  </head>
+  <body>
+    <div class="container pt-5">
+      <h1><i class="fi-alert"></i>エラー</h1>
+      <div class="row justify-content-center">
+        <div class="col">
+          <div class="alert alert-warning" role="alert">
+            <h5 class="alert-heading">
+              何かが間違っています。早急に修理を行います！
+            </h5>
+          </div>
+        </div>
+      </div>
+      <footer>
+        <a th:href="@{/}" class="btn btn-primary">ホームに戻る</a>
+      </footer>
+    </div>
+  </body>
+</html>

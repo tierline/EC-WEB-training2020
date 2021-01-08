@@ -21,7 +21,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css"
       rel="stylesheet"
     />
-    <link th:href="@{/css/header.css}" rel="stylesheet" />
+    <link th:href="@{/css/style.css}" rel="stylesheet" />
   </head>
 
   <body>
@@ -67,6 +67,7 @@
                 <i class="fi-shopping-cart"></i>
                 カート
               </a>
+              <span th:text="${session?.Cart?.quantity}"></span>
             </li>
             <li
               class="nav-item"
