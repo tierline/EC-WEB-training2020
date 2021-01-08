@@ -22,7 +22,7 @@ public class ProductController {
 	 */
 	@CrossOrigin
 	@GetMapping("detail/{id}")
-	public Product detail(@PathVariable("id") Long id) {
+	public Product detail(@PathVariable("id") int id) {
 		var product = productRepository.findId(id).orElseThrow(() -> new IllegalArgumentException());
 		return product;
 	}

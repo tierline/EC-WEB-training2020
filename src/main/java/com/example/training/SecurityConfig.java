@@ -1,7 +1,6 @@
 package com.example.training;
 
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Profile;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -34,7 +33,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		 * true).usernameParameter("name").passwordParameter("password").and().logout()
 		 * .logoutSuccessUrl("/auth/login");
 		 */
-
 	}
 
 	@Bean

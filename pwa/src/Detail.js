@@ -1,5 +1,5 @@
 import React from 'react';
-import { IonList, IonItem, IonLabel, IonContent } from '@ionic/react';
+import { IonList, IonItem, IonLabel, IonContent, IonNote } from '@ionic/react';
 import Action from "./Action";
 
 class Detail extends React.Component {
@@ -27,7 +27,7 @@ class Detail extends React.Component {
                         <IonLabel>{this.state.data.price}</IonLabel>
                     </IonItem>
                     <IonItem>
-                        <IonLabel>{this.state.data.description}</IonLabel>
+                        <IonNote>{this.state.data.description}</IonNote>
                     </IonItem>
                 </IonList>
             </IonContent >
