@@ -4,3 +4,8 @@ npx create-react-app my-app --template cra-template-pwa
 
 
 # 実行手順
+
+```
+サーバ実行
+./pwa.sh
+```
