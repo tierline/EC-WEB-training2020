@@ -45,6 +45,7 @@ public class CartItem {
 		return this.quantity <= 0;
 	}
 
+	//カート内の一つの商品の合計金額を取得
 	public int getTotalAmount() {
 		int price = this.getProductPrice() * this.getQuantity();
 		return price;

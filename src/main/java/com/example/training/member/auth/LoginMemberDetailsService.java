@@ -31,7 +31,6 @@ public class LoginMemberDetailsService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 		assert (email != null);
-		log.debug("loadUserByUsername(email):[{}]", email);
 		Optional<Member> memberOpt = memberRepository.findByEmail(email);
 		if (memberOpt.isEmpty()) {
 			throw new UsernameNotFoundException("User not found for email: " + email);
@@ -43,8 +42,5 @@ public class LoginMemberDetailsService implements UserDetailsService {
 				return new LoginMemberDetails(member);
 			}
 		}
-		// return memberRepository.findByEmail(email).map(LoginMemberDetails::new)
-		// .orElseThrow(() -> new UsernameNotFoundException("User not found by email:["
-		// + email + "]"));
 	}
 }

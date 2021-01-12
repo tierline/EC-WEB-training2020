@@ -13,9 +13,7 @@ public interface ProductRepository {
 
 	public List<Product> findAll();
 
-	Optional<Product> findId(int id);
-
-	public List<Product> findIdList(ArrayList<Integer> id);
+	public Optional<Product> findId(int id);
 
 	public List<Product> findName(String word);
 
