@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.training.common.repository.OrderRepository;
 import com.example.training.member.domain.Member;
+import com.example.training.member.repository.MemberRepository;
 
 @Service
 public class OrderService {
@@ -19,18 +20,27 @@ public class OrderService {
 	private OrderRepository orderRepository;
 
 	@Autowired
-	private HttpSession session;
+	private MemberRepository memberRepository;
 
+	@Autowired
+	private HttpSession session;
+// 色々しすぎてる
 	public int order(@Valid OrderForm orderForm, Cart cart) {
-		Member member = (Member) session.getAttribute(Member.SESSION_NAME);
 		Order order = orderForm.createOrder();
-		order.setMemberId(member.getId());
+		int memberId = orderForm.getMemberId();
+		order.setMemberId(memberId);
 		order.setPrice(cart);
 		orderRepository.save(order);
+		memberRepository.updateAtOrder(orderForm);
+		session.setAttribute(Member.SESSION_NAME, memberRepository.findById(memberId));
 		List<OrderItem> items = order.createItems(cart);
+		this.saveItems(order, items);
+		return order.getId();
+	}
+
+	public void saveItems(Order order, List<OrderItem> items) {
 		for (OrderItem item : items) {
 			orderRepository.saveItem(item, order.getId());
 		}
-		return order.getId();
 	}
 }

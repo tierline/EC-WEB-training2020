@@ -41,14 +41,15 @@ public class OrderController {
 	private OrderService orderService;
 
 	/**
-	 * 注文詳細と住所入力フォームに遷移
+	 * 住所入力フォームに遷移
 	 */
 	@GetMapping("/form")
 	public String form(OrderForm orderForm, Model model, BindingResult result) {
 		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
 		Member member = (Member) session.getAttribute(Member.SESSION_NAME);
+		//Serviceに投げる
 		OrderForm sessionOrderForm = (OrderForm) session.getAttribute(OrderForm.SESSION_NAME);
-		if (session.getAttribute(OrderForm.SESSION_NAME) == null || result.hasErrors()) {
+		if (sessionOrderForm == null || result.hasErrors()) {
 			model.addAttribute("orderForm", orderForm);
 			orderForm.setMemberInfo(member);
 		} else {
@@ -59,6 +60,7 @@ public class OrderController {
 	}
 
 	// 注文内容確認画面を表示する
+	// もう少しスッキリさせたい
 	@PostMapping("/confirmation")
 	public String confirmation(@Valid OrderForm orderForm, BindingResult result, Model model) {
 		session.setAttribute(OrderForm.SESSION_NAME, orderForm);
@@ -83,22 +85,17 @@ public class OrderController {
 		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
 		OrderForm orderForm = (OrderForm) session.getAttribute(OrderForm.SESSION_NAME);
 		int orderId = orderService.order(orderForm, cart);
-		memberRepository.updateAtOrder(orderForm);
-		session.setAttribute(Member.SESSION_NAME, memberRepository.findById(orderForm.getMemberId()));
 		session.setAttribute(Cart.SESSION_NAME, new Cart());
 		session.removeAttribute(OrderForm.SESSION_NAME);
 		return "redirect:/member/order/complete/" + orderId;
 	}
 
 	/**
-	 * 注文明細画面
+	 * 注文完了画面
 	 */
-	@GetMapping("/complete/{id}")
-	public String complete(@PathVariable int id, Model model) {
-		Order order = orderRepository.findById(id);
-		List<OrderItem> items = orderRepository.findItemsByOrder(order);
-		model.addAttribute("order", order);
-		model.addAttribute("items", items);
+	@GetMapping("/complete/{orderId}")
+	public String complete(@PathVariable int orderId, Model model) {
+		model.addAttribute("orderId", orderId);
 		return "member/order/complete";
 	}
 }

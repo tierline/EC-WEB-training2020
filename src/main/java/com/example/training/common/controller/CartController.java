@@ -66,17 +66,8 @@ public class CartController {
 		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
 		if (cart.getSize() == 0) {
 			model.addAttribute("errorMessage", messageSource.getMessage("error.cart.noProduct", null, Locale.JAPAN));
-			model.addAttribute("cart", cart);
-			return "member/cart";
 		}
 		model.addAttribute("cart", cart);
 		return "member/cart";
 	}
-
-	@GetMapping("/clear")
-	public String clear() {
-		session.removeAttribute("cart");
-		return "redirect:/member/cart";
-	}
-
 }

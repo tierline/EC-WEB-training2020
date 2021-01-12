@@ -27,6 +27,7 @@ public class Order {
 		this.date = orderForm.getDateNow();
 	}
 
+	//要修正、いる？
 	public Order(int orderId, int memberId, String email, String phone_number, String name, String address, int price,
 			LocalDate date) {
 		this.id = orderId;
@@ -39,6 +40,7 @@ public class Order {
 		this.date = date;
 	}
 
+	//test用で作っていいのか
 	public Order(int orderId, int memberId, LocalDate date) {
 		this.id = orderId;
 		this.memberId = memberId;

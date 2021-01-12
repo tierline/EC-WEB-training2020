@@ -19,9 +19,9 @@ public class ProductController {
 	/**
 	 * 商品詳細画面に遷移
 	 */
-	@GetMapping("detail/{id}")
-	public String detail(@PathVariable("id") int id, Model model) {
-		var product = productRepository.findId(id).orElseThrow(() -> new IllegalArgumentException());
+	@GetMapping("detail/{productId}")
+	public String detail(@PathVariable int productId, Model model) {
+		var product = productRepository.findId(productId).orElseThrow(() -> new IllegalArgumentException());
 		model.addAttribute("product", product);
 		return "product/detail";
 	}

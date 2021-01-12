@@ -22,21 +22,6 @@
 		WHERE
 		id = ${id}
 	</select>
-
-	<select id="findIdList"
-		resultType="com.example.training.common.domain.Product">
-		SELECT
-		*
-		FROM
-		product
-		WHERE
-		id IN
-		<foreach item="id" collection="list" open="(" separator=","
-			close=")">
-			${id}
-		</foreach>
-	</select>
-
 	<select id="findName"
 		resultType="com.example.training.common.domain.Product">
 		SELECT

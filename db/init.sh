@@ -1,5 +1,5 @@
 #!/bin/bash
-
+cd db
 
 echo -------create table--------
 
@@ -12,6 +12,8 @@ echo -------create table--------
 
 
 mysql --defaults-extra-file=root.conf --enable-local-infile < ./insert_product.sql
+
+cd ..
 
 echo ------- finish--------
 

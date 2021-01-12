@@ -42,9 +42,9 @@ public class MainController {
 	 * @return
 	 */
 	@PostMapping("/search")
-	public String search(Model model, @RequestParam("freeWord") String word) {
-		List<Product> products = productRepository.findName(word);
-		model.addAttribute("word", word);
+	public String search(Model model, @RequestParam("freeWord") String freeWord) {
+		List<Product> products = productRepository.findName(freeWord);
+		model.addAttribute("freeWord", freeWord);
 		model.addAttribute("products", products);
 		if (products.size() == 0) {
 			model.addAttribute("errorMessage", messageSource.getMessage("error.search.noProduct", null, Locale.JAPAN));

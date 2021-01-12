@@ -18,7 +18,6 @@ public class OrderHistoryAssembler {
 
 	public Map<Integer, List<OrderMonth>> create(List<OrderMonth> orders) {
 		Map<Integer, List<OrderMonth>> map = new TreeMap<>();
-
 		for (OrderMonth order : orders) {
 			int month = order.getDate().getMonthValue();
 			if (map.containsKey(month)) {

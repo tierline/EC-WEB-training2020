@@ -92,6 +92,7 @@ public class OrderForm {
 		return new Order(this);
 	}
 
+	//要修正、なんか違う
 	public void setMemberInfo(Member member) {
 		this.lastName = member.getLastName();
 		this.firstName = member.getFirstName();
