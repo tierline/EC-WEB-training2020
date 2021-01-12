@@ -50,6 +50,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:8080",
-  "postbuild": "node ./postbuild.js"
+  "proxy": "http://localhost:8080"
 }
