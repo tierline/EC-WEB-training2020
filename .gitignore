@@ -39,3 +39,5 @@ build/
 /.metadata/
 pwa/.eslintcache
 pwa/debug.log
+
+src/main/resources/public
