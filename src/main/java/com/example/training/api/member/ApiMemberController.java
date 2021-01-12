@@ -41,8 +41,6 @@ public class ApiMemberController {
 	@PostMapping("/applicate")
 	@ResponseBody
 	public Member create(@RequestBody MemberApplicateForm memberApplicateForm) {
-		// 要修正
-		// create の引数に memberApplicateForm を指定したため。Member型をとりあえず返している。
 		memberService.create(memberApplicateForm);
 		Optional<Member> memberDetail = memberRepository.findByEmail(memberApplicateForm.getEmail());
 		session.setAttribute(Member.SESSION_NAME, memberDetail.get());
@@ -69,8 +67,8 @@ public class ApiMemberController {
 	/*
 	 * 住所情報があったら表示する
 	 */
-	 //要修正、sessionから取得する？
-	 //値オブジェクトをいい感じにしたい
+	// 要修正、sessionから取得する？
+	// 値オブジェクトをいい感じにしたい
 	@PostMapping("/address")
 	@ResponseBody
 	public Member fetchMemberAddress(@RequestBody Email email) {
