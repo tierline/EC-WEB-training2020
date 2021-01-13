@@ -12,6 +12,8 @@ import { ExpirationPlugin } from 'workbox-expiration';
 import { precacheAndRoute, createHandlerBoundToURL } from 'workbox-precaching';
 import { registerRoute } from 'workbox-routing';
 import { StaleWhileRevalidate } from 'workbox-strategies';
+import { CacheFirst } from 'workbox-strategies';
+import { CacheableResponsePlugin } from 'workbox-cacheable-response';
 
 clientsClaim();
 
@@ -45,6 +47,20 @@ registerRoute(
   },
   createHandlerBoundToURL(process.env.PUBLIC_URL + '/index.html')
 );
+
+//石塚の追加分　apiをキャッシュする。
+registerRoute(
+  ({ url }) => url.pathname.startsWith('/'),
+  new CacheFirst({
+    cacheName: 'api-cache',
+    plugins: [
+      new CacheableResponsePlugin({
+        statuses: [0, 200],
+      })
+    ]
+  })
+);
+//石塚の追加分　apiをキャッシュする。
 
 // An example runtime caching route for requests that aren't handled by the
 // precache, in this case same-origin .png requests like those from in public/
