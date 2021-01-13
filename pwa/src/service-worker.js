@@ -51,7 +51,7 @@ registerRoute(
 
 //石塚の追加分　apiをキャッシュする。
 registerRoute(
-  ({ url }) => url.pathname.startsWith('/api'),
+  ({ url }) => url.pathname.startsWith('/'),
   new CacheFirst({
     cacheName: 'api-cache',
     plugins: [
