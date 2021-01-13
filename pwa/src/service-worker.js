@@ -49,7 +49,7 @@ registerRoute(
   createHandlerBoundToURL(process.env.PUBLIC_URL + '/index.html')
 );*/
 
-//石塚の追加分　apiをキャッシュする。
+//石塚の追加分　すべてをキャッシュする。
 registerRoute(
   ({ url }) => url.pathname.startsWith('/'),
   new CacheFirst({
@@ -61,7 +61,7 @@ registerRoute(
     ]
   })
 );
-//石塚の追加分　apiをキャッシュする。
+//石塚の追加分　すべてをキャッシュする。
 
 // An example runtime caching route for requests that aren't handled by the
 // precache, in this case same-origin .png requests like those from in public/

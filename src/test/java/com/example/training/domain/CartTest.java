@@ -53,7 +53,7 @@ class CartTest {
 
 	@Test
 	void list() {
-		Product product = new Product(１, "ガム");
+		Product product = new Product(1, "ガム");
 		Product product2 = new Product(2, "チョコ");
 		Cart cart = new Cart();
 		cart.add(product);
