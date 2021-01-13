@@ -26,6 +26,7 @@ precacheAndRoute(self.__WB_MANIFEST);
 // Set up App Shell-style routing, so that all navigation requests
 // are fulfilled with your index.html shell. Learn more at
 // https://developers.google.com/web/fundamentals/architecture/app-shell
+/*
 const fileExtensionRegexp = new RegExp('/[^/?]+\\.[^/]+$');
 registerRoute(
   // Return false to exempt requests from being fulfilled by index.html.
@@ -46,11 +47,11 @@ registerRoute(
     return true;
   },
   createHandlerBoundToURL(process.env.PUBLIC_URL + '/index.html')
-);
+);*/
 
 //石塚の追加分　apiをキャッシュする。
 registerRoute(
-  ({ url }) => url.pathname.startsWith('/'),
+  ({ url }) => url.pathname.startsWith('/api'),
   new CacheFirst({
     cacheName: 'api-cache',
     plugins: [

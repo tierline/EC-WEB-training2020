@@ -3,7 +3,7 @@ import Client from "./Client";
 class Action {
     static findList(component) {
         Client.get(
-            `/index`,
+            `/api/all`,
             response => {
                 component.setState(() => ({
                     data: response
@@ -14,7 +14,7 @@ class Action {
 
     static findDetail(id, component) {
         Client.get(
-            `/product/detail/${id}`,
+            `/api/detail/${id}`,
             response => {
                 component.setState(() => ({
                     data: response

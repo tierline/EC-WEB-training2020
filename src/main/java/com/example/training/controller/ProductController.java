@@ -11,7 +11,7 @@ import com.example.training.domain.Product;
 import com.example.training.repository.ProductRepository;
 
 @RestController
-@RequestMapping("/product")
+@RequestMapping("/api")
 public class ProductController {
 
 	@Autowired

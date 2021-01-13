@@ -19,7 +19,7 @@ public class MainController {
 	private ProductRepository productRepository;
 
 	@CrossOrigin
-	@GetMapping("/index")
+	@GetMapping("/api/all")
 	public List<Product> index() {
 		var products = productRepository.findAll();
 		return products;
