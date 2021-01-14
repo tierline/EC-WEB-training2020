@@ -40,11 +40,18 @@ public class ApiMemberController {
 	@CrossOrigin
 	@PostMapping("/applicate")
 	@ResponseBody
-	public Member create(@RequestBody MemberApplicateForm memberApplicateForm) {
-		memberService.create(memberApplicateForm);
-		Optional<Member> memberDetail = memberRepository.findByEmail(memberApplicateForm.getEmail());
-		session.setAttribute(Member.SESSION_NAME, memberDetail.get());
-		return memberDetail.get();
+	public Boolean create(@RequestBody MemberApplicateForm memberApplicateForm) {
+		// 要修正
+		// create の引数に memberApplicateForm を指定したため。Member型をとりあえず返している。
+		Optional<Member> member = memberRepository.findByEmail(memberApplicateForm.getEmail());
+		if (member.isEmpty()) {
+			memberService.create(memberApplicateForm);
+			Optional<Member> memberDetail = memberRepository.findByEmail(memberApplicateForm.getEmail());
+			session.setAttribute(Member.SESSION_NAME, memberDetail.get());
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	@CrossOrigin
