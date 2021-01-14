@@ -21,7 +21,7 @@ echo ${path}
 
 echo '-----start-----'
 
-sftp -i ~/.ssh/ec-site-kp.pem ec2-user@${ip}<<EOF 
+sftp -i ~/.ssh/ec-site-kp.pem ec2-user@${ip}<<EOF
 put ${path}/build/libs/EC-WEB-training2020-0.0.1-SNAPSHOT.jar
 exit
 EOF
@@ -30,4 +30,3 @@ EOF
 ssh -i ~/.ssh/ec-site-kp.pem ec2-user@${ip}<<EOF
 java -jar /home/ec2-user/EC-WEB-training2020-0.0.1-SNAPSHOT.jar
 EOF
-
