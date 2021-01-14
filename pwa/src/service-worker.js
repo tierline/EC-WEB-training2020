@@ -12,7 +12,7 @@ import { ExpirationPlugin } from 'workbox-expiration';
 import { precacheAndRoute, createHandlerBoundToURL } from 'workbox-precaching';
 import { registerRoute } from 'workbox-routing';
 import { StaleWhileRevalidate } from 'workbox-strategies';
-import { CacheFirst } from 'workbox-strategies';
+import { NetworkFirst } from 'workbox-strategies';
 import { CacheableResponsePlugin } from 'workbox-cacheable-response';
 
 clientsClaim();
@@ -52,7 +52,7 @@ registerRoute(
 //石塚の追加分　すべてをキャッシュする。
 registerRoute(
   ({ url }) => url.pathname.startsWith('/'),
-  new CacheFirst({
+  new NetworkFirst({
     cacheName: 'api-cache',
     plugins: [
       new CacheableResponsePlugin({
