@@ -1,7 +1,6 @@
 package com.example.training.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +19,6 @@ public class ProductController {
 	/**
 	 * 商品詳細画面に遷移
 	 */
-	@CrossOrigin
 	@GetMapping("detail/{id}")
 	public Product detail(@PathVariable("id") int id) {
 		var product = productRepository.findId(id).orElseThrow(() -> new IllegalArgumentException());
