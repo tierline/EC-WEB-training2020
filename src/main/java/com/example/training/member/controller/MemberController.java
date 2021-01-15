@@ -7,6 +7,11 @@ import java.util.Optional;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import com.example.training.member.Service.MemberService;
+import com.example.training.member.domain.Member;
+import com.example.training.member.domain.MemberApplicateForm;
+import com.example.training.member.repository.MemberRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
@@ -15,11 +20,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import com.example.training.member.Service.MemberService;
-import com.example.training.member.domain.Member;
-import com.example.training.member.domain.MemberApplicateForm;
-import com.example.training.member.repository.MemberRepository;
 
 @Controller
 @RequestMapping("/member")
@@ -71,7 +71,7 @@ public class MemberController {
 	/**
 	 * 会員を新規登録する
 	 */
-	// もうちょっとなにかできそうな気がする
+	// TOREVIEW もうちょっとなにかできそうな気がする
 	@PostMapping("applicate")
 	public String applicate(@Valid MemberApplicateForm memberApplicateForm, BindingResult result, Model model) {
 		String email = memberApplicateForm.getEmail();

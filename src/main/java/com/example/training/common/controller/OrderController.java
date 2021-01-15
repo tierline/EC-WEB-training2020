@@ -50,7 +50,7 @@ public class OrderController {
 	}
 
 	// 注文内容確認画面を表示する
-	// もう少しスッキリさせたい
+	// TOREVIEW もう少しスッキリさせたい
 	@PostMapping("/confirmation")
 	public String confirmation(@Valid OrderForm orderForm, BindingResult result, Model model) {
 		session.setAttribute(OrderForm.SESSION_NAME, orderForm);

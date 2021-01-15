@@ -41,7 +41,7 @@ public class ApiMemberController {
 	@PostMapping("/applicate")
 	@ResponseBody
 	public Boolean create(@RequestBody MemberApplicateForm memberApplicateForm) {
-		// 要修正
+		// TOREVIEW 要修正
 		// create の引数に memberApplicateForm を指定したため。Member型をとりあえず返している。
 		Optional<Member> member = memberRepository.findByEmail(memberApplicateForm.getEmail());
 		if (member.isEmpty()) {
@@ -74,7 +74,7 @@ public class ApiMemberController {
 	/*
 	 * 住所情報があったら表示する
 	 */
-	// 要修正、sessionから取得する？
+	// TOREVIEW 要修正、sessionから取得する？
 	// 値オブジェクトをいい感じにしたい
 	@PostMapping("/address")
 	@ResponseBody

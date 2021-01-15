@@ -7,7 +7,7 @@ import lombok.Data;
 
 @Data
 public class Email {
-	// 値オブジェクトを作りたい
+	// TOREVIEW 値オブジェクトを作りたい
 	@NotEmpty
 	@Size(min = 1, max = 128, message = "メールアドレスは1文字以上、128文字以内で入力してください")
 	private String email;
