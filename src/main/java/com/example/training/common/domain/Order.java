@@ -9,6 +9,9 @@ import lombok.Data;
 @Data
 public class Order {
 
+	// クラスのコメント,メソッドのコメントをjavadocで。
+	// メソッドのコメントは「何をやっているか」は日本語で書いていきたい
+
 	private int id;
 	private int memberId;
 	private String name;
@@ -18,7 +21,7 @@ public class Order {
 	private int price;
 	private LocalDate date;
 
-	public Order(OrderForm orderForm) {
+	public Order(OrderForm orderForm, Cart cart) {
 		this.memberId = orderForm.getMemberId();
 		this.name = orderForm.getFullName();
 		this.address = orderForm.getFullAddress();
@@ -27,7 +30,7 @@ public class Order {
 		this.date = orderForm.getDateNow();
 	}
 
-	// TOREVIEW 要修正、いる？
+	// TOREVIEW 要修正、必要か？
 	public Order(int orderId, int memberId, String email, String phone_number, String name, String address, int price,
 			LocalDate date) {
 		this.id = orderId;
@@ -40,7 +43,7 @@ public class Order {
 		this.date = date;
 	}
 
-	// TOREVIEW test用で作っていいのか
+	// TOREVIEW test用で作っていいのか -> あり。できれば既存ので。
 	public Order(int orderId, int memberId, LocalDate date) {
 		this.id = orderId;
 		this.memberId = memberId;

@@ -5,18 +5,21 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import com.example.training.common.repository.OrderRepository;
+import com.example.training.member.domain.Member;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.example.training.common.repository.OrderRepository;
 
 @Service
 public class OrderHistoryAssembler {
 
 	@Autowired
-	OrderRepository orderRepository;
+	private OrderRepository orderRepository;
 
-	public Map<Integer, List<OrderMonth>> create(List<OrderMonth> orders) {
+	public Map<Integer, List<OrderMonth>> create(Member member) {
+		int id = member.getId();
+		List<OrderMonth> list = orderRepository.findByOrderMonth(id); // findByOrderMonthByMember, findByOrderMonthMemberId
 		Map<Integer, List<OrderMonth>> map = new TreeMap<>();
 		for (OrderMonth order : orders) {
 			int month = order.getDate().getMonthValue();

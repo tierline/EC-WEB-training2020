@@ -88,8 +88,8 @@ public class OrderForm {
 		return this.postcode + this.prefecture + this.city + this.block;
 	}
 
-	public Order createOrder() {
-		return new Order(this);
+	public Order createOrder(Cart cart) {
+		return new Order(this, cart);
 	}
 
 	// TOREVIEW 要修正、なんか違う

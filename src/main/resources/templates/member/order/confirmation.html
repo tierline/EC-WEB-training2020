@@ -59,7 +59,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr th:each="item : ${items}">
+              <tr th:each="item : ${cart.items}">
                 <td>
                   <img
                     th:src="@{'/image/' + ${item.ProductImage}}"

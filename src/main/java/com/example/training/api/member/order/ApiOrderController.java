@@ -2,19 +2,8 @@ package com.example.training.api.member.order;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
 import com.example.training.common.domain.Cart;
 import com.example.training.common.domain.Order;
@@ -26,6 +15,16 @@ import com.example.training.common.domain.OrderService;
 import com.example.training.common.repository.OrderRepository;
 import com.example.training.member.domain.Member;
 import com.example.training.member.repository.MemberRepository;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin
 @RestController
@@ -90,10 +89,9 @@ public class ApiOrderController {
 	@PostMapping("/history")
 	@ResponseBody
 	public Map<Integer, List<OrderMonth>> history(@RequestBody Member member) {
-		Optional<Member> memberId = memberRepository.findByEmail(member.getEmail());
-		int id = memberId.get().getId();
-		List<OrderMonth> list = orderRepository.findByOrderMonth(id);
-		Map<Integer, List<OrderMonth>> result = orderHistoryAssembler.create(list);
+		// member は session から
+		Member member = memberRepository.findByEmail(member.getEmail()).orElseThrow();
+		Map<Integer, List<OrderMonth>> result = orderHistoryAssembler.create(member);
 		return result;
 	}
 

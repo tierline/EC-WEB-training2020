@@ -20,7 +20,7 @@ public class Cart {
 	/**
 	 * 商品をカートに追加する
 	 *
-	 * @param item     商品
+	 * @param item
 	 * @param quantity
 	 */
 	public void add(Product product, int quantity) {

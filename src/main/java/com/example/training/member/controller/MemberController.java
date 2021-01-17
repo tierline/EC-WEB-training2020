@@ -79,11 +79,11 @@ public class MemberController {
 		if (result.hasErrors()) {
 			return applicate(memberApplicateForm, model);
 		} else if (memberApplicateForm.isExistedMember(member)) {
-			model.addAttribute("errorMessage",
-					messageSource.getMessage("error.applicate.duplicate", null, Locale.JAPAN));
+			model.addAttribute("errorMessage", messageSource.getMessage("error.applicate.duplicate", null, Locale.JAPAN));
 			return "member/applicate";
 		} else {
-			memberService.create(memberApplicateForm);
+			memberService.create(memberApplicateForm); // TOREVIEW : applicate //
+																									// MemberApplicationService.run(memberApplicateForm);
 			return "redirect:/member/applicated";
 		}
 	}

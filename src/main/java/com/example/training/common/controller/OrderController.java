@@ -38,9 +38,12 @@ public class OrderController {
 		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
 		Member member = (Member) session.getAttribute(Member.SESSION_NAME);
 		// Serviceに投げる
+		// 混在したメソッドを切り分ける（確認画面から戻る用のメソッドとか）
+		// session は途中で抜けられる場合もある。面倒ではある。
 		OrderForm sessionOrderForm = (OrderForm) session.getAttribute(OrderForm.SESSION_NAME);
 		if (sessionOrderForm == null || result.hasErrors()) {
 			model.addAttribute("orderForm", orderForm);
+			// new OrderForm(Member)
 			orderForm.setMemberInfo(member);
 		} else {
 			model.addAttribute("orderForm", sessionOrderForm);
@@ -60,6 +63,7 @@ public class OrderController {
 			Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
 			List<CartItem> items = cart.getItems();
 			int totalAmount = cart.getTotalAmount();
+			// cart を返したらいけるかも。
 			model.addAttribute("items", items);
 			model.addAttribute("totalAmount", totalAmount);
 			model.addAttribute("orderForm", orderForm);
