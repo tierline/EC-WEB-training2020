@@ -18,7 +18,9 @@ path=`pwd`
 
 echo ${path}
 
-sftp -i ~/.ssh/ec-site-kp.pem ec2-user@${ip}<<EOF 
+echo '-----start-----'
+
+sftp -i ~/.ssh/ec-site-kp.pem ec2-user@${ip}<<EOF
 put ${path}/build/libs/EC-WEB-training2020-0.0.1-SNAPSHOT.jar
 exit
 EOF

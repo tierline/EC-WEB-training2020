@@ -5,12 +5,12 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.example.training.common.repository.OrderRepository;
 import com.example.training.member.domain.Member;
 import com.example.training.member.repository.MemberRepository;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Service
 public class OrderService {
@@ -24,7 +24,7 @@ public class OrderService {
 
 	@Autowired
 	private HttpSession session;
-// 色々しすぎてる
+// TOREVIEW 色々しすぎてる
 	public int order(@Valid OrderForm orderForm, Cart cart) {
 		Order order = orderForm.createOrder();
 		int memberId = orderForm.getMemberId();

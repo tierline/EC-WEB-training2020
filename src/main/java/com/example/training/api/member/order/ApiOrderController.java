@@ -85,6 +85,9 @@ public class ApiOrderController {
 
 	}
 
+	/*
+	 * 購入履歴の取得
+	 */
 	// 変数名かえる
 	// dataの受け取り方微妙？
 	@PostMapping("/history")

@@ -2,7 +2,6 @@
 package com.example.training.member.controller;
 
 import java.util.Locale;
-import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -71,20 +70,21 @@ public class MemberController {
 	/**
 	 * 会員を新規登録する
 	 */
-	// もうちょっとなにかできそうな気がする
+	// TOREVIEW もうちょっとなにかできそうな気がする
 	@PostMapping("applicate")
 	public String applicate(@Valid MemberApplicateForm memberApplicateForm, BindingResult result, Model model) {
 		String email = memberApplicateForm.getEmail();
-		Optional<Member> member = memberRepository.findByEmail(email);
+		Member member = memberRepository.findByEmail(email).orElseThrow();
 		if (result.hasErrors()) {
 			return applicate(memberApplicateForm, model);
-		} else if (memberApplicateForm.isExistedMember(member)) {
+		}
+		if (member.getEmail().equals(email)) {
 			model.addAttribute("errorMessage",
 					messageSource.getMessage("error.applicate.duplicate", null, Locale.JAPAN));
 			return "member/applicate";
-		} else {
-			memberService.create(memberApplicateForm);
-			return "redirect:/member/applicated";
 		}
+		memberService.create(memberApplicateForm);
+		return "redirect:/member/applicated";
+
 	}
 }

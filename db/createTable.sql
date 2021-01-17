@@ -4,6 +4,8 @@ create database training;
 
 use training;
 
+-- TOREVIEW : sql を書かずに mybatis で定義できないか --
+
 CREATE TABLE admins (
   id INT AUTO_INCREMENT,
   name VARCHAR(128),
@@ -70,4 +72,3 @@ CREATE TABLE orders (
   date DATE,
   PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-

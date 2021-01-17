@@ -7,13 +7,9 @@ import javax.validation.Valid;
 
 import com.example.training.common.domain.Cart;
 import com.example.training.common.domain.CartItem;
-import com.example.training.common.domain.Order;
 import com.example.training.common.domain.OrderForm;
-import com.example.training.common.domain.OrderItem;
 import com.example.training.common.domain.OrderService;
-import com.example.training.common.repository.OrderRepository;
 import com.example.training.member.domain.Member;
-import com.example.training.member.repository.MemberRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,12 +28,6 @@ public class OrderController {
 	private HttpSession session;
 
 	@Autowired
-	private MemberRepository memberRepository;
-
-	@Autowired
-	private OrderRepository orderRepository;
-
-	@Autowired
 	private OrderService orderService;
 
 	/**
@@ -47,7 +37,7 @@ public class OrderController {
 	public String form(OrderForm orderForm, Model model, BindingResult result) {
 		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
 		Member member = (Member) session.getAttribute(Member.SESSION_NAME);
-		//Serviceに投げる
+		// Serviceに投げる
 		OrderForm sessionOrderForm = (OrderForm) session.getAttribute(OrderForm.SESSION_NAME);
 		if (sessionOrderForm == null || result.hasErrors()) {
 			model.addAttribute("orderForm", orderForm);
@@ -60,7 +50,7 @@ public class OrderController {
 	}
 
 	// 注文内容確認画面を表示する
-	// もう少しスッキリさせたい
+	// TOREVIEW もう少しスッキリさせたい
 	@PostMapping("/confirmation")
 	public String confirmation(@Valid OrderForm orderForm, BindingResult result, Model model) {
 		session.setAttribute(OrderForm.SESSION_NAME, orderForm);

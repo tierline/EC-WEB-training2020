@@ -12,9 +12,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j
 @Component("LoginMemberDetailsService")
 public class LoginMemberDetailsService implements UserDetailsService {
 	@Autowired
