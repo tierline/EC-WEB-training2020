@@ -1,6 +1,8 @@
 package com.example.training.common.domain;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -17,17 +19,18 @@ public class OrderHistoryAssembler {
 	@Autowired
 	private OrderRepository orderRepository;
 
+// TOREVIEW
 	public Map<Integer, List<OrderMonth>> create(Member member) {
 		int id = member.getId();
-		List<OrderMonth> orders = orderRepository.findByOrderMonthByMemberId(id);
+		List<OrderMonth> orderMonthList = orderRepository.findByOrderMonthByMemberId(id);
 		Map<Integer, List<OrderMonth>> map = new TreeMap<>();
-		for (OrderMonth order : orders) {
-			int month = order.getDate().getMonthValue();
+		for (OrderMonth order : orderMonthList) {
+			LocalDate date = order.getDate();
+			int month = date.getMonthValue();
 			if (map.containsKey(month)) {
 				map.get(month).add(order);
 			} else {
-				map.put(month, new ArrayList<OrderMonth>());
-				map.get(month).add(order);
+				map.put(month, new ArrayList<OrderMonth>(Arrays.asList(order)));
 			}
 		}
 		return map;

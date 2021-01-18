@@ -63,7 +63,6 @@ public class OrderController {
 			return form(orderForm, model);
 		} else {
 			Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
-			cart.getTotalAmount();
 			model.addAttribute("cart", cart);
 			model.addAttribute("orderForm", orderForm);
 			return "member/order/confirmation";

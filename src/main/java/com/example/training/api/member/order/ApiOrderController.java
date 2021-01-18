@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin
@@ -83,12 +82,15 @@ public class ApiOrderController {
 		return items;
 	}
 
-	// 変数名かえる
-	@PostMapping("/history")
-	@ResponseBody
-	public Map<Integer, List<OrderMonth>> history(@RequestBody Member member) {
-		Member memberRepo = memberRepository.findByEmail(member.getEmail()).orElseThrow();
-		Map<Integer, List<OrderMonth>> result = orderHistoryAssembler.create(memberRepo);
+	/*
+	 * 購入履歴の取得
+	 */
+	// TOREVIEW
+	// sessionからの取得に変更
+	@GetMapping("/history")
+	public Map<Integer, List<OrderMonth>> history() {
+		Member member = (Member) session.getAttribute(Member.SESSION_NAME);
+		Map<Integer, List<OrderMonth>> result = orderHistoryAssembler.create(member);
 		return result;
 	}
 

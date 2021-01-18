@@ -38,15 +38,12 @@ public class MemberSuccessHandler implements AuthenticationSuccessHandler {
   public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
       Authentication authentication) throws IOException, ServletException {
 
-    // 認証したユーザのemail
     String email = authentication.getName();
     Optional<Member> member = memberRepository.findByEmail(email);
     if (member.isEmpty()) {
-      // 会員が見つからなかった場合、エラーを返す
     } else {
-      // セッションにユーザ情報を格納する
       session.setAttribute(Member.SESSION_NAME, member.get());
-      // "/"にリダイレクトする
+      Member sessionMember = (Member) session.getAttribute(Member.SESSION_NAME);
       response.sendRedirect("/");
     }
   }

@@ -3,12 +3,12 @@ package com.example.training.member.repository;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
 import com.example.training.common.domain.OrderForm;
 import com.example.training.member.domain.Member;
 import com.example.training.member.domain.MemberEditForm;
-
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface MemberRepository {

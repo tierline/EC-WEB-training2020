@@ -77,20 +77,20 @@ public class MemberController {
 	 * @param model
 	 * @return 完了画面
 	 */
+	// TOREVIEW
 	@PostMapping("applicate")
 	public String applicate(@Valid MemberApplicationForm memberApplicationForm, BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			return applicate(memberApplicationForm, model);
+		}
+		String email = memberApplicationForm.getEmail();
+		Optional<Member> member = memberRepository.findByEmail(email);
+		if (member.isPresent()) {
+			model.addAttribute("errorMessage", messageSource.getMessage("error.applicate.duplicate", null, Locale.JAPAN));
+			return "member/applicate";
 		} else {
-			String email = memberApplicationForm.getEmail();
-			Optional<Member> member = memberRepository.findByEmail(email);
-			if (member.isPresent()) {
-				model.addAttribute("errorMessage", messageSource.getMessage("error.applicate.duplicate", null, Locale.JAPAN));
-				return "member/applicate";
-			} else {
-				memberApplicationService.run(memberApplicationForm);
-				return "redirect:/member/applicated";
-			}
+			memberApplicationService.run(memberApplicationForm);
+			return "redirect:/member/applicated";
 		}
 	}
 }
