@@ -2,7 +2,6 @@ package com.example.training.api.member.order;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.training.common.domain.Cart;
@@ -88,15 +86,12 @@ public class ApiOrderController {
 	/*
 	 * 購入履歴の取得
 	 */
-	// 変数名かえる
-	// dataの受け取り方微妙？
-	@PostMapping("/history")
-	@ResponseBody
-	public Map<Integer, List<OrderMonth>> history(@RequestBody Member member) {
-		Optional<Member> memberId = memberRepository.findByEmail(member.getEmail());
-		int id = memberId.get().getId();
-		List<OrderMonth> list = orderRepository.findByOrderMonth(id);
-		Map<Integer, List<OrderMonth>> result = orderHistoryAssembler.create(list);
+	// TOREVIEW
+	//sessionからの取得に変更
+	@GetMapping("/history")
+	public Map<Integer, List<OrderMonth>> history() {
+		Member member = (Member) session.getAttribute(Member.SESSION_NAME);
+		Map<Integer, List<OrderMonth>> result = orderHistoryAssembler.create(member);
 		return result;
 	}
 

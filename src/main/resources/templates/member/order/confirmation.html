@@ -56,10 +56,11 @@
                 <th scope="col">数量</th>
                 <th scope="col">単価</th>
                 <th scope="col">金額</th>
+                <th scope="col">？？</th>
               </tr>
             </thead>
             <tbody>
-              <tr th:each="item : ${items}">
+              <tr th:each="item : ${cart.items}">
                 <td>
                   <img
                     th:src="@{'/image/' + ${item.ProductImage}}"
@@ -71,14 +72,17 @@
                 <td th:text="${item.productName}"></td>
                 <td th:text="${item.quantity}"></td>
                 <td th:text="${item.productPrice}"></td>
-                <td th:text="${item.productPrice * item.quantity}"></td>
+                <td th:text="${item.totalAmount}"></td>
               </tr>
             </tbody>
           </table>
           <div class="d-flex justify-content-end">
             <span>
               合計注文金額：￥
-              <span th:text="${totalAmount}" class="h5 font-weight-bold"></span>
+              <span
+                th:text="${cart.items.totalAmount}"
+                class="h5 font-weight-bold"
+              ></span>
               円
             </span>
           </div>

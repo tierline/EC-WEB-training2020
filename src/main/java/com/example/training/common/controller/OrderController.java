@@ -1,15 +1,7 @@
 package com.example.training.common.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-
-import com.example.training.common.domain.Cart;
-import com.example.training.common.domain.CartItem;
-import com.example.training.common.domain.OrderForm;
-import com.example.training.common.domain.OrderService;
-import com.example.training.member.domain.Member;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +11,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.example.training.common.domain.Cart;
+import com.example.training.common.domain.OrderForm;
+import com.example.training.common.domain.OrderService;
+import com.example.training.member.domain.Member;
 
 @Controller
 @RequestMapping("/member/order")
@@ -38,9 +35,12 @@ public class OrderController {
 		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
 		Member member = (Member) session.getAttribute(Member.SESSION_NAME);
 		// Serviceに投げる
+		// 混在したメソッドを切り分ける（確認画面から戻る用のメソッドとか）
+		// session は途中で抜けられる場合もある。面倒ではある。
 		OrderForm sessionOrderForm = (OrderForm) session.getAttribute(OrderForm.SESSION_NAME);
 		if (sessionOrderForm == null || result.hasErrors()) {
 			model.addAttribute("orderForm", orderForm);
+			// new OrderForm(Member)
 			orderForm.setMemberInfo(member);
 		} else {
 			model.addAttribute("orderForm", sessionOrderForm);
@@ -58,10 +58,12 @@ public class OrderController {
 			return form(orderForm, model, result);
 		} else {
 			Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
-			List<CartItem> items = cart.getItems();
-			int totalAmount = cart.getTotalAmount();
-			model.addAttribute("items", items);
-			model.addAttribute("totalAmount", totalAmount);
+//			List<CartItem> items = cart.getItems();
+//			int totalAmount = cart.getTotalAmount();
+			// cart を返したらいけるかも。
+//			model.addAttribute("items", items);
+//			model.addAttribute("totalAmount", totalAmount);
+			model.addAttribute("cart", cart);
 			model.addAttribute("orderForm", orderForm);
 			return "member/order/confirmation";
 		}

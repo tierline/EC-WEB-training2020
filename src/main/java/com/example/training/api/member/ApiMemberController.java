@@ -4,7 +4,7 @@ import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 
-import com.example.training.member.Service.MemberService;
+import com.example.training.member.Service.MemberApplicationService;
 import com.example.training.member.domain.Email;
 import com.example.training.member.domain.Member;
 import com.example.training.member.domain.MemberApplicateForm;
@@ -29,7 +29,7 @@ public class ApiMemberController {
 	private HttpSession session;
 
 	@Autowired
-	private MemberService memberService;
+	private MemberApplicationService memberService;
 
 	@Autowired
 	private MemberRepository memberRepository;
@@ -41,8 +41,6 @@ public class ApiMemberController {
 	@PostMapping("/applicate")
 	@ResponseBody
 	public Boolean create(@RequestBody MemberApplicateForm memberApplicateForm) {
-		// TOREVIEW 要修正
-		// create の引数に memberApplicateForm を指定したため。Member型をとりあえず返している。
 		Optional<Member> member = memberRepository.findByEmail(memberApplicateForm.getEmail());
 		if (member.isEmpty()) {
 			memberService.create(memberApplicateForm);
@@ -74,13 +72,14 @@ public class ApiMemberController {
 	/*
 	 * 住所情報があったら表示する
 	 */
-	// TOREVIEW 要修正、sessionから取得する？
+	// TOREVIEW 要修正、sessionから取得する？ DBから取得するのはあまり問題なし。アプリケーションによる。
+	// session の乱用は流石に危険。session は変更があった場合など、考えなければならない材料が増える
 	// 値オブジェクトをいい感じにしたい
 	@PostMapping("/address")
 	@ResponseBody
 	public Member fetchMemberAddress(@RequestBody Email email) {
-		Member address = memberRepository.findAddress(email.getEmail());
-		return address;
+		Member member = memberRepository.findAddress(email.getEmail()); // member型 で address の変数名はおかしい
+		return member;
 	}
 
 }

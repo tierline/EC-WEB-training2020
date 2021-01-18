@@ -5,6 +5,8 @@ create database training;
 use training;
 
 -- TOREVIEW : sql を書かずに mybatis で定義できないか --
+-- TABLE 名は大文字に。 mybatis-config から設定できる --
+-- 会社方針：テーブル名は単数形 --
 
 CREATE TABLE admins (
   id INT AUTO_INCREMENT,
@@ -28,6 +30,7 @@ CREATE TABLE members (
   city VARCHAR(256),
   block	 VARCHAR(256),
 
+  -- last_updated_by -> last_update_admin 明示的に --
   last_updated_by VARCHAR(32), -- default: "none", changed: "変更した管理者の名前" --
   status VARCHAR(32), -- 未承認:unapproved, 承認:approval --
   PRIMARY KEY (id),

@@ -24,21 +24,20 @@ public class OrderService {
 
 	@Autowired
 	private HttpSession session;
-// TOREVIEW 色々しすぎてる
+
+	// TOREVIEW 色々しすぎてる
 	public int order(@Valid OrderForm orderForm, Cart cart) {
-		Order order = orderForm.createOrder();
-		int memberId = orderForm.getMemberId();
-		order.setMemberId(memberId);
-		order.setPrice(cart);
-		orderRepository.save(order);
-		memberRepository.updateAtOrder(orderForm);
-		session.setAttribute(Member.SESSION_NAME, memberRepository.findById(memberId));
-		List<OrderItem> items = order.createItems(cart);
-		this.saveItems(order, items);
+		Order order = orderForm.createOrder(cart);
+		this.saveByOrder(order, cart);
+		memberRepository.updateAtOrder(orderForm); // SQLをあまり増やさない
+		session.setAttribute(Member.SESSION_NAME, memberRepository.findById(orderForm.getMemberId()));
 		return order.getId();
 	}
 
-	public void saveItems(Order order, List<OrderItem> items) {
+	// トランザクションで区切る必要
+	private void saveByOrder(Order order, Cart cart) {
+		orderRepository.save(order);
+		List<OrderItem> items = order.createItems(cart);
 		for (OrderItem item : items) {
 			orderRepository.saveItem(item, order.getId());
 		}

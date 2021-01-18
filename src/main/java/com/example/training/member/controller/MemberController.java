@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.example.training.member.Service.MemberService;
+import com.example.training.member.Service.MemberApplicationService;
 import com.example.training.member.domain.Member;
 import com.example.training.member.domain.MemberApplicateForm;
 import com.example.training.member.repository.MemberRepository;
@@ -30,7 +30,7 @@ public class MemberController {
 	protected HttpSession session;
 
 	@Autowired
-	private MemberService memberService;
+	private MemberApplicationService memberApplicationService;
 
 	@Autowired
 	private MemberRepository memberRepository;
@@ -77,14 +77,14 @@ public class MemberController {
 		Member member = memberRepository.findByEmail(email).orElseThrow();
 		if (result.hasErrors()) {
 			return applicate(memberApplicateForm, model);
-		}
-		if (member.getEmail().equals(email)) {
+		} else if (memberApplicateForm.isExistedMember(member)) {
 			model.addAttribute("errorMessage",
 					messageSource.getMessage("error.applicate.duplicate", null, Locale.JAPAN));
 			return "member/applicate";
+		} else {
+			memberApplicationService.run(memberApplicateForm); // TOREVIEW : applicate //
+			// MemberApplicationService.run(memberApplicateForm);
+			return "redirect:/member/applicated";
 		}
-		memberService.create(memberApplicateForm);
-		return "redirect:/member/applicated";
-
 	}
 }

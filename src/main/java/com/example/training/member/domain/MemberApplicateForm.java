@@ -27,11 +27,11 @@ public class MemberApplicateForm {
 	@Size(max = 16, message = "パスワードは16文字以内で入力してください")
 	private String password;
 
-//	public Boolean isExistedMember(Member member) {
-//		if (member) {
-//			return true;
-//		} else {
-//			return false;
-//		}
-//	}
+	public Boolean isExistedMember(Member member) {
+		if (member) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }

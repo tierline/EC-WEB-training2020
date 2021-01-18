@@ -52,7 +52,7 @@
 		WHERE id = ${id}
 	</select>
 
-	<select id="findByOrderMonth"
+	<select id="findByOrderMonthMemberId"
 		resultType="com.example.training.common.domain.OrderMonth">
 		SELECT
 		id as orderId,

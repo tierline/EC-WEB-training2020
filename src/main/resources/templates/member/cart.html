@@ -61,7 +61,7 @@
         </table>
         <hr />
         <div class="d-flex justify-content-center pt-3">
-          <h4>合計金額:[[${cart.totalAmount}]]円</h4>
+          <h4 th:text="${cart.totalAmount}">円</h4>
         </div>
         <div class="d-flex justify-content-center pt-3">
           <a href="/member/order/form"
