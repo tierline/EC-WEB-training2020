@@ -6,10 +6,6 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
-import com.example.training.member.repository.MemberRepository;
-
-import org.springframework.beans.factory.annotation.Autowired;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -18,9 +14,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Data
 public class MemberApplicationForm {
-
-	@Autowired
-	private MemberRepository memberRepository;
 
 	@Email
 	private String email;
@@ -36,4 +29,9 @@ public class MemberApplicationForm {
 			return false;
 		}
 	}
+
+	public Member createMember(String passwordDigest) {
+		return new Member(this, passwordDigest);
+	}
+
 }

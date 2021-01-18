@@ -7,10 +7,10 @@ import java.util.Optional;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-import com.example.training.member.Service.MemberService;
 import com.example.training.member.domain.Member;
 import com.example.training.member.domain.MemberApplicationForm;
 import com.example.training.member.repository.MemberRepository;
+import com.example.training.member.service.MemberApplicationService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -31,7 +31,7 @@ public class MemberController {
 	protected HttpSession session;
 
 	@Autowired
-	private MemberService memberService;
+	private MemberApplicationService memberApplicationService;
 
 	@Autowired
 	private MemberRepository memberRepository;
@@ -71,20 +71,20 @@ public class MemberController {
 	/**
 	 * 会員を新規登録する
 	 */
-	// TOREVIEW もうちょっとなにかできそうな気がする
 	@PostMapping("applicate")
 	public String applicate(@Valid MemberApplicationForm memberApplicationForm, BindingResult result, Model model) {
-		String email = memberApplicationForm.getEmail();
-		Optional<Member> member = memberRepository.findByEmail(email);
 		if (result.hasErrors()) {
 			return applicate(memberApplicationForm, model);
-		} else if (memberApplicationForm.isExistedMember(member)) {
-			model.addAttribute("errorMessage", messageSource.getMessage("error.applicate.duplicate", null, Locale.JAPAN));
-			return "member/applicate";
 		} else {
-			memberService.applicate(memberApplicationForm); // TOREVIEW : applicate //
-			// MemberApplicationService.run(memberApplicateForm);
-			return "redirect:/member/applicated";
+			String email = memberApplicationForm.getEmail();
+			Optional<Member> member = memberRepository.findByEmail(email);
+			if (memberApplicationForm.isExistedMember(member)) {
+				model.addAttribute("errorMessage", messageSource.getMessage("error.applicate.duplicate", null, Locale.JAPAN));
+				return "member/applicate";
+			} else {
+				memberApplicationService.run(memberApplicationForm);
+				return "redirect:/member/applicated";
+			}
 		}
 	}
 }

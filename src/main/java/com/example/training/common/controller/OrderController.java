@@ -5,7 +5,7 @@ import javax.validation.Valid;
 
 import com.example.training.common.domain.Cart;
 import com.example.training.common.domain.OrderForm;
-import com.example.training.common.domain.OrderService;
+import com.example.training.common.service.OrderService;
 import com.example.training.member.domain.Member;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,19 +31,14 @@ public class OrderController {
 	 * 住所入力フォームに遷移
 	 */
 	@GetMapping("/form")
-	public String form(OrderForm orderForm, Model model, BindingResult result) {
-		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
+	public String form(OrderForm orderForm, Model model) {
 		Member member = (Member) session.getAttribute(Member.SESSION_NAME);
-		// TOREVIEW : Serviceに投げる
-		// 混在したメソッドを切り分ける（確認画面から戻る用のメソッドとか）
 		OrderForm sessionOrderForm = (OrderForm) session.getAttribute(OrderForm.SESSION_NAME);
-		if (sessionOrderForm == null || result.hasErrors()) {
-			model.addAttribute("orderForm", orderForm);
-			orderForm.setMemberInfo(member);
-		} else {
+		if (sessionOrderForm != null) {
 			model.addAttribute("orderForm", sessionOrderForm);
+		} else {
+			orderForm.setMemberInfo(member);
 		}
-		model.addAttribute("cart", cart);
 		return "member/order/form";
 	}
 
@@ -52,7 +47,7 @@ public class OrderController {
 	public String confirmation(@Valid OrderForm orderForm, BindingResult result, Model model) {
 		session.setAttribute(OrderForm.SESSION_NAME, orderForm);
 		if (result.hasErrors()) {
-			return form(orderForm, model, result);
+			return form(orderForm, model);
 		} else {
 			Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
 			cart.getTotalAmount();

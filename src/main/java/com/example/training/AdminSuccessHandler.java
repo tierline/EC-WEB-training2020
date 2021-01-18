@@ -37,7 +37,6 @@ public class AdminSuccessHandler implements AuthenticationSuccessHandler {
   @Override
   public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
       Authentication authentication) throws IOException, ServletException {
-    System.out.println(authentication);
     // 認証したユーザのemail
     String name = authentication.getName();
     Optional<Admin> admin = adminRepository.findByName(name);

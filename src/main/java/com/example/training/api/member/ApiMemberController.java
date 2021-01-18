@@ -4,12 +4,12 @@ import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 
-import com.example.training.member.Service.MemberService;
 import com.example.training.member.domain.Email;
 import com.example.training.member.domain.Member;
 import com.example.training.member.domain.MemberApplicationForm;
 import com.example.training.member.domain.MemberLoginForm;
 import com.example.training.member.repository.MemberRepository;
+import com.example.training.member.service.MemberApplicationService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -29,7 +29,7 @@ public class ApiMemberController {
 	private HttpSession session;
 
 	@Autowired
-	private MemberService memberService;
+	private MemberApplicationService memberApplicationService;
 
 	@Autowired
 	private MemberRepository memberRepository;
@@ -43,7 +43,7 @@ public class ApiMemberController {
 	public Boolean create(@RequestBody MemberApplicationForm memberApplicationForm) {
 		Optional<Member> member = memberRepository.findByEmail(memberApplicationForm.getEmail());
 		if (member.isEmpty()) {
-			memberService.applicate(memberApplicationForm);
+			memberApplicationService.run(memberApplicationForm);
 			Optional<Member> memberDetail = memberRepository.findByEmail(memberApplicationForm.getEmail());
 			session.setAttribute(Member.SESSION_NAME, memberDetail.get());
 			return true;
