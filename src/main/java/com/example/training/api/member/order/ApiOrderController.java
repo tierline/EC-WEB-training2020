@@ -73,7 +73,7 @@ public class ApiOrderController {
 	}
 
 	/**
-	 * 注文番号から注文明細を返す
+	 * 注文番号から注文商品を返す
 	 */
 	@GetMapping("/orderedItemList/{id}")
 	public List<OrderItem> orderedItemList(@PathVariable Integer id) {
@@ -81,15 +81,12 @@ public class ApiOrderController {
 		List<OrderItem> items = orderRepository.findItemsByOrder(order);
 
 		return items;
-
 	}
 
 	// 変数名かえる
-	// dataの受け取り方微妙？
 	@PostMapping("/history")
 	@ResponseBody
 	public Map<Integer, List<OrderMonth>> history(@RequestBody Member member) {
-		// member は session から
 		Member memberRepo = memberRepository.findByEmail(member.getEmail()).orElseThrow();
 		Map<Integer, List<OrderMonth>> result = orderHistoryAssembler.create(memberRepo);
 		return result;
