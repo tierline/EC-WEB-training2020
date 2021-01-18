@@ -1,10 +1,13 @@
 #!/bin/bash
 
+echo 'ssh接続先のipアドレスを入力してください'
+
 read ip
 
-echo ${ip}
+ssh -i ~/.ssh/ec-site-kp.pem ec2-user@${ip}
 
-path=`pwd`
+
+# path=`pwd`
 
 # echo '-----initialize-----'
 
