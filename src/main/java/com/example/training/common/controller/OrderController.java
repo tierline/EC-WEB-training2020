@@ -1,12 +1,9 @@
 package com.example.training.common.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import com.example.training.common.domain.Cart;
-import com.example.training.common.domain.CartItem;
 import com.example.training.common.domain.OrderForm;
 import com.example.training.common.domain.OrderService;
 import com.example.training.member.domain.Member;
@@ -37,13 +34,11 @@ public class OrderController {
 	public String form(OrderForm orderForm, Model model, BindingResult result) {
 		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
 		Member member = (Member) session.getAttribute(Member.SESSION_NAME);
-		// Serviceに投げる
+		// TOREVIEW : Serviceに投げる
 		// 混在したメソッドを切り分ける（確認画面から戻る用のメソッドとか）
-		// session は途中で抜けられる場合もある。面倒ではある。
 		OrderForm sessionOrderForm = (OrderForm) session.getAttribute(OrderForm.SESSION_NAME);
 		if (sessionOrderForm == null || result.hasErrors()) {
 			model.addAttribute("orderForm", orderForm);
-			// new OrderForm(Member)
 			orderForm.setMemberInfo(member);
 		} else {
 			model.addAttribute("orderForm", sessionOrderForm);
@@ -53,7 +48,6 @@ public class OrderController {
 	}
 
 	// 注文内容確認画面を表示する
-	// TOREVIEW もう少しスッキリさせたい
 	@PostMapping("/confirmation")
 	public String confirmation(@Valid OrderForm orderForm, BindingResult result, Model model) {
 		session.setAttribute(OrderForm.SESSION_NAME, orderForm);
@@ -61,11 +55,8 @@ public class OrderController {
 			return form(orderForm, model, result);
 		} else {
 			Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
-			List<CartItem> items = cart.getItems();
-			int totalAmount = cart.getTotalAmount();
-			// cart を返したらいけるかも。
-			model.addAttribute("items", items);
-			model.addAttribute("totalAmount", totalAmount);
+			cart.getTotalAmount();
+			model.addAttribute("cart", cart);
 			model.addAttribute("orderForm", orderForm);
 			return "member/order/confirmation";
 		}

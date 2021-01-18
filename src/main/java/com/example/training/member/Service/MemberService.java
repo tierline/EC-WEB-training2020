@@ -1,6 +1,6 @@
 package com.example.training.member.Service;
 
-import com.example.training.member.domain.MemberApplicateForm;
+import com.example.training.member.domain.MemberApplicationForm;
 import com.example.training.member.repository.MemberRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,12 +18,12 @@ public class MemberService {
 	private MemberRepository memberRepository;
 
 	@Transactional
-	public void create(MemberApplicateForm memberApplicateForm) {
-		String password = memberApplicateForm.getPassword();
+	public void applicate(MemberApplicationForm memberApplicationForm) {
+		String password = memberApplicationForm.getPassword();
 		String digest = passwordEncoder.encode(password);
 		// memberApplicateForm が Memberを作る
-		memberRepository.create(memberApplicateForm, digest);// Repository の引数に Form は使わない //
-																													// memberRepository.create(member);
+		memberRepository.create(memberApplicationForm, digest);// Repository の引数に Form は使わない //
+																														// memberRepository.create(member);
 	}
 
 }

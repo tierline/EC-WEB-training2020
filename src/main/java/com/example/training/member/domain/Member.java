@@ -25,9 +25,9 @@ public class Member {
 	private String status;
 	private String roles = "ROLE_USER";
 
-	public Member(MemberApplicateForm memberApplicateForm) {
-		this.password = memberApplicateForm.getPassword();
-		this.email = memberApplicateForm.getEmail();
+	public Member(MemberApplicationForm memberApplicationForm) {
+		this.password = memberApplicationForm.getPassword();
+		this.email = memberApplicationForm.getEmail();
 		this.lastUpdatedBy = "none";
 		this.status = "unapproved";
 	}

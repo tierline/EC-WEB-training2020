@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import com.example.training.common.domain.OrderForm;
 import com.example.training.member.domain.Member;
-import com.example.training.member.domain.MemberApplicateForm;
+import com.example.training.member.domain.MemberApplicationForm;
 import com.example.training.member.domain.MemberEditForm;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -20,7 +20,7 @@ public interface MemberRepository {
 
 	public List<Member> findAll();
 
-	public void create(@Param("memberApplicateForm") MemberApplicateForm memberApplicateForm,
+	public void create(@Param("memberApplicationForm") MemberApplicationForm memberApplicationForm,
 			@Param("digest") String digest);
 
 	public int countByEmail(String email);

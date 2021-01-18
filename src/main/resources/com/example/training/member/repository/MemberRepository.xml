@@ -45,7 +45,7 @@
 
 	<insert id="create" useGeneratedKeys="true">
 		INSERT INTO members (email, password, last_updated_by, status) VALUES (
-			"${memberApplicateForm.email}",
+			"${memberApplicationForm.email}",
 			"${digest}",
 			"none",
 			"unapproved"

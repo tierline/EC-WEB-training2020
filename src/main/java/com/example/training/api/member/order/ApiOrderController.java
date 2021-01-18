@@ -90,8 +90,8 @@ public class ApiOrderController {
 	@ResponseBody
 	public Map<Integer, List<OrderMonth>> history(@RequestBody Member member) {
 		// member は session から
-		Member member = memberRepository.findByEmail(member.getEmail()).orElseThrow();
-		Map<Integer, List<OrderMonth>> result = orderHistoryAssembler.create(member);
+		Member memberRepo = memberRepository.findByEmail(member.getEmail()).orElseThrow();
+		Map<Integer, List<OrderMonth>> result = orderHistoryAssembler.create(memberRepo);
 		return result;
 	}
 

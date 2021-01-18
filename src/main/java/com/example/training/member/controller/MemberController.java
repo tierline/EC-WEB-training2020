@@ -9,7 +9,7 @@ import javax.validation.Valid;
 
 import com.example.training.member.Service.MemberService;
 import com.example.training.member.domain.Member;
-import com.example.training.member.domain.MemberApplicateForm;
+import com.example.training.member.domain.MemberApplicationForm;
 import com.example.training.member.repository.MemberRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,8 +55,8 @@ public class MemberController {
 	 * 会員登録ページを表示する
 	 */
 	@GetMapping("applicate")
-	public String applicate(MemberApplicateForm memberApplicateForm, Model model) {
-		model.addAttribute("memberApplicateForm", memberApplicateForm);
+	public String applicate(MemberApplicationForm memberApplicationForm, Model model) {
+		model.addAttribute("memberApplicationForm", memberApplicationForm);
 		return "member/applicate";
 	}
 
@@ -73,17 +73,17 @@ public class MemberController {
 	 */
 	// TOREVIEW もうちょっとなにかできそうな気がする
 	@PostMapping("applicate")
-	public String applicate(@Valid MemberApplicateForm memberApplicateForm, BindingResult result, Model model) {
-		String email = memberApplicateForm.getEmail();
+	public String applicate(@Valid MemberApplicationForm memberApplicationForm, BindingResult result, Model model) {
+		String email = memberApplicationForm.getEmail();
 		Optional<Member> member = memberRepository.findByEmail(email);
 		if (result.hasErrors()) {
-			return applicate(memberApplicateForm, model);
-		} else if (memberApplicateForm.isExistedMember(member)) {
+			return applicate(memberApplicationForm, model);
+		} else if (memberApplicationForm.isExistedMember(member)) {
 			model.addAttribute("errorMessage", messageSource.getMessage("error.applicate.duplicate", null, Locale.JAPAN));
 			return "member/applicate";
 		} else {
-			memberService.create(memberApplicateForm); // TOREVIEW : applicate //
-																									// MemberApplicationService.run(memberApplicateForm);
+			memberService.applicate(memberApplicationForm); // TOREVIEW : applicate //
+			// MemberApplicationService.run(memberApplicateForm);
 			return "redirect:/member/applicated";
 		}
 	}

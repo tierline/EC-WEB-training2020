@@ -78,7 +78,10 @@
           <div class="d-flex justify-content-end">
             <span>
               合計注文金額：￥
-              <span th:text="${totalAmount}" class="h5 font-weight-bold"></span>
+              <span
+                th:text="${cart.totalAmount}"
+                class="h5 font-weight-bold"
+              ></span>
               円
             </span>
           </div>

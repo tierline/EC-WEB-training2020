@@ -43,7 +43,6 @@ public class Order {
 		this.date = date;
 	}
 
-	// TOREVIEW test用で作っていいのか -> あり。できれば既存ので。
 	public Order(int orderId, int memberId, LocalDate date) {
 		this.id = orderId;
 		this.memberId = memberId;

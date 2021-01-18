@@ -7,7 +7,7 @@ import javax.servlet.http.HttpSession;
 import com.example.training.member.Service.MemberService;
 import com.example.training.member.domain.Email;
 import com.example.training.member.domain.Member;
-import com.example.training.member.domain.MemberApplicateForm;
+import com.example.training.member.domain.MemberApplicationForm;
 import com.example.training.member.domain.MemberLoginForm;
 import com.example.training.member.repository.MemberRepository;
 
@@ -40,11 +40,11 @@ public class ApiMemberController {
 	@CrossOrigin
 	@PostMapping("/applicate")
 	@ResponseBody
-	public Boolean create(@RequestBody MemberApplicateForm memberApplicateForm) {
-		Optional<Member> member = memberRepository.findByEmail(memberApplicateForm.getEmail());
+	public Boolean create(@RequestBody MemberApplicationForm memberApplicationForm) {
+		Optional<Member> member = memberRepository.findByEmail(memberApplicationForm.getEmail());
 		if (member.isEmpty()) {
-			memberService.create(memberApplicateForm);
-			Optional<Member> memberDetail = memberRepository.findByEmail(memberApplicateForm.getEmail());
+			memberService.applicate(memberApplicationForm);
+			Optional<Member> memberDetail = memberRepository.findByEmail(memberApplicationForm.getEmail());
 			session.setAttribute(Member.SESSION_NAME, memberDetail.get());
 			return true;
 		} else {
@@ -72,9 +72,6 @@ public class ApiMemberController {
 	/*
 	 * 住所情報があったら表示する
 	 */
-	// TOREVIEW 要修正、sessionから取得する？ DBから取得するのはあまり問題なし。アプリケーションによる。
-	// session の乱用は流石に危険。session は変更があった場合など、考えなければならない材料が増える
-	// 値オブジェクトをいい感じにしたい
 	@PostMapping("/address")
 	@ResponseBody
 	public Member fetchMemberAddress(@RequestBody Email email) {

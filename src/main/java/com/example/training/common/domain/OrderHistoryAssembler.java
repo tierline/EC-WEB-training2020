@@ -19,7 +19,7 @@ public class OrderHistoryAssembler {
 
 	public Map<Integer, List<OrderMonth>> create(Member member) {
 		int id = member.getId();
-		List<OrderMonth> list = orderRepository.findByOrderMonth(id); // findByOrderMonthByMember, findByOrderMonthMemberId
+		List<OrderMonth> orders = orderRepository.findByOrderMonthByMemberId(id);
 		Map<Integer, List<OrderMonth>> map = new TreeMap<>();
 		for (OrderMonth order : orders) {
 			int month = order.getDate().getMonthValue();
