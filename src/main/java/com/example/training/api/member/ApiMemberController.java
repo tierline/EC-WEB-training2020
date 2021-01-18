@@ -7,18 +7,18 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.training.member.Service.MemberApplicationService;
-import com.example.training.member.domain.Email;
 import com.example.training.member.domain.Member;
-import com.example.training.member.domain.MemberApplicationForm;
-import com.example.training.member.domain.MemberLoginForm;
+import com.example.training.member.domain.form.MemberApplicationForm;
+import com.example.training.member.domain.form.MemberLoginForm;
 import com.example.training.member.repository.MemberRepository;
+import com.example.training.member.service.MemberApplicationService;
 
 @RestController
 @RequestMapping("/api/member")
@@ -64,7 +64,6 @@ public class ApiMemberController {
 			session.setAttribute(Member.SESSION_NAME, memberDetail.get());
 			return result;
 		}
-
 		return false;
 
 	}
@@ -72,10 +71,9 @@ public class ApiMemberController {
 	/*
 	 * 住所情報があったら表示する
 	 */
-	@PostMapping("/address")
-	@ResponseBody
-	public Member fetchMemberAddress(@RequestBody Email email) {
-		Member member = memberRepository.findAddress(email.getEmail()); // member型 で address の変数名はおかしい
+	@GetMapping("/session")
+	public Member fetchMemberAddress() {
+		Member member = (Member) session.getAttribute(Member.SESSION_NAME);// member型 で address の変数名はおかしい
 		return member;
 	}
 

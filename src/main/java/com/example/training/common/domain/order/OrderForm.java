@@ -1,4 +1,4 @@
-package com.example.training.common.domain;
+package com.example.training.common.domain.order;
 
 import java.time.LocalDate;
 
@@ -8,6 +8,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import com.example.training.common.domain.cart.Cart;
+import com.example.training.member.domain.FullName;
 import com.example.training.member.domain.Member;
 
 import lombok.Data;
@@ -17,8 +19,9 @@ public class OrderForm {
 	public static final String SESSION_NAME = "ORDER_FORM";
 
 	public OrderForm(OrderForm form, int id) {
-		this.lastName = form.getLastName();
-		this.firstName = form.getFirstName();
+//		this.lastName = form.getLastName();
+//		this.firstName = form.getFirstName();
+		this.fullName = form.getFullName();
 		this.email = form.getEmail();
 		this.phoneNumber = form.getPhoneNumber();
 		this.postcode = form.getPostcode();
@@ -48,14 +51,15 @@ public class OrderForm {
 	/**
 	 * 基本情報
 	 */
-	@NotEmpty
-	@Size(min = 1, max = 16, message = "姓は1文字以上、16文字以内で入力して下さい。")
-	private String lastName;
+//	@NotEmpty
+//	@Size(min = 1, max = 16, message = "姓は1文字以上、16文字以内で入力して下さい。")
+//	private String lastName;
 
-	@NotEmpty
-	@Size(min = 1, max = 16, message = "名は1文字以上、16文字以内で入力して下さい。")
-	private String firstName;
+//	@NotEmpty
+//	@Size(min = 1, max = 16, message = "名は1文字以上、16文字以内で入力して下さい。")
+//	private String firstName;
 
+	private FullName fullName;
 	/**
 	 * 住所情報
 	 */
@@ -80,9 +84,9 @@ public class OrderForm {
 
 	private LocalDate dateNow = LocalDate.now();
 
-	public String getFullName() {
-		return this.lastName + this.firstName;
-	}
+//	public String getFullName() {
+//		return this.lastName + this.firstName;
+//	}
 
 	public String getFullAddress() {
 		return this.postcode + this.prefecture + this.city + this.block;
@@ -93,8 +97,7 @@ public class OrderForm {
 	}
 
 	public void setMemberInfo(Member member) {
-		this.lastName = member.getLastName();
-		this.firstName = member.getFirstName();
+		this.fullName = member.getFullName();
 		this.email = member.getEmail();
 		this.phoneNumber = member.getPhoneNumber();
 		this.postcode = member.getPostcode();

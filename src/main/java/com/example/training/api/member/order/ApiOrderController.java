@@ -14,12 +14,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.training.common.domain.Cart;
-import com.example.training.common.domain.Order;
-import com.example.training.common.domain.OrderForm;
-import com.example.training.common.domain.OrderHistoryAssembler;
-import com.example.training.common.domain.OrderItem;
-import com.example.training.common.domain.OrderMonth;
+import com.example.training.common.domain.cart.Cart;
+import com.example.training.common.domain.order.Order;
+import com.example.training.common.domain.order.OrderForm;
+import com.example.training.common.domain.order.OrderHistoryAssembler;
+import com.example.training.common.domain.order.OrderItem;
+import com.example.training.common.domain.order.OrderMonth;
 import com.example.training.common.repository.OrderRepository;
 import com.example.training.common.service.OrderService;
 import com.example.training.member.domain.Member;
@@ -78,7 +78,6 @@ public class ApiOrderController {
 	public List<OrderItem> orderedItemList(@PathVariable Integer id) {
 		Order order = orderRepository.findById(id);
 		List<OrderItem> items = orderRepository.findItemsByOrder(order);
-
 		return items;
 
 	}
@@ -92,16 +91,6 @@ public class ApiOrderController {
 	public Map<Integer, List<OrderMonth>> history() {
 		Member member = (Member) session.getAttribute(Member.SESSION_NAME);
 		Map<Integer, List<OrderMonth>> result = orderHistoryAssembler.create(member);
-
-//	// 変数名かえる
-//	// dataの受け取り方微妙？
-//	@PostMapping("/history")
-//	@ResponseBody
-//	public Map<Integer, List<OrderMonth>> history(@RequestBody Member member) {
-//		// member は session から
-//		Member memberRepo = memberRepository.findByEmail(member.getEmail()).orElseThrow();
-//		Map<Integer, List<OrderMonth>> result = orderHistoryAssembler.create(memberRepo);
-
 		return result;
 	}
 

@@ -1,8 +1,12 @@
-package com.example.training.common.domain;
+package com.example.training.common.domain.order;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.example.training.common.domain.cart.Cart;
+import com.example.training.common.domain.cart.CartItem;
+import com.example.training.member.domain.FullName;
 
 import lombok.Data;
 
@@ -14,16 +18,17 @@ public class Order {
 
 	private int id;
 	private int memberId;
-	private String name;
+	private FullName fullName;
 	private String address;
 	private String email;
 	private String phoneNumber;
+	// Priceクラス
 	private int price;
 	private LocalDate date;
 
 	public Order(OrderForm orderForm, Cart cart) {
 		this.memberId = orderForm.getMemberId();
-		this.name = orderForm.getFullName();
+		this.fullName = orderForm.getFullName();
 		this.address = orderForm.getFullAddress();
 		this.email = orderForm.getEmail();
 		this.phoneNumber = orderForm.getPhoneNumber();
@@ -31,13 +36,13 @@ public class Order {
 	}
 
 	// TOREVIEW 要修正、必要か？
-	public Order(int orderId, int memberId, String email, String phone_number, String name, String address, int price,
-			LocalDate date) {
+	public Order(int orderId, int memberId, String email, String phone_number, FullName fullName, String address,
+			int price, LocalDate date) {
 		this.id = orderId;
 		this.memberId = memberId;
 		this.email = email;
 		this.phoneNumber = phone_number;
-		this.name = name;
+		this.fullName = fullName;
 		this.address = address;
 		this.price = price;
 		this.date = date;

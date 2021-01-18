@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.example.training.common.domain.Cart;
-import com.example.training.common.domain.OrderForm;
+import com.example.training.common.domain.cart.Cart;
+import com.example.training.common.domain.order.OrderForm;
 import com.example.training.common.service.OrderService;
 import com.example.training.member.domain.Member;
 
@@ -30,6 +30,7 @@ public class OrderController {
 	/**
 	 * 住所入力フォームに遷移
 	 */
+	// TOREVIEW 変更済み
 	@GetMapping("/form")
 	public String form(OrderForm orderForm, Model model) {
 		Member member = (Member) session.getAttribute(Member.SESSION_NAME);
@@ -43,6 +44,7 @@ public class OrderController {
 	}
 
 	// 注文内容確認画面を表示する
+	// TOREVIEW 変更済み
 	@PostMapping("/confirmation")
 	public String confirmation(@Valid OrderForm orderForm, BindingResult result, Model model) {
 		session.setAttribute(OrderForm.SESSION_NAME, orderForm);
@@ -50,12 +52,6 @@ public class OrderController {
 			return form(orderForm, model);
 		} else {
 			Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
-//			List<CartItem> items = cart.getItems();
-//			int totalAmount = cart.getTotalAmount();
-			// cart を返したらいけるかも。
-//			model.addAttribute("items", items);
-//			model.addAttribute("totalAmount", totalAmount);
-
 			model.addAttribute("cart", cart);
 			model.addAttribute("orderForm", orderForm);
 			return "member/order/confirmation";

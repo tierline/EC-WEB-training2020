@@ -16,10 +16,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.example.training.member.Service.MemberApplicationService;
 import com.example.training.member.domain.Member;
-import com.example.training.member.domain.MemberApplicationForm;
+import com.example.training.member.domain.form.MemberApplicationForm;
 import com.example.training.member.repository.MemberRepository;
+import com.example.training.member.service.MemberApplicationService;
 
 @Controller
 @RequestMapping("/member")
@@ -71,23 +71,22 @@ public class MemberController {
 	/**
 	 * 会員を新規登録する
 	 */
-	// TOREVIEW
+	// TOREVIEW 変更済み
 	@PostMapping("applicate")
 	public String applicate(@Valid MemberApplicationForm memberApplicationForm, BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			return applicate(memberApplicationForm, model);
-		} else {
-			String email = memberApplicationForm.getEmail();
-			Optional<Member> member = memberRepository.findByEmail(email);
-			// ここ↓
-			if (memberApplicationForm.isExistedMember(member)) {
-				model.addAttribute("errorMessage",
-						messageSource.getMessage("error.applicate.duplicate", null, Locale.JAPAN));
-				return "member/applicate";
-			} else {
-				memberApplicationService.run(memberApplicationForm);
-				return "redirect:/member/applicated";
-			}
 		}
+		String email = memberApplicationForm.getEmail();
+		Optional<Member> member = memberRepository.findByEmail(email);
+		if (member.isPresent()) {
+			model.addAttribute("errorMessage",
+					messageSource.getMessage("error.applicate.duplicate", null, Locale.JAPAN));
+			return "member/applicate";
+		} else {
+			memberApplicationService.run(memberApplicationForm);
+			return "redirect:/member/applicated";
+		}
+
 	}
 }
