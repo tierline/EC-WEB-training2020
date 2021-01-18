@@ -7,7 +7,7 @@ import java.util.Optional;
 public class Cart {
 	public static final String SESSION_NAME = "CART";
 	private List<CartItem> items = new ArrayList<CartItem>();
-	private TotalAmount totalAmount = new TotalAmount(items);
+	private int totalAmount;
 
 	/**
 	 * 商品をカートに追加する
@@ -105,15 +105,13 @@ public class Cart {
 	 * @return
 	 */
 	// TOREVIEW 変更
-	public TotalAmount getTotalAmount() {
+	public int getTotalAmount() {
+		this.totalAmount = 0;
+		List<CartItem> items = this.getItems();
+		for (CartItem item : items) {
+			this.totalAmount += item.getTotalAmount();
+		}
+//		this.totalAmount = new TotalAmount(this.getItems());
 		return this.totalAmount;
 	}
-//	public void totalAmount() {
-//		TotalAmount this.totalAmount = new TotalAmount(this.getItems());
-//		int totalAmount = 0;
-//		List<CartItem> items = this.getItems();
-//		for (CartItem item : items) {
-//			totalAmount += item.getTotalAmount();
-//		}
-//			}
 }

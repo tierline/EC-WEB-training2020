@@ -20,8 +20,8 @@ import com.example.training.common.domain.OrderForm;
 import com.example.training.common.domain.OrderHistoryAssembler;
 import com.example.training.common.domain.OrderItem;
 import com.example.training.common.domain.OrderMonth;
-import com.example.training.common.domain.OrderService;
 import com.example.training.common.repository.OrderRepository;
+import com.example.training.common.service.OrderService;
 import com.example.training.member.domain.Member;
 import com.example.training.member.repository.MemberRepository;
 
@@ -87,11 +87,21 @@ public class ApiOrderController {
 	 * 購入履歴の取得
 	 */
 	// TOREVIEW
-	//sessionからの取得に変更
+	// sessionからの取得に変更
 	@GetMapping("/history")
 	public Map<Integer, List<OrderMonth>> history() {
 		Member member = (Member) session.getAttribute(Member.SESSION_NAME);
 		Map<Integer, List<OrderMonth>> result = orderHistoryAssembler.create(member);
+
+//	// 変数名かえる
+//	// dataの受け取り方微妙？
+//	@PostMapping("/history")
+//	@ResponseBody
+//	public Map<Integer, List<OrderMonth>> history(@RequestBody Member member) {
+//		// member は session から
+//		Member memberRepo = memberRepository.findByEmail(member.getEmail()).orElseThrow();
+//		Map<Integer, List<OrderMonth>> result = orderHistoryAssembler.create(memberRepo);
+
 		return result;
 	}
 

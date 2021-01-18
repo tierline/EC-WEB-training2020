@@ -25,7 +25,6 @@
 		SELECT * FROM members
 	</select>
 
-
 	<select id="findAddress"
 		resultType="com.example.training.member.domain.Member">
 		SELECT
@@ -45,8 +44,8 @@
 
 	<insert id="create" useGeneratedKeys="true">
 		INSERT INTO members (email, password, last_updated_by, status) VALUES (
-			"${member.email}",
-			"${digest}",
+			"${email}",
+			"${password}",
 			"none",
 			"unapproved"
 		)

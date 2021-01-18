@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.training.common.domain.Cart;
 import com.example.training.common.domain.OrderForm;
-import com.example.training.common.domain.OrderService;
+import com.example.training.common.service.OrderService;
 import com.example.training.member.domain.Member;
 
 @Controller
@@ -31,31 +31,23 @@ public class OrderController {
 	 * 住所入力フォームに遷移
 	 */
 	@GetMapping("/form")
-	public String form(OrderForm orderForm, Model model, BindingResult result) {
-		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
+	public String form(OrderForm orderForm, Model model) {
 		Member member = (Member) session.getAttribute(Member.SESSION_NAME);
-		// Serviceに投げる
-		// 混在したメソッドを切り分ける（確認画面から戻る用のメソッドとか）
-		// session は途中で抜けられる場合もある。面倒ではある。
 		OrderForm sessionOrderForm = (OrderForm) session.getAttribute(OrderForm.SESSION_NAME);
-		if (sessionOrderForm == null || result.hasErrors()) {
-			model.addAttribute("orderForm", orderForm);
-			// new OrderForm(Member)
-			orderForm.setMemberInfo(member);
-		} else {
+		if (sessionOrderForm != null) {
 			model.addAttribute("orderForm", sessionOrderForm);
+		} else {
+			orderForm.setMemberInfo(member);
 		}
-		model.addAttribute("cart", cart);
 		return "member/order/form";
 	}
 
 	// 注文内容確認画面を表示する
-	// TOREVIEW もう少しスッキリさせたい
 	@PostMapping("/confirmation")
 	public String confirmation(@Valid OrderForm orderForm, BindingResult result, Model model) {
 		session.setAttribute(OrderForm.SESSION_NAME, orderForm);
 		if (result.hasErrors()) {
-			return form(orderForm, model, result);
+			return form(orderForm, model);
 		} else {
 			Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
 //			List<CartItem> items = cart.getItems();
@@ -63,6 +55,7 @@ public class OrderController {
 			// cart を返したらいけるかも。
 //			model.addAttribute("items", items);
 //			model.addAttribute("totalAmount", totalAmount);
+
 			model.addAttribute("cart", cart);
 			model.addAttribute("orderForm", orderForm);
 			return "member/order/confirmation";

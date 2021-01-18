@@ -20,7 +20,7 @@ public interface OrderRepository {
 
 	public Order findById(int id);
 
-	public List<OrderMonth> findByOrderMonthMemberId(int id);
+	public List<OrderMonth> findByOrderMonthByMemberId(int id);
 
 	public List<OrderItem> findByOrderItem(int id);
 

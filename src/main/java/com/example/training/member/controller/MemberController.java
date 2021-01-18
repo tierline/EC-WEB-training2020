@@ -2,6 +2,7 @@
 package com.example.training.member.controller;
 
 import java.util.Locale;
+import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -17,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.training.member.Service.MemberApplicationService;
 import com.example.training.member.domain.Member;
-import com.example.training.member.domain.MemberApplicateForm;
+import com.example.training.member.domain.MemberApplicationForm;
 import com.example.training.member.repository.MemberRepository;
 
 @Controller
@@ -54,8 +55,8 @@ public class MemberController {
 	 * 会員登録ページを表示する
 	 */
 	@GetMapping("applicate")
-	public String applicate(MemberApplicateForm memberApplicateForm, Model model) {
-		model.addAttribute("memberApplicateForm", memberApplicateForm);
+	public String applicate(MemberApplicationForm memberApplicationForm, Model model) {
+		model.addAttribute("memberApplicationForm", memberApplicationForm);
 		return "member/applicate";
 	}
 
@@ -70,21 +71,23 @@ public class MemberController {
 	/**
 	 * 会員を新規登録する
 	 */
-	// TOREVIEW もうちょっとなにかできそうな気がする
+	// TOREVIEW
 	@PostMapping("applicate")
-	public String applicate(@Valid MemberApplicateForm memberApplicateForm, BindingResult result, Model model) {
-		String email = memberApplicateForm.getEmail();
-		Member member = memberRepository.findByEmail(email).orElseThrow();
+	public String applicate(@Valid MemberApplicationForm memberApplicationForm, BindingResult result, Model model) {
 		if (result.hasErrors()) {
-			return applicate(memberApplicateForm, model);
-		} else if (memberApplicateForm.isExistedMember(member)) {
-			model.addAttribute("errorMessage",
-					messageSource.getMessage("error.applicate.duplicate", null, Locale.JAPAN));
-			return "member/applicate";
+			return applicate(memberApplicationForm, model);
 		} else {
-			memberApplicationService.run(memberApplicateForm); // TOREVIEW : applicate //
-			// MemberApplicationService.run(memberApplicateForm);
-			return "redirect:/member/applicated";
+			String email = memberApplicationForm.getEmail();
+			Optional<Member> member = memberRepository.findByEmail(email);
+			// ここ↓
+			if (memberApplicationForm.isExistedMember(member)) {
+				model.addAttribute("errorMessage",
+						messageSource.getMessage("error.applicate.duplicate", null, Locale.JAPAN));
+				return "member/applicate";
+			} else {
+				memberApplicationService.run(memberApplicationForm);
+				return "redirect:/member/applicated";
+			}
 		}
 	}
 }

@@ -19,7 +19,7 @@ public interface MemberRepository {
 
 	public List<Member> findAll();
 
-	public void create(@Param("newMember") Member member, @Param("digest") String digest);
+	public void create(Member member);
 
 	public int countByEmail(String email);
 

@@ -1,10 +1,14 @@
-package com.example.training.common.domain;
+package com.example.training.common.service;
 
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import com.example.training.common.domain.Cart;
+import com.example.training.common.domain.Order;
+import com.example.training.common.domain.OrderForm;
+import com.example.training.common.domain.OrderItem;
 import com.example.training.common.repository.OrderRepository;
 import com.example.training.member.domain.Member;
 import com.example.training.member.repository.MemberRepository;
@@ -25,7 +29,6 @@ public class OrderService {
 	@Autowired
 	private HttpSession session;
 
-	// TOREVIEW 色々しすぎてる
 	public int order(@Valid OrderForm orderForm, Cart cart) {
 		Order order = orderForm.createOrder(cart);
 		this.saveByOrder(order, cart);

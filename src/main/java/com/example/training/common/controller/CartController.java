@@ -17,7 +17,7 @@ import com.example.training.common.domain.Product;
 import com.example.training.common.repository.ProductRepository;
 
 /**
- * @author tsukamoto
+ * @author
  *
  */
 @Controller
@@ -67,9 +67,7 @@ public class CartController {
 		if (cart.getSize() == 0) {
 			model.addAttribute("errorMessage", messageSource.getMessage("error.cart.noProduct", null, Locale.JAPAN));
 		}
-//		cart.getTotalAmount();
 		model.addAttribute("cart", cart);
-
 		return "member/cart";
 	}
 }
