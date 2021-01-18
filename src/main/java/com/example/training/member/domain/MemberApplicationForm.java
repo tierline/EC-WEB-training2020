@@ -1,7 +1,5 @@
 package com.example.training.member.domain;
 
-import java.util.Optional;
-
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
@@ -22,14 +20,13 @@ public class MemberApplicationForm {
 	@Size(max = 16, message = "パスワードは16文字以内で入力してください")
 	private String password;
 
-	public Boolean isExistedMember(Optional<Member> member) {
-		if (member.isPresent()) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
+	/**
+	 *
+	 * 新規会員登録用のMemberを作成する
+	 *
+	 * @param passwordDigest
+	 * @return 会員登録用のメンバーオブジェクト
+	 */
 	public Member createMember(String passwordDigest) {
 		return new Member(this, passwordDigest);
 	}

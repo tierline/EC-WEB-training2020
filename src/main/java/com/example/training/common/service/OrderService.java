@@ -29,6 +29,14 @@ public class OrderService {
 	@Autowired
 	private HttpSession session;
 
+	/**
+	 *
+	 * 注文処理をする
+	 *
+	 * @param orderForm
+	 * @param cart
+	 * @return 注文番号
+	 */
 	public int order(@Valid OrderForm orderForm, Cart cart) {
 		Order order = orderForm.createOrder(cart);
 		this.saveByOrder(order, cart);
@@ -37,7 +45,13 @@ public class OrderService {
 		return order.getId();
 	}
 
-	// トランザクションで区切る必要
+	/**
+	 *
+	 * 注文と注文された商品を保存する
+	 *
+	 * @param order
+	 * @param cart
+	 */
 	private void saveByOrder(Order order, Cart cart) {
 		orderRepository.save(order);
 		List<OrderItem> items = order.createItems(cart);

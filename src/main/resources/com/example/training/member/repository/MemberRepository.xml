@@ -43,7 +43,7 @@
 	</select>
 
 	<insert id="create" useGeneratedKeys="true">
-		INSERT INTO members (email, password, last_updated_by, status) VALUES (
+		INSERT INTO members (email, password, last_update_admin, status) VALUES (
 			"${email}",
 			"${password}",
 			"none",
@@ -58,7 +58,7 @@
 	<update id="update">
     UPDATE members SET
 			email=#{memberEditForm.email},
-			last_updated_by=#{lastUpdatedBy},
+			last_update_admin=#{lastUpdatedBy},
 			status=#{memberEditForm.status}
 			WHERE id= #{memberEditForm.id}
 	</update>

@@ -92,6 +92,12 @@ public class OrderForm {
 		return new Order(this, cart);
 	}
 
+	/**
+	 *
+	 * お届け先入力フォームに会員情報をセットする
+	 *
+	 * @param member
+	 */
 	public void setMemberInfo(Member member) {
 		this.lastName = member.getLastName();
 		this.firstName = member.getFirstName();

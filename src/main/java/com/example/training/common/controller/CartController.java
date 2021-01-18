@@ -33,8 +33,11 @@ public class CartController {
 	protected MessageSource messageSource;
 
 	/**
+	 *
+	 * カートに商品を1つ追加する
+	 *
 	 * @param id
-	 * @return カートに商品の追加
+	 * @return
 	 */
 	@GetMapping("/add/{id}")
 	public String add(@PathVariable int id) {
@@ -45,8 +48,11 @@ public class CartController {
 	}
 
 	/**
+	 *
+	 * カート内の商品を1つ削除する
+	 *
 	 * @param id
-	 * @return カート内の商品の削除
+	 * @return
 	 */
 	@GetMapping("/delete/{id}")
 	public String delete(@PathVariable int id) {
@@ -58,7 +64,8 @@ public class CartController {
 	}
 
 	/**
-	 * 商品一覧画面の表示
+	 *
+	 * カート内商品の一覧画面を表示する
 	 *
 	 */
 	@GetMapping("/list")

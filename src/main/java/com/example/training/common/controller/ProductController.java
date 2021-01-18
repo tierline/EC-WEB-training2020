@@ -17,7 +17,12 @@ public class ProductController {
 	private ProductRepository productRepository;
 
 	/**
-	 * 商品詳細画面に遷移
+	 *
+	 * 商品詳細画面を表示する
+	 *
+	 * @param productId
+	 * @param model
+	 * @return 商品詳細画面
 	 */
 	@GetMapping("detail/{productId}")
 	public String detail(@PathVariable int productId, Model model) {

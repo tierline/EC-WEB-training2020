@@ -69,7 +69,13 @@ public class MemberController {
 	}
 
 	/**
-	 * 会員を新規登録する
+	 *
+	 * 会員の新規登録処理をする
+	 *
+	 * @param memberApplicationForm
+	 * @param result
+	 * @param model
+	 * @return 完了画面
 	 */
 	@PostMapping("applicate")
 	public String applicate(@Valid MemberApplicationForm memberApplicationForm, BindingResult result, Model model) {
@@ -78,7 +84,7 @@ public class MemberController {
 		} else {
 			String email = memberApplicationForm.getEmail();
 			Optional<Member> member = memberRepository.findByEmail(email);
-			if (memberApplicationForm.isExistedMember(member)) {
+			if (member.isPresent()) {
 				model.addAttribute("errorMessage", messageSource.getMessage("error.applicate.duplicate", null, Locale.JAPAN));
 				return "member/applicate";
 			} else {

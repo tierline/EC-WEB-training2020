@@ -28,7 +28,12 @@ public class OrderController {
 	private OrderService orderService;
 
 	/**
-	 * 住所入力フォームに遷移
+	 *
+	 * お届け先入力フォームを表示する
+	 *
+	 * @param orderForm
+	 * @param model
+	 * @return お届け先入力フォーム画面
 	 */
 	@GetMapping("/form")
 	public String form(OrderForm orderForm, Model model) {
@@ -42,7 +47,15 @@ public class OrderController {
 		return "member/order/form";
 	}
 
-	// 注文内容確認画面を表示する
+	/**
+	 *
+	 * 注文確認画面を表示する
+	 *
+	 * @param orderForm
+	 * @param result
+	 * @param model
+	 * @return 注文確認画面
+	 */
 	@PostMapping("/confirmation")
 	public String confirmation(@Valid OrderForm orderForm, BindingResult result, Model model) {
 		session.setAttribute(OrderForm.SESSION_NAME, orderForm);
@@ -58,7 +71,10 @@ public class OrderController {
 	}
 
 	/**
+	 *
 	 * 注文を処理する
+	 *
+	 * @return 注文完了画面
 	 */
 	@PostMapping("/save")
 	public String save() {
@@ -71,7 +87,12 @@ public class OrderController {
 	}
 
 	/**
-	 * 注文完了画面
+	 *
+	 * 注文完了画面を表示する
+	 *
+	 * @param orderId
+	 * @param model
+	 * @return 注文完了画面
 	 */
 	@GetMapping("/complete/{orderId}")
 	public String complete(@PathVariable int orderId, Model model) {

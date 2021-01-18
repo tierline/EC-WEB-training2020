@@ -9,9 +9,6 @@ import lombok.Data;
 @Data
 public class Order {
 
-	// クラスのコメント,メソッドのコメントをjavadocで。
-	// メソッドのコメントは「何をやっているか」は日本語で書いていきたい
-
 	private int id;
 	private int memberId;
 	private String name;
@@ -21,6 +18,13 @@ public class Order {
 	private int price;
 	private LocalDate date;
 
+	/**
+	 *
+	 * 注文処理用コンストラクタ
+	 *
+	 * @param orderForm
+	 * @param cart
+	 */
 	public Order(OrderForm orderForm, Cart cart) {
 		this.memberId = orderForm.getMemberId();
 		this.name = orderForm.getFullName();
@@ -30,25 +34,27 @@ public class Order {
 		this.date = orderForm.getDateNow();
 	}
 
-	// TOREVIEW 要修正、必要か？
-	public Order(int orderId, int memberId, String email, String phone_number, String name, String address, int price,
-			LocalDate date) {
-		this.id = orderId;
-		this.memberId = memberId;
-		this.email = email;
-		this.phoneNumber = phone_number;
-		this.name = name;
-		this.address = address;
-		this.price = price;
-		this.date = date;
-	}
-
+	/**
+	 *
+	 * テスト用コンストラクタ
+	 *
+	 * @param orderId
+	 * @param memberId
+	 * @param date
+	 */
 	public Order(int orderId, int memberId, LocalDate date) {
 		this.id = orderId;
 		this.memberId = memberId;
 		this.date = date;
 	}
 
+	/**
+	 *
+	 * 注文から注文商品を生成する
+	 *
+	 * @param cart
+	 * @return
+	 */
 	public List<OrderItem> createItems(Cart cart) {
 		List<OrderItem> results = new ArrayList<OrderItem>(cart.getSize());
 		for (CartItem item : cart.getItems()) {
