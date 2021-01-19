@@ -37,7 +37,8 @@ public class MemberSuccessHandler implements AuthenticationSuccessHandler {
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
 		String email = authentication.getName();
-		Member member = memberRepository.findByEmail(email).orElseThrow();
+//		Member member = memberRepository.findByEmail(email).orElseThrow();
+		Member member = memberRepository.findByEmailSample(email);
 
 		session.setAttribute(Member.SESSION_NAME, member);
 		var test = session.getAttribute(Member.SESSION_NAME);

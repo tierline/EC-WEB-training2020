@@ -19,15 +19,16 @@ public class Member {
 	// PhoneNumberクラス
 	private String phoneNumber;
 	// 名前 //Nameクラス
-//	private FullName fullName;
-	private String lastName;
-	private String firstName;
+	private FullName fullName;
+//	private String lastName;
+//	private String firstName;
 	// 住所
 	// Addressクラス
-	private String postcode;
-	private String prefecture;
-	private String city;
-	private String block;
+	private Address address;
+//	private String postcode;
+//	private String prefecture;
+//	private String city;
+//	private String block;
 	// その他
 	private String lastUpdatedBy;
 	private String status;
@@ -40,22 +41,31 @@ public class Member {
 		this.status = "unapproved";
 	}
 
-	public Member(String lastName, String firstName, String email, String postcode, String prefecture, String city,
-			String block, String phoneNumber, String status) {
-		this.lastName = lastName;
-		this.firstName = firstName;
+	// 元の実装
+//	public Member(String lastName, String firstName, String email, String postcode, String prefecture, String city,
+//			String block, String phoneNumber, String status) {
+//		this.lastName = lastName;
+//		this.firstName = firstName;
+//		this.email = email;
+//		this.postcode = postcode;
+//		this.prefecture = prefecture;
+//		this.city = city;
+//		this.block = block;
+//		this.phoneNumber = phoneNumber;
+//		this.status = status;
+//	}
+
+	public Member(FullName fullName, String email, Address address, String phoneNumber, String status) {
+		this.fullName = fullName;
 		this.email = email;
-		this.postcode = postcode;
-		this.prefecture = prefecture;
-		this.city = city;
-		this.block = block;
+		this.address = address;
 		this.phoneNumber = phoneNumber;
 		this.status = status;
 	}
 
-	public String getFullName() {
-		return this.lastName + this.firstName;
-	}
+//	public String getFullName() {
+//		return this.lastName + this.firstName;
+//	}
 
 //	public Member(String email, String lastName, String firstName) {
 //		this.fullName = new FullName(lastName, firstName);

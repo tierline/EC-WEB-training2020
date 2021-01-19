@@ -15,6 +15,45 @@
 		email = "${email}"
 	</select>
 
+	<select id="findByEmailSample" resultMap="memberMap"
+		parameterType="map">
+		SELECT
+		last_name,
+		first_name,
+		phone_number,
+		postcode,
+		prefecture,
+		city,
+		block
+		FROM
+		Member
+		WHERE
+		email = "${email}"
+	</select>
+	<resultMap type="com.example.training.member.domain.Member"
+		id="memberMap">
+		<association property="fullName" resultMap="fullNameMap"/>
+		<association property="address" resultMap="addressMap" />
+	</resultMap>
+	<resultMap type="com.example.training.member.domain.FullName" id="fullNameMap">
+	<constructor>
+				<arg column="last_name" javaType="String" />
+				<arg column="first_name" javaType="String" />
+			</constructor>
+	</resultMap>
+	
+	<resultMap type="com.example.training.member.domain.Address" id="addressMap">
+		<constructor>
+				<arg column="postcode" javaType="String" />
+				<arg column="prefecture" javaType="String" />
+				<arg column="city" javaType="String" />
+				<arg column="block" javaType="String" />
+			</constructor>
+	</resultMap>
+
+
+
+
 	<select id="findById"
 		resultType="com.example.training.member.domain.Member">
 		SELECT * FROM MEMBER WHERE id = "${id}"
@@ -43,24 +82,27 @@
 	</select>
 
 	<insert id="create" useGeneratedKeys="true">
-		INSERT INTO MEMBER (email, password, last_updated_by, status) VALUES (
-			"${email}",
-			"${password}",
-			"none",
-			"unapproved"
+		INSERT INTO MEMBER (email,
+		password, last_updated_by, status) VALUES (
+		"${email}",
+		"${password}",
+		"none",
+		"unapproved"
 		)
 	</insert>
 
 	<select id="countByEmail" resultType="int">
-		SELECT COUNT(*) FROM MEMBER WHERE email = #{email}
+		SELECT COUNT(*) FROM MEMBER
+		WHERE email = #{email}
 	</select>
 
 	<update id="update">
-    UPDATE MEMBER SET
-			email=#{memberEditForm.email},
-			last_updated_by=#{lastUpdatedBy},
-			status=#{memberEditForm.status}
-			WHERE id= #{memberEditForm.id}
+		UPDATE MEMBER SET
+		email=#{memberEditForm.email},
+		last_updated_by=#{lastUpdatedBy},
+		status=#{memberEditForm.status}
+		WHERE
+		id= #{memberEditForm.id}
 	</update>
 
 	<update id="updateAtOrder">
@@ -74,5 +116,6 @@
 		block=#{orderForm.block}
 		WHERE id= #{orderForm.memberId}
 	</update>
+
 
 </mapper>

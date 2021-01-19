@@ -30,4 +30,6 @@ public interface MemberRepository {
 
 	public void updateAtOrder(@Param("orderForm") OrderForm orderForm);
 
+	public Member findByEmailSample(@Param("email") String email);
+
 }
