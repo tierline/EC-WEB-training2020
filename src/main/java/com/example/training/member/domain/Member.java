@@ -19,9 +19,9 @@ public class Member {
 	// PhoneNumberクラス
 	private String phoneNumber;
 	// 名前 //Nameクラス
-	private FullName fullName;
-//	private String lastName;
-//	private String firstName;
+//	private FullName fullName;
+	private String lastName;
+	private String firstName;
 	// 住所
 	// Addressクラス
 	private String postcode;
@@ -40,27 +40,27 @@ public class Member {
 		this.status = "unapproved";
 	}
 
-	public Member(int id, String password, String email, String phoneNumber, String lastName, String firstName,
-			String postcode, String prefecture, String city, String block, String lastUpdatedBy, String status,
-			String roles) {
-		this.id = id;
-		this.password = password;
+	public Member(String lastName, String firstName, String email, String postcode, String prefecture, String city,
+			String block, String phoneNumber, String status) {
+		this.lastName = lastName;
+		this.firstName = firstName;
 		this.email = email;
-		this.phoneNumber = phoneNumber;
-		this.fullName = new FullName(lastName, firstName);
 		this.postcode = postcode;
 		this.prefecture = prefecture;
 		this.city = city;
 		this.block = block;
-		this.lastUpdatedBy = lastUpdatedBy;
+		this.phoneNumber = phoneNumber;
 		this.status = status;
-		this.roles = roles;
 	}
 
-	public Member(String email, String lastName, String firstName) {
-		this.fullName = new FullName(lastName, firstName);
-		this.email = email;
+	public String getFullName() {
+		return this.lastName + this.firstName;
 	}
+
+//	public Member(String email, String lastName, String firstName) {
+//		this.fullName = new FullName(lastName, firstName);
+//		this.email = email;
+//	}
 
 	public Member() {
 	}

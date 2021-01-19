@@ -10,19 +10,19 @@
 		SELECT
 		*
 		FROM
-		members
+		MEMBER
 		WHERE
 		email = "${email}"
 	</select>
 
 	<select id="findById"
 		resultType="com.example.training.member.domain.Member">
-		SELECT * FROM members WHERE id = "${id}"
+		SELECT * FROM MEMBER WHERE id = "${id}"
 	</select>
 
 	<select id="findAll"
 		resultType="com.example.training.member.domain.Member">
-		SELECT * FROM members
+		SELECT * FROM MEMBER
 	</select>
 
 	<select id="findAddress"
@@ -37,13 +37,13 @@
 		block,
 		phone_number
 		FROM
-		members
+		MEMBER
 		m
 		WHERE m.email = "${email}"
 	</select>
 
 	<insert id="create" useGeneratedKeys="true">
-		INSERT INTO members (email, password, last_updated_by, status) VALUES (
+		INSERT INTO MEMBER (email, password, last_updated_by, status) VALUES (
 			"${email}",
 			"${password}",
 			"none",
@@ -52,11 +52,11 @@
 	</insert>
 
 	<select id="countByEmail" resultType="int">
-		SELECT COUNT(*) FROM members WHERE email = #{email}
+		SELECT COUNT(*) FROM MEMBER WHERE email = #{email}
 	</select>
 
 	<update id="update">
-    UPDATE members SET
+    UPDATE MEMBER SET
 			email=#{memberEditForm.email},
 			last_updated_by=#{lastUpdatedBy},
 			status=#{memberEditForm.status}
@@ -64,7 +64,7 @@
 	</update>
 
 	<update id="updateAtOrder">
-		UPDATE members SET
+		UPDATE MEMBER SET
 		first_name=#{orderForm.firstName},
 		last_name=#{orderForm.lastName},
 		phone_number=#{orderForm.phoneNumber},

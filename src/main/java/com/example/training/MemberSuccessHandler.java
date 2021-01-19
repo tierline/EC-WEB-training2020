@@ -39,10 +39,9 @@ public class MemberSuccessHandler implements AuthenticationSuccessHandler {
 		String email = authentication.getName();
 		Member member = memberRepository.findByEmail(email).orElseThrow();
 
-		session.setAttribute(Member.SESSION_NAME, new Member());
-		var ses = session.getAttribute(Member.SESSION_NAME);
-		System.out.println(ses);
+		session.setAttribute(Member.SESSION_NAME, member);
+		var test = session.getAttribute(Member.SESSION_NAME);
+		System.out.println(test);
 		response.sendRedirect("/");
 	}
-
 }

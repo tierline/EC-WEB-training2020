@@ -4,21 +4,19 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 public class FullName {
-	@Size(max = 16)
 	@NotEmpty
+	@Size(max = 16, min = 1)
 	private String lastName;
 
-	@Size(max = 16)
 	@NotEmpty
+	@Size(max = 16, min = 1)
 	private String firstName;
 
 	public FullName(String lastName, String firstName) {
-
 		this.lastName = lastName;
 		this.firstName = firstName;
 	}
 
-	// これはFullNameとして返せないのか？
 	public String getFullName() {
 		return this.lastName + this.firstName;
 	}

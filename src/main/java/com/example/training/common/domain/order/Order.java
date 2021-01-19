@@ -18,7 +18,7 @@ public class Order {
 
 	private int id;
 	private int memberId;
-	private FullName fullName;
+	private String fullName;
 	private String address;
 	private String email;
 	private String phoneNumber;
@@ -36,22 +36,21 @@ public class Order {
 	}
 
 	// TOREVIEW 要修正、必要か？
-	public Order(int orderId, int memberId, String email, String phone_number, FullName fullName, String address,
-			int price, LocalDate date) {
+	public Order(int orderId, int memberId, LocalDate date) {
 		this.id = orderId;
 		this.memberId = memberId;
+		this.date = date;
+	}
+
+	public Order(int orderId, int memberId, String email, String phone_number, String fullName, String address,
+			int price, LocalDate date) {
+		this(orderId, memberId, date);
 		this.email = email;
 		this.phoneNumber = phone_number;
 		this.fullName = fullName;
 		this.address = address;
 		this.price = price;
-		this.date = date;
-	}
 
-	public Order(int orderId, int memberId, LocalDate date) {
-		this.id = orderId;
-		this.memberId = memberId;
-		this.date = date;
 	}
 
 	public List<OrderItem> createItems(Cart cart) {
