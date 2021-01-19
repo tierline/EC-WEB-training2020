@@ -1,4 +1,4 @@
-package com.example.training.common.domain;
+package com.example.training.common.domain.order;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -19,7 +19,7 @@ public class OrderHistoryAssembler {
 	@Autowired
 	private OrderRepository orderRepository;
 
-// TOREVIEW
+// TOREVIEW 変更済み
 	public Map<Integer, List<OrderMonth>> create(Member member) {
 		int id = member.getId();
 		List<OrderMonth> orderMonthList = orderRepository.findByOrderMonthByMemberId(id);

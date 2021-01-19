@@ -8,7 +8,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import com.example.training.member.domain.Member;
-import com.example.training.member.domain.MemberApplicationForm;
+import com.example.training.member.domain.form.MemberApplicationForm;
 import com.example.training.member.repository.MemberRepository;
 import com.example.training.member.service.MemberApplicationService;
 
@@ -77,7 +77,7 @@ public class MemberController {
 	 * @param model
 	 * @return 完了画面
 	 */
-	// TOREVIEW
+	// TOREVIEW 変更済み
 	@PostMapping("applicate")
 	public String applicate(@Valid MemberApplicationForm memberApplicationForm, BindingResult result, Model model) {
 		if (result.hasErrors()) {
@@ -92,5 +92,6 @@ public class MemberController {
 			memberApplicationService.run(memberApplicationForm);
 			return "redirect:/member/applicated";
 		}
+
 	}
 }

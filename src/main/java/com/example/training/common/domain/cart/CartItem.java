@@ -1,7 +1,10 @@
-package com.example.training.common.domain;
+package com.example.training.common.domain.cart;
+
+import com.example.training.common.domain.Product;
 
 public class CartItem {
 	private Product product;
+	// Quantityクラス
 	private int quantity = 0;
 
 	public CartItem(Product product) {
@@ -45,7 +48,7 @@ public class CartItem {
 		return this.quantity <= 0;
 	}
 
-	//カート内の一つの商品の合計金額を取得
+	// カート内の一つの商品の合計金額を取得
 	public int getTotalAmount() {
 		int price = this.getProductPrice() * this.getQuantity();
 		return price;

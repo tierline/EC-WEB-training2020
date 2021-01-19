@@ -5,12 +5,12 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
-import com.example.training.common.domain.Cart;
-import com.example.training.common.domain.Order;
-import com.example.training.common.domain.OrderForm;
-import com.example.training.common.domain.OrderHistoryAssembler;
-import com.example.training.common.domain.OrderItem;
-import com.example.training.common.domain.OrderMonth;
+import com.example.training.common.domain.cart.Cart;
+import com.example.training.common.domain.order.Order;
+import com.example.training.common.domain.order.OrderForm;
+import com.example.training.common.domain.order.OrderHistoryAssembler;
+import com.example.training.common.domain.order.OrderItem;
+import com.example.training.common.domain.order.OrderMonth;
 import com.example.training.common.repository.OrderRepository;
 import com.example.training.common.service.OrderService;
 import com.example.training.member.domain.Member;
@@ -78,7 +78,6 @@ public class ApiOrderController {
 	public List<OrderItem> orderedItemList(@PathVariable Integer id) {
 		Order order = orderRepository.findById(id);
 		List<OrderItem> items = orderRepository.findItemsByOrder(order);
-
 		return items;
 	}
 

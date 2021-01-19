@@ -1,4 +1,4 @@
-package com.example.training.member.domain;
+package com.example.training.member.domain.form;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;

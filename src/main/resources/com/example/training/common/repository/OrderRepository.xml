@@ -13,7 +13,7 @@
 		VALUES(
 		"${memberId}",
 		"${phoneNumber}",
-		"${name}",
+		"${fullName}",
 		"${address}",
 		"${email}",
 		${price},
@@ -33,7 +33,7 @@
 	</insert>
 
 	<select id="findItemsByOrder"
-		resultType="com.example.training.common.domain.OrderItem">
+		resultType="com.example.training.common.domain.order.OrderItem">
 		SELECT
 		name, price, quantity
 		FROM
@@ -44,7 +44,7 @@
 	</select>
 
 	<select id="findById"
-		resultType="com.example.training.common.domain.Order">
+		resultType="com.example.training.common.domain.order.Order">
 		SELECT
 		*
 		FROM
@@ -53,7 +53,7 @@
 	</select>
 
 	<select id="findByOrderMonthMemberId"
-		resultType="com.example.training.common.domain.OrderMonth">
+		resultType="com.example.training.common.domain.order.OrderMonth">
 		SELECT
 		id as orderId,
 		`date`
@@ -63,7 +63,7 @@
 	</select>
 
 	<select id="findByOrderItem"
-		resultType="com.example.training.common.domain.OrderItem">
+		resultType="com.example.training.common.domain.order.OrderItem">
 		SELECT
 		name,
 		price,

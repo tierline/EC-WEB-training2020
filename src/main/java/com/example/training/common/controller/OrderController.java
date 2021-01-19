@@ -3,8 +3,8 @@ package com.example.training.common.controller;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-import com.example.training.common.domain.Cart;
-import com.example.training.common.domain.OrderForm;
+import com.example.training.common.domain.cart.Cart;
+import com.example.training.common.domain.order.OrderForm;
 import com.example.training.common.service.OrderService;
 import com.example.training.member.domain.Member;
 
@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 @Controller
 @RequestMapping("/member/order")
 public class OrderController {
@@ -35,6 +34,7 @@ public class OrderController {
 	 * @param model
 	 * @return お届け先入力フォーム画面
 	 */
+	// TOREVIEW 変更済み
 	@GetMapping("/form")
 	public String form(OrderForm orderForm, Model model) {
 		Member member = (Member) session.getAttribute(Member.SESSION_NAME);

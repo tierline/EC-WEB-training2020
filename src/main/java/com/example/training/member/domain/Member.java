@@ -1,5 +1,7 @@
 package com.example.training.member.domain;
 
+import com.example.training.member.domain.form.MemberApplicationForm;
+
 import lombok.Data;
 
 @Data
@@ -7,15 +9,21 @@ public class Member {
 	public static final String SESSION_NAME = "MEMBER";
 
 	// 基本情報
+	// MemberIdクラス
 	private int id;
+	// Passwordクラス
 	private String password;
 	// 連絡先
+	// Emailクラス
 	private String email;
+	// PhoneNumberクラス
 	private String phoneNumber;
-	// 名前
+	// 名前 //Nameクラス
+	// private FullName fullName;
 	private String lastName;
 	private String firstName;
 	// 住所
+	// Addressクラス
 	private String postcode;
 	private String prefecture;
 	private String city;
@@ -32,8 +40,12 @@ public class Member {
 		this.status = "unapproved";
 	}
 
-	public Member() {
+	// public Member(String email, String lastName, String firstName) {
+	// this.fullName = new FullName(lastName, firstName);
+	// this.email = email;
+	// }
 
+	public Member() {
 	}
 
 }
