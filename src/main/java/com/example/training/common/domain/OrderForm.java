@@ -1,4 +1,4 @@
-package com.example.training.common.domain.order;
+package com.example.training.common.domain;
 
 import java.time.LocalDate;
 
@@ -8,7 +8,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-import com.example.training.common.domain.cart.Cart;
 import com.example.training.member.domain.Member;
 
 import lombok.Data;
@@ -18,9 +17,8 @@ public class OrderForm {
 	public static final String SESSION_NAME = "ORDER_FORM";
 
 	public OrderForm(OrderForm form, int id) {
-//		this.lastName = form.getLastName();
-//		this.firstName = form.getFirstName();
-		this.fullName = form.getFullName();
+		this.lastName = form.getLastName();
+		this.firstName = form.getFirstName();
 		this.email = form.getEmail();
 		this.phoneNumber = form.getPhoneNumber();
 		this.postcode = form.getPostcode();
@@ -58,12 +56,12 @@ public class OrderForm {
 	@Size(min = 1, max = 16, message = "名は1文字以上、16文字以内で入力して下さい。")
 	private String firstName;
 
-	// private FullName fullName;
 	/**
 	 * 住所情報
 	 */
 	@NotEmpty
 	@Pattern(regexp = "^[0-9]{3}[0-9]{4}$", message = "郵便番号の形式が間違っています")
+
 	private String postcode; // 郵便番号(ハイフンなし)
 
 	@NotEmpty
@@ -104,8 +102,10 @@ public class OrderForm {
 	 * @param member
 	 */
 	public void setMemberInfo(Member member) {
-		// this.fullName = member.getFullName();
-		this.fullName = this.getFullName();
+		this.fullName = member.getLastName() + member.getFirstName();
+		this.lastName = member.getLastName();
+		this.firstName = member.getFirstName();
+		// this.fullName = this.getFullName();
 		this.email = member.getEmail();
 		this.phoneNumber = member.getPhoneNumber();
 		this.postcode = member.getPostcode();

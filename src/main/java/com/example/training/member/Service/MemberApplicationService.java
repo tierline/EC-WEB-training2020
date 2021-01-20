@@ -2,7 +2,7 @@
 package com.example.training.member.service;
 
 import com.example.training.member.domain.Member;
-import com.example.training.member.domain.form.MemberApplicationForm;
+import com.example.training.member.domain.MemberApplicationForm;
 import com.example.training.member.repository.MemberRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;

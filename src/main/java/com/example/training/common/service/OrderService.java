@@ -5,10 +5,10 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-import com.example.training.common.domain.cart.Cart;
-import com.example.training.common.domain.order.Order;
-import com.example.training.common.domain.order.OrderForm;
-import com.example.training.common.domain.order.OrderItem;
+import com.example.training.common.domain.Cart;
+import com.example.training.common.domain.Order;
+import com.example.training.common.domain.OrderForm;
+import com.example.training.common.domain.OrderItem;
 import com.example.training.common.repository.OrderRepository;
 import com.example.training.member.domain.Member;
 import com.example.training.member.repository.MemberRepository;

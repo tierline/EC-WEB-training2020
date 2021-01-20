@@ -6,9 +6,9 @@ import java.util.Optional;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import com.example.training.common.domain.order.OrderForm;
+import com.example.training.common.domain.OrderForm;
 import com.example.training.member.domain.Member;
-import com.example.training.member.domain.form.MemberEditForm;
+import com.example.training.member.domain.MemberEditForm;
 
 @Mapper
 public interface MemberRepository {

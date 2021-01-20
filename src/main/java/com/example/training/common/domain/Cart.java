@@ -1,10 +1,8 @@
-package com.example.training.common.domain.cart;
+package com.example.training.common.domain;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
-import com.example.training.common.domain.Product;
 
 public class Cart {
 	public static final String SESSION_NAME = "CART";

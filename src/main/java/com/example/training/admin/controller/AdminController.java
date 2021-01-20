@@ -6,7 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import com.example.training.admin.domain.Admin;
 import com.example.training.member.domain.Member;
-import com.example.training.member.domain.form.MemberEditForm;
+import com.example.training.member.domain.MemberEditForm;
 import com.example.training.member.repository.MemberRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;

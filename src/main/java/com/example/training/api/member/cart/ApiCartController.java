@@ -2,8 +2,8 @@ package com.example.training.api.member.cart;
 
 import javax.servlet.http.HttpSession;
 
+import com.example.training.common.domain.Cart;
 import com.example.training.common.domain.Product;
-import com.example.training.common.domain.cart.Cart;
 import com.example.training.common.repository.ProductRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +27,30 @@ public class ApiCartController {
 
 	/**
 	 *
+	 * 会員のカートを返す
+	 *
+	 * @return
+	 */
+	@GetMapping("/")
+	public Cart getCart() {
+		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
+		return cart;
+	}
+
+	/**
+	 *
+	 * カート内の商品を返す
+	 *
+	 * @return
+	 */
+	@GetMapping("/list")
+	public Object list() {
+		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
+		return cart;
+	}
+
+	/**
+	 *
 	 * カートに商品の追加する
 	 *
 	 * @return
@@ -45,23 +69,11 @@ public class ApiCartController {
 	 * @param id
 	 * @return
 	 */
-	@PostMapping("/delete/{productId}")
-	public void cartFromParticularProductsAllDelete(@PathVariable int productId) {
+	@PostMapping("/remove/{productId}")
+	public Cart cartFromParticularProductsAllDelete(@PathVariable int productId) {
 		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
 		Product product = productRepository.findId(productId).orElseThrow();
 		cart.removeAll(product);
-		// return this.cart 削除時に一緒にその時点のカートを返す
-	}
-
-	/**
-	 *
-	 * カート内の商品を返す
-	 *
-	 * @return
-	 */
-	@GetMapping("/list")
-	public Object list() {
-		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
 		return cart;
 	}
 

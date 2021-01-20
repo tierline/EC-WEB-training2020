@@ -5,8 +5,8 @@ import java.util.Optional;
 import javax.servlet.http.HttpSession;
 
 import com.example.training.member.domain.Member;
-import com.example.training.member.domain.form.MemberApplicationForm;
-import com.example.training.member.domain.form.MemberLoginForm;
+import com.example.training.member.domain.MemberApplicationForm;
+import com.example.training.member.domain.MemberLoginForm;
 import com.example.training.member.repository.MemberRepository;
 import com.example.training.member.service.MemberApplicationService;
 
@@ -40,7 +40,7 @@ public class ApiMemberController {
 	@CrossOrigin
 	@PostMapping("/applicate")
 	@ResponseBody
-	public Boolean create(@RequestBody MemberApplicationForm memberApplicationForm) {
+	public Boolean applicate(@RequestBody MemberApplicationForm memberApplicationForm) {
 		Optional<Member> member = memberRepository.findByEmail(memberApplicationForm.getEmail());
 		if (member.isEmpty()) {
 			memberApplicationService.run(memberApplicationForm);
@@ -57,23 +57,22 @@ public class ApiMemberController {
 	@ResponseBody
 	public Boolean login(@RequestBody MemberLoginForm memberLoginForm) {
 		String password = memberLoginForm.getPassword();
-		Optional<Member> memberDetail = memberRepository.findByEmail(memberLoginForm.getEmail());
-		if (memberDetail.isPresent()) {
-			String hashPassword = memberDetail.get().getPassword();
-			Boolean result = bCryptPasswordEncoder.matches(password, hashPassword);
-			session.setAttribute(Member.SESSION_NAME, memberDetail.get());
-			return result;
+		Member member = memberRepository.findByEmail(memberLoginForm.getEmail()).orElseThrow();
+		String hashPassword = member.getPassword();
+		Boolean isMatched = bCryptPasswordEncoder.matches(password, hashPassword);
+		if (isMatched) {
+			session.setAttribute(Member.SESSION_NAME, member);
 		}
-		return false;
-
+		return isMatched;
 	}
 
 	/*
 	 * 住所情報があったら表示する
 	 */
 	@GetMapping("/session")
+	@ResponseBody
 	public Member fetchMemberAddress() {
-		Member member = (Member) session.getAttribute(Member.SESSION_NAME);// member型 で address の変数名はおかしい
+		Member member = (Member) session.getAttribute(Member.SESSION_NAME);
 		return member;
 	}
 

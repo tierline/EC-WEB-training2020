@@ -1,6 +1,4 @@
-package com.example.training.common.domain.order;
-
-import com.example.training.common.domain.cart.CartItem;
+package com.example.training.common.domain;
 
 import lombok.Data;
 

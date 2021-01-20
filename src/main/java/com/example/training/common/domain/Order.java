@@ -1,11 +1,8 @@
-package com.example.training.common.domain.order;
+package com.example.training.common.domain;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.example.training.common.domain.cart.Cart;
-import com.example.training.common.domain.cart.CartItem;
 
 import lombok.Data;
 
@@ -19,7 +16,6 @@ public class Order {
 	private String address;
 	private String email;
 	private String phoneNumber;
-	// Priceクラス
 	private int price;
 	private LocalDate date;
 
@@ -37,6 +33,7 @@ public class Order {
 		this.email = orderForm.getEmail();
 		this.phoneNumber = orderForm.getPhoneNumber();
 		this.date = orderForm.getDateNow();
+		this.price = cart.getTotalAmount();
 	}
 
 	/**

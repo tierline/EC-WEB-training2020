@@ -1,4 +1,4 @@
-package com.example.training.common.domain.order;
+package com.example.training.common.domain;
 
 import java.time.LocalDate;
 
