@@ -33,6 +33,10 @@ public class CartItem {
 		this.quantity = this.quantity + quantity;
 	}
 
+	public void changeQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+
 	public void removeQuantity(int quantity) {
 		this.quantity = this.quantity - quantity;
 	}
@@ -45,7 +49,7 @@ public class CartItem {
 		return this.quantity <= 0;
 	}
 
-	//カート内の一つの商品の合計金額を取得
+	// カート内の一つの商品の合計金額を取得
 	public int getTotalAmount() {
 		int price = this.getProductPrice() * this.getQuantity();
 		return price;

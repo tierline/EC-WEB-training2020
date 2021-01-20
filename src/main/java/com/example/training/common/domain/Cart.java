@@ -33,6 +33,14 @@ public class Cart {
 		}
 	}
 
+	public void changeItemQuantity(Product product, int quantity) {
+		CartItem item = getItem(product).orElseThrow();
+		item.changeQuantity(quantity);
+		if (item.isEmpty()) {
+			this.items.remove(item);
+		}
+	}
+
 	/**
 	 * カートから商品を1つ削除する
 	 *

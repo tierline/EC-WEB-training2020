@@ -4,17 +4,18 @@ import java.util.Locale;
 
 import javax.servlet.http.HttpSession;
 
+import com.example.training.common.domain.Cart;
+import com.example.training.common.domain.Product;
+import com.example.training.common.repository.ProductRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import com.example.training.common.domain.Cart;
-import com.example.training.common.domain.Product;
-import com.example.training.common.repository.ProductRepository;
 
 /**
  * @author
@@ -46,6 +47,40 @@ public class CartController {
 		cart.add(product);
 		return "redirect:/";
 	}
+
+	/**
+	 *
+	 * カートに商品を1つ追加する
+	 *
+	 * @param id
+	 * @return
+	 */
+	@PostMapping(path = "/addPost/{id}", consumes = "application/x-www-form-urlencoded")
+	public String addPost(@PathVariable int id, int quantity) {
+		System.out.println(id);
+		System.out.println(quantity);
+		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
+		Product product = productRepository.findId(id).orElseThrow();
+		cart.changeItemQuantity(product, quantity);
+		return "redirect:/member/cart/list";
+	}
+
+	// /**
+	// *
+	// * カートに商品を1つ追加する
+	// *
+	// * @param id
+	// * @return
+	// */
+	// @PostMapping("/addPost/{id}/{quantity}")
+	// public String addPost(@PathVariable int id, @PathVariable int quantity) {
+	// System.out.println(id);
+	// System.out.println(quantity);
+	// Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
+	// Product product = productRepository.findId(id).orElseThrow();
+	// cart.add(product);
+	// return "redirect:/member/cart/list";
+	// }
 
 	/**
 	 *
