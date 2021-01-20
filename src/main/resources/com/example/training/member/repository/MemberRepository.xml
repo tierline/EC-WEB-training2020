@@ -14,42 +14,92 @@
 		WHERE
 		email = "${email}"
 	</select>
+	<select id="findByEmailPersonal"
+		resultType="com.example.training.member.PersonalEntity">
+		SELECT
+		*
+		FROM
+		MEMBER
+		WHERE
+		email = "${email}"
+	</select>
 
 	<select id="findByEmailSample" resultMap="memberMap"
 		parameterType="map">
 		SELECT
+		id,
+		email,
+		phone_number,
 		last_name,
 		first_name,
-		phone_number,
 		postcode,
 		prefecture,
 		city,
-		block
+		block,
+		status
 		FROM
 		Member
 		WHERE
 		email = "${email}"
 	</select>
+
+
 	<resultMap type="com.example.training.member.domain.Member"
 		id="memberMap">
-		<association property="fullName" resultMap="fullNameMap"/>
-		<association property="address" resultMap="addressMap" />
-	</resultMap>
-	<resultMap type="com.example.training.member.domain.FullName" id="fullNameMap">
-	<constructor>
-				<arg column="last_name" javaType="String" />
-				<arg column="first_name" javaType="String" />
-			</constructor>
-	</resultMap>
-	
-	<resultMap type="com.example.training.member.domain.Address" id="addressMap">
+		<association property="id">
 		<constructor>
+			<arg column="id" javaType="Long" />
+		</constructor>
+		</association>
+		<association property="fullName" resultMap="fullNameMap" />
+		<association property="address" resultMap="addressMap" />
+		<association property="email">
+			<result column="email" javaType="String" />
+		</association>
+		<association property="phoneNumber">
+			<constructor>
+				<arg column="phone_number" javaType="String" />
+			</constructor>
+		</association>
+	</resultMap>
+
+	<resultMap type="com.example.training.member.domain.FullName"
+		id="fullNameMap">
+		<constructor>
+			<arg column="last_name" javaType="String" />
+			<arg column="first_name" javaType="String" />
+		</constructor>
+	</resultMap>
+
+	<resultMap type="com.example.training.member.domain.Address"
+		id="addressMap">
+		<association property="postcode"
+			javaType="com.example.training.member.domain.address.Postcode">
+			<constructor>
 				<arg column="postcode" javaType="String" />
+			</constructor>
+		</association>
+		<association property="prefecture"
+			javaType="com.example.training.member.domain.address.Prefecture">
+			<constructor>
 				<arg column="prefecture" javaType="String" />
+			</constructor>
+		</association>
+		<association property="city"
+			javaType="com.example.training.member.domain.address.City">
+			<constructor>
 				<arg column="city" javaType="String" />
+			</constructor>
+		</association>
+		<association property="block"
+			javaType="com.example.training.member.domain.address.Block">
+			<constructor>
 				<arg column="block" javaType="String" />
 			</constructor>
+		</association>
 	</resultMap>
+
+
 
 
 

@@ -2,11 +2,11 @@ package com.example.training.member.auth;
 
 import java.util.Collection;
 
-import com.example.training.member.domain.Member;
-
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.User;
+
+import com.example.training.member.domain.Member;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

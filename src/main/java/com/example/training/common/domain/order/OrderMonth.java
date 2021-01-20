@@ -2,10 +2,13 @@ package com.example.training.common.domain.order;
 
 import java.time.LocalDate;
 
-import lombok.Data;
+import com.example.training.member.domain.MemberId;
 
-@Data
 public class OrderMonth {
-	private int orderId;
+	private MemberId memberId;
 	private LocalDate date;
+
+	public LocalDate getDate() {
+		return this.date;
+	}
 }

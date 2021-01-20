@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.training.common.repository.OrderRepository;
 import com.example.training.member.domain.Member;
+import com.example.training.member.domain.MemberId;
 
 @Service
 public class OrderHistoryAssembler {
@@ -21,7 +22,7 @@ public class OrderHistoryAssembler {
 
 // TOREVIEW 変更済み
 	public Map<Integer, List<OrderMonth>> create(Member member) {
-		int id = member.getId();
+		MemberId id = member.getId();
 		List<OrderMonth> orderMonthList = orderRepository.findByOrderMonthByMemberId(id);
 		Map<Integer, List<OrderMonth>> map = new TreeMap<>();
 		for (OrderMonth order : orderMonthList) {

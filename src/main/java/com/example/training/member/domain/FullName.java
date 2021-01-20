@@ -3,7 +3,13 @@ package com.example.training.member.domain;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
+import lombok.Getter;
+
+@Getter
 public class FullName {
+	@NotEmpty
+	private String fullName;
+
 	@NotEmpty
 	@Size(max = 16, min = 1)
 	private String lastName;
@@ -17,16 +23,17 @@ public class FullName {
 		this.firstName = firstName;
 	}
 
-	public String getFullName() {
-		return this.lastName + this.firstName;
+	public FullName(String fullName) {
+		this.fullName = fullName;
 	}
 
-	public String getLastName() {
-		return this.lastName;
+	public FullName() {
+
 	}
 
-	public String getFirstName() {
-		return this.firstName;
+	public FullName getFullName() {
+		String fullName = this.lastName + this.firstName;
+		return new FullName(fullName);
 	}
 
 }

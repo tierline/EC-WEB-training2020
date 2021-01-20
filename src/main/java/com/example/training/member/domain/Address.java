@@ -1,34 +1,24 @@
 package com.example.training.member.domain;
 
-import lombok.Getter;
+import com.example.training.member.domain.address.Block;
+import com.example.training.member.domain.address.City;
+import com.example.training.member.domain.address.Postcode;
+import com.example.training.member.domain.address.Prefecture;
 
-@Getter
 public class Address {
-	private String postCode;
-	private String prefecture;
-	private String city;
-	private String block;
+	private Postcode postcode;
+	private Prefecture prefecture;
+	private City city;
+	private Block block;
 
-	public Address(String postCode, String prefecture, String city, String block) {
-		this.postCode = postCode;
+	public Address(Postcode postcode, Prefecture prefecture, City city, Block block) {
+		this.postcode = postcode;
 		this.prefecture = prefecture;
 		this.city = city;
 		this.block = block;
 	}
 
-//	public PostCode getPostCode() {
-//		return this.postCode;
-//	}
-//
-//	public Prefecture getPrefecture() {
-//		return this.prefecture;
-//	}
-//
-//	public City getCity() {
-//		return this.city;
-//	}
-//
-//	public String getBlock() {
-//		return this.block;
-//	}
+	public Address() {
+
+	}
 }

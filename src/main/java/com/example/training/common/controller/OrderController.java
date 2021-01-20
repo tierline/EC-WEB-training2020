@@ -39,6 +39,7 @@ public class OrderController {
 			model.addAttribute("orderForm", sessionOrderForm);
 		} else {
 			orderForm.setMemberInfo(member);
+			session.setAttribute(OrderForm.SESSION_NAME, orderForm);
 		}
 		return "member/order/form";
 	}
