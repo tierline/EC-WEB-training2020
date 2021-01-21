@@ -14,10 +14,22 @@
 		WHERE
 		email = "${email}"
 	</select>
-	<select id="findByEmailPersonal"
-		resultType="com.example.training.member.PersonalEntity">
+
+	<select id="findByEmailMember"
+		resultType="com.example.training.member.MemberEntity">
 		SELECT
-		*
+		id as memberId,
+		password,
+		email,
+		phone_number,
+		last_name,
+		first_name,
+		postcode,
+		prefecture,
+		city,
+		block,
+		last_updated_by,
+		status
 		FROM
 		MEMBER
 		WHERE
@@ -38,7 +50,7 @@
 		block,
 		status
 		FROM
-		Member
+		MEMBER
 		WHERE
 		email = "${email}"
 	</select>
@@ -47,9 +59,9 @@
 	<resultMap type="com.example.training.member.domain.Member"
 		id="memberMap">
 		<association property="id">
-		<constructor>
-			<arg column="id" javaType="Long" />
-		</constructor>
+			<constructor>
+				<arg column="id" javaType="Long" />
+			</constructor>
 		</association>
 		<association property="fullName" resultMap="fullNameMap" />
 		<association property="address" resultMap="addressMap" />

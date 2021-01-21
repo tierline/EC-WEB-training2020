@@ -1,6 +1,6 @@
 package com.example.training.member.domain;
 
-import com.example.training.member.PersonalEntity;
+import com.example.training.member.MemberEntity;
 import com.example.training.member.domain.address.Block;
 import com.example.training.member.domain.address.City;
 import com.example.training.member.domain.address.Postcode;
@@ -42,8 +42,8 @@ public class Member {
 		this.status = status;
 	}
 
-	public Member(PersonalEntity entity) {
-		this.id = new MemberId(entity.getId());
+	public Member(MemberEntity entity) {
+		this.id = new MemberId(entity.getMemberId());
 		this.password = entity.getPassword();
 		this.email = entity.getEmail();
 		this.fullName = new FullName(entity.getLastName(), entity.getFirstName());
@@ -52,7 +52,6 @@ public class Member {
 		this.phoneNumber = new PhoneNumber(entity.getPhoneNumber());
 		this.status = entity.getStatus();
 		this.lastUpdatedBy = entity.getLastUpdatedBy();
-
 	}
 
 	public Member() {

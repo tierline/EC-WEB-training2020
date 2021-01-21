@@ -3,8 +3,8 @@ package com.example.training.member;
 import lombok.Data;
 
 @Data
-public class PersonalEntity {
-	private long id;
+public class MemberEntity {
+	private long memberId;
 	private String password;
 	private String email;
 	private String phoneNumber;

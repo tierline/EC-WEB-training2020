@@ -7,14 +7,14 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.example.training.common.domain.order.OrderForm;
-import com.example.training.member.PersonalEntity;
+import com.example.training.member.MemberEntity;
 import com.example.training.member.domain.Member;
 import com.example.training.member.domain.MemberId;
 import com.example.training.member.domain.form.MemberEditForm;
 
 @Mapper
 public interface MemberRepository {
-	public Optional<PersonalEntity> findByEmailPersonal(String email);
+	public Optional<MemberEntity> findByEmailMember(String email);
 
 	public Optional<Member> findByEmail(String email);
 

@@ -40,6 +40,7 @@ public class OrderController {
 		} else {
 			orderForm.setMemberInfo(member);
 			session.setAttribute(OrderForm.SESSION_NAME, orderForm);
+			var check = session.getAttribute(OrderForm.SESSION_NAME);
 		}
 		return "member/order/form";
 	}

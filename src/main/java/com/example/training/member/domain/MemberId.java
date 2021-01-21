@@ -1,14 +1,19 @@
 package com.example.training.member.domain;
 
+import javax.validation.constraints.NotNull;
+
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
+@Setter
 public class MemberId {
-	private Long memberId;
+	@NotNull
+	private Long value;
 
 	// 要バリデーション追加
-	public MemberId(Long memberId) {
-		this.memberId = memberId;
+	public MemberId(Long value) {
+		this.value = value;
 	}
 
 	public MemberId() {

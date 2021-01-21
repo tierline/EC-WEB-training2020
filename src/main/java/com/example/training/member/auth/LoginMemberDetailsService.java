@@ -9,7 +9,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.example.training.member.PersonalEntity;
+import com.example.training.member.MemberEntity;
 import com.example.training.member.domain.Member;
 import com.example.training.member.repository.MemberRepository;
 
@@ -30,7 +30,7 @@ public class LoginMemberDetailsService implements UserDetailsService {
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 		assert (email != null);
 //		Optional<Member> memberOpt = memberRepository.findByEmail(email);
-		Optional<PersonalEntity> memberOpt = memberRepository.findByEmailPersonal(email);
+		Optional<MemberEntity> memberOpt = memberRepository.findByEmailMember(email);
 		if (memberOpt.isEmpty()) {
 			throw new UsernameNotFoundException("User not found for email: " + email);
 		} else {
