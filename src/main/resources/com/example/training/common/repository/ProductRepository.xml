@@ -10,7 +10,7 @@
 		SELECT
 		*
 		FROM
-		product
+		PRODUCT
 	</select>
 
 	<select id="findId"
@@ -18,7 +18,7 @@
 		SELECT
 		*
 		FROM
-		product
+		PRODUCT
 		WHERE
 		id = ${id}
 	</select>
@@ -27,7 +27,7 @@
 		SELECT
 		*
 		FROM
-		product
+		PRODUCT
 		WHERE
 		name LIKE
 		'%${word}%'

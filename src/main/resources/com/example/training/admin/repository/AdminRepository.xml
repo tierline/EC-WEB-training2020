@@ -10,7 +10,7 @@
 		SELECT
 		*
 		FROM
-		admins
+		ADMIN
 		WHERE
 		name = "${name}"
 	</select>

@@ -8,7 +8,7 @@ use training;
 -- TABLE 名は大文字に。 mybatis-config から設定できる --
 -- 会社方針：テーブル名は単数形 --
 
-CREATE TABLE admins (
+CREATE TABLE ADMIN (
   id INT AUTO_INCREMENT,
   name VARCHAR(128),
   password VARCHAR(256),
@@ -16,7 +16,7 @@ CREATE TABLE admins (
   UNIQUE(name)
 );
 
-CREATE TABLE members (
+CREATE TABLE MEMBER (
   id INT(11) NOT NULL AUTO_INCREMENT,
   password VARCHAR(256),
   email VARCHAR(128),
@@ -36,13 +36,13 @@ CREATE TABLE members (
   UNIQUE(email)
 );
 
-CREATE TABLE category(
+CREATE TABLE CATEGORY(
   id INT AUTO_INCREMENT,
   name VARCHAR(16),
   PRIMARY KEY (id)
 );
 
-CREATE TABLE product(
+CREATE TABLE PRODUCT(
   id INT AUTO_INCREMENT,
   category_id INT,
   name VARCHAR(128),
@@ -52,7 +52,7 @@ CREATE TABLE product(
   PRIMARY KEY (id)
 );
 
-CREATE TABLE order_items (
+CREATE TABLE ORDER_ITEMS (
   id INT(11) NOT NULL AUTO_INCREMENT,
   order_id INT(11),
   name VARCHAR(128),
@@ -63,7 +63,7 @@ CREATE TABLE order_items (
   PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE orders (
+CREATE TABLE ORDERS (
   id INT(11) NOT NULL AUTO_INCREMENT,
   member_id INT(11) NOT NULL,
   email VARCHAR(128),

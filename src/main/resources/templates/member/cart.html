@@ -47,7 +47,7 @@
               />
             </td>
             <td class="h5 pt-3" th:text="${item.productName}"></td>
-            <td class="h5 pt-3" th:text="${item.ProductPrice}"></td>
+            <td class="h5 pt-3" th:text="${'￥' + item.ProductPrice}"></td>
             <td>
               <!-- <form
                 th:action="@{/member/cart/addPost/{id}(id=${item.productId})/{quantity}(quantity=${value})}"
