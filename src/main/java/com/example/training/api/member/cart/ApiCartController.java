@@ -64,6 +64,22 @@ public class ApiCartController {
 
 	/**
 	 *
+	 * カートの商品の数量を変更する
+	 *
+	 * @param id
+	 * @return
+	 */
+	// public void changeItemQuantity(@PathVariable int productId, @PathVariable int
+	// quantity) {
+	@PostMapping("/changeQuantity/{productId}/{quantity}")
+	public void changeItemQuantity(@PathVariable int productId, @PathVariable int quantity) {
+		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
+		Product product = productRepository.findId(productId).orElseThrow();
+		cart.changeItemQuantity(product, quantity);
+	}
+
+	/**
+	 *
 	 * カートから特定の商品をすべて削除する
 	 *
 	 * @param id

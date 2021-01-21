@@ -18,11 +18,8 @@ path=`pwd`
 
 echo ${path}
 
-<<<<<<< HEAD
-=======
 echo '-----start-----'
 
->>>>>>> origin/temp
 sftp -i ~/.ssh/ec-site-kp.pem ec2-user@${ip}<<EOF
 put ${path}/build/libs/EC-WEB-training2020-0.0.1-SNAPSHOT.jar
 exit

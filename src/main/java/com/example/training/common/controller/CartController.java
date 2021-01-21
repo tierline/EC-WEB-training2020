@@ -50,37 +50,18 @@ public class CartController {
 
 	/**
 	 *
-	 * カートに商品を1つ追加する
+	 * カートの商品の数量を変更する
 	 *
 	 * @param id
 	 * @return
 	 */
-	@PostMapping(path = "/addPost/{id}", consumes = "application/x-www-form-urlencoded")
-	public String addPost(@PathVariable int id, int quantity) {
-		System.out.println(id);
-		System.out.println(quantity);
+	@PostMapping(path = "/changeQuantity/{id}", consumes = "application/x-www-form-urlencoded")
+	public String changeItemQuantity(@PathVariable int id, int quantity) {
 		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
 		Product product = productRepository.findId(id).orElseThrow();
 		cart.changeItemQuantity(product, quantity);
 		return "redirect:/member/cart/list";
 	}
-
-	// /**
-	// *
-	// * カートに商品を1つ追加する
-	// *
-	// * @param id
-	// * @return
-	// */
-	// @PostMapping("/addPost/{id}/{quantity}")
-	// public String addPost(@PathVariable int id, @PathVariable int quantity) {
-	// System.out.println(id);
-	// System.out.println(quantity);
-	// Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
-	// Product product = productRepository.findId(id).orElseThrow();
-	// cart.add(product);
-	// return "redirect:/member/cart/list";
-	// }
 
 	/**
 	 *

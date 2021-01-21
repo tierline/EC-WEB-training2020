@@ -54,7 +54,7 @@
                 method="post"
               > -->
               <form
-                th:action="@{/member/cart/addPost/{id}(id=${item.productId})}"
+                th:action="@{/member/cart/changeQuantity/{id}(id=${item.productId})}"
                 method="post"
               >
                 <select
@@ -96,26 +96,3 @@
     </div>
   </body>
 </html>
-
-<!-- <script type="text/javascript">
-  $(function () {
-    $("#submit_select").change(function () {
-      console.log("submit!").post();
-    });
-  });
-</script>
- -->
-<!-- <script>
-$(document).ready(function(){
-  $("button").click(function(){
-    $.post("demo_test_post.asp",
-    {
-      name: "Donald Duck",
-      city: "Duckburg"
-    },
-    function(data,status){
-      alert("Data: " + data + "\nStatus: " + status);
-    });
-  });
-});
-</script> -->

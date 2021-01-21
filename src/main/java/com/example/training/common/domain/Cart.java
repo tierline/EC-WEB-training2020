@@ -33,7 +33,7 @@ public class Cart {
 		}
 	}
 
-	public void changeItemQuantity(Product product, int quantity) {
+	public void changeItemQuantity(Product product, Integer quantity) {
 		CartItem item = getItem(product).orElseThrow();
 		item.changeQuantity(quantity);
 		if (item.isEmpty()) {
