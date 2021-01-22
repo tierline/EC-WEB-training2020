@@ -3,10 +3,10 @@ package com.example.training.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.training.common.domain.Cart;
-import com.example.training.common.domain.Order;
-import com.example.training.common.domain.OrderHistoryAssembler;
 import com.example.training.common.domain.Product;
+import com.example.training.common.domain.cart.Cart;
+import com.example.training.common.domain.order.Order;
+import com.example.training.common.domain.order.OrderHistoryAssembler;
 
 import org.junit.jupiter.api.Test;
 
@@ -15,7 +15,7 @@ public class OrderTest {
 	@Test
 	void orderSave() {
 		Product product = new Product(1, "ガム", 20);
-		Cart cart = new Cart();
+		Cart cart = new Cart();w
 		cart.add(product);
 
 	}

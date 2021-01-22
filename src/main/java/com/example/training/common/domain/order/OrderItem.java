@@ -1,4 +1,7 @@
-package com.example.training.common.domain;
+package com.example.training.common.domain.order;
+
+import com.example.training.common.domain.Quantity;
+import com.example.training.common.domain.cart.CartItem;
 
 import lombok.Data;
 
@@ -6,7 +9,7 @@ import lombok.Data;
 public class OrderItem {
 	private String name;
 	private int price;
-	private int quantity;
+	private Quantity quantity;
 	private String imagePath;
 
 	public OrderItem(CartItem item) {

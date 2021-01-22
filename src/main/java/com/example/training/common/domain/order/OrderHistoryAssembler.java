@@ -1,4 +1,4 @@
-package com.example.training.common.domain;
+package com.example.training.common.domain.order;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -8,6 +8,7 @@ import java.util.TreeMap;
 
 import com.example.training.common.repository.OrderRepository;
 import com.example.training.member.domain.Member;
+import com.example.training.member.domain.MemberId;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,7 @@ public class OrderHistoryAssembler {
 
 	// TOREVIEW
 	public Map<Integer, List<OrderMonth>> create(Member member) {
-		int id = member.getId();
+		MemberId id = member.getId();
 		List<OrderMonth> orderMonthList = orderRepository.findByOrderMonthByMemberId(id);
 		Map<Integer, List<OrderMonth>> map = new TreeMap<>();
 		for (OrderMonth orderMonth : orderMonthList) {

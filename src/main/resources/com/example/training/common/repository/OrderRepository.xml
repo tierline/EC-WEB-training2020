@@ -11,17 +11,17 @@
 		INSERT
 		INTO ORDERS (member_id, phone_number, name, address, email, price, date)
 		VALUES(
-		"${memberId}",
-		"${phoneNumber}",
-		"${fullName}",
-		"${address}",
+		"${memberId.value}",
+		"${phoneNumber.value}",
+		"${fullName.firstName}",
+		"${address.value}",
 		"${email}",
 		${price},
 		"${date}")
 	</insert>
 
 	<insert id="saveItem">
-		INSERT INTO ORDER_ITEMS (order_id, name, price,
+		INSERT INTO ORDER_ITEM (order_id, name, price,
 		quantity, image_path)
 		VALUES(
 		${id},
@@ -37,7 +37,7 @@
 		SELECT
 		name, price, quantity
 		FROM
-		ORDER_ITEMS
+		ORDER_ITEM
 		WHERE order_id =
 		${id}
 
@@ -57,7 +57,7 @@
 		SELECT
 		id as orderId,
 		`date`
-		FROM orders AS o
+		FROM ORDERS AS o
 		WHERE member_id = ${id}
 		ORDER BY `date` DESC
 	</select>
@@ -70,7 +70,7 @@
 		quantity,
 		image_path
 		FROM
-		order_items
+		ORDER_ITEM
 		WHERE order_id = ${id}
 	</select>
 

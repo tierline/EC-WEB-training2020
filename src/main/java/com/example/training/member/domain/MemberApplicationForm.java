@@ -1,6 +1,5 @@
 package com.example.training.member.domain;
 
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
@@ -13,7 +12,6 @@ import lombok.RequiredArgsConstructor;
 @Data
 public class MemberApplicationForm {
 
-	@Email
 	private String email;
 
 	@NotEmpty

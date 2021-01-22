@@ -2,9 +2,10 @@ package com.example.training.common.repository;
 
 import java.util.List;
 
-import com.example.training.common.domain.Order;
-import com.example.training.common.domain.OrderItem;
-import com.example.training.common.domain.OrderMonth;
+import com.example.training.common.domain.order.Order;
+import com.example.training.common.domain.order.OrderItem;
+import com.example.training.common.domain.order.OrderMonth;
+import com.example.training.member.domain.MemberId;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -20,10 +21,8 @@ public interface OrderRepository {
 
 	public Order findById(int id);
 
-	public List<OrderMonth> findByOrderMonthByMemberId(int id);
+	public List<OrderMonth> findByOrderMonthByMemberId(MemberId id);
 
 	public List<OrderItem> findByOrderItem(int id);
-
-	public void saveByOrder(Order order);
 
 }

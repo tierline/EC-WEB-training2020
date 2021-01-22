@@ -1,5 +1,6 @@
 package com.example.training.common.domain;
 
+//作り直す
 public class TotalAmount {
 	int totalAmount = 0;
 

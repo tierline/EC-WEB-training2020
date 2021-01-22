@@ -1,8 +1,11 @@
-package com.example.training.common.domain;
+package com.example.training.common.domain.cart;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import com.example.training.common.domain.Product;
+import com.example.training.common.domain.Quantity;
 
 public class Cart {
 	public static final String SESSION_NAME = "CART";
@@ -15,7 +18,7 @@ public class Cart {
 	 * @param item 商品
 	 */
 	public void add(Product product) {
-		this.add(product, 1);
+		this.add(product, new Quantity(1));
 	}
 
 	/**
@@ -24,7 +27,7 @@ public class Cart {
 	 * @param item
 	 * @param quantity
 	 */
-	public void add(Product product, int quantity) {
+	public void add(Product product, Quantity quantity) {
 		Optional<CartItem> itemOpt = getItem(product);
 		if (itemOpt.isPresent()) {
 			itemOpt.get().addQuantity(quantity);
@@ -33,7 +36,7 @@ public class Cart {
 		}
 	}
 
-	public void changeItemQuantity(Product product, Integer quantity) {
+	public void changeItemQuantity(Product product, Quantity quantity) {
 		CartItem item = getItem(product).orElseThrow();
 		item.changeQuantity(quantity);
 		if (item.isEmpty()) {
@@ -50,7 +53,7 @@ public class Cart {
 		Optional<CartItem> itemOpt = getItem(product);
 		if (itemOpt.isPresent()) {
 			CartItem item = itemOpt.get();
-			item.removeQuantity(1);
+			item.removeQuantity(new Quantity(1));
 			if (item.isEmpty()) {
 				this.items.remove(item);
 			}

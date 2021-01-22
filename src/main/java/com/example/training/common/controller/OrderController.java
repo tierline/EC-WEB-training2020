@@ -3,8 +3,8 @@ package com.example.training.common.controller;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-import com.example.training.common.domain.Cart;
-import com.example.training.common.domain.OrderForm;
+import com.example.training.common.domain.cart.Cart;
+import com.example.training.common.domain.order.OrderForm;
 import com.example.training.common.service.OrderService;
 import com.example.training.member.domain.Member;
 
@@ -43,6 +43,7 @@ public class OrderController {
 			model.addAttribute("orderForm", sessionOrderForm);
 		} else {
 			orderForm.setMemberInfo(member);
+			session.setAttribute(OrderForm.SESSION_NAME, orderForm);
 		}
 		return "member/order/form";
 	}

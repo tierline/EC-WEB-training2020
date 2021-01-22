@@ -5,10 +5,10 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-import com.example.training.common.domain.Cart;
-import com.example.training.common.domain.Order;
-import com.example.training.common.domain.OrderForm;
-import com.example.training.common.domain.OrderItem;
+import com.example.training.common.domain.cart.Cart;
+import com.example.training.common.domain.order.Order;
+import com.example.training.common.domain.order.OrderForm;
+import com.example.training.common.domain.order.OrderItem;
 import com.example.training.common.repository.OrderRepository;
 import com.example.training.member.domain.Member;
 import com.example.training.member.repository.MemberRepository;
@@ -40,8 +40,9 @@ public class OrderService {
 	public int order(@Valid OrderForm orderForm, Cart cart) {
 		Order order = orderForm.createOrder(cart);
 		this.saveByOrder(order, cart);
-		memberRepository.updateAtOrder(orderForm); // SQLをあまり増やさない
-		session.setAttribute(Member.SESSION_NAME, memberRepository.findById(orderForm.getMemberId()));
+		memberRepository.updateAtOrder(orderForm); // formは渡さないmemberとして！
+		Member member = new Member(memberRepository.findById(orderForm.getMemberId()));
+		// session.setAttribute(Member.SESSION_NAME, member); 不要
 		return order.getId();
 	}
 
