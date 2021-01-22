@@ -1,6 +1,5 @@
 package com.example.training.common.domain;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -24,13 +23,12 @@ public class OrderHistoryAssembler {
 		int id = member.getId();
 		List<OrderMonth> orderMonthList = orderRepository.findByOrderMonthByMemberId(id);
 		Map<Integer, List<OrderMonth>> map = new TreeMap<>();
-		for (OrderMonth order : orderMonthList) {
-			LocalDate date = order.getDate();
-			int month = date.getMonthValue();
+		for (OrderMonth orderMonth : orderMonthList) {
+			int month = orderMonth.getDate().getMonthValue();
 			if (map.containsKey(month)) {
-				map.get(month).add(order);
+				map.get(month).add(orderMonth);
 			} else {
-				map.put(month, new ArrayList<OrderMonth>(Arrays.asList(order)));
+				map.put(month, new ArrayList<OrderMonth>(Arrays.asList(orderMonth)));
 			}
 		}
 		return map;

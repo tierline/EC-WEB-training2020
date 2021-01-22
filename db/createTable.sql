@@ -71,6 +71,6 @@ CREATE TABLE ORDERS (
   name VARCHAR(32),
   address VARCHAR(256),
   price INT(12),
-  date DATE,
+  date DATETIME,
   PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

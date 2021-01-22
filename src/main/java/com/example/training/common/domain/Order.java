@@ -1,6 +1,7 @@
 package com.example.training.common.domain;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,7 +9,6 @@ import lombok.Data;
 
 @Data
 public class Order {
-
 	private int id;
 	private int memberId;
 	// private FullName fullName;
@@ -17,7 +17,8 @@ public class Order {
 	private String email;
 	private String phoneNumber;
 	private int price;
-	private LocalDate date;
+	private String date;
+	private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
 	/**
 	 *
@@ -32,7 +33,7 @@ public class Order {
 		this.address = orderForm.getFullAddress();
 		this.email = orderForm.getEmail();
 		this.phoneNumber = orderForm.getPhoneNumber();
-		this.date = orderForm.getDateNow();
+		this.date = orderForm.getOrderDateAndTime().format(formatter);
 		this.price = cart.getTotalAmount();
 	}
 
@@ -44,10 +45,10 @@ public class Order {
 	 * @param memberId
 	 * @param date
 	 */
-	public Order(int orderId, int memberId, LocalDate date) {
+	public Order(int orderId, int memberId, LocalDateTime date) {
 		this.id = orderId;
 		this.memberId = memberId;
-		this.date = date;
+		this.date = date.format(formatter);
 	}
 
 	/**

@@ -1,6 +1,6 @@
 package com.example.training.common.domain;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -15,22 +15,6 @@ import lombok.Data;
 @Data
 public class OrderForm {
 	public static final String SESSION_NAME = "ORDER_FORM";
-
-	public OrderForm(OrderForm form, int id) {
-		this.lastName = form.getLastName();
-		this.firstName = form.getFirstName();
-		this.email = form.getEmail();
-		this.phoneNumber = form.getPhoneNumber();
-		this.postcode = form.getPostcode();
-		this.prefecture = form.getPrefecture();
-		this.city = form.getCity();
-		this.block = form.getBlock();
-		this.dateNow = getDateNow();
-		this.memberId = id;
-	}
-
-	public OrderForm() {
-	}
 
 	/**
 	 * 連絡先情報
@@ -76,12 +60,32 @@ public class OrderForm {
 	@Size(max = 128, message = "入力できる文字数を超過しています。")
 	private String block; // 番地
 
+	private LocalDateTime orderDateAndTime = getCurrentTime();
+
 	@NotNull
 	private int memberId;
 
-	private LocalDate dateNow = LocalDate.now();
-
 	private String fullName;
+
+	public OrderForm(OrderForm form, int id) {
+		this.lastName = form.getLastName();
+		this.firstName = form.getFirstName();
+		this.email = form.getEmail();
+		this.phoneNumber = form.getPhoneNumber();
+		this.postcode = form.getPostcode();
+		this.prefecture = form.getPrefecture();
+		this.city = form.getCity();
+		this.block = form.getBlock();
+		this.orderDateAndTime = getOrderDateAndTime();
+		this.memberId = id;
+	}
+
+	public OrderForm() {
+	}
+
+	public LocalDateTime getCurrentTime() {
+		return LocalDateTime.now();
+	}
 
 	public String getFullName() {
 		return this.lastName + this.firstName;
