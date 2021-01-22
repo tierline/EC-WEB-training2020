@@ -8,7 +8,6 @@ import org.apache.ibatis.annotations.Param;
 
 import com.example.training.common.domain.order.OrderForm;
 import com.example.training.member.MemberEntity;
-import com.example.training.member.domain.Email;
 import com.example.training.member.domain.Member;
 import com.example.training.member.domain.MemberId;
 import com.example.training.member.domain.form.MemberEditForm;
@@ -17,7 +16,7 @@ import com.example.training.member.domain.form.MemberEditForm;
 public interface MemberRepository {
 	public Optional<MemberEntity> findByEmailMember(String email);
 
-	public Optional<Member> findByEmail(Email email);
+	public Optional<Member> findByEmail(String email);
 
 	public MemberEntity findById(MemberId memberId);
 

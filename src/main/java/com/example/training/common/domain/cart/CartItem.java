@@ -1,15 +1,15 @@
 package com.example.training.common.domain.cart;
 
 import com.example.training.common.domain.Product;
+import com.example.training.common.domain.Quantity;
 
 public class CartItem {
 	private Product product;
-	// Quantityクラス
-	private int quantity = 0;
+	private Quantity quantity;
 
 	public CartItem(Product product) {
 		this.product = product;
-		this.quantity = 1;
+		this.quantity = new Quantity(1);
 	}
 
 	public int getProductId() {
@@ -28,29 +28,29 @@ public class CartItem {
 		return product.getPrice();
 	}
 
-	public int getQuantity() {
-		return quantity;
+	public Quantity getQuantity() {
+		return this.quantity;
 	}
 
-	public void addQuantity(int quantity) {
-		this.quantity = this.quantity + quantity;
+	public void addQuantity(Quantity quantity) {
+		this.quantity = this.quantity.add(quantity);
 	}
 
-	public void removeQuantity(int quantity) {
-		this.quantity = this.quantity - quantity;
+	public void removeQuantity(Quantity quantity) {
+		this.quantity = this.quantity.remove(quantity);
 	}
 
 	public void removeAll() {
-		this.quantity = 0;
+		this.quantity = this.quantity.removeAll();
 	}
 
 	public boolean isEmpty() {
-		return this.quantity <= 0;
+		return this.quantity.isEmpty();
 	}
 
 	// カート内の一つの商品の合計金額を取得
 	public int getTotalAmount() {
-		int price = this.getProductPrice() * this.getQuantity();
+		int price = this.getProductPrice() * this.getQuantity().getValue();
 		return price;
 	}
 }

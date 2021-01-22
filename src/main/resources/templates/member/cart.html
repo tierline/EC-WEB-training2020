@@ -49,7 +49,7 @@
             </td>
             <td th:text="${item.productName}"></td>
             <td th:text="${item.ProductPrice}"></td>
-            <td th:text="${item.quantity}"></td>
+            <td th:text="${item.quantity.value}"></td>
             <td>
               <a
                 th:href="@{/member/cart/delete/{id}(id=${item.productId})}"
