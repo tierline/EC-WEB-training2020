@@ -67,6 +67,7 @@ public class OrderController {
 		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
 		OrderForm orderForm = (OrderForm) session.getAttribute(OrderForm.SESSION_NAME);
 		int orderId = orderService.order(orderForm, cart);
+		// メンバーのリロード処理を追加
 		session.setAttribute(Cart.SESSION_NAME, new Cart());
 		session.removeAttribute(OrderForm.SESSION_NAME);
 		return "redirect:/member/order/complete/" + orderId;

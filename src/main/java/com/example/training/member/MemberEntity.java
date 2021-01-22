@@ -16,5 +16,5 @@ public class MemberEntity {
 	private String block;
 	private String status;
 	private String lastUpdatedBy;
-	private String roles = "ROLE_USER";
+
 }

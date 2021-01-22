@@ -1,8 +1,5 @@
 package com.example.training.admin;
 
-import com.example.training.AdminSuccessHandler;
-import com.example.training.admin.auth.LoginAdminDetailsService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -17,75 +14,57 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.firewall.StrictHttpFirewall;
 
+import com.example.training.AdminSuccessHandler;
+import com.example.training.admin.auth.LoginAdminDetailsService;
+
 @Configuration
 @EnableWebSecurity
 @Order(1)
 public class AdminSecurityConfig extends WebSecurityConfigurerAdapter {
 
-  // アカウント登録時のパスワードエンコードで利用するためDI管理する。
-  @Bean
-  PasswordEncoder passwordEncoder() {
-    return new BCryptPasswordEncoder();
-  }
+	// アカウント登録時のパスワードエンコードで利用するためDI管理する。
+	@Bean
+	PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
 
-  @Autowired
-  private AdminSuccessHandler adminSuccessHandler;
+	@Autowired
+	private AdminSuccessHandler adminSuccessHandler;
 
-  @Autowired
-  @Qualifier("LoginAdminDetailsService")
-  private LoginAdminDetailsService service;
+	@Autowired
+	@Qualifier("LoginAdminDetailsService")
+	private LoginAdminDetailsService service;
 
-  /**
-   * セキュリティの対象から外す
-   */
-  @Override
-  public void configure(WebSecurity web) throws Exception {
-    StrictHttpFirewall firewall = new StrictHttpFirewall();
-    firewall.setAllowSemicolon(true);
-    web.httpFirewall(firewall);
-    // @formatter:off
-		web
-			.ignoring()
-			.mvcMatchers("/static/**", "/webjars/**", "/js/**") // 静的リソースに認証が行われないようにする。
+	/**
+	 * セキュリティの対象から外す
+	 */
+	@Override
+	public void configure(WebSecurity web) throws Exception {
+		StrictHttpFirewall firewall = new StrictHttpFirewall();
+		// @formatter:off
+		web.ignoring().mvcMatchers("/static/**", "/webjars/**", "/js/**") // 静的リソースに認証が行われないようにする。
 		;
 		// @formatter:on
-  }
+	}
 
-  @Override
-  protected void configure(HttpSecurity http) throws Exception {
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
 
-    // @formatter:off
-    http
-      .mvcMatcher("/admin/**")
-      .authorizeRequests()
-        .mvcMatchers("/admin/login").permitAll() // 管理者用ログイン画面は誰でもアクセス可能
+		// @formatter:off
+		http.mvcMatcher("/admin/**").authorizeRequests().mvcMatchers("/admin/login").permitAll() // 管理者用ログイン画面は誰でもアクセス可能
 				.mvcMatchers("/admin/**").hasRole("ADMIN") // admin以下は ADMINロールを持つ認証ユーザのみアクセスできる。
-        .anyRequest()
-        .authenticated() // 上記以外は認証ユーザのみアクセスできる
-			.and()
-			.formLogin()
-        .loginPage("/admin/login")
-        .loginProcessingUrl("/admin/login")
-				.usernameParameter("name")
-        .passwordParameter("password")
-        .defaultSuccessUrl("/admin")
-        .successHandler(adminSuccessHandler)
-			.and()
-			.logout()
-        .logoutUrl("/admin/logout")
-        .logoutSuccessUrl("/")
-        .deleteCookies("JSESSIONID")
-				.invalidateHttpSession(true) // ログアウト時のセッション破棄を有効化
-      .and()
-        .csrf()
-        .disable()
-		;
+				.anyRequest().authenticated() // 上記以外は認証ユーザのみアクセスできる
+				.and().formLogin().loginPage("/admin/login").loginProcessingUrl("/admin/login")
+				.usernameParameter("name").passwordParameter("password").defaultSuccessUrl("/admin")
+				.successHandler(adminSuccessHandler).and().logout().logoutUrl("/admin/logout").logoutSuccessUrl("/")
+				.deleteCookies("JSESSIONID").invalidateHttpSession(true) // ログアウト時のセッション破棄を有効化
+				.and().csrf().disable();
 		// @formatter:on
-  }
+	}
 
-  @Override
-  protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-    auth.userDetailsService(service).passwordEncoder(new BCryptPasswordEncoder());
-  }
+	@Override
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		auth.userDetailsService(service).passwordEncoder(new BCryptPasswordEncoder());
+	}
 
 }

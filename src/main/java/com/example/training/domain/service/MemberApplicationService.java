@@ -1,5 +1,5 @@
 
-package com.example.training.member.service;
+package com.example.training.domain.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;

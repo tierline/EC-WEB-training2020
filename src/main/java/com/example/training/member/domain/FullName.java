@@ -4,20 +4,18 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 import lombok.Getter;
-import lombok.Setter;
 
 @Getter
-@Setter
 public class FullName {
-	private String value;
+
+	// formのバリデーションは別で
+	@NotEmpty
+	@Size(max = 16, min = 1)
+	private Name lastName;
 
 	@NotEmpty
 	@Size(max = 16, min = 1)
-	private String lastName;
-
-	@NotEmpty
-	@Size(max = 16, min = 1)
-	private String firstName;
+	private Name firstName;
 
 	public FullName(String lastName, String firstName) {
 		this.lastName = lastName;
@@ -29,7 +27,7 @@ public class FullName {
 	}
 
 	public String getValue() {
-		this.value = this.lastName + this.firstName;
-		return this.value;
+		return this.lastName + this.firstName;
+
 	}
 }

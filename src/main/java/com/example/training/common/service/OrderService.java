@@ -2,9 +2,6 @@ package com.example.training.common.service;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,16 +23,18 @@ public class OrderService {
 	@Autowired
 	private MemberRepository memberRepository;
 
-	@Autowired
-	private HttpSession session;
-
-	public int order(@Valid OrderForm orderForm, Cart cart) {
+//コメントを書く
+	// serviceクラスにsessionを使わない
+	public Order order(OrderForm orderForm, Cart cart) {
 		Order order = orderForm.createOrder(cart);
 		this.saveByOrder(order, cart);
-		memberRepository.updateAtOrder(orderForm); // SQLをあまり増やさない
 		Member member = new Member(memberRepository.findById(orderForm.getMemberId()));
-		session.setAttribute(Member.SESSION_NAME, member);
-		return order.getId();
+		// 引数はmemberにすべき
+		orderForm.upDateMember(member);
+		// 後で修正
+
+		// 注文の操作と関係ないcontrollerへ
+		return order;
 	}
 
 	// トランザクションで区切る必要

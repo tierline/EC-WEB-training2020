@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.training.domain.service.MemberApplicationService;
 import com.example.training.member.domain.Member;
 import com.example.training.member.domain.form.MemberApplicationForm;
 import com.example.training.member.domain.form.MemberLoginForm;
 import com.example.training.member.repository.MemberRepository;
-import com.example.training.member.service.MemberApplicationService;
 
 @RestController
 @RequestMapping("/api/member")

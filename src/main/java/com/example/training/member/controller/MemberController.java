@@ -16,10 +16,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.training.domain.service.MemberApplicationService;
 import com.example.training.member.domain.Member;
 import com.example.training.member.domain.form.MemberApplicationForm;
 import com.example.training.member.repository.MemberRepository;
-import com.example.training.member.service.MemberApplicationService;
 
 @Controller
 @RequestMapping("/member")

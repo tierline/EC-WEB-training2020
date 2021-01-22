@@ -5,7 +5,6 @@ import com.example.training.member.domain.address.Block;
 import com.example.training.member.domain.address.City;
 import com.example.training.member.domain.address.Postcode;
 import com.example.training.member.domain.address.Prefecture;
-import com.example.training.member.domain.form.MemberApplicationForm;
 
 import lombok.Getter;
 
@@ -14,19 +13,23 @@ public class Member {
 	public static final String SESSION_NAME = "MEMBER";
 	// 基本情報
 	private MemberId id;
-	private String password;
+	private DigestPassword password;
 	private FullName fullName;
 	private Address address;
 	// Passwordクラス
-	private String email;
+	private Email email;
 	private PhoneNumber phoneNumber;
-	private String lastUpdatedBy;
-	private String status;
-	private String roles = "ROLE_USER";
+	private Admin lastUpdatedBy;
+	private MemberStatus status;
+	private Role roles = "ROLE_USER";
 
-	public Member(MemberApplicationForm memberApplicationForm, String passwordDigest) {
+//status を列挙型に
+	/*
+	 * 新規登録処理 なんのときに使うか書く
+	 */
+	public Member(Email email, DigestPassword passwordDigest) {
 		this.password = passwordDigest;
-		this.email = memberApplicationForm.getEmail();
+		this.email = email;
 		this.lastUpdatedBy = "none";
 		this.status = "unapproved";
 	}

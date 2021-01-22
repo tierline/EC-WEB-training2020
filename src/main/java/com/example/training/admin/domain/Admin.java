@@ -6,7 +6,7 @@ import lombok.Data;
 public class Admin {
   public static final String SESSION_NAME = "ADMIN";
   private int id;
-  private String name;
+  private  name;
   private String password;
   private String roles = "ROLE_USER,ROLE_ADMIN";
 

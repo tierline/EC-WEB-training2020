@@ -32,6 +32,7 @@ public class OrderForm {
 	public OrderForm() {
 	}
 
+	// formでは素の型で受けて後でドメインモデルに変換する。
 	@NotEmpty
 	@Email
 	@Size(min = 1, max = 128, message = "メールアドレスは1文字以上、128文字以内で入力してください")
@@ -56,6 +57,10 @@ public class OrderForm {
 		this.phoneNumber = member.getPhoneNumber();
 		this.address = member.getAddress();
 		this.memberId = member.getId();
+	}
+
+	public void upDateMember(Member member) {
+		member.upDateAtOrder();
 	}
 
 }
