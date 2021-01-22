@@ -8,10 +8,12 @@ import com.example.training.member.domain.address.Postcode;
 import com.example.training.member.domain.address.Prefecture;
 
 import lombok.Getter;
+import lombok.Setter;
 
 //setterなしで書くには
 //TOREVIEW
 @Getter
+@Setter
 public class Address {
 
 	private String value;
@@ -31,14 +33,14 @@ public class Address {
 		this.block = block;
 	}
 
+	public Address() {
+
+	}
+
 	public String getValue() {
 		this.value = "〒" + postcode.getValue() + " " + prefecture.getValue() + " " + city.getValue() + " "
 				+ block.getValue();
 		return this.value;
-	}
-
-	public Address() {
-
 	}
 
 }

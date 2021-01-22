@@ -18,7 +18,6 @@ public class Member {
 	private FullName fullName;
 	private Address address;
 	// Passwordクラス
-	// Emailクラス
 	private String email;
 	private PhoneNumber phoneNumber;
 	private String lastUpdatedBy;

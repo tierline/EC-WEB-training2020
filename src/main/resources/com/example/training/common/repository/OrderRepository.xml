@@ -14,7 +14,7 @@
 		"${memberId.value}",
 		"${phoneNumber.value}",
 		"${fullName.firstName}",
-		"${address.fullAddress}",
+		"${address.value}",
 		"${email}",
 		${price},
 		"${date}")

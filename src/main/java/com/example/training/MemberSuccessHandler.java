@@ -13,7 +13,6 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import org.springframework.stereotype.Component;
 
 import com.example.training.member.MemberEntity;
-import com.example.training.member.domain.Email;
 import com.example.training.member.domain.Member;
 import com.example.training.member.repository.MemberRepository;
 
@@ -38,7 +37,7 @@ public class MemberSuccessHandler implements AuthenticationSuccessHandler {
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
-		Email email = Email.doTypeConverting(authentication.getName());
+		String email = authentication.getName();
 		MemberEntity entity = memberRepository.findByEmailMember(email).orElseThrow();
 		Member member = new Member(entity);
 		session.setAttribute(Member.SESSION_NAME, member);

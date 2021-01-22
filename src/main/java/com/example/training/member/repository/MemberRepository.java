@@ -15,7 +15,7 @@ import com.example.training.member.domain.form.MemberEditForm;
 
 @Mapper
 public interface MemberRepository {
-	public Optional<MemberEntity> findByEmailMember(Email email);
+	public Optional<MemberEntity> findByEmailMember(String email);
 
 	public Optional<Member> findByEmail(Email email);
 

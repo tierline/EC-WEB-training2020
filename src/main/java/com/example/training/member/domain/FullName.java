@@ -9,7 +9,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class FullName {
-	private String fullName;
+	private String value;
 
 	@NotEmpty
 	@Size(max = 16, min = 1)
@@ -22,11 +22,14 @@ public class FullName {
 	public FullName(String lastName, String firstName) {
 		this.lastName = lastName;
 		this.firstName = firstName;
-		this.fullName = lastName + firstName;
 	}
 
 	public FullName() {
 
 	}
 
+	public String getValue() {
+		this.value = this.lastName + this.firstName;
+		return this.value;
+	}
 }
