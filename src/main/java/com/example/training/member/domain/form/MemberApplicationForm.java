@@ -3,6 +3,7 @@ package com.example.training.member.domain.form;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
+import com.example.training.member.domain.Email;
 import com.example.training.member.domain.Member;
 
 import lombok.AllArgsConstructor;
@@ -14,7 +15,7 @@ import lombok.RequiredArgsConstructor;
 @Data
 public class MemberApplicationForm {
 
-	private String email;
+	private Email email;
 
 	@NotEmpty
 	@Size(max = 16, message = "パスワードは16文字以内で入力してください")

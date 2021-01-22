@@ -2,9 +2,9 @@ package com.example.training.common.domain.order;
 
 import java.time.LocalDate;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.example.training.common.domain.cart.Cart;
@@ -32,30 +32,18 @@ public class OrderForm {
 	public OrderForm() {
 	}
 
-	/**
-	 * 連絡先情報
-	 */
 	@NotEmpty
 	@Email
 	@Size(min = 1, max = 128, message = "メールアドレスは1文字以上、128文字以内で入力してください")
 	private String email;
-
+	@Valid
 	private PhoneNumber phoneNumber;
-
-	/**
-	 * 基本情報
-	 */
-
+	@Valid
 	private FullName fullName;
-	/**
-	 * 住所情報
-	 */
-
+	@Valid
 	private Address address;
-
-	@NotNull
+	@Valid
 	private MemberId memberId;
-
 	private LocalDate dateNow = LocalDate.now();
 
 	public Order createOrder(Cart cart) {

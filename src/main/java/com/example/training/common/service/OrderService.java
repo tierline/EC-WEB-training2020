@@ -5,6 +5,9 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.example.training.common.domain.cart.Cart;
 import com.example.training.common.domain.order.Order;
 import com.example.training.common.domain.order.OrderForm;
@@ -12,9 +15,6 @@ import com.example.training.common.domain.order.OrderItem;
 import com.example.training.common.repository.OrderRepository;
 import com.example.training.member.domain.Member;
 import com.example.training.member.repository.MemberRepository;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 @Service
 public class OrderService {
@@ -33,7 +33,8 @@ public class OrderService {
 		Order order = orderForm.createOrder(cart);
 		this.saveByOrder(order, cart);
 		memberRepository.updateAtOrder(orderForm); // SQLをあまり増やさない
-		session.setAttribute(Member.SESSION_NAME, memberRepository.findById(orderForm.getMemberId()));
+		Member member = new Member(memberRepository.findById(orderForm.getMemberId()));
+		session.setAttribute(Member.SESSION_NAME, member);
 		return order.getId();
 	}
 

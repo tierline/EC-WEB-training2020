@@ -34,9 +34,9 @@
         </thead>
         <tbody>
           <tr th:each="member:${members}" th:object="${member}">
-            <td th:text="*{id}"></td>
+            <td th:text="*{memberId}"></td>
             <td th:text="*{email}"></td>
-            <td th:text="*{fullName.lastName}"></td>
+            <td th:text="*{lastName}"></td>
             <td th:text="*{lastUpdatedBy}"></td>
             <td th:text="*{status}" class="text-danger"></td>
             <td th:text="*{roles}"></td>
@@ -44,7 +44,7 @@
               <form>
                 <a
                   class="btn btn-primary btn-sm"
-                  th:href="@{/admin/members/{id}/edit(id=*{id})}"
+                  th:href="@{/admin/members/{memberId}/edit(id=*{memberId})}"
                   >編集</a
                 >
               </form>

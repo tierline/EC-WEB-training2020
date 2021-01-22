@@ -30,12 +30,14 @@
               </tr>
               <tr>
                 <td class="table-secondary">お名前</td>
-                <td th:text="${orderForm.fullName.lastName + orderForm.fullName.firstName}"></td>
+                <td
+                  th:text="${orderForm.fullName.lastName + orderForm.fullName.firstName}"
+                ></td>
               </tr>
               <tr>
                 <td class="table-secondary">お届け先</td>
                 <td
-                  th:text="${'〒' + orderForm.postcode + ' ' + orderForm.prefecture + orderForm.city + orderForm.block}"
+                  th:text="${'〒' + orderForm.address.postcode.value + ' ' + orderForm.address.prefecture.value + orderForm.address.city.value + orderForm.address.block.value}"
                 ></td>
               </tr>
               <tr>
@@ -44,7 +46,7 @@
               </tr>
               <tr>
                 <td class="table-secondary">電話番号</td>
-                <td th:text="${orderForm.phoneNumber}"></td>
+                <td th:text="${orderForm.phoneNumber.value}"></td>
               </tr>
             </tbody>
           </table>

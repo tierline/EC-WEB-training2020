@@ -25,6 +25,4 @@ public interface OrderRepository {
 
 	public List<OrderItem> findByOrderItem(int id);
 
-	public void saveByOrder(Order order);
-
 }

@@ -112,18 +112,35 @@
 	</resultMap>
 
 
-
-
-
-
 	<select id="findById"
-		resultType="com.example.training.member.domain.Member">
-		SELECT * FROM MEMBER WHERE id = "${id}"
+		resultType="com.example.training.member.MemberEntity">
+		SELECT id as meberId,
+		email,
+		phone_number,
+		last_name,
+		first_name,
+		postcode,
+		prefecture,
+		city,
+		block
+		FROM MEMBER WHERE id = "${value}"
 	</select>
 
 	<select id="findAll"
-		resultType="com.example.training.member.domain.Member">
-		SELECT * FROM MEMBER
+		resultType="com.example.training.member.MemberEntity">
+		SELECT 
+		id as meberId,
+		email,
+		phone_number,
+		last_name,
+		first_name,
+		postcode,
+		prefecture,
+		city,
+		block,
+		status,
+		last_updated_by
+		FROM MEMBER
 	</select>
 
 	<select id="findAddress"
@@ -169,14 +186,15 @@
 
 	<update id="updateAtOrder">
 		UPDATE MEMBER SET
-		first_name=#{orderForm.firstName},
-		last_name=#{orderForm.lastName},
-		phone_number=#{orderForm.phoneNumber},
-		postcode=#{orderForm.postcode},
-		prefecture=#{orderForm.prefecture},
-		city=#{orderForm.city},
-		block=#{orderForm.block}
-		WHERE id= #{orderForm.memberId}
+		first_name=#{orderForm.fullName.firstName},
+		last_name=#{orderForm.fullName.lastName},
+		phone_number=#{orderForm.phoneNumber.value},
+		postcode=#{orderForm.address.postcode.value},
+		prefecture=#{orderForm.address.prefecture.value},
+		city=#{orderForm.address.city.value},
+		block=#{orderForm.address.block.value}
+		WHERE id=
+		#{orderForm.memberId.value}
 	</update>
 
 

@@ -11,10 +11,10 @@
 		INSERT
 		INTO ORDERS (member_id, phone_number, name, address, email, price, date)
 		VALUES(
-		"${memberId}",
-		"${phoneNumber}",
-		"${fullName}",
-		"${address}",
+		"${memberId.value}",
+		"${phoneNumber.value}",
+		"${fullName.firstName}",
+		"${address.fullAddress}",
 		"${email}",
 		${price},
 		"${date}")

@@ -7,9 +7,9 @@ import com.example.training.member.domain.address.Postcode;
 import com.example.training.member.domain.address.Prefecture;
 import com.example.training.member.domain.form.MemberApplicationForm;
 
-import lombok.Data;
+import lombok.Getter;
 
-@Data
+@Getter
 public class Member {
 	public static final String SESSION_NAME = "MEMBER";
 	// 基本情報

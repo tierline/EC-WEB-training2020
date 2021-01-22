@@ -9,7 +9,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class FullName {
-	@NotEmpty
 	private String fullName;
 
 	@NotEmpty
@@ -23,19 +22,11 @@ public class FullName {
 	public FullName(String lastName, String firstName) {
 		this.lastName = lastName;
 		this.firstName = firstName;
-	}
-
-	public FullName(String fullName) {
-		this.fullName = fullName;
+		this.fullName = lastName + firstName;
 	}
 
 	public FullName() {
 
-	}
-
-	public FullName getFullName() {
-		String fullName = this.lastName + this.firstName;
-		return new FullName(fullName);
 	}
 
 }

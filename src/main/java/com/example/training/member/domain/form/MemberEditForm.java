@@ -13,15 +13,15 @@ import lombok.RequiredArgsConstructor;
 @Data
 public class MemberEditForm {
 
-  @NotEmpty
-  private int id;
+	@NotEmpty
+	private Long id;
 
-  @NotEmpty
-  @Email
-  @Size(min = 1, max = 128, message = "メールアドレスは1文字以上、128文字以内で入力してください")
-  private String email;
+	@NotEmpty
+	@Email
+	@Size(min = 1, max = 128, message = "メールアドレスは1文字以上、128文字以内で入力してください")
+	private String email;
 
-  @NotEmpty
-  private String status;
+	@NotEmpty
+	private String status;
 
 }
