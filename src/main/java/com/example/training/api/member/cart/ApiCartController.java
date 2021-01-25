@@ -2,9 +2,9 @@ package com.example.training.api.member.cart;
 
 import javax.servlet.http.HttpSession;
 
-import com.example.training.common.domain.Product;
-import com.example.training.common.domain.cart.Cart;
 import com.example.training.common.repository.ProductRepository;
+import com.example.training.domain.Product;
+import com.example.training.domain.cart.Cart;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;

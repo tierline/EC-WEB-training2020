@@ -3,7 +3,6 @@ package com.example.training.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.training.common.domain.Product;
 import com.example.training.common.domain.cart.Cart;
 import com.example.training.common.domain.order.Order;
 import com.example.training.common.domain.order.OrderHistoryAssembler;

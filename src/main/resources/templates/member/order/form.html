@@ -28,18 +28,18 @@
 						<label for="lastName">姓
 							<span class="badge badge-danger">必須</span>
 							<br>
-							<span th:if="${#fields.hasErrors('*{fullName.lastName}')}" th:errors="*{fullName.lastName}" class="col-sm-offset-2 text-danger"></span>
+							<span th:if="${#fields.hasErrors('*{lastName}')}" th:errors="*{lastName}" class="col-sm-offset-2 text-danger"></span>
 						</label>
-						<input type="text" class="form-control" th:field="*{fullName.lastName}">
+						<input type="text" class="form-control" th:field="*{lastName}">
 			</div>
 
 			<div class="form-group">
 						<label for="firstName">名
 							<span class="badge badge-danger">必須</span>
 							<br>
-							<span th:if="${#fields.hasErrors('*{fullName.firstName}')}" th:errors="*{fullName.firstName}" class="col-sm-offset-2 text-danger"></span>
+							<span th:if="${#fields.hasErrors('*{firstName}')}" th:errors="*{firstName}" class="col-sm-offset-2 text-danger"></span>
 						</label>
-						<input type="text" class="form-control" th:field="*{fullName.firstName}">
+						<input type="text" class="form-control" th:field="*{firstName}">
 			</div>
 
 			<div class="form-group">
@@ -47,9 +47,9 @@
 							<span class="badge badge-danger">必須</span>
 							<small>（ハイフンなしで数字のみ入力してください）</small>
 							<br>
-							<span th:if="${#fields.hasErrors('*{phoneNumber.value}')}" th:errors="*{phoneNumber.value}" class="col-sm-offset-2 text-danger"></span>
+							<span th:if="${#fields.hasErrors('*{phoneNumber}')}" th:errors="*{phoneNumber}" class="col-sm-offset-2 text-danger"></span>
 						</label>
-						<input type="text" class="form-control" th:field="*{phoneNumber.value}">
+						<input type="text" class="form-control" th:field="*{phoneNumber}">
 			</div>
 
 			<div class="form-group">
@@ -57,8 +57,8 @@
 							<span class="badge badge-danger">必須</span>
 							<small>（ハイフンなしで数字のみ入力してください）</small>
 							<br>
-							<span th:if="${#fields.hasErrors('*{address.postcode.value}')}" th:errors="*{address.postcode.value}" class="col-sm-offset-2 text-danger"></span>
-							<input type="text" class="form-control" th:field="*{address.postcode.value}">
+							<span th:if="${#fields.hasErrors('*{postcode}')}" th:errors="*{postcode}" class="col-sm-offset-2 text-danger"></span>
+							<input type="text" class="form-control" th:field="*{postcode}">
 						</label>
 			</div>
 
@@ -75,34 +75,29 @@
 						<label for="prefecture">都道府県
 							<span class="badge badge-danger">必須</span>
 							<br>
-							<span th:if="${#fields.hasErrors('*{address.prefecture.value}')}" th:errors="*{address.prefecture.value}" class="col-sm-offset-2 text-danger"></span>
+							<span th:if="${#fields.hasErrors('*{prefecture}')}" th:errors="*{prefecture}" class="col-sm-offset-2 text-danger"></span>
 						</label>
-						<input type="text" class="form-control" size="40" th:field="*{address.prefecture.value}">
+						<input type="text" class="form-control" size="40" th:field="*{prefecture}">
 			</div>
 
 			<div class="form-group">
 						<label for="city">市区町村
 							<span class="badge badge-danger">必須</span>
 							<br>
-							<span th:if="${#fields.hasErrors('*{address.city.value}')}" th:errors="*{address.city.value}" class="col-sm-offset-2 text-danger"></span>
+							<span th:if="${#fields.hasErrors('*{city}')}" th:errors="*{city}" class="col-sm-offset-2 text-danger"></span>
 						</label>
-						<input type="text" class="form-control" size="40" th:field="*{address.city.value}">
+						<input type="text" class="form-control" size="40" th:field="*{city}">
 			</div>
 
 			<div class="form-group">
 						<label for="block">番地
 							<span class="badge badge-danger">必須</span>
 							<br>
-							<span th:if="${#fields.hasErrors('*{address.block.value}')}" th:errors="*{address.block.value}" class="col-sm-offset-2 text-danger"></span>
+							<span th:if="${#fields.hasErrors('*{block}')}" th:errors="*{block}" class="col-sm-offset-2 text-danger"></span>
 						</label>
-						<input type="text" class="form-control" size="40" th:field="*{address.block.value}">
+						<input type="text" class="form-control" size="40" th:field="*{block}">
 			</div>
-<<<<<<< HEAD
-
 			<input type="hidden" name="memberId" th:value="*{memberId}"></input>
-=======
-			<input type="hidden" name="memberId.value" th:value="*{memberId.value}"></input>
->>>>>>> origin/tsukamoto-temp
 			<div class="py-2 text-right">
 				<button type="submit" class="btn btn-primary">確認画面へ進む  <i class="fi-arrow-right"></i></button>
 			</form>

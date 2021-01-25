@@ -5,11 +5,11 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import com.example.training.admin.domain.Admin;
-import com.example.training.member.MemberEntity;
-import com.example.training.member.domain.Member;
-import com.example.training.member.domain.MemberEditForm;
-import com.example.training.member.domain.MemberId;
-import com.example.training.member.repository.MemberRepository;
+import com.example.training.common.repository.MemberRepository;
+import com.example.training.domain.MemberEntity;
+import com.example.training.domain.member.Member;
+import com.example.training.domain.member.MemberEditForm;
+import com.example.training.domain.member.MemberId;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

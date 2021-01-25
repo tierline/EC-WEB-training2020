@@ -5,8 +5,8 @@ import java.util.Locale;
 
 import javax.servlet.http.HttpSession;
 
-import com.example.training.common.domain.Product;
 import com.example.training.common.repository.ProductRepository;
+import com.example.training.domain.Product;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;

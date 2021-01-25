@@ -13,7 +13,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.example.training.MemberSuccessHandler;
-import com.example.training.member.auth.LoginMemberDetailsService;
+import com.example.training.domain.service.LoginMemberDetailsService;
 
 @Configuration
 @EnableWebSecurity

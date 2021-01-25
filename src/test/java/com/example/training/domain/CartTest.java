@@ -7,9 +7,8 @@ import static org.junit.Assert.assertTrue;
 import java.util.List;
 import java.util.Optional;
 
-import com.example.training.common.domain.Product;
-import com.example.training.common.domain.cart.Cart;
-import com.example.training.common.domain.cart.CartItem;
+import com.example.training.domain.cart.Cart;
+import com.example.training.domain.cart.CartItem;
 
 import org.junit.jupiter.api.Test;
 

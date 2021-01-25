@@ -5,17 +5,17 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import com.example.training.common.domain.order.Order;
-import com.example.training.common.domain.order.OrderItem;
-import com.example.training.common.domain.order.OrderMonth;
-import com.example.training.domain.MemberId;
+import com.example.training.domain.member.MemberId;
+import com.example.training.domain.order.Order;
+import com.example.training.domain.order.OrderItem;
+import com.example.training.domain.order.OrderMonth;
 
 @Mapper
 public interface OrderRepository {
 
 	public int save(Order order);
 
-	public void saveItem(@Param("item") OrderItem item, @Param("id") int id);
+	public void saveItem(@Param("item") OrderItem item, @Param("id") Long id);
 
 	public List<OrderItem> findItemsByOrder(Order order);
 

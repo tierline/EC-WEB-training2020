@@ -12,10 +12,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
-import com.example.training.domain.Email;
-import com.example.training.domain.service.MemberSession;
-import com.example.training.member.domain.Member;
-import com.example.training.member.repository.MemberRepository;
+import com.example.training.common.repository.MemberRepository;
+import com.example.training.domain.MemberSession;
+import com.example.training.domain.member.Email;
+import com.example.training.domain.member.Member;
 
 @Component
 public class MemberSuccessHandler implements AuthenticationSuccessHandler {

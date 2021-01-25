@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.example.training.common.domain.Product;
-import com.example.training.common.domain.Quantity;
-import com.example.training.common.domain.cart.Cart;
 import com.example.training.common.repository.ProductRepository;
+import com.example.training.domain.Product;
+import com.example.training.domain.Quantity;
+import com.example.training.domain.cart.Cart;
 
 /**
  * @author

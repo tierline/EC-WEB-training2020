@@ -5,12 +5,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.example.training.domain.Email;
-import com.example.training.domain.RawPassword;
-import com.example.training.member.domain.DigestPassword;
-import com.example.training.member.domain.Member;
-import com.example.training.member.domain.MemberApplicationForm;
-import com.example.training.member.repository.MemberRepository;
+import com.example.training.common.repository.MemberRepository;
+import com.example.training.domain.member.DigestPassword;
+import com.example.training.domain.member.Email;
+import com.example.training.domain.member.Member;
+import com.example.training.domain.member.MemberApplicationForm;
+import com.example.training.domain.member.RawPassword;
 
 @Service
 public class MemberApplicationService {

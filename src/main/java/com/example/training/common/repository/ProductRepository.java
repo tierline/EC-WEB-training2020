@@ -3,9 +3,9 @@ package com.example.training.common.repository;
 import java.util.List;
 import java.util.Optional;
 
-import com.example.training.common.domain.Product;
-
 import org.apache.ibatis.annotations.Mapper;
+
+import com.example.training.domain.Product;
 
 @Mapper
 public interface ProductRepository {

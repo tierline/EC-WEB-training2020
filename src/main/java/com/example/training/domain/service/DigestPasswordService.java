@@ -4,9 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.example.training.domain.Email;
-import com.example.training.domain.MemberLoginForm;
-import com.example.training.member.repository.MemberRepository;
+import com.example.training.common.repository.MemberRepository;
+import com.example.training.domain.MemberSession;
+import com.example.training.domain.member.Email;
+import com.example.training.domain.member.MemberLoginForm;
 
 @Service
 public class DigestPasswordService {

@@ -5,17 +5,17 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
-import com.example.training.common.domain.cart.Cart;
-import com.example.training.common.domain.order.Order;
-import com.example.training.common.domain.order.OrderForm;
-import com.example.training.common.domain.order.OrderHistoryAssembler;
-import com.example.training.common.domain.order.OrderItem;
-import com.example.training.common.domain.order.OrderMonth;
+import com.example.training.common.repository.MemberRepository;
 import com.example.training.common.repository.OrderRepository;
 import com.example.training.common.service.OrderService;
-import com.example.training.member.domain.Member;
-import com.example.training.member.domain.MemberId;
-import com.example.training.member.repository.MemberRepository;
+import com.example.training.domain.cart.Cart;
+import com.example.training.domain.member.Member;
+import com.example.training.domain.member.MemberId;
+import com.example.training.domain.order.Order;
+import com.example.training.domain.order.OrderForm;
+import com.example.training.domain.order.OrderHistoryAssembler;
+import com.example.training.domain.order.OrderItem;
+import com.example.training.domain.order.OrderMonth;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;

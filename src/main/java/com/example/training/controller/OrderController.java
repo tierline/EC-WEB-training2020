@@ -12,11 +12,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.example.training.common.domain.cart.Cart;
-import com.example.training.common.domain.order.Order;
-import com.example.training.common.domain.order.OrderForm;
+import com.example.training.common.repository.MemberRepository;
 import com.example.training.common.service.OrderService;
-import com.example.training.member.domain.Member;
+import com.example.training.domain.MemberEntity;
+import com.example.training.domain.MemberSession;
+import com.example.training.domain.cart.Cart;
+import com.example.training.domain.member.Email;
+import com.example.training.domain.member.Member;
+import com.example.training.domain.order.Order;
+import com.example.training.domain.order.OrderForm;
 
 @Controller
 @RequestMapping("/member/order")
@@ -28,6 +32,9 @@ public class OrderController {
 	@Autowired
 	private OrderService orderService;
 
+	@Autowired
+	private MemberRepository memberRepository;
+
 	/**
 	 *
 	 * お届け先入力フォームを表示する
@@ -38,12 +45,14 @@ public class OrderController {
 	 */
 	@GetMapping("/form")
 	public String form(OrderForm orderForm, Model model) {
-		Member member = (Member) session.getAttribute(Member.SESSION_NAME);
+		MemberSession memberSession = (MemberSession) session.getAttribute(Member.SESSION_NAME);
 		OrderForm sessionOrderForm = (OrderForm) session.getAttribute(OrderForm.SESSION_NAME);
 		if (sessionOrderForm != null) {
 			model.addAttribute("orderForm", sessionOrderForm);
 		} else {
-			orderForm.setMemberInfo(member);
+			Email email = new Email(memberSession.getEmail());
+			MemberEntity entity = memberRepository.findByEmail(email).orElseThrow();
+			orderForm.setMemberInfo(entity);
 			session.setAttribute(OrderForm.SESSION_NAME, orderForm);
 		}
 		return "member/order/form";
@@ -85,7 +94,7 @@ public class OrderController {
 		// メンバーのリロード処理を追加
 		session.setAttribute(Cart.SESSION_NAME, new Cart());
 		session.removeAttribute(OrderForm.SESSION_NAME);
-		return "redirect:/member/order/complete/" + order.getId();
+		return "redirect:/member/order/complete/" + order.getOrderId();
 	}
 
 	/**

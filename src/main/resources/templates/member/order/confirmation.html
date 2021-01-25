@@ -31,13 +31,13 @@
               <tr>
                 <td class="table-secondary">お名前</td>
                 <td
-                  th:text="${orderForm.fullName.value}"
+                  th:text="${orderForm.lastName + orderForm.firstName}"
                 ></td>
               </tr>
               <tr>
                 <td class="table-secondary">お届け先</td>
                 <td
-                  th:text="${orderForm.address.value}"
+                  th:text="${'〒' + orderForm.postcode + ' ' + orderForm.prefecture + ' ' + orderForm.city + '' + orderForm.block}"
                 ></td>
               </tr>
               <tr>
@@ -46,7 +46,7 @@
               </tr>
               <tr>
                 <td class="table-secondary">電話番号</td>
-                <td th:text="${orderForm.phoneNumber.value}"></td>
+                <td th:text="${orderForm.phoneNumber}"></td>
               </tr>
             </tbody>
           </table>
@@ -71,7 +71,7 @@
                   />
                 </td>
                 <td th:text="${item.productName}"></td>
-                <td th:text="${item.quantity}"></td>
+                <td th:text="${item.quantity.value}"></td>
                 <td th:text="${item.productPrice}"></td>
                 <td th:text="${item.totalAmount}"></td>
               </tr>

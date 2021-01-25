@@ -7,16 +7,16 @@
 <mapper
 	namespace="com.example.training.common.repository.OrderRepository">
 
-	<insert id="save" useGeneratedKeys="true" keyProperty="id">
+	<insert id="save" useGeneratedKeys="true" keyProperty="orderId">
 		INSERT
 		INTO ORDERS (member_id, phone_number, name, address, email, price, date)
 		VALUES(
 		"${memberId.value}",
 		"${phoneNumber.value}",
-		"${fullName.firstName}",
+		"${fullName.value}",
 		"${address.value}",
-		"${email}",
-		${price},
+		"${email.value}",
+		${price.value},
 		"${date}")
 	</insert>
 
@@ -27,13 +27,13 @@
 		${id},
 		"${item.name}",
 		${item.price},
-		${item.quantity},
+		${item.quantity.value},
 		"${item.imagePath}"
 		)
 	</insert>
 
 	<select id="findItemsByOrder"
-		resultType="com.example.training.common.domain.OrderItem">
+		resultType="com.example.training.domain.order.OrderItem">
 		SELECT
 		name, price, quantity
 		FROM
@@ -44,7 +44,7 @@
 	</select>
 
 	<select id="findById"
-		resultType="com.example.training.common.domain.Order">
+		resultType="com.example.training.domain.order.Order">
 		SELECT
 		*
 		FROM
@@ -53,7 +53,7 @@
 	</select>
 
 	<select id="findByOrderMonthByMemberId"
-		resultType="com.example.training.common.domain.OrderMonth">
+		resultType="com.example.training.domain.order.OrderMonth">
 		SELECT
 		id as orderId,
 		`date`
@@ -63,7 +63,7 @@
 	</select>
 
 	<select id="findByOrderItem"
-		resultType="com.example.training.common.domain.OrderItem">
+		resultType="com.example.training.domain.order.OrderItem">
 		SELECT
 		name,
 		price,

@@ -5,13 +5,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.training.common.domain.cart.Cart;
-import com.example.training.common.domain.order.Order;
-import com.example.training.common.domain.order.OrderForm;
-import com.example.training.common.domain.order.OrderItem;
+import com.example.training.common.repository.MemberRepository;
 import com.example.training.common.repository.OrderRepository;
-import com.example.training.member.domain.Member;
-import com.example.training.member.repository.MemberRepository;
+import com.example.training.domain.cart.Cart;
+import com.example.training.domain.member.Member;
+import com.example.training.domain.member.MemberId;
+import com.example.training.domain.order.Order;
+import com.example.training.domain.order.OrderForm;
+import com.example.training.domain.order.OrderItem;
 
 @Service
 public class OrderService {
@@ -28,9 +29,9 @@ public class OrderService {
 	public Order order(OrderForm orderForm, Cart cart) {
 		Order order = orderForm.createOrder(cart);
 		this.saveByOrder(order, cart);
-		Member member = new Member(memberRepository.findById(orderForm.getMemberId()));
+		Member member = new Member(memberRepository.findById(new MemberId(orderForm.getMemberId())));
 		// 引数はmemberにすべき
-		orderForm.upDateMember(member);
+		orderForm.updateMember(member);
 		// 後で修正
 
 		// 注文の操作と関係ないcontrollerへ
@@ -48,7 +49,7 @@ public class OrderService {
 		orderRepository.save(order);
 		List<OrderItem> items = order.createItems(cart);
 		for (OrderItem item : items) {
-			orderRepository.saveItem(item, order.getId());
+			orderRepository.saveItem(item, order.getOrderId());
 		}
 	}
 }
