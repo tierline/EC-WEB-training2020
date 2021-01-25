@@ -60,7 +60,7 @@
               <tr th:each="item : ${cart.items}">
                 <td>
                   <img
-                    th:src="@{'/image/' + ${item.ProductImage}}"
+                    th:src="@{'/image/' + ${item.productImagePath}}"
                     alt=""
                     class="card-img-top"
                     style="width: 100px; height: 100px; object-fit: contain"
@@ -68,8 +68,8 @@
                 </td>
                 <td th:text="${item.productName}"></td>
                 <td th:text="${item.quantity.value}"></td>
-                <td th:text="${item.productPrice}"></td>
-                <td th:text="${item.totalAmount}"></td>
+                <td th:text="${item.productPrice.value}"></td>
+                <td th:text="${item.totalAmount.value}"></td>
               </tr>
             </tbody>
           </table>
@@ -77,7 +77,7 @@
             <span>
               合計注文金額：￥
               <span
-                th:text="${cart.totalAmount}"
+                th:text="${cart.totalAmount.value}"
                 class="h5 font-weight-bold"
               ></span>
               円

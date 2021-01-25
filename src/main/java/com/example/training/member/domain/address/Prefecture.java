@@ -10,7 +10,7 @@ import lombok.Setter;
 @Setter
 public class Prefecture {
 	@NotEmpty
-	@Size(min = 2, max = 4, message = "入力できる文字数を超過しています。")
+	@Size(max = 4, message = "入力できる文字数を超過しています。")
 	private String value;
 
 	public Prefecture(String value) {

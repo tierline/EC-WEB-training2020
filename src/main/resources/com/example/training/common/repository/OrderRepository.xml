@@ -7,7 +7,7 @@
 <mapper
 	namespace="com.example.training.common.repository.OrderRepository">
 
-	<insert id="save" useGeneratedKeys="true" keyProperty="id">
+	<insert id="create" useGeneratedKeys="true" keyProperty="id">
 		INSERT
 		INTO ORDERS (member_id, phone_number, name, address, email, price, date)
 		VALUES(
@@ -16,17 +16,17 @@
 		"${fullName.firstName}",
 		"${address.value}",
 		"${email}",
-		${price},
+		${price.value},
 		"${date.value}")
 	</insert>
 
-	<insert id="saveItem">
+	<insert id="createItem">
 		INSERT INTO ORDER_ITEM (order_id, name, price,
 		quantity, image_path)
 		VALUES(
 		${id},
 		"${item.name}",
-		${item.price},
+		${item.price.value},
 		${item.quantity.value},
 		"${item.imagePath}"
 		)
