@@ -5,7 +5,6 @@ import java.util.Optional;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,10 +13,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.training.domain.Email;
+import com.example.training.domain.MemberLoginForm;
+import com.example.training.domain.service.DigestPasswordService;
 import com.example.training.domain.service.MemberApplicationService;
+import com.example.training.domain.service.MemberSession;
+import com.example.training.member.MemberEntity;
 import com.example.training.member.domain.Member;
-import com.example.training.member.domain.form.MemberApplicationForm;
-import com.example.training.member.domain.form.MemberLoginForm;
+import com.example.training.member.domain.MemberApplicationForm;
 import com.example.training.member.repository.MemberRepository;
 
 @RestController
@@ -32,20 +35,24 @@ public class ApiMemberController {
 	private MemberApplicationService memberApplicationService;
 
 	@Autowired
-	private MemberRepository memberRepository;
+	private DigestPasswordService digestPasswordService;
 
 	@Autowired
-	private BCryptPasswordEncoder bCryptPasswordEncoder;
+	private MemberRepository memberRepository;
+
+//	@Autowired
+//	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	@CrossOrigin
 	@PostMapping("/applicate")
 	@ResponseBody
-	public Boolean create(@RequestBody MemberApplicationForm memberApplicationForm) {
-		Optional<Member> member = memberRepository.findByEmail(memberApplicationForm.getEmail());
+	public Boolean applicate(@RequestBody MemberApplicationForm memberApplicationForm) {
+		Email email = new Email(memberApplicationForm.getEmail());
+		Optional<MemberEntity> member = memberRepository.findByEmail(email);
 		if (member.isEmpty()) {
 			memberApplicationService.run(memberApplicationForm);
-			Optional<Member> memberDetail = memberRepository.findByEmail(memberApplicationForm.getEmail());
-			session.setAttribute(Member.SESSION_NAME, memberDetail.get());
+			MemberSession memberSession = memberRepository.findByEmailSession(email).orElseThrow();
+			session.setAttribute(Member.SESSION_NAME, memberSession);
 			return true;
 		} else {
 			return false;
@@ -56,24 +63,22 @@ public class ApiMemberController {
 	@PostMapping("/login")
 	@ResponseBody
 	public Boolean login(@RequestBody MemberLoginForm memberLoginForm) {
-		String password = memberLoginForm.getPassword();
-		Optional<Member> memberDetail = memberRepository.findByEmail(memberLoginForm.getEmail());
-		if (memberDetail.isPresent()) {
-			String hashPassword = memberDetail.get().getPassword();
-			Boolean result = bCryptPasswordEncoder.matches(password, hashPassword);
-			session.setAttribute(Member.SESSION_NAME, memberDetail.get());
-			return result;
+		Email email = new Email(memberLoginForm.getEmail());
+		Boolean isMatched = digestPasswordService.isMatched(memberLoginForm);
+		if (isMatched) {
+			MemberSession memberSession = memberRepository.findByEmailSession(email).orElseThrow();
+			session.setAttribute(Member.SESSION_NAME, memberSession);
 		}
-		return false;
-
+		return isMatched;
 	}
 
 	/*
 	 * 住所情報があったら表示する
 	 */
 	@GetMapping("/session")
+	@ResponseBody
 	public Member fetchMemberAddress() {
-		Member member = (Member) session.getAttribute(Member.SESSION_NAME);// member型 で address の変数名はおかしい
+		Member member = (Member) session.getAttribute(Member.SESSION_NAME);
 		return member;
 	}
 

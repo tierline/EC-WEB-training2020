@@ -7,6 +7,7 @@ import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.User;
 
 import com.example.training.member.domain.Member;
+import com.example.training.member.domain.Role;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -25,7 +26,7 @@ public class LoginMemberDetails extends User {
 	 * @param member memberエンティティ
 	 */
 	public LoginMemberDetails(Member member) {
-		super(member.getEmail(), member.getPassword(), createRole(member));
+		super(member.getEmail().getValue(), member.getPassword().getValue(), createRole());
 		this.member = member;
 	}
 
@@ -33,9 +34,12 @@ public class LoginMemberDetails extends User {
 		return member;
 	}
 
-	private static Collection<? extends GrantedAuthority> createRole(Member member) {
-		String authorityString = member.getRoles();
-		return AuthorityUtils.commaSeparatedStringToAuthorityList(authorityString);
+	/*
+	 * roleのセット
+	 */
+	private static Collection<? extends GrantedAuthority> createRole() {
+		String role = Role.ROLE_USER.name();
+		return AuthorityUtils.commaSeparatedStringToAuthorityList(role);
 	}
 
 }

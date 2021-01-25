@@ -1,4 +1,4 @@
-package com.example.training.common.controller;
+package com.example.training.controller;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.training.common.domain.cart.Cart;
+import com.example.training.common.domain.order.Order;
 import com.example.training.common.domain.order.OrderForm;
 import com.example.training.common.service.OrderService;
 import com.example.training.member.domain.Member;
@@ -28,9 +29,13 @@ public class OrderController {
 	private OrderService orderService;
 
 	/**
-	 * 住所入力フォームに遷移
+	 *
+	 * お届け先入力フォームを表示する
+	 *
+	 * @param orderForm
+	 * @param model
+	 * @return お届け先入力フォーム画面
 	 */
-	// TOREVIEW 変更済み
 	@GetMapping("/form")
 	public String form(OrderForm orderForm, Model model) {
 		Member member = (Member) session.getAttribute(Member.SESSION_NAME);
@@ -44,8 +49,15 @@ public class OrderController {
 		return "member/order/form";
 	}
 
-	// 注文内容確認画面を表示する
-	// TOREVIEW 変更済み
+	/**
+	 *
+	 * 注文確認画面を表示する
+	 *
+	 * @param orderForm
+	 * @param result
+	 * @param model
+	 * @return 注文確認画面
+	 */
 	@PostMapping("/confirmation")
 	public String confirmation(@Valid OrderForm orderForm, BindingResult result, Model model) {
 		session.setAttribute(OrderForm.SESSION_NAME, orderForm);
@@ -60,21 +72,29 @@ public class OrderController {
 	}
 
 	/**
+	 *
 	 * 注文を処理する
+	 *
+	 * @return 注文完了画面
 	 */
 	@PostMapping("/save")
 	public String save() {
 		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
 		OrderForm orderForm = (OrderForm) session.getAttribute(OrderForm.SESSION_NAME);
-		int orderId = orderService.order(orderForm, cart);
+		Order order = orderService.order(orderForm, cart);
 		// メンバーのリロード処理を追加
 		session.setAttribute(Cart.SESSION_NAME, new Cart());
 		session.removeAttribute(OrderForm.SESSION_NAME);
-		return "redirect:/member/order/complete/" + orderId;
+		return "redirect:/member/order/complete/" + order.getId();
 	}
 
 	/**
-	 * 注文完了画面
+	 *
+	 * 注文完了画面を表示する
+	 *
+	 * @param orderId
+	 * @param model
+	 * @return 注文完了画面
 	 */
 	@GetMapping("/complete/{orderId}")
 	public String complete(@PathVariable int orderId, Model model) {

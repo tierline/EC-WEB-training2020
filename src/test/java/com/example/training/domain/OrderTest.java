@@ -1,6 +1,5 @@
 package com.example.training.domain;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +15,7 @@ public class OrderTest {
 	@Test
 	void orderSave() {
 		Product product = new Product(1, "ガム", 20);
-		Cart cart = new Cart();
+		Cart cart = new Cart();w
 		cart.add(product);
 
 	}
@@ -25,16 +24,16 @@ public class OrderTest {
 	void orderMonth() {
 		OrderHistoryAssembler history = new OrderHistoryAssembler();
 		List<Order> orders = new ArrayList<Order>();
-		Order order1 = new Order(1, 1, LocalDate.of(2020, 10, 22));
-		Order order2 = new Order(2, 1, LocalDate.of(2020, 12, 12));
-		Order order3 = new Order(3, 1, LocalDate.of(2020, 12, 25));
-		Order order4 = new Order(4, 1, LocalDate.of(2020, 10, 2));
-		Order order5 = new Order(5, 1, LocalDate.of(2020, 10, 18));
-		orders.add(order1);
-		orders.add(order2);
-		orders.add(order3);
-		orders.add(order4);
-		orders.add(order5);
+		// Order order1 = new Order(1, 1, LocalDate.of(2020, 10, 22));
+		// Order order2 = new Order(2, 1, LocalDate.of(2020, 12, 12));
+		// Order order3 = new Order(3, 1, LocalDate.of(2020, 12, 25));
+		// Order order4 = new Order(4, 1, LocalDate.of(2020, 10, 2));
+		// Order order5 = new Order(5, 1, LocalDate.of(2020, 10, 18));
+		// orders.add(order1);
+		// orders.add(order2);
+		// orders.add(order3);
+		// orders.add(order4);
+		// orders.add(order5);
 		// history.create(1);
 	}
 }

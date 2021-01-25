@@ -1,4 +1,4 @@
-package com.example.training.member.domain.form;
+package com.example.training.domain;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -12,11 +12,11 @@ import lombok.RequiredArgsConstructor;
 @Data
 public class MemberLoginForm {
 
-  @NotEmpty
-  @Email
-  private String email;
+	@NotEmpty
+	@Email
+	private String email;
 
-  @NotEmpty
-  private String password;
+	@NotEmpty
+	private String password;
 
 }

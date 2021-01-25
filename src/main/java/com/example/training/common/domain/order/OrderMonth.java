@@ -1,14 +1,14 @@
 package com.example.training.common.domain.order;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import com.example.training.member.domain.MemberId;
 
 public class OrderMonth {
 	private MemberId memberId;
-	private LocalDate date;
+	private LocalDateTime date;
 
-	public LocalDate getDate() {
+	public LocalDateTime getDate() {
 		return this.date;
 	}
 }

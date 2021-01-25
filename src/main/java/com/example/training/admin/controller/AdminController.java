@@ -4,6 +4,13 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import com.example.training.admin.domain.Admin;
+import com.example.training.member.MemberEntity;
+import com.example.training.member.domain.Member;
+import com.example.training.member.domain.MemberEditForm;
+import com.example.training.member.domain.MemberId;
+import com.example.training.member.repository.MemberRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,13 +18,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import com.example.training.admin.domain.Admin;
-import com.example.training.member.MemberEntity;
-import com.example.training.member.domain.Member;
-import com.example.training.member.domain.MemberId;
-import com.example.training.member.domain.form.MemberEditForm;
-import com.example.training.member.repository.MemberRepository;
 
 @Controller
 @RequestMapping("/admin")

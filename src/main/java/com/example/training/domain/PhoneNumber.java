@@ -1,4 +1,4 @@
-package com.example.training.member.domain;
+package com.example.training.domain;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;

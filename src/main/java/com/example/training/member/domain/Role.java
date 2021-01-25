@@ -1,5 +1,5 @@
 package com.example.training.member.domain;
 
-public class RowPassword {
-
+public enum Role {
+	ROLE_USER, ADMIN_USER;
 }

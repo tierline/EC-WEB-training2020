@@ -1,6 +1,6 @@
 package com.example.training.common.domain.order;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Email;
@@ -8,11 +8,11 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 import com.example.training.common.domain.cart.Cart;
-import com.example.training.member.domain.Address;
+import com.example.training.domain.Address;
+import com.example.training.domain.MemberId;
+import com.example.training.domain.PhoneNumber;
 import com.example.training.member.domain.FullName;
 import com.example.training.member.domain.Member;
-import com.example.training.member.domain.MemberId;
-import com.example.training.member.domain.PhoneNumber;
 
 import lombok.Data;
 
@@ -45,14 +45,24 @@ public class OrderForm {
 	private Address address;
 	@Valid
 	private MemberId memberId;
-	private LocalDate dateNow = LocalDate.now();
+
+	private LocalDateTime dateNow = LocalDateTime.now();
 
 	public Order createOrder(Cart cart) {
 		return new Order(this, cart);
 	}
 
+	/**
+	 *
+	 * お届け先入力フォームに会員情報をセットする
+	 *
+	 * @param member
+	 */
 	public void setMemberInfo(Member member) {
-		this.fullName = member.getFullName();
+		this.fullName = member.getLastName() + member.getFirstName();
+		this.lastName = member.getLastName();
+		this.firstName = member.getFirstName();
+		// this.fullName = this.getFullName();
 		this.email = member.getEmail();
 		this.phoneNumber = member.getPhoneNumber();
 		this.address = member.getAddress();

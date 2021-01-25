@@ -27,6 +27,30 @@ public class ApiCartController {
 
 	/**
 	 *
+	 * 会員のカートを返す
+	 *
+	 * @return
+	 */
+	@GetMapping("/")
+	public Cart getCart() {
+		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
+		return cart;
+	}
+
+	/**
+	 *
+	 * カート内の商品を返す
+	 *
+	 * @return
+	 */
+	@GetMapping("/list")
+	public Object list() {
+		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
+		return cart;
+	}
+
+	/**
+	 *
 	 * カートに商品の追加する
 	 *
 	 * @return
@@ -40,28 +64,32 @@ public class ApiCartController {
 
 	/**
 	 *
+	 * カートの商品の数量を変更する
+	 *
+	 * @param id
+	 * @return
+	 */
+	// public void changeItemQuantity(@PathVariable int productId, @PathVariable int
+	// quantity) {
+	@PostMapping("/changeQuantity/{productId}/{quantity}")
+	public void changeItemQuantity(@PathVariable int productId, @PathVariable int quantity) {
+		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
+		Product product = productRepository.findId(productId).orElseThrow();
+		cart.changeItemQuantity(product, quantity);
+	}
+
+	/**
+	 *
 	 * カートから特定の商品をすべて削除する
 	 *
 	 * @param id
 	 * @return
 	 */
-	@PostMapping("/delete/{productId}")
-	public void cartFromParticularProductsAllDelete(@PathVariable int productId) {
+	@PostMapping("/remove/{productId}")
+	public Cart cartFromParticularProductsAllDelete(@PathVariable int productId) {
 		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
 		Product product = productRepository.findId(productId).orElseThrow();
 		cart.removeAll(product);
-		// return this.cart 削除時に一緒にその時点のカートを返す
-	}
-
-	/**
-	 *
-	 * カート内の商品を返す
-	 *
-	 * @return
-	 */
-	@GetMapping("/list")
-	public Object list() {
-		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
 		return cart;
 	}
 

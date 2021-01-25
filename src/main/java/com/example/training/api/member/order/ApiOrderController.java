@@ -5,15 +5,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.example.training.common.domain.cart.Cart;
 import com.example.training.common.domain.order.Order;
 import com.example.training.common.domain.order.OrderForm;
@@ -25,6 +16,15 @@ import com.example.training.common.service.OrderService;
 import com.example.training.member.domain.Member;
 import com.example.training.member.domain.MemberId;
 import com.example.training.member.repository.MemberRepository;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin
 @RestController
@@ -73,14 +73,14 @@ public class ApiOrderController {
 	}
 
 	/**
-	 * 注文番号から注文明細を返す
+	 * 注文番号から注文商品を返す
 	 */
 	@GetMapping("/orderedItemList/{id}")
 	public List<OrderItem> orderedItemList(@PathVariable Integer id) {
 		Order order = orderRepository.findById(id);
 		List<OrderItem> items = orderRepository.findItemsByOrder(order);
-		return items;
 
+		return items;
 	}
 
 	/*

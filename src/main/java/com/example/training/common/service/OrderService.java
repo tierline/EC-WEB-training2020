@@ -37,7 +37,13 @@ public class OrderService {
 		return order;
 	}
 
-	// トランザクションで区切る必要
+	/**
+	 *
+	 * 注文と注文された商品を保存する
+	 *
+	 * @param order
+	 * @param cart
+	 */
 	private void saveByOrder(Order order, Cart cart) {
 		orderRepository.save(order);
 		List<OrderItem> items = order.createItems(cart);

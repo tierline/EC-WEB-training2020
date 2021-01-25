@@ -36,8 +36,12 @@ public class CartItem {
 		this.quantity = this.quantity.add(quantity);
 	}
 
+	public void changeQuantity(Quantity quantity) {
+		this.quantity = quantity;
+	}
+
 	public void removeQuantity(Quantity quantity) {
-		this.quantity = this.quantity.remove(quantity);
+		this.quantity = ;
 	}
 
 	public void removeAll() {

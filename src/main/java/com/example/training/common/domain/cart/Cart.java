@@ -13,7 +13,7 @@ public class Cart {
 	private int totalAmount;
 
 	/**
-	 * 商品をカートに追加する
+	 * カートに商品を1つ追加する
 	 *
 	 * @param item 商品
 	 */
@@ -22,7 +22,7 @@ public class Cart {
 	}
 
 	/**
-	 * 商品をカートに追加する
+	 * カートに商品を引数個分、追加する
 	 *
 	 * @param item
 	 * @param quantity
@@ -33,6 +33,14 @@ public class Cart {
 			itemOpt.get().addQuantity(quantity);
 		} else {
 			items.add(new CartItem(product));
+		}
+	}
+
+	public void changeItemQuantity(Product product, Quantity quantity) {
+		CartItem item = getItem(product).orElseThrow();
+		item.changeQuantity(quantity);
+		if (item.isEmpty()) {
+			this.items.remove(item);
 		}
 	}
 
@@ -78,7 +86,7 @@ public class Cart {
 	}
 
 	/**
-	 * カートの中身の取得
+	 * カート内の商品を取得する
 	 *
 	 * @return
 	 */
@@ -87,7 +95,7 @@ public class Cart {
 	}
 
 	/**
-	 * 商品が存在するか確認
+	 * 商品が存在するか確認する
 	 *
 	 * @param product
 	 * @return
@@ -103,7 +111,7 @@ public class Cart {
 	}
 
 	/**
-	 * カート内のすべての商品の合計金額を取得
+	 * カート内のすべての商品の合計金額を取得する
 	 *
 	 * @return
 	 */
@@ -114,7 +122,6 @@ public class Cart {
 		for (CartItem item : items) {
 			this.totalAmount += item.getTotalAmount();
 		}
-//		this.totalAmount = new TotalAmount(this.getItems());
 		return this.totalAmount;
 	}
 }

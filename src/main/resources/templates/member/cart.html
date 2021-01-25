@@ -8,7 +8,6 @@
       th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}"
     />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
     <link
       href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css"
       rel="stylesheet"
@@ -44,12 +43,42 @@
                 th:src="@{'/image/' + ${item.ProductImage}}"
                 alt=""
                 class="card-img-top"
-                style="width: 150px; height: 150px; object-fit: contain"
+                style="width: 200px; height: 200px; object-fit: contain"
               />
             </td>
+<<<<<<< HEAD
+            <td class="h5 pt-3" th:text="${item.productName}"></td>
+            <td class="h5 pt-3" th:text="${'￥' + item.ProductPrice}"></td>
+            <td>
+              <!-- <form
+                th:action="@{/member/cart/addPost/{id}(id=${item.productId})/{quantity}(quantity=${value})}"
+                method="post"
+              > -->
+              <form
+                th:action="@{/member/cart/changeQuantity/{id}(id=${item.productId})}"
+                method="post"
+              >
+                <select
+                  class="form-control"
+                  name="quantity"
+                  id="quantity"
+                  onchange="this.form.submit()"
+                  style="width: 80px"
+                >
+                  <option
+                    th:each="i : ${#numbers.sequence(0, 20)}"
+                    th:value="${i}"
+                    th:text="${i}"
+                    th:selected="${item.quantity == i}"
+                  ></option>
+                </select>
+              </form>
+            </td>
+=======
             <td th:text="${item.productName}"></td>
             <td th:text="${item.ProductPrice}"></td>
             <td th:text="${item.quantity.value}"></td>
+>>>>>>> origin/tsukamoto-temp
             <td>
               <a
                 th:href="@{/member/cart/delete/{id}(id=${item.productId})}"

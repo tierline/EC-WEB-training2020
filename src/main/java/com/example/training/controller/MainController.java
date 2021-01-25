@@ -1,4 +1,4 @@
-package com.example.training.common.controller;
+package com.example.training.controller;
 
 import java.util.List;
 import java.util.Locale;

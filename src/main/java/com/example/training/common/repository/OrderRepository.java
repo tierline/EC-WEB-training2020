@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import com.example.training.common.domain.order.Order;
 import com.example.training.common.domain.order.OrderItem;
 import com.example.training.common.domain.order.OrderMonth;
-import com.example.training.member.domain.MemberId;
+import com.example.training.domain.MemberId;
 
 @Mapper
 public interface OrderRepository {

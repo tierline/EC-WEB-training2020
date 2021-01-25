@@ -12,16 +12,11 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
-import com.example.training.member.MemberEntity;
+import com.example.training.domain.Email;
+import com.example.training.domain.service.MemberSession;
 import com.example.training.member.domain.Member;
 import com.example.training.member.repository.MemberRepository;
 
-/**
- * 認証成功時のハンドラ
- *
- * @author T.Harao
- *
- */
 @Component
 public class MemberSuccessHandler implements AuthenticationSuccessHandler {
 
@@ -37,10 +32,10 @@ public class MemberSuccessHandler implements AuthenticationSuccessHandler {
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
-		String email = authentication.getName();
-		MemberEntity entity = memberRepository.findByEmailMember(email).orElseThrow();
-		Member member = new Member(entity);
-		session.setAttribute(Member.SESSION_NAME, member);
+		String name = authentication.getName();
+		Email email = new Email(name);
+		MemberSession memberSession = memberRepository.findByEmailSession(email).orElseThrow();
+		session.setAttribute(Member.SESSION_NAME, memberSession);
 		response.sendRedirect("/");
 	}
 }

@@ -17,7 +17,7 @@ CREATE TABLE ADMIN (
 );
 
 CREATE TABLE MEMBER (
-  id INT(11) NOT NULL AUTO_INCREMENT,
+  id INT(11) NOT NULL AUTO_INCREMENT, -- fix: Long型？ --
   password VARCHAR(256),
   email VARCHAR(128),
   phone_number VARCHAR(16),
@@ -30,8 +30,7 @@ CREATE TABLE MEMBER (
   city VARCHAR(256),
   block	 VARCHAR(256),
 
-  -- last_updated_by -> last_update_admin 明示的に --
-  last_updated_by VARCHAR(32), -- default: "none", changed: "変更した管理者の名前" --
+  last_update_admin VARCHAR(32), -- default: "none", changed: "変更した管理者の名前" --
   status VARCHAR(32), -- 未承認:unapproved, 承認:approval --
   PRIMARY KEY (id),
   UNIQUE(email)
@@ -72,6 +71,6 @@ CREATE TABLE ORDERS (
   name VARCHAR(32),
   address VARCHAR(256),
   price INT(12),
-  date DATE,
+  date DATETIME,
   PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

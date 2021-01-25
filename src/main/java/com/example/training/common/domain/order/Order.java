@@ -1,6 +1,7 @@
 package com.example.training.common.domain.order;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,10 +16,6 @@ import lombok.Data;
 
 @Data
 public class Order {
-
-	// クラスのコメント,メソッドのコメントをjavadocで。
-	// メソッドのコメントは「何をやっているか」は日本語で書いていきたい
-
 	private int id;
 	private MemberId memberId;
 	private FullName fullName;
@@ -27,8 +24,16 @@ public class Order {
 	private PhoneNumber phoneNumber;
 	// Priceクラス
 	private int price;
-	private LocalDate date;
+	private String date;
+	private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
+	/**
+	 *
+	 * 注文処理用コンストラクタ
+	 *
+	 * @param orderForm
+	 * @param cart
+	 */
 	public Order(OrderForm orderForm, Cart cart) {
 		this.memberId = orderForm.getMemberId();
 		this.fullName = orderForm.getFullName();
@@ -45,17 +50,25 @@ public class Order {
 		this.date = date;
 	}
 
-//	public Order(int orderId, MemberId memberId, String email, PhoneNumber phone_number, FullName fullName,
-//			Address address, int price, LocalDate date) {
-//		this(orderId, memberId, date);
-//		this.email = email;
-//		this.phoneNumber = phone_number;
-//		this.fullName = fullName;
-//		this.address = address;
-//		this.price = price;
-//
-//	}
+	// public Order(int orderId, MemberId memberId, String email, PhoneNumber
+	// phone_number, FullName fullName,
+	// Address address, int price, LocalDate date) {
+	// this(orderId, memberId, date);
+	// this.email = email;
+	// this.phoneNumber = phone_number;
+	// this.fullName = fullName;
+	// this.address = address;
+	// this.price = price;
+	//
+	// }
 
+	/**
+	 *
+	 * 注文から注文商品を生成する
+	 *
+	 * @param cart
+	 * @return
+	 */
 	public List<OrderItem> createItems(Cart cart) {
 		List<OrderItem> results = new ArrayList<OrderItem>(cart.getSize());
 		for (CartItem item : cart.getItems()) {

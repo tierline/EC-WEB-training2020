@@ -6,16 +6,6 @@
 <mapper
 	namespace="com.example.training.member.repository.MemberRepository">
 	<select id="findByEmail"
-		resultType="com.example.training.member.domain.Member">
-		SELECT
-		*
-		FROM
-		MEMBER
-		WHERE
-		email = "${email}"
-	</select>
-
-	<select id="findByEmailMember"
 		resultType="com.example.training.member.MemberEntity">
 		SELECT
 		id as memberId,
@@ -29,6 +19,18 @@
 		city,
 		block,
 		last_updated_by,
+		status
+		FROM
+		MEMBER
+		WHERE
+		email = "${email}"
+	</select>
+
+	<select id="findByEmailMember"
+		resultType="com.example.training.member.MemberSession">
+		SELECT
+		id as memberId,
+		email,
 		status
 		FROM
 		MEMBER
@@ -128,7 +130,7 @@
 
 	<select id="findAll"
 		resultType="com.example.training.member.MemberEntity">
-		SELECT 
+		SELECT
 		id as meberId,
 		email,
 		phone_number,
@@ -161,19 +163,13 @@
 	</select>
 
 	<insert id="create" useGeneratedKeys="true">
-		INSERT INTO MEMBER (email,
-		password, last_updated_by, status) VALUES (
+		INSERT INTO MEMBER (email, password, last_updated_by, status) VALUES (
 		"${email}",
 		"${password}",
 		"none",
 		"unapproved"
 		)
 	</insert>
-
-	<select id="countByEmail" resultType="int">
-		SELECT COUNT(*) FROM MEMBER
-		WHERE email = #{email}
-	</select>
 
 	<update id="update">
 		UPDATE MEMBER SET
