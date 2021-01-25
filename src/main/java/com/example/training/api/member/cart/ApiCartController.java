@@ -3,6 +3,7 @@ package com.example.training.api.member.cart;
 import javax.servlet.http.HttpSession;
 
 import com.example.training.common.domain.Product;
+import com.example.training.common.domain.Quantity;
 import com.example.training.common.domain.cart.Cart;
 import com.example.training.common.repository.ProductRepository;
 
@@ -62,20 +63,20 @@ public class ApiCartController {
 		cart.add(product);
 	}
 
+	// fix
 	/**
-	 *
-	 * カートの商品の数量を変更する
-	 *
-	 * @param id
-	 * @return
-	 */
-	// public void changeItemQuantity(@PathVariable int productId, @PathVariable int
-	// quantity) {
+	*
+	* カートの商品の数量を変更する
+	*
+	* @param id
+	* @return
+	*/
 	@PostMapping("/changeQuantity/{productId}/{quantity}")
-	public void changeItemQuantity(@PathVariable int productId, @PathVariable int quantity) {
-		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
-		Product product = productRepository.findId(productId).orElseThrow();
-		cart.changeItemQuantity(product, quantity);
+	public void changeItemQuantity(@PathVariable int productId, @PathVariable int
+	quantity) {
+	Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
+	Product product = productRepository.findId(productId).orElseThrow();
+	cart.changeItemQuantity(product, new Quantity(quantity));
 	}
 
 	/**

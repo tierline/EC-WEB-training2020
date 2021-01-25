@@ -28,7 +28,7 @@
 		prefecture,
 		city,
 		block,
-		last_updated_by,
+		last_update_admin,
 		status
 		FROM
 		MEMBER
@@ -139,7 +139,7 @@
 		city,
 		block,
 		status,
-		last_updated_by
+		last_update_admin
 		FROM MEMBER
 	</select>
 
@@ -161,18 +161,18 @@
 	</select>
 
 	<insert id="create" useGeneratedKeys="true">
-		INSERT INTO MEMBER (email, password, last_updated_by, status) VALUES (
+		INSERT INTO MEMBER (email, password, last_update_admin, status) VALUES (
 		"${email}",
-		"${password}",
-		"none",
-		"unapproved"
+		"${digestPassword}",
+		"${lastUpdatedBy}",
+		"${status}"
 		)
 	</insert>
 
 	<update id="update">
 		UPDATE MEMBER SET
 		email=#{memberEditForm.email},
-		last_updated_by=#{lastUpdatedBy},
+		last_update_admin=#{lastUpdatedBy},
 		status=#{memberEditForm.status}
 		WHERE
 		id= #{memberEditForm.id}

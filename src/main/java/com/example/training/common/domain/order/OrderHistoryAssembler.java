@@ -21,8 +21,8 @@ public class OrderHistoryAssembler {
 
 	// TOREVIEW
 	public Map<Integer, List<OrderMonth>> create(Member member) {
-		MemberId id = member.getId();
-		List<OrderMonth> orderMonthList = orderRepository.findByOrderMonthByMemberId(id);
+		MemberId memberId = member.getId();
+		List<OrderMonth> orderMonthList = orderRepository.findByOrderMonthByMemberId(memberId);
 		Map<Integer, List<OrderMonth>> map = new TreeMap<>();
 		for (OrderMonth orderMonth : orderMonthList) {
 			int month = orderMonth.getDate().getMonthValue();

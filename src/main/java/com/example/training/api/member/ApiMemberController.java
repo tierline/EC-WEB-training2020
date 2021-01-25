@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 
+import com.example.training.member.MemberEntity;
 import com.example.training.member.domain.Member;
 import com.example.training.member.domain.MemberApplicationForm;
 import com.example.training.member.domain.MemberLoginForm;
@@ -52,15 +53,17 @@ public class ApiMemberController {
 		}
 	}
 
+	// fix
 	@CrossOrigin
 	@PostMapping("/login")
 	@ResponseBody
 	public Boolean login(@RequestBody MemberLoginForm memberLoginForm) {
 		String password = memberLoginForm.getPassword();
-		Member member = memberRepository.findByEmail(memberLoginForm.getEmail()).orElseThrow();
-		String hashPassword = member.getPassword();
+		MemberEntity memberEntity = memberRepository.findByEmailMember(memberLoginForm.getEmail()).orElseThrow();
+		String hashPassword = memberEntity.getPassword();
 		Boolean isMatched = bCryptPasswordEncoder.matches(password, hashPassword);
 		if (isMatched) {
+			Member member = new Member(memberEntity);
 			session.setAttribute(Member.SESSION_NAME, member);
 		}
 		return isMatched;
@@ -71,8 +74,8 @@ public class ApiMemberController {
 	 */
 	@GetMapping("/session")
 	@ResponseBody
-	public Member fetchMemberAddress() {
-		Member member = (Member) session.getAttribute(Member.SESSION_NAME);
+	public Member fetchMemberSession() {
+		Member member = (Member) session.getAttribute(Member.SESSION_NAME); // fix
 		return member;
 	}
 

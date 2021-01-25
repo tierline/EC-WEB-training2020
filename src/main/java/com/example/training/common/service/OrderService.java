@@ -2,7 +2,6 @@ package com.example.training.common.service;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import com.example.training.common.domain.cart.Cart;
@@ -26,9 +25,6 @@ public class OrderService {
 	@Autowired
 	private MemberRepository memberRepository;
 
-	@Autowired
-	private HttpSession session;
-
 	/**
 	 *
 	 * 注文処理をする
@@ -43,7 +39,7 @@ public class OrderService {
 		memberRepository.updateAtOrder(orderForm); // formは渡さないmemberとして！
 		Member member = new Member(memberRepository.findById(orderForm.getMemberId()));
 		// session.setAttribute(Member.SESSION_NAME, member); 不要
-		return order.getId();
+		return order.getId(); // fix orderそのものを返す
 	}
 
 	/**

@@ -1,10 +1,10 @@
 package com.example.training.common.domain.order;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.training.common.domain.Date;
 import com.example.training.common.domain.cart.Cart;
 import com.example.training.common.domain.cart.CartItem;
 import com.example.training.member.domain.Address;
@@ -23,9 +23,8 @@ public class Order {
 	private String email;
 	private PhoneNumber phoneNumber;
 	// Priceクラス
-	private int price;
-	private String date;
-	private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+	private int price; // fix
+	private Date date;
 
 	/**
 	 *
@@ -40,14 +39,15 @@ public class Order {
 		this.address = orderForm.getAddress();
 		this.email = orderForm.getEmail();
 		this.phoneNumber = orderForm.getPhoneNumber();
-		this.date = orderForm.getDateNow();
+		this.date = orderForm.getOrderDateAndTime();
+		this.price = cart.getTotalAmount();
 	}
 
 	// TOREVIEW 要修正、必要か？
-	public Order(int orderId, MemberId memberId, LocalDate date) {
+	public Order(int orderId, MemberId memberId, LocalDateTime date) {
 		this.id = orderId;
 		this.memberId = memberId;
-		this.date = date;
+		this.date = new Date(date);
 	}
 
 	// public Order(int orderId, MemberId memberId, String email, PhoneNumber

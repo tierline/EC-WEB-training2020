@@ -7,12 +7,18 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
+import com.example.training.common.OrderFormEntity;
+import com.example.training.common.domain.Date;
 import com.example.training.common.domain.cart.Cart;
 import com.example.training.member.domain.Address;
 import com.example.training.member.domain.FullName;
 import com.example.training.member.domain.Member;
 import com.example.training.member.domain.MemberId;
 import com.example.training.member.domain.PhoneNumber;
+import com.example.training.member.domain.address.Block;
+import com.example.training.member.domain.address.City;
+import com.example.training.member.domain.address.Postcode;
+import com.example.training.member.domain.address.Prefecture;
 
 import lombok.Data;
 
@@ -20,13 +26,17 @@ import lombok.Data;
 public class OrderForm {
 	public static final String SESSION_NAME = "ORDER_FORM";
 
-	public OrderForm(OrderForm form, MemberId id) {
-		this.fullName = form.getFullName();
-		this.email = form.getEmail();
-		this.phoneNumber = form.getPhoneNumber();
-		this.address = form.getAddress();
-		this.dateNow = getDateNow();
-		this.memberId = id;
+	public OrderForm(OrderFormEntity orderFormEntity, MemberId memberId) {
+		this.fullName = new FullName(orderFormEntity.getLastName(), orderFormEntity.getFirstName());
+		this.email = orderFormEntity.getEmail();
+		this.phoneNumber = new PhoneNumber(orderFormEntity.getPhoneNumber());
+		Postcode postcode = new Postcode(orderFormEntity.getPostcode());
+		Prefecture prefecture = new Prefecture(orderFormEntity.getPrefecture());
+		City city = new City(orderFormEntity.getCity());
+		Block block = new Block(orderFormEntity.getBlock());
+		this.address = new Address(postcode, prefecture, city, block);
+		this.orderDateAndTime = getOrderDateAndTime();
+		this.memberId = memberId;
 	}
 
 	public OrderForm() {
@@ -45,7 +55,7 @@ public class OrderForm {
 	@Valid
 	private MemberId memberId;
 
-	private LocalDateTime dateNow = LocalDateTime.now();
+	private Date orderDateAndTime = new Date(LocalDateTime.now());
 
 	public Order createOrder(Cart cart) {
 		return new Order(this, cart);
@@ -58,10 +68,7 @@ public class OrderForm {
 	 * @param member
 	 */
 	public void setMemberInfo(Member member) {
-		this.fullName = member.getLastName() + member.getFirstName();
-		this.lastName = member.getLastName();
-		this.firstName = member.getFirstName();
-		// this.fullName = this.getFullName();
+		this.fullName = member.getFullName();
 		this.email = member.getEmail();
 		this.phoneNumber = member.getPhoneNumber();
 		this.address = member.getAddress();

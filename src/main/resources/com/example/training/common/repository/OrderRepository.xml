@@ -17,7 +17,7 @@
 		"${address.value}",
 		"${email}",
 		${price},
-		"${date}")
+		"${date.value}")
 	</insert>
 
 	<insert id="saveItem">
@@ -27,13 +27,13 @@
 		${id},
 		"${item.name}",
 		${item.price},
-		${item.quantity},
+		${item.quantity.value},
 		"${item.imagePath}"
 		)
 	</insert>
 
 	<select id="findItemsByOrder"
-		resultType="com.example.training.common.domain.OrderItem">
+		resultType="com.example.training.common.domain.order.OrderItem">
 		SELECT
 		name, price, quantity
 		FROM
@@ -44,7 +44,7 @@
 	</select>
 
 	<select id="findById"
-		resultType="com.example.training.common.domain.Order">
+		resultType="com.example.training.common.domain.order.Order">
 		SELECT
 		*
 		FROM
@@ -53,17 +53,17 @@
 	</select>
 
 	<select id="findByOrderMonthByMemberId"
-		resultType="com.example.training.common.domain.OrderMonth">
+		resultType="com.example.training.common.domain.order.OrderMonth">
 		SELECT
 		id as orderId,
 		`date`
 		FROM ORDERS AS o
-		WHERE member_id = ${id}
+		WHERE member_id = ${value}
 		ORDER BY `date` DESC
 	</select>
 
 	<select id="findByOrderItem"
-		resultType="com.example.training.common.domain.OrderItem">
+		resultType="com.example.training.common.domain.order.OrderItem">
 		SELECT
 		name,
 		price,

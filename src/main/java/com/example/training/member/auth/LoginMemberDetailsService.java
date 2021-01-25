@@ -2,16 +2,16 @@ package com.example.training.member.auth;
 
 import java.util.Optional;
 
+import com.example.training.member.MemberEntity;
+import com.example.training.member.domain.Member;
+import com.example.training.member.repository.MemberRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.example.training.member.MemberEntity;
-import com.example.training.member.domain.Member;
-import com.example.training.member.repository.MemberRepository;
 
 @Component("LoginMemberDetailsService")
 public class LoginMemberDetailsService implements UserDetailsService {
@@ -29,7 +29,6 @@ public class LoginMemberDetailsService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 		assert (email != null);
-//		Optional<Member> memberOpt = memberRepository.findByEmail(email);
 		Optional<MemberEntity> memberOpt = memberRepository.findByEmailMember(email);
 		if (memberOpt.isEmpty()) {
 			throw new UsernameNotFoundException("User not found for email: " + email);

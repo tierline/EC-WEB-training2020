@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import com.example.training.common.OrderFormEntity;
 import com.example.training.common.domain.cart.Cart;
 import com.example.training.common.domain.order.Order;
 import com.example.training.common.domain.order.OrderForm;
@@ -50,7 +51,7 @@ public class ApiOrderController {
 	 * 注文処理を行う
 	 */
 	@PostMapping("/save")
-	public Integer save(@RequestBody OrderForm order) {
+	public Integer save(@RequestBody OrderFormEntity order) {
 		Member member = (Member) session.getAttribute(Member.SESSION_NAME);
 		MemberId memberId = member.getId();
 		OrderForm orderForm = new OrderForm(order, memberId);

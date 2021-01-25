@@ -41,7 +41,7 @@ public class CartItem {
 	}
 
 	public void removeQuantity(Quantity quantity) {
-		this.quantity = ;
+		this.quantity = quantity;
 	}
 
 	public void removeAll() {

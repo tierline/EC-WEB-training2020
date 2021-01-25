@@ -12,8 +12,13 @@ public class MemberId {
 	private Long value;
 
 	// 要バリデーション追加
-	public MemberId(Long value) {
-		this.value = value;
+	public MemberId(Long memberId) {
+		this.value = memberId;
+	}
+
+	// 要バリデーション追加
+	public MemberId(String memberId) {
+		this.value = Long.parseLong(memberId);
 	}
 
 	public MemberId() {

@@ -26,19 +26,15 @@
             <tbody>
               <tr>
                 <td class="table-secondary">注文日</td>
-                <td th:text="${orderForm.orderDateAndTime}"></td>
+                <td th:text="${orderForm.orderDateAndTime.value}"></td>
               </tr>
               <tr>
                 <td class="table-secondary">お名前</td>
-                <td
-                  th:text="${orderForm.fullName.value}"
-                ></td>
+                <td th:text="${orderForm.fullName.value}"></td>
               </tr>
               <tr>
                 <td class="table-secondary">お届け先</td>
-                <td
-                  th:text="${orderForm.address.value}"
-                ></td>
+                <td th:text="${orderForm.address.value}"></td>
               </tr>
               <tr>
                 <td class="table-secondary">メールアドレス</td>
@@ -71,7 +67,7 @@
                   />
                 </td>
                 <td th:text="${item.productName}"></td>
-                <td th:text="${item.quantity}"></td>
+                <td th:text="${item.quantity.value}"></td>
                 <td th:text="${item.productPrice}"></td>
                 <td th:text="${item.totalAmount}"></td>
               </tr>
