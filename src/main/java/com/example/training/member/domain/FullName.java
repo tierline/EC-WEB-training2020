@@ -16,19 +16,18 @@ public class FullName {
 	private final int MIN = 1;
 
 	public FullName(String lastName, String firstName) {
-		// fix
-		// if (lastName == null) {
-		// throw new IllegalArgumentException("値が入力");
-		// }
-		// if (lastName.length() < MIN || lastName.length() > MAX) {
-		// throw new IllegalArgumentException("値が入力");
-		// }
-		// if (firstName == null) {
-		// throw new IllegalArgumentException("値が入力");
-		// }
-		// if (firstName.length() < MIN || firstName.length() > MAX) {
-		// throw new IllegalArgumentException("値が入力");
-		// }
+		if (lastName == null) {
+			throw new IllegalArgumentException("値が入力");
+		}
+		if (lastName.length() < MIN || lastName.length() > MAX) {
+			throw new IllegalArgumentException("値が入力");
+		}
+		if (firstName == null) {
+			throw new IllegalArgumentException("値が入力");
+		}
+		if (firstName.length() < MIN || firstName.length() > MAX) {
+			throw new IllegalArgumentException("値が入力");
+		}
 		this.lastName = lastName;
 		this.firstName = firstName;
 	}

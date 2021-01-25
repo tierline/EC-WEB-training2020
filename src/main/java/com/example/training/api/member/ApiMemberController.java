@@ -42,11 +42,11 @@ public class ApiMemberController {
 	@PostMapping("/applicate")
 	@ResponseBody
 	public Boolean applicate(@RequestBody MemberApplicationForm memberApplicationForm) {
-		Optional<Member> member = memberRepository.findByEmail(memberApplicationForm.getEmail());
-		if (member.isEmpty()) {
+		Optional<MemberEntity> memberOpt = memberRepository.findByEmail(memberApplicationForm.getEmail());
+		if (memberOpt.isEmpty()) {
 			memberApplicationService.run(memberApplicationForm);
-			Optional<Member> memberDetail = memberRepository.findByEmail(memberApplicationForm.getEmail());
-			session.setAttribute(Member.SESSION_NAME, memberDetail.get());
+			Optional<MemberEntity> member = memberRepository.findByEmail(memberApplicationForm.getEmail());
+			session.setAttribute(Member.SESSION_NAME, member);
 			return true;
 		} else {
 			return false;
@@ -59,7 +59,7 @@ public class ApiMemberController {
 	@ResponseBody
 	public Boolean login(@RequestBody MemberLoginForm memberLoginForm) {
 		String password = memberLoginForm.getPassword();
-		MemberEntity memberEntity = memberRepository.findByEmailMember(memberLoginForm.getEmail()).orElseThrow();
+		MemberEntity memberEntity = memberRepository.findByEmail(memberLoginForm.getEmail()).orElseThrow();
 		String hashPassword = memberEntity.getPassword();
 		Boolean isMatched = bCryptPasswordEncoder.matches(password, hashPassword);
 		if (isMatched) {

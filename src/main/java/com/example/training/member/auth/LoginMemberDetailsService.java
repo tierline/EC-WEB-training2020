@@ -29,7 +29,7 @@ public class LoginMemberDetailsService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 		assert (email != null);
-		Optional<MemberEntity> memberOpt = memberRepository.findByEmailMember(email);
+		Optional<MemberEntity> memberOpt = memberRepository.findByEmail(email);
 		if (memberOpt.isEmpty()) {
 			throw new UsernameNotFoundException("User not found for email: " + email);
 		} else {

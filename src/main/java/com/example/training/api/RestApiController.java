@@ -1,8 +1,10 @@
 package com.example.training.api;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.example.training.common.domain.Product;
+import com.example.training.common.domain.ProductEntity;
 import com.example.training.common.repository.ProductRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +23,13 @@ public class RestApiController {
 
 	@GetMapping("/product")
 	public List<Product> product() {
-		List<Product> items = productRepository.findAll();
-		return items;
+		List<ProductEntity> productEntities = productRepository.findAll();
+		List<Product> products = new ArrayList<Product>();
+		for (ProductEntity productEntity : productEntities) {
+			products.add(new Product(productEntity));
+		}
+
+		return products;
 	}
 
 }

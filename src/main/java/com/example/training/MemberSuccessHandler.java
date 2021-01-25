@@ -32,7 +32,7 @@ public class MemberSuccessHandler implements AuthenticationSuccessHandler {
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
 		String email = authentication.getName();
-		MemberEntity entity = memberRepository.findByEmailMember(email).orElseThrow();
+		MemberEntity entity = memberRepository.findByEmail(email).orElseThrow();
 		Member member = new Member(entity);
 		session.setAttribute(Member.SESSION_NAME, member);
 		response.sendRedirect("/");

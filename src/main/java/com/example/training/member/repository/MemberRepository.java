@@ -14,9 +14,7 @@ import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface MemberRepository {
-	public Optional<MemberEntity> findByEmailMember(String email);
-
-	public Optional<Member> findByEmail(String email);
+	public Optional<MemberEntity> findByEmail(String email);
 
 	public MemberEntity findById(MemberId memberId);
 
@@ -30,7 +28,5 @@ public interface MemberRepository {
 	public Member findAddress(String email);
 
 	public void updateAtOrder(@Param("orderForm") OrderForm orderForm);// formを引数にとらない
-
-	// public Member findByEmailSample(@Param("email") String email);
 
 }

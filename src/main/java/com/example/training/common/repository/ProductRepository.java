@@ -3,17 +3,17 @@ package com.example.training.common.repository;
 import java.util.List;
 import java.util.Optional;
 
-import com.example.training.common.domain.Product;
+import com.example.training.common.domain.ProductEntity;
 
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface ProductRepository {
 
-	public List<Product> findAll();
+	public List<ProductEntity> findAll();
 
-	public Optional<Product> findId(int id);
+	public Optional<ProductEntity> findId(int id);
 
-	public List<Product> findName(String word);
+	public List<ProductEntity> findName(String word);
 
 }

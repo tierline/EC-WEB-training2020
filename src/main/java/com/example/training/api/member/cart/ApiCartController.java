@@ -3,6 +3,7 @@ package com.example.training.api.member.cart;
 import javax.servlet.http.HttpSession;
 
 import com.example.training.common.domain.Product;
+import com.example.training.common.domain.ProductEntity;
 import com.example.training.common.domain.Quantity;
 import com.example.training.common.domain.cart.Cart;
 import com.example.training.common.repository.ProductRepository;
@@ -59,24 +60,25 @@ public class ApiCartController {
 	@PostMapping("/add/{productId}")
 	public void add(@PathVariable int productId) {
 		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
-		Product product = productRepository.findId(productId).orElseThrow();
+		ProductEntity productEntity = productRepository.findId(productId).orElseThrow();
+		Product product = new Product(productEntity);
 		cart.add(product);
 	}
 
 	// fix
 	/**
-	*
-	* カートの商品の数量を変更する
-	*
-	* @param id
-	* @return
-	*/
+	 *
+	 * カートの商品の数量を変更する
+	 *
+	 * @param id
+	 * @return
+	 */
 	@PostMapping("/changeQuantity/{productId}/{quantity}")
-	public void changeItemQuantity(@PathVariable int productId, @PathVariable int
-	quantity) {
-	Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
-	Product product = productRepository.findId(productId).orElseThrow();
-	cart.changeItemQuantity(product, new Quantity(quantity));
+	public void changeItemQuantity(@PathVariable int productId, @PathVariable int quantity) {
+		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
+		ProductEntity productEntity = productRepository.findId(productId).orElseThrow();
+		Product product = new Product(productEntity);
+		cart.changeItemQuantity(product, new Quantity(quantity));
 	}
 
 	/**
@@ -89,7 +91,8 @@ public class ApiCartController {
 	@PostMapping("/remove/{productId}")
 	public Cart cartFromParticularProductsAllDelete(@PathVariable int productId) {
 		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
-		Product product = productRepository.findId(productId).orElseThrow();
+		ProductEntity productEntity = productRepository.findId(productId).orElseThrow();
+		Product product = new Product(productEntity);
 		cart.removeAll(product);
 		return cart;
 	}

@@ -1,5 +1,6 @@
 package com.example.training.common.domain.cart;
 
+import com.example.training.common.domain.Price;
 import com.example.training.common.domain.Product;
 import com.example.training.common.domain.Quantity;
 
@@ -7,54 +8,105 @@ public class CartItem {
 	private Product product;
 	private Quantity quantity;
 
+	/**
+	 *
+	 * 基本コンストラクタ。
+	 *
+	 * @param product
+	 */
 	public CartItem(Product product) {
 		this.product = product;
 		this.quantity = new Quantity(1);
 	}
 
-	public int getProductId() {
-		return product.getId();
-	}
-
-	public String getProductImage() {
-		return product.getImagePath();
-	}
-
-	public String getProductName() {
-		return product.getName();
-	}
-
-	public int getProductPrice() {
-		return product.getPrice();
-	}
-
+	/**
+	 *
+	 * 商品数を返す
+	 *
+	 * @return
+	 */
 	public Quantity getQuantity() {
 		return this.quantity;
 	}
 
+	/**
+	 *
+	 * 商品数と引数を加算する
+	 *
+	 * @param quantity
+	 */
 	public void addQuantity(Quantity quantity) {
 		this.quantity = this.quantity.add(quantity);
 	}
 
+	/**
+	 *
+	 *
+	 * fix: change以外の方法で...。
+	 *
+	 * @param quantity
+	 */
 	public void changeQuantity(Quantity quantity) {
 		this.quantity = quantity;
 	}
 
-	public void removeQuantity(Quantity quantity) {
-		this.quantity = quantity;
+	/**
+	 *
+	 * 商品数ゼロにする
+	 *
+	 * @param quantity
+	 */
+	public void resetQuantity(Quantity quantity) {
+		this.quantity = quantity.reset();
 	}
 
-	public void removeAll() {
-		this.quantity = this.quantity.removeAll();
+	/**
+	 *
+	 * 商品の個数がゼロかどうかの判定結果を返す
+	 *
+	 * @return
+	 */
+	public boolean isQuantityZero() {
+		return this.quantity.isZero();
 	}
 
-	public boolean isEmpty() {
-		return this.quantity.isEmpty();
+	/**
+	 *
+	 * 商品の合計金額を返す
+	 *
+	 * @return
+	 */
+	public Price getTotalAmount() {
+		// Price totalAmount = this.product.getProductPrice() *
+		// this.getQuantity().getValue();
+		Price totalAmount = this.product.getPrice().multiply(this.getQuantity());
+		return totalAmount;
 	}
 
-	// カート内の一つの商品の合計金額を取得
-	public int getTotalAmount() {
-		int price = this.getProductPrice() * this.getQuantity().getValue();
-		return price;
+	/**
+	 *
+	 * 商品を返す
+	 *
+	 * @return
+	 */
+
+	public Product getProduct() {
+		return this.product;
+	}
+
+	public int getProductId() {
+		return this.getProduct().getId();
+	}
+
+	public String getProductImagePath() {
+		return this.getProduct().getImagePath();
+	}
+
+	public String getProductName() {
+		return this.getProduct().getName();
+	}
+
+	public Price getProductPrice() {
+		return this.getProduct().getPrice();
 	}
 }

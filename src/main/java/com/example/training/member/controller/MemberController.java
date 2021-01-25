@@ -7,6 +7,7 @@ import java.util.Optional;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import com.example.training.member.MemberEntity;
 import com.example.training.member.domain.Member;
 import com.example.training.member.domain.MemberApplicationForm;
 import com.example.training.member.repository.MemberRepository;
@@ -84,8 +85,8 @@ public class MemberController {
 			return applicate(memberApplicationForm, model);
 		}
 		String email = memberApplicationForm.getEmail();
-		Optional<Member> member = memberRepository.findByEmail(email);
-		if (member.isPresent()) {
+		Optional<MemberEntity> memberEntity = memberRepository.findByEmail(email);
+		if (memberEntity.isPresent()) {
 			model.addAttribute("errorMessage", messageSource.getMessage("error.applicate.duplicate", null, Locale.JAPAN));
 			return "member/applicate";
 		} else {

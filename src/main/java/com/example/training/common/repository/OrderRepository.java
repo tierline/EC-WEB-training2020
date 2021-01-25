@@ -13,9 +13,9 @@ import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface OrderRepository {
 
-	public int save(Order order);
+	public int create(Order order);
 
-	public void saveItem(@Param("item") OrderItem item, @Param("id") int id);
+	public void createItem(@Param("item") OrderItem item, @Param("id") int id);
 
 	public List<OrderItem> findItemsByOrder(Order order);
 

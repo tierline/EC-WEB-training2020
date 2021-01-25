@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.example.training.common.domain.Date;
+import com.example.training.common.domain.Price;
 import com.example.training.common.domain.cart.Cart;
 import com.example.training.common.domain.cart.CartItem;
 import com.example.training.member.domain.Address;
@@ -22,8 +23,7 @@ public class Order {
 	private Address address;
 	private String email;
 	private PhoneNumber phoneNumber;
-	// Priceクラス
-	private int price; // fix
+	private Price price;
 	private Date date;
 
 	/**
@@ -77,14 +77,15 @@ public class Order {
 		return results;
 	}
 
-	public void setPrice(int price) {
+	public void setPrice(Price price) {
 		this.price = price;
 	}
 
 	public void setPrice(Cart cart) {
-		int total = 0;
+		Price total = new Price(0);
 		for (CartItem item : cart.getItems()) {
-			total += item.getTotalAmount();
+			// total += item.getTotalAmount();
+			item.getTotalAmount().add(total);
 		}
 		this.price = total;
 	}

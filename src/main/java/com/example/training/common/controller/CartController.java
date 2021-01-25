@@ -5,6 +5,7 @@ import java.util.Locale;
 import javax.servlet.http.HttpSession;
 
 import com.example.training.common.domain.Product;
+import com.example.training.common.domain.ProductEntity;
 import com.example.training.common.domain.Quantity;
 import com.example.training.common.domain.cart.Cart;
 import com.example.training.common.repository.ProductRepository;
@@ -44,7 +45,9 @@ public class CartController {
 	@GetMapping("/add/{id}")
 	public String add(@PathVariable int id) {
 		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
-		Product product = productRepository.findId(id).orElseThrow();
+		ProductEntity productEntity = productRepository.findId(id).orElseThrow();
+		Product product = new Product(productEntity);
+
 		cart.add(product);
 		return "redirect:/";
 	}
@@ -60,8 +63,8 @@ public class CartController {
 	@PostMapping(path = "/changeQuantity/{id}", consumes = "application/x-www-form-urlencoded")
 	public String changeItemQuantity(@PathVariable int id, int quantity) {
 		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
-		Product product = productRepository.findId(id).orElseThrow();
-		cart.changeItemQuantity(product, new Quantity(quantity));
+		ProductEntity productEntity = productRepository.findId(id).orElseThrow();
+		cart.changeItemQuantity(new Product(productEntity), new Quantity(quantity));
 		return "redirect:/member/cart/list";
 	}
 
@@ -75,7 +78,8 @@ public class CartController {
 	@GetMapping("/delete/{id}")
 	public String delete(@PathVariable int id) {
 		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
-		Product product = productRepository.findId(id).orElseThrow();
+		ProductEntity productEntity = productRepository.findId(id).orElseThrow();
+		Product product = new Product(productEntity);
 		cart.remove(product);
 
 		return "redirect:/member/cart/list";
@@ -87,7 +91,7 @@ public class CartController {
 	 *
 	 */
 	@GetMapping("/list")
-	public String doGet(Model model) {
+	public String get(Model model) {
 		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
 		if (cart.getSize() == 0) {
 			model.addAttribute("errorMessage", messageSource.getMessage("error.cart.noProduct", null, Locale.JAPAN));
