@@ -6,13 +6,12 @@ import java.util.Optional;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import com.example.training.domain.MemberEntity;
-import com.example.training.domain.MemberSession;
-import com.example.training.domain.member.Email;
-import com.example.training.domain.member.Member;
-import com.example.training.domain.member.MemberEditForm;
-import com.example.training.domain.member.MemberId;
-import com.example.training.domain.order.OrderForm;
+import com.example.training.web.domain.MemberEntity;
+import com.example.training.web.domain.MemberSession;
+import com.example.training.web.domain.member.Email;
+import com.example.training.web.domain.member.Member;
+import com.example.training.web.domain.member.MemberEditForm;
+import com.example.training.web.domain.member.MemberId;
 
 @Mapper
 public interface MemberRepository {
@@ -29,18 +28,18 @@ public interface MemberRepository {
 
 	public List<MemberEntity> findAll();
 
-	public void insert(Member member);
+	public void create(Member member);
+
+	public void updateAtOrder(Member member);// formを引数にとらない
 
 	public int countByEmail(String email);
 
-	public void update();
+	public void update(Member member);
 
 	public void update(@Param("memberEditForm") MemberEditForm memberEditForm,
 			@Param("lastUpdatedBy") String lastUpdatedBy);// formを引数にとらない
 
 	public Member findAddress(String email);
-
-	public void updateAtOrder(@Param("orderForm") OrderForm orderForm);// formを引数にとらない
 
 	// public Member findByEmailSample(@Param("email") String email);
 

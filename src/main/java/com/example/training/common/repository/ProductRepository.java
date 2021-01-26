@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.example.training.domain.Product;
+import com.example.training.web.domain.Product;
 
 @Mapper
 public interface ProductRepository {

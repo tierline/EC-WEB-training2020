@@ -1,4 +1,4 @@
-package com.example.training.admin;
+package com.example.training.common;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -11,28 +11,20 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
-import com.example.training.admin.auth.LoginAdminDetailsService;
-import com.example.training.common.AdminSuccessHandler;
+import com.example.training.web.domain.service.LoginMemberDetailsService;
 
 @Configuration
 @EnableWebSecurity
-@Order(1)
-public class AdminSecurityConfig extends WebSecurityConfigurerAdapter {
-
-	// アカウント登録時のパスワードエンコードで利用するためDI管理する。
-	@Bean
-	PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
+@Order(2)
+public class MemberSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
-	private AdminSuccessHandler adminSuccessHandler;
+	@Qualifier("LoginMemberDetailsService")
+	private LoginMemberDetailsService service;
 
 	@Autowired
-	@Qualifier("LoginAdminDetailsService")
-	private LoginAdminDetailsService service;
+	private MemberSuccessHandler successHandler;
 
 	/**
 	 * セキュリティの対象から外す
@@ -49,12 +41,13 @@ public class AdminSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 
 		// @formatter:off
-		http.mvcMatcher("/admin/**").authorizeRequests().mvcMatchers("/admin/login").permitAll() // 管理者用ログイン画面は誰でもアクセス可能
-				.mvcMatchers("/admin/**").hasRole("ADMIN") // admin以下は ADMINロールを持つ認証ユーザのみアクセスできる。
-				.anyRequest().authenticated() // 上記以外は認証ユーザのみアクセスできる
-				.and().formLogin().loginPage("/admin/login").loginProcessingUrl("/admin/login")
-				.usernameParameter("name").passwordParameter("password").defaultSuccessUrl("/admin")
-				.successHandler(adminSuccessHandler).and().logout().logoutUrl("/admin/logout").logoutSuccessUrl("/")
+		http.mvcMatcher("/member/**").authorizeRequests()
+				.mvcMatchers("/member/login", "/member/applicate", "/member/applicated").permitAll()
+				.mvcMatchers("/member/**").hasRole("USER") // member以下は USERロールを持つ認証ユーザのみアクセスできる。
+				.anyRequest().authenticated() // 上記以外は認証ユーザがアクセスできる
+				.and().formLogin().loginPage("/member/login").loginProcessingUrl("/member/login")
+				.usernameParameter("email").passwordParameter("password").defaultSuccessUrl("/")
+				.successHandler(successHandler).and().logout().logoutUrl("/member/logout").logoutSuccessUrl("/")
 				.deleteCookies("JSESSIONID").invalidateHttpSession(true) // ログアウト時のセッション破棄を有効化
 				.and().csrf().disable();
 		// @formatter:on
@@ -63,6 +56,11 @@ public class AdminSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(service).passwordEncoder(new BCryptPasswordEncoder());
+	}
+
+	@Bean
+	public BCryptPasswordEncoder bCryptPasswordEncoder() {
+		return new BCryptPasswordEncoder();
 	}
 
 }

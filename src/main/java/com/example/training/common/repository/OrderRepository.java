@@ -5,10 +5,10 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import com.example.training.domain.member.MemberId;
-import com.example.training.domain.order.Order;
-import com.example.training.domain.order.OrderItem;
-import com.example.training.domain.order.OrderMonth;
+import com.example.training.web.domain.member.MemberId;
+import com.example.training.web.domain.order.Order;
+import com.example.training.web.domain.order.OrderItem;
+import com.example.training.web.domain.order.OrderMonth;
 
 @Mapper
 public interface OrderRepository {

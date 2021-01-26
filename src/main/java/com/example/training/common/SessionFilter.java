@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.example.training.domain.cart.Cart;
+import com.example.training.web.domain.cart.Cart;
 
 @Component
 public class SessionFilter implements Filter {
