@@ -7,5 +7,5 @@ import lombok.Data;
 @Data
 public class CartEntity {
   private List<CartItem> items;
-  private int totalAmount;
+  private int totalPrice;
 }

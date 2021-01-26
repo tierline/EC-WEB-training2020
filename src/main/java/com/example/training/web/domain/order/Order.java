@@ -14,6 +14,11 @@ import com.example.training.web.domain.product.Price;
 
 import lombok.Data;
 
+/**
+ *
+ * 注文クラス
+ *
+ */
 @Data
 public class Order {
 	private int id;
@@ -22,15 +27,15 @@ public class Order {
 	private Address address;
 	private String email;
 	private PhoneNumber phoneNumber;
-	private Price price;
-	private Date date;
+	private Price totalPrice;
+	private Date orderDate;
 
 	/**
 	 *
 	 * 注文処理用コンストラクタ
 	 *
-	 * @param orderForm
-	 * @param cart
+	 * @param orderForm 住所入力フォーム
+	 * @param cart      カート
 	 */
 	public Order(OrderForm orderForm, Cart cart) {
 		this.memberId = orderForm.getMemberId();
@@ -38,37 +43,32 @@ public class Order {
 		this.address = orderForm.getAddress();
 		this.email = orderForm.getEmail();
 		this.phoneNumber = orderForm.getPhoneNumber();
-		this.date = orderForm.getOrderDateAndTime();
-		this.price = cart.getTotalAmount();
+		this.orderDate = orderForm.getOrderDateAndTime();
+		this.totalPrice = cart.getTotalPrice();
 	}
-
-	// TOREVIEW 要修正、必要か？
-	public Order(int orderId, MemberId memberId, LocalDateTime date) {
-		this.id = orderId;
-		this.memberId = memberId;
-		this.date = new Date(date);
-	}
-
-	// public Order(int orderId, MemberId memberId, String email, PhoneNumber
-	// phone_number, FullName fullName,
-	// Address address, int price, LocalDate date) {
-	// this(orderId, memberId, date);
-	// this.email = email;
-	// this.phoneNumber = phone_number;
-	// this.fullName = fullName;
-	// this.address = address;
-	// this.price = price;
-	//
-	// }
 
 	/**
 	 *
-	 * 注文から注文商品を生成する
+	 * テスト用コンストラクタ
 	 *
-	 * @param cart
-	 * @return
+	 * @param orderId  注文ID
+	 * @param memberId 会員ID
+	 * @param date     注文日時
 	 */
-	public List<OrderItem> createItems(Cart cart) {
+	public Order(int orderId, MemberId memberId, LocalDateTime orderDate) {
+		this.id = orderId;
+		this.memberId = memberId;
+		this.orderDate = new Date(orderDate);
+	}
+
+	/**
+	 *
+	 * カートの商品から注文商品を生成する
+	 *
+	 * @param cart カート
+	 * @return 注文した商品
+	 */
+	public List<OrderItem> createOrderItemsFromCart(Cart cart) {
 		List<OrderItem> results = new ArrayList<OrderItem>(cart.getSize());
 		for (CartItem item : cart.getItems()) {
 			results.add(new OrderItem(item));
@@ -76,16 +76,17 @@ public class Order {
 		return results;
 	}
 
-	public void setPrice(Price price) {
-		this.price = price;
-	}
-
+	/**
+	 *
+	 * 合計金額をセットする。
+	 *
+	 * @param cart カート
+	 */
 	public void setPrice(Cart cart) {
 		Price total = new Price(0);
 		for (CartItem item : cart.getItems()) {
-			// total += item.getTotalAmount();
-			item.getTotalAmount().add(total);
+			item.getTotalPrice().add(total);
 		}
-		this.price = total;
+		this.totalPrice = total;
 	}
 }

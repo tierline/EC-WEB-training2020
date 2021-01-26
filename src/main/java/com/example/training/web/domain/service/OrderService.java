@@ -7,7 +7,6 @@ import javax.validation.Valid;
 import com.example.training.common.repository.MemberRepository;
 import com.example.training.common.repository.OrderRepository;
 import com.example.training.web.domain.cart.Cart;
-import com.example.training.web.domain.member.Member;
 import com.example.training.web.domain.order.Order;
 import com.example.training.web.domain.order.OrderForm;
 import com.example.training.web.domain.order.OrderItem;
@@ -36,9 +35,8 @@ public class OrderService {
 	public int order(@Valid OrderForm orderForm, Cart cart) {
 		Order order = orderForm.createOrder(cart);
 		this.saveByOrder(order, cart);
+		// fix メンバーの取得?
 		memberRepository.updateAtOrder(orderForm); // formは渡さないmemberとして！
-		Member member = new Member(memberRepository.findById(orderForm.getMemberId()));
-		// session.setAttribute(Member.SESSION_NAME, member); 不要
 		return order.getId(); // fix orderそのものを返す
 	}
 
@@ -51,7 +49,7 @@ public class OrderService {
 	 */
 	private void saveByOrder(Order order, Cart cart) {
 		orderRepository.create(order);
-		List<OrderItem> items = order.createItems(cart);
+		List<OrderItem> items = order.createOrderItemsFromCart(cart);
 		for (OrderItem item : items) {
 			orderRepository.createItem(item, order.getId());
 		}

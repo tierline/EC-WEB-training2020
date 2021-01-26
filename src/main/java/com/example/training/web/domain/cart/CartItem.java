@@ -76,11 +76,9 @@ public class CartItem {
 	 *
 	 * @return
 	 */
-	public Price getTotalAmount() {
-		// Price totalAmount = this.product.getProductPrice() *
-		// this.getQuantity().getValue();
-		Price totalAmount = this.product.getPrice().multiply(this.getQuantity());
-		return totalAmount;
+	public Price getTotalPrice() {
+		Price totalPrice = this.product.getPrice().multiply(this.getQuantity());
+		return totalPrice;
 	}
 
 	/**

@@ -11,7 +11,7 @@ import com.example.training.web.domain.product.Quantity;
 public class Cart {
 	public static final String SESSION_NAME = "CART";
 	private List<CartItem> items = new ArrayList<CartItem>();
-	private Price totalAmount = new Price(0);
+	private Price totalPrice = new Price(0);
 
 	/**
 	 *
@@ -125,14 +125,13 @@ public class Cart {
 	 * @return
 	 */
 	// TOREVIEW 変更
-	public Price getTotalAmount() {
-		// fix 毎回 getTotalAmount が呼ばれて再計算している
-		this.totalAmount = new Price(0);
+	public Price getTotalPrice() {
+		// fix 毎回 method が呼ばれて再計算している
+		this.totalPrice = new Price(0);
 		List<CartItem> items = this.getItems();
-		Integer a = 0;
 		for (CartItem item : items) {
-			this.totalAmount = this.totalAmount.add(item.getTotalAmount());
+			this.totalPrice = this.totalPrice.add(item.getTotalPrice());
 		}
-		return this.totalAmount;
+		return this.totalPrice;
 	}
 }

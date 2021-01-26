@@ -46,7 +46,7 @@ public class Quantity {
 
 	/**
 	 *
-	 * 数量を得る
+	 * 数量を得る。
 	 *
 	 * @return 数量の値
 	 */
@@ -58,7 +58,7 @@ public class Quantity {
 	 *
 	 * 数量を加算する。
 	 *
-	 * @param quantity
+	 * @param quantity 加える値
 	 * @return 加算結果
 	 */
 	public Quantity add(Quantity quantity) {
@@ -70,7 +70,7 @@ public class Quantity {
 	 *
 	 * 数量を減算する。
 	 *
-	 * @param quantity
+	 * @param quantity 引く値
 	 * @return 加算結果
 	 */
 	public Quantity subtract(Quantity quantity) {
@@ -98,7 +98,7 @@ public class Quantity {
 	 * @return 判定結果
 	 */
 	public Boolean isZero() {
-		return this.value == MIN;
+		return this.value == 0;
 	}
 
 }
