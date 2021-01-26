@@ -1,117 +1,101 @@
 package com.example.training.web.domain.product;
 
-import org.dom4j.IllegalAddException;
-
+/**
+ *
+ * 商品の個数を表す値オブジェクト
+ *
+ */
 public class Quantity {
 
-	// 数量の値
+	/**
+	 *
+	 * 数量の値
+	 *
+	 */
 	private int value;
 
-	// 数量の最小値
+	/**
+	 *
+	 * 数量の最小値
+	 *
+	 */
 	private final int MIN = 0;
 
 	/**
 	 *
-	 * 通常のコンストラクタ
+	 * 数量の最大値
+	 *
+	 */
+	private final int MAX = Integer.MAX_VALUE;
+
+	/**
+	 *
+	 * 基本コンストラクタ
 	 *
 	 * @param value
 	 */
 	public Quantity(int value) {
+		if (value < MIN) {
+			throw new IllegalArgumentException("数量の最小値を下回っています");
+		}
+		if (value > MAX) {
+			throw new IllegalArgumentException("数量の最大値を超えています");
+		}
 		this.value = value;
 	}
 
+	/**
+	 *
+	 * 数量を得る
+	 *
+	 * @return 数量の値
+	 */
 	public int getValue() {
 		return this.value;
 	}
 
 	/**
 	 *
-	 * 加算可能か判定し、フィールドの数量値と引数の加算結果を返す。
+	 * 数量を加算する。
 	 *
 	 * @param quantity
-	 * @return 加算後の数値
+	 * @return 加算結果
 	 */
 	public Quantity add(Quantity quantity) {
-		if (!canAdd(quantity)) {
-			throw new IllegalAddException("不正な値です。加算結果がマイナスです");
-		}
-		int added = addValue(quantity);
+		int added = this.value + quantity.getValue();
 		return new Quantity(added);
 	}
 
 	/**
 	 *
-	 * 加算可能かどうかの判定結果を返す。
+	 * 数量を減算する。
 	 *
 	 * @param quantity
-	 * @return
-	 */
-	private Boolean canAdd(Quantity quantity) {
-		int added = addValue(quantity);
-		return added > MIN;
-	}
-
-	/**
-	 *
-	 * フィールドの数量値と引数の加算結果を返す。
-	 *
-	 * @param quantity
-	 * @return
-	 */
-	private int addValue(Quantity quantity) {
-		return this.value + quantity.value;
-	}
-
-	/**
-	 *
-	 * 減算可能か判定し、フィールドの数量値と引数の減算結果を返す。
-	 *
-	 * @param quantity
-	 * @return 減算後の数値
+	 * @return 加算結果
 	 */
 	public Quantity subtract(Quantity quantity) {
-		if (!canSubtract(quantity)) {
-			throw new IllegalAddException("不正な値です。減算結果がマイナスです");
+		int subtracted = this.value - quantity.getValue();
+		if (subtracted < MIN) {
+			return new Quantity(0);
 		}
-		int removed = subtractValue(quantity);
-		return new Quantity(removed);
+		return new Quantity(subtracted);
 	}
 
 	/**
 	 *
-	 * 減算可能かどうかの判定結果を返す。
+	 * 数量を初期化する。
 	 *
-	 * @param quantity
-	 * @return
+	 * @return 新しいインスタンス
 	 */
-	private Boolean canSubtract(Quantity quantity) {
-		int removed = subtractValue(quantity);
-		return removed >= MIN;
-	}
-
-	/**
-	 *
-	 * フィールドの数量値と引数の減算結果を返す。
-	 *
-	 * @param quantity
-	 * @return
-	 */
-	private int subtractValue(Quantity quantity) {
-		return this.value - quantity.value;
-	}
-
-	/**
-	 * 数量値ゼロの新しいインスタンスを返す。
-	 */
-	public Quantity reset() {
+	public Quantity clear() {
 		return new Quantity(MIN);
 	}
 
 	/**
 	 *
-	 * 数量がゼロかどうか判定する
+	 * 数量がゼロか判定する
 	 *
-	 * @return
+	 * @return 判定結果
 	 */
 	public Boolean isZero() {
 		return this.value == MIN;

@@ -57,7 +57,7 @@ public class CartItem {
 	 * @param quantity
 	 */
 	public void resetQuantity(Quantity quantity) {
-		this.quantity = quantity.reset();
+		this.quantity = quantity.clear();
 	}
 
 	/**
