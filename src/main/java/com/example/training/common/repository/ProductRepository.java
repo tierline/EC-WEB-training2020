@@ -3,7 +3,7 @@ package com.example.training.common.repository;
 import java.util.List;
 import java.util.Optional;
 
-import com.example.training.common.domain.ProductEntity;
+import com.example.training.web.domain.product.ProductEntity;
 
 import org.apache.ibatis.annotations.Mapper;
 

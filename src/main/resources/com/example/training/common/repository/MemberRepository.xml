@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+	namespace="com.example.training.common.repository.MemberRepository">
+
+	<select id="findByEmail"
+		resultType="com.example.training.web.domain.member.MemberEntity">
+		SELECT
+		id as memberId,
+		password,
+		email,
+		phone_number,
+		last_name,
+		first_name,
+		postcode,
+		prefecture,
+		city,
+		block,
+		last_update_admin,
+		status
+		FROM
+		MEMBER
+		WHERE
+		email = "${email}"
+	</select>
+
+	<select id="findById"
+		resultType="com.example.training.web.domain.member.MemberEntity">
+		SELECT id as meberId,
+		email,
+		phone_number,
+		last_name,
+		first_name,
+		postcode,
+		prefecture,
+		city,
+		block
+		FROM MEMBER WHERE id = "${value}"
+	</select>
+
+	<select id="findAll"
+		resultType="com.example.training.web.domain.member.MemberEntity">
+		SELECT
+		id as meberId,
+		email,
+		phone_number,
+		last_name,
+		first_name,
+		postcode,
+		prefecture,
+		city,
+		block,
+		status,
+		last_update_admin
+		FROM MEMBER
+	</select>
+
+	<select id="findAddress"
+		resultType="com.example.training.web.domain.member.Member">
+		SELECT
+		last_name,
+		first_name,
+		email,
+		postcode,
+		prefecture,
+		city,
+		block,
+		phone_number
+		FROM
+		MEMBER
+		m
+		WHERE m.email = "${email}"
+	</select>
+
+	<insert id="create" useGeneratedKeys="true">
+		INSERT INTO MEMBER (email, password, last_update_admin, status) VALUES (
+		"${email}",
+		"${digestPassword}",
+		"${lastUpdatedBy}",
+		"${status}"
+		)
+	</insert>
+
+	<update id="update">
+		UPDATE MEMBER SET
+		email=#{memberEditForm.email},
+		last_update_admin=#{lastUpdatedBy},
+		status=#{memberEditForm.status}
+		WHERE
+		id= #{memberEditForm.id}
+	</update>
+
+	<update id="updateAtOrder">
+		UPDATE MEMBER SET
+		first_name=#{orderForm.fullName.firstName},
+		last_name=#{orderForm.fullName.lastName},
+		phone_number=#{orderForm.phoneNumber.value},
+		postcode=#{orderForm.address.postcode.value},
+		prefecture=#{orderForm.address.prefecture.value},
+		city=#{orderForm.address.city.value},
+		block=#{orderForm.address.block.value}
+		WHERE id=
+		#{orderForm.memberId.value}
+	</update>
+
+
+</mapper>
+
+
+<!-- Entity以外のキャスト方法をとりあえず保存しているもの。（xmlでアソシエーションを書く） -->
+
+	<!-- <select id="findByEmailSample" resultMap="memberMap"
+		parameterType="map">
+		SELECT
+		id,
+		email,
+		phone_number,
+		last_name,
+		first_name,
+		postcode,
+		prefecture,
+		city,
+		block,
+		status
+		FROM
+		MEMBER
+		WHERE
+		email = "${email}"
+	</select> -->
+
+
+	<!-- <resultMap type="com.example.training.web.domain.member.Member"
+		id="memberMap">
+		<association property="id">
+			<constructor>
+				<arg column="id" javaType="Long" />
+			</constructor>
+		</association>
+		<association property="fullName" resultMap="fullNameMap" />
+		<association property="address" resultMap="addressMap" />
+		<association property="email">
+			<result column="email" javaType="String" />
+		</association>
+		<association property="phoneNumber">
+			<constructor>
+				<arg column="phone_number" javaType="String" />
+			</constructor>
+		</association>
+	</resultMap>
+
+	<resultMap type="com.example.training.web.domain.member.FullName"
+		id="fullNameMap">
+		<constructor>
+			<arg column="last_name" javaType="String" />
+			<arg column="first_name" javaType="String" />
+		</constructor>
+	</resultMap>
+
+	<resultMap type="com.example.training.web.domain.member.address.Address"
+		id="addressMap">
+		<association property="postcode"
+			javaType="com.example.training.web.domain.member.address.Postcode">
+			<constructor>
+				<arg column="postcode" javaType="String" />
+			</constructor>
+		</association>
+		<association property="prefecture"
+			javaType="com.example.training.web.domain.member.address.Prefecture">
+			<constructor>
+				<arg column="prefecture" javaType="String" />
+			</constructor>
+		</association>
+		<association property="city"
+			javaType="com.example.training.web.domain.member.address.City">
+			<constructor>
+				<arg column="city" javaType="String" />
+			</constructor>
+		</association>
+		<association property="block"
+			javaType="com.example.training.web.domain.member.address.Block">
+			<constructor>
+				<arg column="block" javaType="String" />
+			</constructor>
+		</association>
+	</resultMap> -->

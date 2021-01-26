@@ -2,10 +2,10 @@ package com.example.training.common.repository;
 
 import java.util.List;
 
-import com.example.training.common.domain.order.Order;
-import com.example.training.common.domain.order.OrderItem;
-import com.example.training.common.domain.order.OrderMonth;
-import com.example.training.member.domain.MemberId;
+import com.example.training.web.domain.member.MemberId;
+import com.example.training.web.domain.order.Order;
+import com.example.training.web.domain.order.OrderItem;
+import com.example.training.web.domain.order.OrderMonth;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
