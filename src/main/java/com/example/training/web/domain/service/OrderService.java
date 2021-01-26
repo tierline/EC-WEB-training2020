@@ -50,9 +50,9 @@ public class OrderService {
 	 */
 	private void saveByOrder(Order order, Cart cart) {
 		orderRepository.create(order);
-		List<OrderItem> items = order.createOrderItemsFrom(cart);
+		List<OrderItem> items = order.createOrderItems(cart, order);
 		for (OrderItem item : items) {
-			orderRepository.createItem(item, order.getId());
+			orderRepository.createItem(item);
 		}
 	}
 }

@@ -85,15 +85,15 @@ public class Order {
 	}
 
 	/**
-	 * カートの商品から注文商品を作る。
+	 * 注文商品を作る。
 	 *
 	 * @param cart カート
 	 * @return 注文した商品
 	 */
-	public List<OrderItem> createOrderItemsFrom(Cart cart) {
+	public List<OrderItem> createOrderItems(Cart cart, Order order) {
 		List<OrderItem> results = new ArrayList<OrderItem>(cart.getSize());
 		for (CartItem item : cart.getItems()) {
-			results.add(new OrderItem(item));
+			results.add(new OrderItem(item, order));
 		}
 		return results;
 	}

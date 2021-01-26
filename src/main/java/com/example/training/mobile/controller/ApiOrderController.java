@@ -68,20 +68,26 @@ public class ApiOrderController {
 	 */
 	@GetMapping("/orderDetails/{id}")
 	public Order orderDetails(@PathVariable Integer id) {
-		Order order = orderRepository.findById(id);
+		Order order = orderRepository.findByOrderId(id);
 
 		return order;
 	}
 
+	// fix 下と同じでは？
 	/**
 	 * 注文番号から注文商品を返す
 	 */
 	@GetMapping("/orderedItemList/{id}")
-	public List<OrderItem> orderedItemList(@PathVariable Integer id) {
-		Order order = orderRepository.findById(id);
-		List<OrderItem> items = orderRepository.findItemsByOrder(order);
+	public List<OrderItem> orderedItemList(@PathVariable int id) {
+		List<OrderItem> items = orderRepository.findOrderItemsByOrderId(id);
 
 		return items;
+	}
+
+	@GetMapping("/history/item/{id}")
+	public List<OrderItem> orderItemList(@PathVariable int id) {
+		List<OrderItem> list = orderRepository.findOrderItemsByOrderId(id);
+		return list;
 	}
 
 	/*
@@ -96,9 +102,4 @@ public class ApiOrderController {
 		return result;
 	}
 
-	@GetMapping("/history/item/{id}")
-	public List<OrderItem> orderItemList(@PathVariable int id) {
-		List<OrderItem> list = orderRepository.findByOrderItem(id);
-		return list;
-	}
 }

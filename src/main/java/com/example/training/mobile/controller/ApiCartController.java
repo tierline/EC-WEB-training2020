@@ -28,7 +28,7 @@ public class ApiCartController {
 	private ProductRepository productRepository;
 
 	/**
-	 * カートを得る。
+	 * カートを取得する。
 	 *
 	 * @return カート
 	 */

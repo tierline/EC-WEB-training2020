@@ -24,24 +24,24 @@
 		INSERT INTO ORDER_ITEM (order_id, name, price,
 		quantity, image_path)
 		VALUES(
-		${id},
-		"${item.productName}",
-		${item.productPrice.value},
-		${item.productQuantity.value},
-		"${item.productImagePath}"
+		"${orderId}",
+		"${productName}",
+		"${productPrice.value}",
+		"${productQuantity.value}",
+		"${productImagePath}"
 		)
 	</insert>
 
 	<select id="findItemsByOrder"
 		resultType="com.example.training.web.domain.order.OrderItem">
 		SELECT
-		name, price, quantity
+		name, price, quantity, image_path
 		FROM
 		ORDER_ITEM
 		WHERE order_id =
 		${id}
-
 	</select>
+
 
 	<select id="findById"
 		resultType="com.example.training.web.domain.order.Order">
@@ -60,18 +60,6 @@
 		FROM ORDERS AS o
 		WHERE member_id = ${value}
 		ORDER BY `date` DESC
-	</select>
-
-	<select id="findByOrderItem"
-		resultType="com.example.training.web.domain.order.OrderItem">
-		SELECT
-		name,
-		price,
-		quantity,
-		image_path
-		FROM
-		ORDER_ITEM
-		WHERE order_id = ${id}
 	</select>
 
 </mapper>

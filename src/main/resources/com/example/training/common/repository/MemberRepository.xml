@@ -58,23 +58,6 @@
 		FROM MEMBER
 	</select>
 
-	<select id="findAddress"
-		resultType="com.example.training.web.domain.member.Member">
-		SELECT
-		last_name,
-		first_name,
-		email,
-		postcode,
-		prefecture,
-		city,
-		block,
-		phone_number
-		FROM
-		MEMBER
-		m
-		WHERE m.email = "${email}"
-	</select>
-
 	<insert id="create" useGeneratedKeys="true">
 		INSERT INTO MEMBER (email, password, last_update_admin, status) VALUES (
 		"${email}",

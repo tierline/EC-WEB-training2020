@@ -73,7 +73,7 @@ public class CartItem {
 	}
 
 	/**
-	 * 商品の合計金額を得る。
+	 * 商品の合計金額を取得する。
 	 *
 	 * @return 合計金額
 	 */
@@ -83,7 +83,7 @@ public class CartItem {
 	}
 
 	/**
-	 * 商品を得る。
+	 * 商品を取得する。
 	 *
 	 * @return 商品
 	 */
@@ -92,7 +92,7 @@ public class CartItem {
 	}
 
 	/**
-	 * 商品IDを得る。
+	 * 商品IDを取得する。
 	 *
 	 * @return 商品ID
 	 */
@@ -101,7 +101,7 @@ public class CartItem {
 	}
 
 	/**
-	 * 商品画像のPATHを得る。
+	 * 商品画像のPATHを取得する。
 	 *
 	 * @return 商品画像PATH
 	 */
@@ -110,7 +110,7 @@ public class CartItem {
 	}
 
 	/**
-	 * 商品名を得る。
+	 * 商品名を取得する。
 	 *
 	 * @return 商品名
 	 */
@@ -119,7 +119,7 @@ public class CartItem {
 	}
 
 	/**
-	 * 商品価格を得る。
+	 * 商品価格を取得する。
 	 *
 	 * @return 商品価格
 	 */
