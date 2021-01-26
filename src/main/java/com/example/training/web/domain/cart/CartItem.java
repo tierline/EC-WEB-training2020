@@ -18,7 +18,6 @@ public class CartItem {
 	private Quantity quantity;
 
 	/**
-	 *
 	 * 基本コンストラクタ
 	 *
 	 * @param product 商品
@@ -29,7 +28,6 @@ public class CartItem {
 	}
 
 	/**
-	 *
 	 * 商品の個数を返す。
 	 *
 	 * @return 商品数
@@ -39,7 +37,6 @@ public class CartItem {
 	}
 
 	/**
-	 *
 	 * 商品数を加算する。
 	 *
 	 * @param quantity 加算結果
@@ -49,8 +46,7 @@ public class CartItem {
 	}
 
 	/**
-	 *
-	 * 商品の個数を変更する fix: change以外の方法で...。
+	 * 商品の個数を変更する。
 	 *
 	 * @param quantity 変更後の個数
 	 */
@@ -59,8 +55,7 @@ public class CartItem {
 	}
 
 	/**
-	 *
-	 * 商品数をゼロにする
+	 * 商品数をゼロにする。
 	 *
 	 * @param quantity 個数ゼロの商品
 	 */
@@ -69,8 +64,7 @@ public class CartItem {
 	}
 
 	/**
-	 *
-	 * 商品の個数がゼロか判定する
+	 * 商品の個数がゼロか判定する。
 	 *
 	 * @return 判定結果
 	 */
@@ -79,8 +73,7 @@ public class CartItem {
 	}
 
 	/**
-	 *
-	 * 商品の合計金額を返す
+	 * 商品の合計金額を得る。
 	 *
 	 * @return 合計金額
 	 */
@@ -90,8 +83,7 @@ public class CartItem {
 	}
 
 	/**
-	 *
-	 * 商品を取得する
+	 * 商品を得る。
 	 *
 	 * @return 商品
 	 */
@@ -100,7 +92,7 @@ public class CartItem {
 	}
 
 	/**
-	 * 商品IDを取得する
+	 * 商品IDを得る。
 	 *
 	 * @return 商品ID
 	 */
@@ -109,7 +101,7 @@ public class CartItem {
 	}
 
 	/**
-	 * 商品画像のPATHを取得する
+	 * 商品画像のPATHを得る。
 	 *
 	 * @return 商品画像PATH
 	 */
@@ -118,7 +110,7 @@ public class CartItem {
 	}
 
 	/**
-	 * 商品名を取得する
+	 * 商品名を得る。
 	 *
 	 * @return 商品名
 	 */
@@ -127,7 +119,7 @@ public class CartItem {
 	}
 
 	/**
-	 * 商品価格を取得する
+	 * 商品価格を得る。
 	 *
 	 * @return 商品価格
 	 */

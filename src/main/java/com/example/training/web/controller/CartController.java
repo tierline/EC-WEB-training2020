@@ -36,8 +36,7 @@ public class CartController {
 	protected MessageSource messageSource;
 
 	/**
-	 *
-	 * カートに商品を1つ追加する
+	 * カートに商品を1つ追加する。
 	 *
 	 * @param id
 	 * @return
@@ -52,10 +51,8 @@ public class CartController {
 		return "redirect:/";
 	}
 
-	// fix
 	/**
-	 *
-	 * カートの商品の数量を変更する
+	 * カートの商品の数量を変更する。
 	 *
 	 * @param id
 	 * @return
@@ -69,8 +66,7 @@ public class CartController {
 	}
 
 	/**
-	 *
-	 * カート内の商品を1つ削除する
+	 * カート内の商品を1つ削除する。
 	 *
 	 * @param id
 	 * @return
@@ -86,8 +82,7 @@ public class CartController {
 	}
 
 	/**
-	 *
-	 * カート内商品の一覧画面を表示する
+	 * カート内商品の一覧画面を表示する。
 	 *
 	 */
 	@GetMapping("/list")

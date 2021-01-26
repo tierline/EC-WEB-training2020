@@ -26,19 +26,23 @@ public class Price {
   /**
    * 基本コンストラクタ
    *
-   * @param value
+   * @param price 価格
    */
-  public Price(int value) {
+  public Price(int price) {
     if (value < MIN) {
       throw new IllegalArgumentException("価格が最小値を下回っています");
     }
-    this.value = value;
+    if (value > MAX) {
+      throw new IllegalArgumentException("価格が最大値を上回っています");
+    }
+
+    this.value = price;
   }
 
   /**
-   * 加算する
+   * 加算する。
    *
-   * @param price
+   * @param price 価格
    * @return 加算結果
    */
   public Price add(Price price) {
@@ -47,9 +51,9 @@ public class Price {
   }
 
   /**
-   * 数量で乗算する
+   * 数量で乗算する。
    *
-   * @param quantity
+   * @param quantity 数量
    * @return 乗算結果
    */
   public Price multiply(Quantity quantity) {

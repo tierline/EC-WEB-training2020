@@ -35,7 +35,7 @@ public class AdminController {
 	}
 
 	/**
-	 * 会員のログイン画面を表示する
+	 * 会員のログイン画面を表示する。
 	 */
 	@GetMapping("/login")
 	public String login() {
@@ -47,7 +47,7 @@ public class AdminController {
 	}
 
 	/**
-	 * 会員情報の一覧を表示する
+	 * 会員情報の一覧を表示する。
 	 */
 	@GetMapping("/members")
 	public String list(Model model) {
@@ -57,7 +57,7 @@ public class AdminController {
 	}
 
 	/**
-	 * 会員情報編集画面を表示する
+	 * 会員情報編集画面を表示する。
 	 */
 	@GetMapping("/members/{id}/edit")
 	public String editForm(@PathVariable MemberId id, Model model, MemberEditForm memberEditForm) {
@@ -68,7 +68,7 @@ public class AdminController {
 	}
 
 	/**
-	 * 会員情報を編集する
+	 * 会員情報を編集する。
 	 */
 	@PostMapping("/members/{id}/edit")
 	public String edit(@PathVariable int id, MemberEditForm memberEditForm, Model model) {

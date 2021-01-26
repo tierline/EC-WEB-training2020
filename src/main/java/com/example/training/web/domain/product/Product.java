@@ -30,7 +30,7 @@ public class Product {
 
 	/**
 	 *
-	 * DBから取得するためのコンストラクタ
+	 * DBから得るためのコンストラクタ
 	 *
 	 * @param productEntity
 	 */

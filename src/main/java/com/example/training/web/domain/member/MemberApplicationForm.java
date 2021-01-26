@@ -20,7 +20,7 @@ public class MemberApplicationForm {
 
 	/**
 	 *
-	 * 新規会員登録用のMemberを作成する
+	 * 新規会員登録用のMemberを作る。
 	 *
 	 * @param passwordDigest
 	 * @return 会員登録用のメンバーオブジェクト

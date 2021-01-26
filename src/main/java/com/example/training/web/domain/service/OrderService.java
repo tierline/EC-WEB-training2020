@@ -14,6 +14,9 @@ import com.example.training.web.domain.order.OrderItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * 注文（ドメイン）のサービスクラス
+ */
 @Service
 public class OrderService {
 	public static final String SESSION_NAME = "ORDER_PERSON";
@@ -25,11 +28,10 @@ public class OrderService {
 	private MemberRepository memberRepository;
 
 	/**
+	 * 注文処理をする。
 	 *
-	 * 注文処理をする
-	 *
-	 * @param orderForm
-	 * @param cart
+	 * @param orderForm 注文フォーム
+	 * @param cart      カート
 	 * @return 注文番号
 	 */
 	public int order(@Valid OrderForm orderForm, Cart cart) {
@@ -41,11 +43,10 @@ public class OrderService {
 	}
 
 	/**
+	 * 注文内容と注文商品を保存する
 	 *
-	 * 注文と注文された商品を保存する
-	 *
-	 * @param order
-	 * @param cart
+	 * @param order 注文内容
+	 * @param cart  カート
 	 */
 	private void saveByOrder(Order order, Cart cart) {
 		orderRepository.create(order);

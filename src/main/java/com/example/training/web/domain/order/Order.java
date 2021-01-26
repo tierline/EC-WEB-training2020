@@ -85,7 +85,7 @@ public class Order {
 	}
 
 	/**
-	 * カートの商品から注文商品を生成する
+	 * カートの商品から注文商品を作る。
 	 *
 	 * @param cart カート
 	 * @return 注文した商品

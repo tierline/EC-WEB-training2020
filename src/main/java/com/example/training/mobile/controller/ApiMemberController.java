@@ -70,7 +70,7 @@ public class ApiMemberController {
 	}
 
 	/*
-	 * 住所情報があったら表示する
+	 * 住所情報があったら表示する。
 	 */
 	@GetMapping("/session")
 	@ResponseBody

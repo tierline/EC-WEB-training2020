@@ -41,7 +41,7 @@ public class MemberController {
 	protected MessageSource messageSource;
 
 	/**
-	 * 会員のログインページを表示する
+	 * 会員のログインページを表示する。
 	 */
 	@GetMapping("/login")
 	public String login() {
@@ -53,7 +53,7 @@ public class MemberController {
 	}
 
 	/**
-	 * 会員登録ページを表示する
+	 * 会員登録ページを表示する。
 	 */
 	@GetMapping("applicate")
 	public String applicate(MemberApplicationForm memberApplicationForm, Model model) {
@@ -62,7 +62,7 @@ public class MemberController {
 	}
 
 	/**
-	 * 会員登録完了ページを表示する
+	 * 会員登録完了ページを表示する。
 	 */
 	@GetMapping("applicated")
 	public String applicated() {
@@ -70,8 +70,7 @@ public class MemberController {
 	}
 
 	/**
-	 *
-	 * 会員の新規登録処理をする
+	 * 会員の新規登録処理をする。
 	 *
 	 * @param memberApplicationForm
 	 * @param result

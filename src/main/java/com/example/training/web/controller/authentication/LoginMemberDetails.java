@@ -20,7 +20,7 @@ public class LoginMemberDetails extends User {
 	private Member member;
 
 	/**
-	 * データベースより検索したuserエンティティよりSpring Securityで使用するユーザー認証情報のインスタンスを生成する。
+	 * データベースより検索したuserエンティティよりSpring Securityで使用するユーザー認証情報のインスタンスを作る。
 	 *
 	 * @param member memberエンティティ
 	 */

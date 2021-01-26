@@ -92,7 +92,7 @@ public class OrderForm {
 	}
 
 	/**
-	 * カートから注文クラスを生成する
+	 * カートから注文クラスを作る。
 	 *
 	 * @param cart
 	 * @return 注文クラス
@@ -102,7 +102,7 @@ public class OrderForm {
 	}
 
 	/**
-	 * お届け先入力フォームに会員情報をセットする
+	 * お届け先入力フォームに会員情報をセットする。
 	 *
 	 * @param member 会員
 	 */

@@ -1,5 +1,7 @@
 package com.example.training.web.domain.product;
 
+import lombok.Getter;
+
 /**
  *
  * 商品の個数を表す値オブジェクト
@@ -10,6 +12,7 @@ public class Quantity {
 	/**
 	 * 数量の値
 	 */
+	@Getter
 	private int value;
 
 	/**
@@ -32,18 +35,9 @@ public class Quantity {
 			throw new IllegalArgumentException("数量の最小値を下回っています");
 		}
 		if (value > MAX) {
-			throw new IllegalArgumentException("数量の最大値を超えています");
+			throw new IllegalArgumentException("数量の最大値を上回っています");
 		}
 		this.value = value;
-	}
-
-	/**
-	 * 数量を得る。
-	 *
-	 * @return 数量の値
-	 */
-	public int getValue() {
-		return this.value;
 	}
 
 	/**
@@ -81,7 +75,7 @@ public class Quantity {
 	}
 
 	/**
-	 * 数量がゼロか判定する
+	 * 数量がゼロか判定する。
 	 *
 	 * @return 判定結果
 	 */

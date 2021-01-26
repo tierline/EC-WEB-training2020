@@ -28,8 +28,7 @@ public class OrderController {
 	private OrderService orderService;
 
 	/**
-	 *
-	 * お届け先入力フォームを表示する
+	 * お届け先入力フォームを表示する。
 	 *
 	 * @param orderForm
 	 * @param model
@@ -49,8 +48,7 @@ public class OrderController {
 	}
 
 	/**
-	 *
-	 * 注文確認画面を表示する
+	 * 注文確認画面を表示する。
 	 *
 	 * @param orderForm
 	 * @param result
@@ -71,8 +69,7 @@ public class OrderController {
 	}
 
 	/**
-	 *
-	 * 注文を処理する
+	 * 注文処理する。
 	 *
 	 * @return 注文完了画面
 	 */
@@ -87,8 +84,7 @@ public class OrderController {
 	}
 
 	/**
-	 *
-	 * 注文完了画面を表示する
+	 * 注文完了画面を表示する。
 	 *
 	 * @param orderId
 	 * @param model

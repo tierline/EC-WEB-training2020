@@ -17,8 +17,7 @@ public class ProductController {
 	private ProductRepository productRepository;
 
 	/**
-	 *
-	 * 商品詳細画面を表示する
+	 * 商品詳細画面を表示する。
 	 *
 	 * @param productId
 	 * @param model

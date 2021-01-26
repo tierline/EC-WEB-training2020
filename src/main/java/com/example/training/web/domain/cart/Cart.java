@@ -26,8 +26,7 @@ public class Cart {
 	private Price totalPrice = new Price(0);
 
 	/**
-	 *
-	 * 商品を1つ追加する
+	 * 商品を1つ追加する。
 	 *
 	 * @param item 商品
 	 */
@@ -36,8 +35,7 @@ public class Cart {
 	}
 
 	/**
-	 *
-	 * 商品を複数追加する
+	 * 商品を複数追加する。
 	 *
 	 * @param item     商品
 	 * @param quantity 商品数
@@ -52,7 +50,10 @@ public class Cart {
 	}
 
 	/**
-	 * 商品の個数を変更する
+	 * 商品の個数を変更する。
+	 *
+	 * @param product  商品
+	 * @param quantity 商品数
 	 */
 	public void changeItemQuantity(Product product, Quantity quantity) {
 		CartItem item = getItem(product).orElseThrow();
@@ -63,8 +64,7 @@ public class Cart {
 	}
 
 	/**
-	 *
-	 * 商品のうち1つを削除する
+	 * 商品のうち1つを削除する。
 	 *
 	 * @param product 商品
 	 */
@@ -81,8 +81,7 @@ public class Cart {
 	}
 
 	/**
-	 *
-	 * 全ての商品を削除する
+	 * 全ての商品を削除する。
 	 *
 	 * @param product 商品
 	 */
@@ -98,8 +97,7 @@ public class Cart {
 	}
 
 	/**
-	 *
-	 * 商品の数を取得する
+	 * 商品の数を得る。
 	 *
 	 * @return 商品数
 	 */
@@ -108,8 +106,7 @@ public class Cart {
 	}
 
 	/**
-	 *
-	 * 商品が存在するか判定する
+	 * 商品が存在するか判定する。
 	 *
 	 * @param product
 	 * @return
@@ -125,8 +122,7 @@ public class Cart {
 	}
 
 	/**
-	 *
-	 * 商品の合計金額を取得する
+	 * 商品の合計金額を得る。
 	 *
 	 * @return 合計金額
 	 */
