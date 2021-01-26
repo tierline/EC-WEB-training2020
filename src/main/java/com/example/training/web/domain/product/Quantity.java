@@ -8,28 +8,21 @@ package com.example.training.web.domain.product;
 public class Quantity {
 
 	/**
-	 *
 	 * 数量の値
-	 *
 	 */
 	private int value;
 
 	/**
-	 *
 	 * 数量の最小値
-	 *
 	 */
 	private final int MIN = 0;
 
 	/**
-	 *
 	 * 数量の最大値
-	 *
 	 */
 	private final int MAX = Integer.MAX_VALUE;
 
 	/**
-	 *
 	 * 基本コンストラクタ
 	 *
 	 * @param value
@@ -45,7 +38,6 @@ public class Quantity {
 	}
 
 	/**
-	 *
 	 * 数量を得る。
 	 *
 	 * @return 数量の値
@@ -55,7 +47,6 @@ public class Quantity {
 	}
 
 	/**
-	 *
 	 * 数量を加算する。
 	 *
 	 * @param quantity 加える値
@@ -67,7 +58,6 @@ public class Quantity {
 	}
 
 	/**
-	 *
 	 * 数量を減算する。
 	 *
 	 * @param quantity 引く値
@@ -82,7 +72,6 @@ public class Quantity {
 	}
 
 	/**
-	 *
 	 * 数量を初期化する。
 	 *
 	 * @return 新しいインスタンス
@@ -92,7 +81,6 @@ public class Quantity {
 	}
 
 	/**
-	 *
 	 * 数量がゼロか判定する
 	 *
 	 * @return 判定結果

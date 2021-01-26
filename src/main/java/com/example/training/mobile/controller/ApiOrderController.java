@@ -14,8 +14,8 @@ import com.example.training.web.domain.order.Order;
 import com.example.training.web.domain.order.OrderForm;
 import com.example.training.web.domain.order.OrderFormEntity;
 import com.example.training.web.domain.order.OrderHistoryAssembler;
+import com.example.training.web.domain.order.OrderHistoryByMonth;
 import com.example.training.web.domain.order.OrderItem;
-import com.example.training.web.domain.order.OrderMonth;
 import com.example.training.web.domain.service.OrderService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -90,9 +90,9 @@ public class ApiOrderController {
 	// TOREVIEW
 	// sessionからの取得に変更
 	@GetMapping("/history")
-	public Map<Integer, List<OrderMonth>> history() {
+	public Map<Integer, List<OrderHistoryByMonth>> history() {
 		Member member = (Member) session.getAttribute(Member.SESSION_NAME);
-		Map<Integer, List<OrderMonth>> result = orderHistoryAssembler.create(member);
+		Map<Integer, List<OrderHistoryByMonth>> result = orderHistoryAssembler.create(member);
 		return result;
 	}
 

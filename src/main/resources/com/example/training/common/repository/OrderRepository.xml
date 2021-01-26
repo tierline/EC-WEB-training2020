@@ -25,10 +25,10 @@
 		quantity, image_path)
 		VALUES(
 		${id},
-		"${item.name}",
-		${item.price.value},
-		${item.quantity.value},
-		"${item.imagePath}"
+		"${item.productName}",
+		${item.productPrice.value},
+		${item.productQuantity.value},
+		"${item.productImagePath}"
 		)
 	</insert>
 
@@ -53,7 +53,7 @@
 	</select>
 
 	<select id="findByOrderMonthByMemberId"
-		resultType="com.example.training.web.domain.order.OrderMonth">
+		resultType="com.example.training.web.domain.order.OrderHistoryByMonth">
 		SELECT
 		id as orderId,
 		`date`

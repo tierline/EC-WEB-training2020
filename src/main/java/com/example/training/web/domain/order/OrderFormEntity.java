@@ -2,6 +2,9 @@ package com.example.training.web.domain.order;
 
 import lombok.Data;
 
+/**
+ * キャスト用の住所入力エンティティ
+ */
 @Data
 public class OrderFormEntity {
   private String firstName;

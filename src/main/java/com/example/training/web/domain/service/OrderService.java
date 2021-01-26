@@ -33,7 +33,7 @@ public class OrderService {
 	 * @return 注文番号
 	 */
 	public int order(@Valid OrderForm orderForm, Cart cart) {
-		Order order = orderForm.createOrder(cart);
+		Order order = orderForm.createOrderFrom(cart);
 		this.saveByOrder(order, cart);
 		// fix メンバーの取得?
 		memberRepository.updateAtOrder(orderForm); // formは渡さないmemberとして！
@@ -49,7 +49,7 @@ public class OrderService {
 	 */
 	private void saveByOrder(Order order, Cart cart) {
 		orderRepository.create(order);
-		List<OrderItem> items = order.createOrderItemsFromCart(cart);
+		List<OrderItem> items = order.createOrderItemsFrom(cart);
 		for (OrderItem item : items) {
 			orderRepository.createItem(item, order.getId());
 		}

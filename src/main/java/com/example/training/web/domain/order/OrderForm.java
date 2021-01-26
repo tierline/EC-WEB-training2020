@@ -20,10 +20,58 @@ import com.example.training.web.domain.member.address.Prefecture;
 
 import lombok.Data;
 
+/**
+ *
+ * 注文フォームクラス
+ *
+ */
 @Data
 public class OrderForm {
 	public static final String SESSION_NAME = "ORDER_FORM";
 
+	/**
+	 * Eメール
+	 */
+	@NotEmpty
+	@Email
+	@Size(min = 1, max = 128, message = "メールアドレスは1文字以上、128文字以内で入力してください")
+	private String email;
+
+	/**
+	 * 電話番号
+	 */
+	@Valid
+	private PhoneNumber phoneNumber;
+
+	/**
+	 * 名前
+	 */
+	@Valid
+	private FullName fullName;
+
+	/**
+	 * 住所
+	 */
+	@Valid
+	private Address address;
+
+	/**
+	 * 会員ID
+	 */
+	@Valid
+	private MemberId memberId;
+
+	/**
+	 * 注文日時
+	 */
+	private Date orderDateAndTime = new Date(LocalDateTime.now());
+
+	/**
+	 * Mobileの注文用コンストラクタ
+	 *
+	 * @param orderFormEntity
+	 * @param memberId
+	 */
 	public OrderForm(OrderFormEntity orderFormEntity, MemberId memberId) {
 		this.fullName = new FullName(orderFormEntity.getLastName(), orderFormEntity.getFirstName());
 		this.email = orderFormEntity.getEmail();
@@ -37,33 +85,26 @@ public class OrderForm {
 		this.memberId = memberId;
 	}
 
+	/**
+	 * デフォルトコンストラクタ
+	 */
 	public OrderForm() {
 	}
 
-	@NotEmpty
-	@Email
-	@Size(min = 1, max = 128, message = "メールアドレスは1文字以上、128文字以内で入力してください")
-	private String email;
-	@Valid
-	private PhoneNumber phoneNumber;
-	@Valid
-	private FullName fullName;
-	@Valid
-	private Address address;
-	@Valid
-	private MemberId memberId;
-
-	private Date orderDateAndTime = new Date(LocalDateTime.now());
-
-	public Order createOrder(Cart cart) {
+	/**
+	 * カートから注文クラスを生成する
+	 *
+	 * @param cart
+	 * @return 注文クラス
+	 */
+	public Order createOrderFrom(Cart cart) {
 		return new Order(this, cart);
 	}
 
 	/**
-	 *
 	 * お届け先入力フォームに会員情報をセットする
 	 *
-	 * @param member
+	 * @param member 会員
 	 */
 	public void setMemberInfo(Member member) {
 		this.fullName = member.getFullName();
