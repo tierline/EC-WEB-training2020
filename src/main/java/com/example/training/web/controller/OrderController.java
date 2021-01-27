@@ -5,6 +5,8 @@ import javax.validation.Valid;
 
 import com.example.training.web.domain.cart.Cart;
 import com.example.training.web.domain.member.Member;
+import com.example.training.web.domain.member.MemberDto;
+import com.example.training.web.domain.order.Order;
 import com.example.training.web.domain.order.OrderForm;
 import com.example.training.web.domain.service.OrderService;
 
@@ -41,7 +43,8 @@ public class OrderController {
 		if (sessionOrderForm != null) {
 			model.addAttribute("orderForm", sessionOrderForm);
 		} else {
-			orderForm.setMemberInfo(member);
+			MemberDto memberDto = new MemberDto(member);
+			orderForm.setMemberInfo(memberDto);
 			session.setAttribute(OrderForm.SESSION_NAME, orderForm);
 		}
 		return "member/order/form";
@@ -62,8 +65,9 @@ public class OrderController {
 			return form(orderForm, model);
 		} else {
 			Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
+			Order order = new Order(orderForm, cart);
 			model.addAttribute("cart", cart);
-			model.addAttribute("orderForm", orderForm);
+			model.addAttribute("order", order);
 			return "member/order/confirmation";
 		}
 	}
@@ -77,10 +81,11 @@ public class OrderController {
 	public String save() {
 		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
 		OrderForm orderForm = (OrderForm) session.getAttribute(OrderForm.SESSION_NAME);
-		int orderId = orderService.order(orderForm, cart);
+		Order order = orderForm.createOrderFrom(cart);
+		Order ordered = orderService.order(order, cart);
 		session.setAttribute(Cart.SESSION_NAME, new Cart());
 		session.removeAttribute(OrderForm.SESSION_NAME);
-		return "redirect:/member/order/complete/" + orderId;
+		return "redirect:/member/order/complete/" + ordered.getId();
 	}
 
 	/**

@@ -11,7 +11,7 @@ public class FullName {
 
 	private String firstName;
 
-	private final int MAX = 5;
+	private final int MAX = 16;
 
 	private final int MIN = 1;
 
@@ -38,7 +38,7 @@ public class FullName {
 
 	// 名前の全ての値を取る場合は？
 	// クライアントが何かによって変わる。タイムリーフの場合は、getter的にStringで返してもよい
-	public String getFullName() {
+	public String getValue() {
 		return this.lastName + this.firstName;
 	}
 }

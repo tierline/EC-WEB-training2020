@@ -17,32 +17,28 @@
     </div>
     <div class="container pb-5">
       <div class="mt-4">
-        <form
-          action="/member/order/save"
-          th:object="${orderForm}"
-          method="post"
-        >
+        <form action="/member/order/save" th:object="${order}" method="post">
           <table class="table table-bordered table-light">
             <tbody>
               <tr>
                 <td class="table-secondary">注文日</td>
-                <td th:text="${orderForm.orderDateAndTime.value}"></td>
+                <td th:text="${order.orderDateAndTime.value}"></td>
               </tr>
               <tr>
                 <td class="table-secondary">お名前</td>
-                <td th:text="${orderForm.fullName.value}"></td>
+                <td th:text="${order.fullName.value}"></td>
               </tr>
               <tr>
                 <td class="table-secondary">お届け先</td>
-                <td th:text="${orderForm.address.value}"></td>
+                <td th:text="${order.address.value}"></td>
               </tr>
               <tr>
                 <td class="table-secondary">メールアドレス</td>
-                <td th:text="${orderForm.email}"></td>
+                <td th:text="${order.email.value}"></td>
               </tr>
               <tr>
                 <td class="table-secondary">電話番号</td>
-                <td th:text="${orderForm.phoneNumber.value}"></td>
+                <td th:text="${order.phoneNumber.value}"></td>
               </tr>
             </tbody>
           </table>

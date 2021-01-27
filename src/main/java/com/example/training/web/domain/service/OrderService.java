@@ -2,13 +2,10 @@ package com.example.training.web.domain.service;
 
 import java.util.List;
 
-import javax.validation.Valid;
-
 import com.example.training.common.repository.MemberRepository;
 import com.example.training.common.repository.OrderRepository;
 import com.example.training.web.domain.cart.Cart;
 import com.example.training.web.domain.order.Order;
-import com.example.training.web.domain.order.OrderForm;
 import com.example.training.web.domain.order.OrderItem;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,12 +31,11 @@ public class OrderService {
 	 * @param cart      カート
 	 * @return 注文番号
 	 */
-	public int order(@Valid OrderForm orderForm, Cart cart) {
-		Order order = orderForm.createOrderFrom(cart);
+	public Order order(Order order, Cart cart) {
 		this.saveByOrder(order, cart);
-		// fix メンバーの取得?
-		memberRepository.updateAtOrder(orderForm); // formは渡さないmemberとして！
-		return order.getId(); // fix orderそのものを返す
+		// memberRepository.updateAtOrder(orderForm); // formは渡さないmemberとして！ fix :
+		// update(member)に変更する。
+		return order;
 	}
 
 	/**

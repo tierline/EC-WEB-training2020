@@ -11,6 +11,10 @@ import com.example.training.web.domain.member.FullName;
 import com.example.training.web.domain.member.MemberId;
 import com.example.training.web.domain.member.PhoneNumber;
 import com.example.training.web.domain.member.address.Address;
+import com.example.training.web.domain.member.address.Block;
+import com.example.training.web.domain.member.address.City;
+import com.example.training.web.domain.member.address.Postcode;
+import com.example.training.web.domain.member.address.Prefecture;
 import com.example.training.web.domain.product.Price;
 
 import lombok.Data;
@@ -54,7 +58,7 @@ public class Order {
 	/**
 	 * 注文日時
 	 */
-	private Date orderDate;
+	private Date orderDateAndTime;
 
 	/**
 	 * 注文処理用コンストラクタ
@@ -63,12 +67,13 @@ public class Order {
 	 * @param cart      カート
 	 */
 	public Order(OrderForm orderForm, Cart cart) {
-		this.memberId = orderForm.getMemberId();
-		this.fullName = orderForm.getFullName();
-		this.address = orderForm.getAddress();
-		this.email = orderForm.getEmail();
-		this.phoneNumber = orderForm.getPhoneNumber();
-		this.orderDate = orderForm.getOrderDateAndTime();
+		this.memberId = new MemberId(orderForm.getMemberId());
+		this.fullName = new FullName(orderForm.getLastName(), orderForm.getFirstName());
+		this.address = new Address(new Postcode(orderForm.getPostcode()), new Prefecture(orderForm.getPrefecture()),
+				new City(orderForm.getCity()), new Block(orderForm.getBlock()));
+		this.email = new Email(orderForm.getEmail());
+		this.phoneNumber = new PhoneNumber(orderForm.getPhoneNumber());
+		this.orderDateAndTime = orderForm.getOrderDateAndTime();
 		this.totalPrice = cart.getTotalPrice();
 	}
 
@@ -79,10 +84,16 @@ public class Order {
 	 * @param memberId 会員ID
 	 * @param date     注文日時
 	 */
-	public Order(int orderId, MemberId memberId, LocalDateTime orderDate) {
+	public Order(int orderId, MemberId memberId, LocalDateTime orderDateAndTime) {
 		this.id = orderId;
 		this.memberId = memberId;
-		this.orderDate = new Date(orderDate);
+		this.orderDateAndTime = new Date(orderDateAndTime);
+	}
+
+	/**
+	 * デフォルトコンストラクタ
+	 */
+	public Order() {
 	}
 
 	/**
