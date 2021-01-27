@@ -2,6 +2,9 @@ package com.example.training.web.domain.member;
 
 import lombok.Data;
 
+/**
+ * キャスト用エンティティ（DB取得時）
+ */
 @Data
 public class MemberEntity {
 	private long memberId;

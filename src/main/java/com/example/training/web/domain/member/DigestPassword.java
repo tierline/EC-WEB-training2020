@@ -1,6 +1,6 @@
 package com.example.training.web.domain.member;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import lombok.Getter;
@@ -10,9 +10,6 @@ import lombok.Getter;
  */
 public class DigestPassword {
 
-  @Autowired
-  private PasswordEncoder passwordEncoder;
-
   /**
    * パスワードの値
    */
@@ -20,7 +17,7 @@ public class DigestPassword {
   public String value;
 
   /**
-   * 基本コンストラクタ 平文のパスワードをハッシュ値に変換する。
+   * 基本コンストラクタ。平文のパスワードをハッシュ値に変換する。
    *
    * @param digestPassword 平文のパスワード
    */
@@ -28,6 +25,7 @@ public class DigestPassword {
     if (plainPassword == null) {
       throw new NullPointerException();
     }
+    PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
     String digestPassword = passwordEncoder.encode(plainPassword);
 
     this.value = digestPassword;

@@ -56,11 +56,12 @@ public class ApiOrderController {
 		MemberId memberId = member.getId();
 		OrderForm orderForm = new OrderForm(order, memberId);
 		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
-		int orderId = orderService.order(orderForm, cart);
+		// int orderId = orderService.order(orderForm, cart);
 		memberRepository.updateAtOrder(orderForm);
 		session.setAttribute(Cart.SESSION_NAME, new Cart());
 
-		return orderId;
+		// return orderId;
+		return 0;
 	}
 
 	/**

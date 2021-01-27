@@ -2,6 +2,9 @@ package com.example.training.web.domain.member;
 
 import lombok.Getter;
 
+/**
+ * 会員のデータ転送用オブジェクト
+ */
 @Getter
 public class MemberDto {
   private Long memberId;
@@ -26,7 +29,7 @@ public class MemberDto {
   public MemberDto(Member member) {
     this.memberId = member.getId().getValue();
     this.email = member.getEmail().getValue();
-    this.password = member.getDigestPassword();
+    this.password = member.getDigestPassword().getValue();
     this.lastName = member.getFullName().getLastName();
     this.firstName = member.getFullName().getFirstName();
     this.phoneNumber = member.getPhoneNumber().getValue();

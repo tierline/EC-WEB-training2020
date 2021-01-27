@@ -22,7 +22,7 @@ public class Member {
 	/**
 	 * 会員パスワード（ハッシュ値）
 	 */
-	private String digestPassword; // fix
+	private DigestPassword digestPassword;
 	/**
 	 * 氏名
 	 */
@@ -59,8 +59,7 @@ public class Member {
 	 */
 	public Member(MemberEntity entity) {
 		this.id = new MemberId(entity.getMemberId());
-		// this.password = new DigestPassword(entity.getPassword());
-		this.digestPassword = entity.getPassword();
+		this.digestPassword = new DigestPassword(entity.getPassword());
 		this.email = new Email(entity.getEmail());
 		this.fullName = new FullName(entity.getLastName(), entity.getFirstName());
 		this.address = new Address(new Postcode(entity.getPostcode()), new Prefecture(entity.getPrefecture()),
@@ -68,17 +67,15 @@ public class Member {
 		this.phoneNumber = new PhoneNumber(entity.getPhoneNumber());
 		this.status = entity.getStatus();
 		this.lastUpdatedBy = entity.getLastUpdatedBy();
-		// this.status = new MemberStatus(entity.getStatus());
-		// this.lastUpdatedBy = new Admin(entity.getLastUpdatedBy());
 	}
 
 	/**
-	 * 新規作成時のコンストラクタ
+	 * 新規会員登録時のコンストラクタ
 	 *
 	 * @param memberApplicationForm
 	 * @param passwordDigest
 	 */
-	public Member(MemberApplicationForm memberApplicationForm, String passwordDigest) {
+	public Member(MemberApplicationForm memberApplicationForm, DigestPassword passwordDigest) {
 		this.digestPassword = passwordDigest;
 		this.email = new Email(memberApplicationForm.getEmail());
 		this.lastUpdatedBy = "none";

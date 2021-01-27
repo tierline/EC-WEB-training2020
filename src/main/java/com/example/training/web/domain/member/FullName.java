@@ -7,14 +7,29 @@ import lombok.Getter;
  */
 @Getter
 public class FullName {
+	/**
+	 * 姓
+	 */
 	private String lastName;
 
+	/**
+	 * 名
+	 */
 	private String firstName;
 
+	/**
+	 * 姓・名の最大値
+	 */
 	private final int MAX = 16;
 
+	/**
+	 * 姓・名の最小値
+	 */
 	private final int MIN = 1;
 
+	/**
+	 * 基本コンストラクタ
+	 */
 	public FullName(String lastName, String firstName) {
 		if (lastName == null) {
 			throw new NullPointerException("姓が入力されていません");
@@ -32,12 +47,18 @@ public class FullName {
 		this.firstName = firstName;
 	}
 
+	/**
+	 * デフォルトコンストラクタ
+	 */
 	public FullName() {
 
 	}
 
-	// 名前の全ての値を取る場合は？
-	// クライアントが何かによって変わる。タイムリーフの場合は、getter的にStringで返してもよい
+	/**
+	 * 氏名を取得する
+	 *
+	 * @return 氏名
+	 */
 	public String getValue() {
 		return this.lastName + this.firstName;
 	}
