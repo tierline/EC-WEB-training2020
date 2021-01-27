@@ -19,7 +19,7 @@ import lombok.RequiredArgsConstructor;
 public class MemberApplicationForm {
 
 	/**
-	 * Eメール
+	 * fix: 型をつける Eメール
 	 */
 	private String email;
 

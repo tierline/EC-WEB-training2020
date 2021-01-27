@@ -80,21 +80,21 @@ public class Cart {
 		}
 	}
 
-	/**
-	 * 全ての商品を削除する。
-	 *
-	 * @param product 商品
-	 */
-	public void removeAll(Product product) {
-		Optional<CartItem> itemOpt = getItem(product);
-		if (itemOpt.isPresent()) {
-			CartItem item = itemOpt.get();
-			item.clearQuantity(new Quantity(0));
-			if (item.isQuantityZero()) {
-				this.items.remove(item);
-			}
-		}
-	}
+	// /** fix: 不要では？
+	// * 全ての商品を削除する。
+	// *
+	// * @param product 商品
+	// */
+	// public void removeAll(Product product) {
+	// Optional<CartItem> itemOpt = getItem(product);
+	// if (itemOpt.isPresent()) {
+	// CartItem item = itemOpt.get();
+	// item.clearQuantity(new Quantity(0));
+	// if (item.isQuantityZero()) {
+	// this.items.remove(item);
+	// }
+	// }
+	// }
 
 	/**
 	 * 商品の数を取得する。

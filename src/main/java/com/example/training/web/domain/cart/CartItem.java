@@ -55,7 +55,7 @@ public class CartItem {
 	}
 
 	/**
-	 * 商品数をゼロにする。
+	 * fix : 引数いる？ 商品数をゼロにする。
 	 *
 	 * @param quantity 個数ゼロの商品
 	 */

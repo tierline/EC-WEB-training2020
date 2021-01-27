@@ -55,7 +55,7 @@ public class Quantity {
 	 * 数量を減算する。
 	 *
 	 * @param quantity 引く値
-	 * @return 加算結果
+	 * @return 減算結果
 	 */
 	public Quantity subtract(Quantity quantity) {
 		int subtracted = this.value - quantity.getValue();

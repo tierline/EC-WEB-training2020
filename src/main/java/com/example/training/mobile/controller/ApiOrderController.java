@@ -60,6 +60,7 @@ public class ApiOrderController {
 		memberRepository.updateAtOrder(orderForm);
 		session.setAttribute(Cart.SESSION_NAME, new Cart());
 
+		// TODO : orderを返すように。
 		// return orderId;
 		return 0;
 	}
