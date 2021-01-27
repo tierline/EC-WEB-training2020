@@ -14,9 +14,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.training.common.repository.ProductRepository;
-import com.example.training.web.domain.Product;
-import com.example.training.web.domain.Quantity;
 import com.example.training.web.domain.cart.Cart;
+import com.example.training.web.domain.product.Product;
+import com.example.training.web.domain.product.ProductEntity;
+import com.example.training.web.domain.product.Quantity;
 
 /**
  * @author
@@ -44,11 +45,14 @@ public class CartController {
 	@GetMapping("/add/{id}")
 	public String add(@PathVariable int id) {
 		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
-		Product product = productRepository.findId(id).orElseThrow();
+		ProductEntity productEntity = productRepository.findId(id).orElseThrow();
+		Product product = new Product(productEntity);
+
 		cart.add(product);
 		return "redirect:/";
 	}
 
+	// fix
 	/**
 	 *
 	 * カートの商品の数量を変更する
@@ -59,8 +63,8 @@ public class CartController {
 	@PostMapping(path = "/changeQuantity/{id}", consumes = "application/x-www-form-urlencoded")
 	public String changeItemQuantity(@PathVariable int id, int quantity) {
 		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
-		Product product = productRepository.findId(id).orElseThrow();
-		cart.changeItemQuantity(product, new Quantity(quantity));
+		ProductEntity productEntity = productRepository.findId(id).orElseThrow();
+		cart.changeItemQuantity(new Product(productEntity), new Quantity(quantity));
 		return "redirect:/member/cart/list";
 	}
 
@@ -74,7 +78,8 @@ public class CartController {
 	@GetMapping("/delete/{id}")
 	public String delete(@PathVariable int id) {
 		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
-		Product product = productRepository.findId(id).orElseThrow();
+		ProductEntity productEntity = productRepository.findId(id).orElseThrow();
+		Product product = new Product(productEntity);
 		cart.remove(product);
 
 		return "redirect:/member/cart/list";
@@ -86,7 +91,7 @@ public class CartController {
 	 *
 	 */
 	@GetMapping("/list")
-	public String doGet(Model model) {
+	public String get(Model model) {
 		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
 		if (cart.getSize() == 0) {
 			model.addAttribute("errorMessage", messageSource.getMessage("error.cart.noProduct", null, Locale.JAPAN));

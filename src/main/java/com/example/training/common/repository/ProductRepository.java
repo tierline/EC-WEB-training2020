@@ -5,15 +5,15 @@ import java.util.Optional;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.example.training.web.domain.Product;
+import com.example.training.web.domain.product.ProductEntity;
 
 @Mapper
 public interface ProductRepository {
 
-	public List<Product> findAll();
+	public List<ProductEntity> findAll();
 
-	public Optional<Product> findId(int id);
+	public Optional<ProductEntity> findId(int id);
 
-	public List<Product> findName(String word);
+	public List<ProductEntity> findName(String word);
 
 }

@@ -1,12 +1,10 @@
 package com.example.training.web.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.http.HttpSession;
-
-import com.example.training.common.repository.ProductRepository;
-import com.example.training.web.domain.Product;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -15,6 +13,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import com.example.training.common.repository.ProductRepository;
+import com.example.training.web.domain.product.Product;
+import com.example.training.web.domain.product.ProductEntity;
 
 @Controller
 public class MainController {
@@ -29,7 +31,11 @@ public class MainController {
 
 	@GetMapping("/")
 	public String index(Model model) {
-		List<Product> products = productRepository.findAll();
+		List<ProductEntity> productEntities = productRepository.findAll();
+		List<Product> products = new ArrayList<Product>();
+		for (ProductEntity productEntity : productEntities) {
+			products.add(new Product(productEntity));
+		}
 		model.addAttribute("products", products);
 		return "index";
 	}
@@ -43,7 +49,11 @@ public class MainController {
 	 */
 	@PostMapping("/search")
 	public String search(Model model, @RequestParam("freeWord") String freeWord) {
-		List<Product> products = productRepository.findName(freeWord);
+		List<ProductEntity> productEntities = productRepository.findName(freeWord);
+		List<Product> products = new ArrayList<Product>();
+		for (ProductEntity productEntity : productEntities) {
+			products.add(new Product(productEntity));
+		}
 		model.addAttribute("freeWord", freeWord);
 		model.addAttribute("products", products);
 		if (products.size() == 0) {

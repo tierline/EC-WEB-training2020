@@ -32,10 +32,17 @@ public class MemberSuccessHandler implements AuthenticationSuccessHandler {
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
+
 		String name = authentication.getName();
 		Email email = new Email(name);
 		MemberSession memberSession = memberRepository.findByEmailSession(email).orElseThrow();
 		session.setAttribute(Member.SESSION_NAME, memberSession);
+
+//		String email = authentication.getName();
+//		MemberEntity entity = memberRepository.findByEmail(email).orElseThrow();
+//		Member member = new Member(entity);
+//		session.setAttribute(Member.SESSION_NAME, member);
+
 		response.sendRedirect("/");
 	}
 }

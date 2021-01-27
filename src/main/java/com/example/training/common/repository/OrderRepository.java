@@ -13,15 +13,18 @@ import com.example.training.web.domain.order.OrderMonth;
 @Mapper
 public interface OrderRepository {
 
-	public int save(Order order);
+	public int create(Order order);
 
+//TODO
 	public void saveItem(@Param("item") OrderItem item, @Param("id") Long id);
+
+	public void createItem(@Param("item") OrderItem item, @Param("id") int id);
 
 	public List<OrderItem> findItemsByOrder(Order order);
 
 	public Order findById(int id);
 
-	public List<OrderMonth> findByOrderMonthByMemberId(MemberId id);
+	public List<OrderMonth> findByOrderMonthByMemberId(MemberId memberId);
 
 	public List<OrderItem> findByOrderItem(int id);
 

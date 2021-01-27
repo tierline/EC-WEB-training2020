@@ -40,19 +40,18 @@
           <tr th:each="item : ${cart.items}">
             <td>
               <img
-                th:src="@{'/image/' + ${item.ProductImage}}"
+                th:src="@{'/image/' + ${item.productImagePath}}"
                 alt=""
                 class="card-img-top"
                 style="width: 200px; height: 200px; object-fit: contain"
               />
             </td>
             <td class="h5 pt-3" th:text="${item.productName}"></td>
-            <td class="h5 pt-3" th:text="${'￥' + item.ProductPrice}"></td>
+            <td
+              class="h5 pt-3"
+              th:text="${'￥' + item.productPrice.value}"
+            ></td>
             <td>
-              <!-- <form
-                th:action="@{/member/cart/addPost/{id}(id=${item.productId})/{quantity}(quantity=${value})}"
-                method="post"
-              > -->
               <form
                 th:action="@{/member/cart/changeQuantity/{id}(id=${item.productId})}"
                 method="post"
@@ -84,7 +83,7 @@
         </table>
         <hr />
         <div class="d-flex justify-content-center pt-3">
-          <h4>合計金額[[${cart.totalAmount}]]円</h4>
+          <h4>合計金額[[${cart.totalAmount.value}]]円</h4>
         </div>
         <div class="d-flex justify-content-center pt-3">
           <a href="/member/order/form"

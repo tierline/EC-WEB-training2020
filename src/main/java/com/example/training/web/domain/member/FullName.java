@@ -1,13 +1,14 @@
 package com.example.training.web.domain.member;
 
 import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 public class FullName {
-	@Getter
 	private String lastName;
 
 	// C: これでもいけるか？
-	@Getter
 	private String firstName;
 
 	private final int MAX = 5;
@@ -42,29 +43,3 @@ public class FullName {
 		return this.lastName + this.firstName;
 	}
 }
-
-// 注意
-// クラスのコンストラクタとメソッドに全て日本語でコメントを書く。何用のコンストラクタか、何をするメソッドか。
-// Serviceクラスでsessionは使わない
-
-// やること
-// 値オブジェクト
-// 値オブジェクトフォームを切り離す
-// 値オブジェクトのバリデーション
-
-// リポジトリ
-// リポジトリの名前を統一する（create, update）
-// リポジトリにアプリケーション層を持ってこない
-
-// セッション
-// セッションの保持する値をID, EMAIL
-// 基本的にセッションではなく、DBから取ってくる。（永続化されるかどうか）
-
-// パッケージの構成を整える
-// resources のほうも書き換える。xml系。
-// web
-// controller
-// domain
-// mobile
-// common
-// repository

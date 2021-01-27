@@ -24,5 +24,4 @@ public class MemberApplicationForm {
 	public Member createMember(Email email, DigestPassword passwordDigest) {
 		return new Member(email, passwordDigest);
 	}
-
 }

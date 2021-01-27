@@ -1,4 +1,3 @@
-
 package com.example.training.web.controller;
 
 import java.util.Locale;
@@ -17,10 +16,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.training.common.repository.MemberRepository;
-import com.example.training.web.domain.MemberEntity;
 import com.example.training.web.domain.member.Email;
 import com.example.training.web.domain.member.Member;
 import com.example.training.web.domain.member.MemberApplicationForm;
+import com.example.training.web.domain.member.MemberEntity;
 import com.example.training.web.domain.service.MemberApplicationService;
 
 @Controller
@@ -85,7 +84,8 @@ public class MemberController {
 		if (result.hasErrors()) {
 			return applicate(memberApplicationForm, model);
 		}
-		Email email = new Email(memberApplicationForm.getEmail());
+
+		Email email = memberApplicationForm.getEmail();
 		Optional<MemberEntity> member = memberRepository.findByEmail(email);
 		if (member.isPresent()) {
 			model.addAttribute("errorMessage",

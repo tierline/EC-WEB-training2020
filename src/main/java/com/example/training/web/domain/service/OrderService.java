@@ -2,17 +2,18 @@ package com.example.training.web.domain.service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import javax.validation.Valid;
 
 import com.example.training.common.repository.MemberRepository;
 import com.example.training.common.repository.OrderRepository;
 import com.example.training.web.domain.cart.Cart;
 import com.example.training.web.domain.member.Member;
-import com.example.training.web.domain.member.MemberId;
 import com.example.training.web.domain.order.Order;
 import com.example.training.web.domain.order.OrderForm;
 import com.example.training.web.domain.order.OrderItem;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Service
 public class OrderService {
@@ -24,19 +25,21 @@ public class OrderService {
 	@Autowired
 	private MemberRepository memberRepository;
 
-	/*
-	 * 注文者情報の保存
+	/**
+	 *
+	 * 注文処理をする
+	 *
+	 * @param orderForm
+	 * @param cart
+	 * @return 注文番号
 	 */
-	public Order order(OrderForm orderForm, Cart cart) {
+	public int order(@Valid OrderForm orderForm, Cart cart) {
 		Order order = orderForm.createOrder(cart);
 		this.saveByOrder(order, cart);
-		Member member = new Member(memberRepository.findById(new MemberId(orderForm.getMemberId())));
-		// 引数はmemberにすべき
-//		orderForm.updateMember(member);
-		// 後で修正
-		memberRepository.updateAtOrder(member);
-		// 注文の操作と関係ないcontrollerへ
-		return order;
+		memberRepository.updateAtOrder(orderForm); // formは渡さないmemberとして！
+		Member member = new Member(memberRepository.findById(orderForm.getMemberId()));
+		// session.setAttribute(Member.SESSION_NAME, member); 不要
+		return order.getId(); // fix orderそのものを返す
 	}
 
 	/**
@@ -47,10 +50,10 @@ public class OrderService {
 	 * @param cart
 	 */
 	private void saveByOrder(Order order, Cart cart) {
-		orderRepository.save(order);
+		orderRepository.create(order);
 		List<OrderItem> items = order.createItems(cart);
 		for (OrderItem item : items) {
-			orderRepository.saveItem(item, order.getOrderId());
+			orderRepository.createItem(item, order.getId());
 		}
 	}
 }

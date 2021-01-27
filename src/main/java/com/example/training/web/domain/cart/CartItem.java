@@ -1,7 +1,7 @@
 package com.example.training.web.domain.cart;
 
-import com.example.training.web.domain.Product;
-import com.example.training.web.domain.Quantity;
+import com.example.training.web.domain.product.Product;
+import com.example.training.web.domain.product.Quantity;
 
 public class CartItem {
 	private Product product;

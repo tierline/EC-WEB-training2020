@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.training.common.repository.MemberRepository;
-import com.example.training.web.domain.MemberEntity;
 import com.example.training.web.domain.MemberSession;
 import com.example.training.web.domain.cart.Cart;
 import com.example.training.web.domain.member.Email;
 import com.example.training.web.domain.member.Member;
+import com.example.training.web.domain.member.MemberEntity;
 import com.example.training.web.domain.order.Order;
 import com.example.training.web.domain.order.OrderForm;
 import com.example.training.web.domain.service.OrderService;
