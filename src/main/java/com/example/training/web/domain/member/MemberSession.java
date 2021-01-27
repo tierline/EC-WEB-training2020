@@ -24,7 +24,7 @@ public class MemberSession {
    * @param value
    */
   public MemberSession(Member member) {
-    MemberId memberId = member.getId();
+    MemberId memberId = member.getMemberId();
     Email email = member.getEmail();
     if (memberId == null) {
       throw new NullPointerException();

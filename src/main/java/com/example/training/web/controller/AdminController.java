@@ -29,6 +29,9 @@ public class AdminController {
 	@Autowired
 	MemberRepository memberRepository;
 
+	/**
+	 * 会員トップ画面を表示する。
+	 */
 	@GetMapping()
 	public String index() {
 		return "admin/index";
@@ -59,25 +62,22 @@ public class AdminController {
 	/**
 	 * 会員情報編集画面を表示する。
 	 */
-	@GetMapping("/members/{id}/edit")
-	public String editForm(@PathVariable MemberId id, Model model, MemberEditForm memberEditForm) {
-		MemberEntity entity = memberRepository.findById(id);
-		Member member = new Member(entity);
-		model.addAttribute("memberEditForm", member);
+	@GetMapping("/members/{memberId}/edit")
+	public String editForm(@PathVariable MemberId memberId, Model model) {
+		MemberEntity memberEntity = memberRepository.findById(memberId);
+		model.addAttribute("member", memberEntity);
 		return "admin/members/edit";
 	}
 
 	/**
 	 * 会員情報を編集する。
 	 */
-	@PostMapping("/members/{id}/edit")
-	public String edit(@PathVariable MemberId id, MemberEditForm memberEditForm, Model model) {
+	@PostMapping("/members/{memberId}/edit")
+	public String edit(@PathVariable MemberId memberId, MemberEditForm memberEditForm) {
 		Admin admin = (Admin) session.getAttribute(Admin.SESSION_NAME);
-		String lastUpdatedBy = admin.getName();
-		MemberEntity memberEntity = memberRepository.findById(id);
-		Member member = new Member(memberEntity);
-		memberRepository.update(memberEditForm, lastUpdatedBy);
-		// memberRepository.update(member);
+		String adminName = admin.getName();
+		Member member = new Member(memberEditForm, adminName, memberId);
+		memberRepository.updateByAdmin(member);
 		return "redirect:/admin/members";
 	}
 

@@ -6,6 +6,7 @@ import com.example.training.web.domain.member.address.City;
 import com.example.training.web.domain.member.address.Postcode;
 import com.example.training.web.domain.member.address.Prefecture;
 import com.example.training.web.domain.member.form.MemberApplicationForm;
+import com.example.training.web.domain.member.form.MemberEditForm;
 import com.example.training.web.domain.order.Order;
 
 import lombok.Getter;
@@ -19,7 +20,7 @@ public class Member {
 	/**
 	 * 会員ID
 	 */
-	private MemberId id;
+	private MemberId memberId;
 	/**
 	 * 会員パスワード（ハッシュ値）
 	 */
@@ -59,7 +60,7 @@ public class Member {
 	 * @param entity
 	 */
 	public Member(MemberEntity entity) {
-		this.id = new MemberId(entity.getMemberId());
+		this.memberId = new MemberId(entity.getMemberId());
 		this.digestPassword = new DigestPassword(entity.getPassword());
 		this.email = new Email(entity.getEmail());
 		this.fullName = new FullName(entity.getLastName(), entity.getFirstName());
@@ -92,7 +93,13 @@ public class Member {
 		this.fullName = order.getFullName();
 		this.phoneNumber = order.getPhoneNumber();
 		this.address = order.getAddress();
-		this.id = order.getMemberId();
+		this.memberId = order.getMemberId();
+	}
+
+	public Member(MemberEditForm memberEditForm, String adminName, MemberId memberId) {
+		this.memberId = memberId;
+		this.lastUpdatedBy = adminName;
+		this.status = memberEditForm.getStatus();
 	}
 
 	/**

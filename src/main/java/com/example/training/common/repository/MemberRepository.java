@@ -7,10 +7,8 @@ import com.example.training.web.domain.member.Email;
 import com.example.training.web.domain.member.Member;
 import com.example.training.web.domain.member.MemberEntity;
 import com.example.training.web.domain.member.MemberId;
-import com.example.training.web.domain.member.form.MemberEditForm;
 
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 
 /**
  * 会員のリポジトリー
@@ -46,8 +44,7 @@ public interface MemberRepository {
 	 * @param memberEditForm
 	 * @param lastUpdatedBy
 	 */
-	public void update(@Param("memberEditForm") MemberEditForm memberEditForm,
-			@Param("lastUpdatedBy") String lastUpdatedBy);// formを引数にとらない
+	public void updateByAdmin(Member member);
 
 	/**
 	 * 注文内容で会員情報を更新する。

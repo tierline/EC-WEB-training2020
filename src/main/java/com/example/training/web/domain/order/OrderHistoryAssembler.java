@@ -29,7 +29,7 @@ public class OrderHistoryAssembler {
 	 * @return 月別注文履歴リスト
 	 */
 	public Map<Integer, List<OrderHistoryByMonth>> create(Member member) {
-		MemberId memberId = member.getId();
+		MemberId memberId = member.getMemberId();
 		List<OrderHistoryByMonth> orderHistoryByMonthList = orderRepository.findOrderHistoryByMonthByMemberId(memberId);
 		Map<Integer, List<OrderHistoryByMonth>> map = new TreeMap<>();
 		for (OrderHistoryByMonth orderHistoryByMonth : orderHistoryByMonthList) {

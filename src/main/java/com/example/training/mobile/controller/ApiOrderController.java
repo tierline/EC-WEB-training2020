@@ -53,7 +53,7 @@ public class ApiOrderController {
 	@PostMapping("/save")
 	public Integer save(@RequestBody OrderFormEntity order) {
 		Member member = (Member) session.getAttribute(Member.SESSION_NAME);
-		MemberId memberId = member.getId();
+		MemberId memberId = member.getMemberId();
 		OrderForm orderForm = new OrderForm(order, memberId);
 		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
 		// int orderId = orderService.order(orderForm, cart);

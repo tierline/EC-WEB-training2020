@@ -27,7 +27,7 @@ public class MemberDto {
    * @param member
    */
   public MemberDto(Member member) {
-    this.memberId = member.getId().getValue();
+    this.memberId = member.getMemberId().getValue();
     this.email = member.getEmail().getValue();
     this.password = member.getDigestPassword().getValue();
     this.lastName = member.getFullName().getLastName();
