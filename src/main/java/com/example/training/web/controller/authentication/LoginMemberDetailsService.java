@@ -30,13 +30,13 @@ public class LoginMemberDetailsService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String stringEmail) throws UsernameNotFoundException {
 		Email email = new Email(stringEmail);
-		Optional<MemberEntity> memberOpt = memberRepository.findByEmail(email);
-		if (memberOpt.isEmpty()) {
-			throw new UsernameNotFoundException("User not found for email: " + email);
+		Optional<MemberEntity> memberEntityOpt = memberRepository.findByEmail(email);
+		if (memberEntityOpt.isEmpty()) {
+			throw new UsernameNotFoundException("Eメールで会員が見つけられませんでした。: " + email);
 		} else {
-			Member member = new Member(memberOpt.get());
+			Member member = new Member(memberEntityOpt.get());
 			if (member.getStatus().equals("unapproved")) {
-				throw new UsernameNotFoundException("Unauthorized user.: " + email);
+				throw new UsernameNotFoundException("承認されていない会員です。: " + email);
 			} else {
 				return new LoginMemberDetails(member);
 			}

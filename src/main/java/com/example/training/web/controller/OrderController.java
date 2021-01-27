@@ -3,9 +3,13 @@ package com.example.training.web.controller;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import com.example.training.common.repository.MemberRepository;
 import com.example.training.web.domain.cart.Cart;
+import com.example.training.web.domain.member.Email;
 import com.example.training.web.domain.member.Member;
 import com.example.training.web.domain.member.MemberDto;
+import com.example.training.web.domain.member.MemberEntity;
+import com.example.training.web.domain.member.MemberSession;
 import com.example.training.web.domain.order.Order;
 import com.example.training.web.domain.order.OrderForm;
 import com.example.training.web.domain.service.OrderService;
@@ -29,6 +33,9 @@ public class OrderController {
 	@Autowired
 	private OrderService orderService;
 
+	@Autowired
+	private MemberRepository memberRepository;
+
 	/**
 	 * お届け先入力フォームを表示する。
 	 *
@@ -38,7 +45,10 @@ public class OrderController {
 	 */
 	@GetMapping("/form")
 	public String form(OrderForm orderForm, Model model) {
-		Member member = (Member) session.getAttribute(Member.SESSION_NAME);
+		MemberSession memberSession = (MemberSession) session.getAttribute(Member.SESSION_NAME);
+		Email email = memberSession.getEmail();
+		MemberEntity memberEntity = memberRepository.findByEmail(email).orElseThrow();
+		Member member = new Member(memberEntity);
 		OrderForm sessionOrderForm = (OrderForm) session.getAttribute(OrderForm.SESSION_NAME);
 		if (sessionOrderForm != null) {
 			model.addAttribute("orderForm", sessionOrderForm);

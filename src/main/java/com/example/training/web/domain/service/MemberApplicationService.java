@@ -14,8 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class MemberApplicationService {
 
-  // 本来は不要
-  // mobile版で DigestPassword 型を使うように修正したら削除する予定。
+  // fix DigestPasswordオブジェクトの中でエンコードする方法に失敗している状態。
   @Autowired
   private PasswordEncoder passwordEncoder;
 
@@ -24,8 +23,9 @@ public class MemberApplicationService {
 
   @Transactional
   public void run(MemberApplicationForm memberApplicationForm) {
-    String plainPassword = memberApplicationForm.getPassword();
-    DigestPassword digestPassword = new DigestPassword(plainPassword);
+    String rawPassword = memberApplicationForm.getPassword();
+    String digestPasswordString = passwordEncoder.encode(rawPassword);
+    DigestPassword digestPassword = new DigestPassword(digestPasswordString);
     Member member = memberApplicationForm.createMember(digestPassword);
     memberRepository.create(member);
   }

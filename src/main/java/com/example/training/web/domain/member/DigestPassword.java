@@ -1,8 +1,5 @@
 package com.example.training.web.domain.member;
 
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-
 import lombok.Getter;
 
 /**
@@ -16,19 +13,20 @@ public class DigestPassword {
   @Getter
   public String value;
 
+  // @Service をつけてみても、null になる。値オブジェクト内で暗号化すべきか？ するとしたら、どうするか。
+  // @Autowired
+  // private PasswordEncoder passwordEncoder;
+
   /**
    * 基本コンストラクタ。平文のパスワードをハッシュ値に変換する。
    *
    * @param digestPassword 平文のパスワード
    */
-  public DigestPassword(String plainPassword) {
-    if (plainPassword == null) {
+  public DigestPassword(String value) {
+    if (value == null) {
       throw new NullPointerException();
     }
-    PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-    String digestPassword = passwordEncoder.encode(plainPassword);
-
-    this.value = digestPassword;
+    this.value = value;
   }
 
   /**

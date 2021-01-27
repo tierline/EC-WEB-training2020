@@ -11,6 +11,7 @@ import com.example.training.common.repository.MemberRepository;
 import com.example.training.web.domain.member.Email;
 import com.example.training.web.domain.member.Member;
 import com.example.training.web.domain.member.MemberEntity;
+import com.example.training.web.domain.member.MemberSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -35,7 +36,8 @@ public class MemberSuccessHandler implements AuthenticationSuccessHandler {
 		Email email = new Email(authentication.getName());
 		MemberEntity entity = memberRepository.findByEmail(email).orElseThrow();
 		Member member = new Member(entity);
-		session.setAttribute(Member.SESSION_NAME, member);
+		MemberSession memberSession = new MemberSession(member);
+		session.setAttribute(Member.SESSION_NAME, memberSession);
 		response.sendRedirect("/");
 	}
 }
