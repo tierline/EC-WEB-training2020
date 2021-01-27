@@ -7,15 +7,9 @@
 // import java.util.List;
 // import java.util.Optional;
 
-<<<<<<< HEAD
-import com.example.training.web.domain.Product;
-import com.example.training.web.domain.cart.Cart;
-import com.example.training.web.domain.cart.CartItem;
-=======
 // import com.example.training.common.domain.Product;
 // import com.example.training.common.domain.cart.Cart;
 // import com.example.training.common.domain.cart.CartItem;
->>>>>>> origin/kato
 
 // import org.junit.jupiter.api.Test;
 

@@ -4,18 +4,18 @@ import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 
-<<<<<<< HEAD
-=======
 import com.example.training.common.repository.MemberRepository;
 import com.example.training.web.domain.member.Email;
 import com.example.training.web.domain.member.Member;
 import com.example.training.web.domain.member.MemberEntity;
+import com.example.training.web.domain.member.MemberSession;
 import com.example.training.web.domain.member.form.MemberApplicationForm;
 import com.example.training.web.domain.member.form.MemberLoginForm;
+import com.example.training.web.domain.service.DigestPasswordService;
 import com.example.training.web.domain.service.MemberApplicationService;
 
->>>>>>> origin/kato
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,16 +23,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.example.training.common.repository.MemberRepository;
-import com.example.training.web.domain.member.Email;
-import com.example.training.web.domain.member.Member;
-import com.example.training.web.domain.member.MemberApplicationForm;
-import com.example.training.web.domain.member.MemberEntity;
-import com.example.training.web.domain.member.MemberLoginForm;
-import com.example.training.web.domain.member.MemberSession;
-import com.example.training.web.domain.service.DigestPasswordService;
-import com.example.training.web.domain.service.MemberApplicationService;
 
 @RestController
 @RequestMapping("/api/member")
@@ -46,13 +36,10 @@ public class ApiMemberController {
 	private MemberApplicationService memberApplicationService;
 
 	@Autowired
-	private DigestPasswordService digestPasswordService;
-
-	@Autowired
 	private MemberRepository memberRepository;
 
-//	@Autowired
-//	private BCryptPasswordEncoder bCryptPasswordEncoder;
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	@CrossOrigin
 	@PostMapping("/applicate")
@@ -75,18 +62,14 @@ public class ApiMemberController {
 	@PostMapping("/login")
 	@ResponseBody
 	public Boolean login(@RequestBody MemberLoginForm memberLoginForm) {
-<<<<<<< HEAD
-		Email email = new Email(memberLoginForm.getEmail());
-		Boolean isMatched = digestPasswordService.isMatched(memberLoginForm);
-=======
 		String password = memberLoginForm.getPassword();
 		Email email = new Email(memberLoginForm.getEmail());
 		MemberEntity memberEntity = memberRepository.findByEmail(email).orElseThrow();
 		String hashPassword = memberEntity.getPassword();
 		Boolean isMatched = bCryptPasswordEncoder.matches(password, hashPassword);
->>>>>>> origin/kato
 		if (isMatched) {
-			MemberSession memberSession = memberRepository.findByEmailSession(email).orElseThrow();
+			Member member = new Member(memberEntity);
+			MemberSession memberSession = new MemberSession(member);
 			session.setAttribute(Member.SESSION_NAME, memberSession);
 		}
 		return isMatched;

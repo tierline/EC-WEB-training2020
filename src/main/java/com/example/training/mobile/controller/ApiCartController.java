@@ -77,7 +77,7 @@ public class ApiCartController {
 		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
 		ProductEntity productEntity = productRepository.findId(productId).orElseThrow();
 		Product product = new Product(productEntity);
-		cart.removeAll(product);
+		cart.remove(product);
 		return cart;
 	}
 

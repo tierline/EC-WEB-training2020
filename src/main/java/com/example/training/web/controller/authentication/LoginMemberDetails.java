@@ -26,11 +26,7 @@ public class LoginMemberDetails extends User {
 	 * @param member memberエンティティ
 	 */
 	public LoginMemberDetails(Member member) {
-<<<<<<< HEAD
-		super(member.getEmail(), member.getDigestPassword(), createRole());
-=======
-		super(member.getEmail().getValue(), member.getDigestPassword().getValue(), createRole(member)); // fix
->>>>>>> origin/kato
+		super(member.getEmail().getValue(), member.getDigestPassword().getValue(), createRole()); // fix
 		this.member = member;
 	}
 

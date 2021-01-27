@@ -3,17 +3,10 @@
 // import java.util.ArrayList;
 // import java.util.List;
 
-<<<<<<< HEAD
-import com.example.training.common.domain.cart.Cart;
-import com.example.training.common.domain.order.Order;
-import com.example.training.common.domain.order.OrderHistoryAssembler;
-import com.example.training.web.domain.Product;
-=======
 // import com.example.training.common.domain.Product;
 // import com.example.training.common.domain.cart.Cart;
 // import com.example.training.common.domain.order.Order;
 // import com.example.training.common.domain.order.OrderHistoryAssembler;
->>>>>>> origin/kato
 
 // import org.junit.jupiter.api.Test;
 

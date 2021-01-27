@@ -26,13 +26,13 @@ public class DigestPasswordService {
 	/*
 	 * 登録されているパスワードと一致するか
 	 */
-	public Boolean isMatched(MemberLoginForm memberLoginForm) {
-		Email email = new Email(memberLoginForm.getEmail());
-		String raw = memberLoginForm.getPassword();
-		MemberSession memberSession = memberRepository.findByEmailSession(email).orElseThrow();
-		String digest = memberSession.getPassword();
-		return bCryptPasswordEncoder.matches(raw, digest);
-	}
+	// public Boolean isMatched(MemberLoginForm memberLoginForm) {
+	// 	Email email = new Email(memberLoginForm.getEmail());
+	// 	String raw = memberLoginForm.getPassword();
+	// 	MemberSession memberSession = memberRepository.findByEmailSession(email).orElseThrow();
+	// 	String digest = memberSession.getPassword();
+	// 	return bCryptPasswordEncoder.matches(raw, digest);
+	// }
 
 	/*
 	 * 暗号化パスワードの生成

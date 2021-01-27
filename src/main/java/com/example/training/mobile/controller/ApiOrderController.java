@@ -50,26 +50,24 @@ public class ApiOrderController {
 	/**
 	 * 注文処理を行う
 	 */
+	//TODO
 	@PostMapping("/save")
-	public Order save(@RequestBody OrderFormEntity orderFormEntity) {
+	public int save(@RequestBody OrderFormEntity orderFormEntity) {
 		Member member = (Member) session.getAttribute(Member.SESSION_NAME);
 		MemberId memberId = member.getMemberId();
 		OrderForm orderForm = new OrderForm(orderFormEntity, memberId);
 		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
-<<<<<<< HEAD
 		Order order = orderService.order(orderForm, cart);
 //		memberRepository.updateAtOrder(orderForm);
-		session.setAttribute(Cart.SESSION_NAME, new Cart());
+		// session.setAttribute(Cart.SESSION_NAME, new Cart());
 
-		return order;
-=======
+		// return order;
 		// int orderId = orderService.order(orderForm, cart);
 		memberRepository.updateAtOrder(orderForm);
 		session.setAttribute(Cart.SESSION_NAME, new Cart());
 
 		// return orderId;
 		return 0;
->>>>>>> origin/kato
 	}
 
 	/**
