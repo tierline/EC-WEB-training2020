@@ -6,6 +6,7 @@ import com.example.training.web.domain.member.address.City;
 import com.example.training.web.domain.member.address.Postcode;
 import com.example.training.web.domain.member.address.Prefecture;
 import com.example.training.web.domain.member.form.MemberApplicationForm;
+import com.example.training.web.domain.order.Order;
 
 import lombok.Getter;
 
@@ -80,6 +81,18 @@ public class Member {
 		this.email = new Email(memberApplicationForm.getEmail());
 		this.lastUpdatedBy = "none";
 		this.status = "unapproved";
+	}
+
+	/**
+	 * 注文時の会員情報更新のためのコンストラクタ
+	 *
+	 * @param order 注文内容
+	 */
+	public Member(Order order) {
+		this.fullName = order.getFullName();
+		this.phoneNumber = order.getPhoneNumber();
+		this.address = order.getAddress();
+		this.id = order.getMemberId();
 	}
 
 	/**

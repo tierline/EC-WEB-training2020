@@ -5,6 +5,7 @@ import java.util.List;
 import com.example.training.common.repository.MemberRepository;
 import com.example.training.common.repository.OrderRepository;
 import com.example.training.web.domain.cart.Cart;
+import com.example.training.web.domain.member.Member;
 import com.example.training.web.domain.order.Order;
 import com.example.training.web.domain.order.OrderItem;
 
@@ -33,8 +34,7 @@ public class OrderService {
 	 */
 	public Order order(Order order, Cart cart) {
 		this.saveByOrder(order, cart);
-		// memberRepository.updateAtOrder(orderForm); // formは渡さないmemberとして！ fix :
-		// update(member)に変更する。
+		this.updateMemberByOrder(order);
 		return order;
 	}
 
@@ -51,4 +51,15 @@ public class OrderService {
 			orderRepository.createItem(item);
 		}
 	}
+
+	/**
+	 * 注文内容で会員情報を更新する
+	 *
+	 * @param order 注文内容
+	 */
+	private void updateMemberByOrder(Order order) {
+		Member member = new Member(order);
+		memberRepository.updateAtOrder(member);
+	}
+
 }

@@ -73,11 +73,11 @@ public class AdminController {
 	@PostMapping("/members/{id}/edit")
 	public String edit(@PathVariable MemberId id, MemberEditForm memberEditForm, Model model) {
 		Admin admin = (Admin) session.getAttribute(Admin.SESSION_NAME);
-		// fix
-		// MemberEntity memberEntity = memberRepository.findById(id);
-		// Member member = new Member(memberEntity);
 		String lastUpdatedBy = admin.getName();
+		MemberEntity memberEntity = memberRepository.findById(id);
+		Member member = new Member(memberEntity);
 		memberRepository.update(memberEditForm, lastUpdatedBy);
+		// memberRepository.update(member);
 		return "redirect:/admin/members";
 	}
 

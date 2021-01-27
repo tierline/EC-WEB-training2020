@@ -57,7 +57,7 @@ public class ApiOrderController {
 		OrderForm orderForm = new OrderForm(order, memberId);
 		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
 		// int orderId = orderService.order(orderForm, cart);
-		memberRepository.updateAtOrder(orderForm);
+		// memberRepository.updateAtOrder(orderForm);
 		session.setAttribute(Cart.SESSION_NAME, new Cart());
 
 		// TODO : orderを返すように。
