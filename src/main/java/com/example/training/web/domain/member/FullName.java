@@ -1,14 +1,14 @@
 package com.example.training.web.domain.member;
 
 import lombok.Getter;
-import lombok.Setter;
 
+/**
+ *
+ */
 @Getter
-@Setter
 public class FullName {
 	private String lastName;
 
-	// C: これでもいけるか？
 	private String firstName;
 
 	private final int MAX = 5;
@@ -17,16 +17,16 @@ public class FullName {
 
 	public FullName(String lastName, String firstName) {
 		if (lastName == null) {
-			throw new IllegalArgumentException("値が入力");
+			throw new NullPointerException("姓が入力されていません");
 		}
 		if (lastName.length() < MIN || lastName.length() > MAX) {
-			throw new IllegalArgumentException("値が入力");
+			throw new IllegalArgumentException("姓が字数制限を満たしていません");
 		}
 		if (firstName == null) {
-			throw new IllegalArgumentException("値が入力");
+			throw new NullPointerException("名が入力されていません");
 		}
 		if (firstName.length() < MIN || firstName.length() > MAX) {
-			throw new IllegalArgumentException("値が入力");
+			throw new IllegalArgumentException("名が字数制限を満たしていません");
 		}
 		this.lastName = lastName;
 		this.firstName = firstName;
@@ -38,7 +38,7 @@ public class FullName {
 
 	// 名前の全ての値を取る場合は？
 	// クライアントが何かによって変わる。タイムリーフの場合は、getter的にStringで返してもよい
-	public String getValue() {
+	public String getFullName() {
 		return this.lastName + this.firstName;
 	}
 }

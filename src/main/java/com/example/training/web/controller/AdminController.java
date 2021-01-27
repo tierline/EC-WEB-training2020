@@ -7,9 +7,9 @@ import javax.servlet.http.HttpSession;
 import com.example.training.common.repository.MemberRepository;
 import com.example.training.web.domain.admin.Admin;
 import com.example.training.web.domain.member.Member;
-import com.example.training.web.domain.member.MemberEditForm;
 import com.example.training.web.domain.member.MemberEntity;
 import com.example.training.web.domain.member.MemberId;
+import com.example.training.web.domain.member.form.MemberEditForm;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

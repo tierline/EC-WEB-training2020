@@ -3,10 +3,11 @@ package com.example.training.common.repository;
 import java.util.List;
 import java.util.Optional;
 
+import com.example.training.web.domain.member.Email;
 import com.example.training.web.domain.member.Member;
-import com.example.training.web.domain.member.MemberEditForm;
 import com.example.training.web.domain.member.MemberEntity;
 import com.example.training.web.domain.member.MemberId;
+import com.example.training.web.domain.member.form.MemberEditForm;
 import com.example.training.web.domain.order.OrderForm;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -21,7 +22,7 @@ public interface MemberRepository {
 	/**
 	 * Eメールで取得する。
 	 */
-	public Optional<MemberEntity> findByEmail(String email);
+	public Optional<MemberEntity> findByEmail(Email email);
 
 	/**
 	 * IDで取得する。

@@ -35,7 +35,7 @@ public class Quantity {
 			throw new IllegalArgumentException("数量の最小値を下回っています");
 		}
 		if (value > MAX) {
-			throw new IllegalArgumentException("数量の最大値を上回っています");
+			throw new IllegalArgumentException("数量の最大値を超えています");
 		}
 		this.value = value;
 	}

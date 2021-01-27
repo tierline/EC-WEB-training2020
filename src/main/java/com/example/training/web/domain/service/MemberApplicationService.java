@@ -3,7 +3,7 @@ package com.example.training.web.domain.service;
 
 import com.example.training.common.repository.MemberRepository;
 import com.example.training.web.domain.member.Member;
-import com.example.training.web.domain.member.MemberApplicationForm;
+import com.example.training.web.domain.member.form.MemberApplicationForm;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;

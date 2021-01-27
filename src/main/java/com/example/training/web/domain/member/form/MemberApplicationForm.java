@@ -1,7 +1,9 @@
-package com.example.training.web.domain.member;
+package com.example.training.web.domain.member.form;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+
+import com.example.training.web.domain.member.Member;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

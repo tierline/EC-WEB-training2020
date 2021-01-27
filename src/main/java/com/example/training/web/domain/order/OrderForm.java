@@ -3,11 +3,11 @@ package com.example.training.web.domain.order;
 import java.time.LocalDateTime;
 
 import javax.validation.Valid;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 import com.example.training.web.domain.cart.Cart;
+import com.example.training.web.domain.member.Email;
 import com.example.training.web.domain.member.FullName;
 import com.example.training.web.domain.member.Member;
 import com.example.training.web.domain.member.MemberId;
@@ -33,9 +33,9 @@ public class OrderForm {
 	 * Eメール
 	 */
 	@NotEmpty
-	@Email
+	@javax.validation.constraints.Email
 	@Size(min = 1, max = 128, message = "メールアドレスは1文字以上、128文字以内で入力してください")
-	private String email;
+	private Email email;
 
 	/**
 	 * 電話番号
@@ -74,7 +74,7 @@ public class OrderForm {
 	 */
 	public OrderForm(OrderFormEntity orderFormEntity, MemberId memberId) {
 		this.fullName = new FullName(orderFormEntity.getLastName(), orderFormEntity.getFirstName());
-		this.email = orderFormEntity.getEmail();
+		this.email = new Email(orderFormEntity.getEmail());
 		this.phoneNumber = new PhoneNumber(orderFormEntity.getPhoneNumber());
 		Postcode postcode = new Postcode(orderFormEntity.getPostcode());
 		Prefecture prefecture = new Prefecture(orderFormEntity.getPrefecture());

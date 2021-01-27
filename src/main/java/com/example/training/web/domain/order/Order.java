@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.example.training.web.domain.cart.Cart;
 import com.example.training.web.domain.cart.CartItem;
+import com.example.training.web.domain.member.Email;
 import com.example.training.web.domain.member.FullName;
 import com.example.training.web.domain.member.MemberId;
 import com.example.training.web.domain.member.PhoneNumber;
@@ -41,7 +42,7 @@ public class Order {
 	/**
 	 * 会員のEメールアドレス
 	 */
-	private String email;
+	private Email email;
 	/**
 	 * 会員の電話番号
 	 */

@@ -3,6 +3,7 @@ package com.example.training.web.controller.authentication;
 import java.util.Optional;
 
 import com.example.training.common.repository.MemberRepository;
+import com.example.training.web.domain.member.Email;
 import com.example.training.web.domain.member.Member;
 import com.example.training.web.domain.member.MemberEntity;
 
@@ -27,8 +28,8 @@ public class LoginMemberDetailsService implements UserDetailsService {
 	 */
 	@Transactional(readOnly = true)
 	@Override
-	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-		assert (email != null);
+	public UserDetails loadUserByUsername(String stringEmail) throws UsernameNotFoundException {
+		Email email = new Email(stringEmail);
 		Optional<MemberEntity> memberOpt = memberRepository.findByEmail(email);
 		if (memberOpt.isEmpty()) {
 			throw new UsernameNotFoundException("User not found for email: " + email);

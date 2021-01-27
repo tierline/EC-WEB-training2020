@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.example.training.common.repository.MemberRepository;
+import com.example.training.web.domain.member.Email;
 import com.example.training.web.domain.member.Member;
 import com.example.training.web.domain.member.MemberEntity;
 
@@ -31,7 +32,7 @@ public class MemberSuccessHandler implements AuthenticationSuccessHandler {
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
-		String email = authentication.getName();
+		Email email = new Email(authentication.getName());
 		MemberEntity entity = memberRepository.findByEmail(email).orElseThrow();
 		Member member = new Member(entity);
 		session.setAttribute(Member.SESSION_NAME, member);

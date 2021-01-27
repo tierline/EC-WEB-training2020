@@ -8,9 +8,10 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import com.example.training.common.repository.MemberRepository;
+import com.example.training.web.domain.member.Email;
 import com.example.training.web.domain.member.Member;
-import com.example.training.web.domain.member.MemberApplicationForm;
 import com.example.training.web.domain.member.MemberEntity;
+import com.example.training.web.domain.member.form.MemberApplicationForm;
 import com.example.training.web.domain.service.MemberApplicationService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -83,7 +84,7 @@ public class MemberController {
 		if (result.hasErrors()) {
 			return applicate(memberApplicationForm, model);
 		}
-		String email = memberApplicationForm.getEmail();
+		Email email = new Email(memberApplicationForm.getEmail());
 		Optional<MemberEntity> memberEntity = memberRepository.findByEmail(email);
 		if (memberEntity.isPresent()) {
 			model.addAttribute("errorMessage", messageSource.getMessage("error.applicate.duplicate", null, Locale.JAPAN));

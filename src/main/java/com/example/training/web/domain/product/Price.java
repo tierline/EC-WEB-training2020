@@ -33,7 +33,7 @@ public class Price {
       throw new IllegalArgumentException("価格が最小値を下回っています");
     }
     if (value > MAX) {
-      throw new IllegalArgumentException("価格が最大値を上回っています");
+      throw new IllegalArgumentException("価格が最大値を超えています");
     }
 
     this.value = price;
