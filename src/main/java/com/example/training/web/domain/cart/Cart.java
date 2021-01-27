@@ -8,14 +8,25 @@ import com.example.training.web.domain.product.Price;
 import com.example.training.web.domain.product.Product;
 import com.example.training.web.domain.product.Quantity;
 
+import lombok.Getter;
+
+/**
+ * カートクラス
+ */
 public class Cart {
 	public static final String SESSION_NAME = "CART";
+	/**
+	 * 商品
+	 */
+	@Getter
 	private List<CartItem> items = new ArrayList<CartItem>();
-	private Price totalAmount = new Price(0);
+	/**
+	 * 合計金額
+	 */
+	private Price totalPrice = new Price(0);
 
 	/**
-	 *
-	 * カートに商品を1つ追加する
+	 * 商品を1つ追加する。
 	 *
 	 * @param item 商品
 	 */
@@ -24,11 +35,10 @@ public class Cart {
 	}
 
 	/**
+	 * 商品を複数追加する。
 	 *
-	 * カートに商品を引数個分、追加する
-	 *
-	 * @param item
-	 * @param quantity
+	 * @param item     商品
+	 * @param quantity 商品数
 	 */
 	public void add(Product product, Quantity quantity) {
 		Optional<CartItem> itemOpt = getItem(product);
@@ -39,6 +49,12 @@ public class Cart {
 		}
 	}
 
+	/**
+	 * 商品の個数を変更する。
+	 *
+	 * @param product  商品
+	 * @param quantity 商品数
+	 */
 	public void changeItemQuantity(Product product, Quantity quantity) {
 		CartItem item = getItem(product).orElseThrow();
 		item.changeQuantity(quantity);
@@ -48,17 +64,15 @@ public class Cart {
 	}
 
 	/**
+	 * 商品のうち1つを削除する。
 	 *
-	 * カートから商品を1つ削除する
-	 *
-	 * @param product
+	 * @param product 商品
 	 */
 	public void remove(Product product) {
 		Optional<CartItem> itemOpt = getItem(product);
 		if (itemOpt.isPresent()) {
 			CartItem item = itemOpt.get();
-			item.resetQuantity();
-			;
+			item.clearQuantity(new Quantity(0));
 			if (item.isQuantityZero()) {
 				this.items.remove(item);
 			}
@@ -66,44 +80,32 @@ public class Cart {
 	}
 
 	/**
-	 * カートの特定の商品をすべて取り除く
+	 * 全ての商品を削除する。
 	 *
-	 * @param product
+	 * @param product 商品
 	 */
-	public void removeAll(Product product) {
-		Optional<CartItem> itemOpt = getItem(product);
-		if (itemOpt.isPresent()) {
-			CartItem item = itemOpt.get();
-			item.resetQuantity();
-			if (item.isQuantityZero()) {
-				this.items.remove(item);
-			}
-		}
-	}
+	// public void removeAll(Product product) {
+	// 	Optional<CartItem> itemOpt = getItem(product);
+	// 	if (itemOpt.isPresent()) {
+	// 		CartItem item = itemOpt.get();
+	// 		item.clearQuantity(new Quantity(0));
+	// 		if (item.isQuantityZero()) {
+	// 			this.items.remove(item);
+	// 		}
+	// 	}
+	// }
 
 	/**
+	 * 商品の数を取得する。
 	 *
-	 * カート内の商品の数を返す
-	 *
-	 * @return items.size
+	 * @return 商品数
 	 */
 	public int getSize() {
 		return items.size();
 	}
 
 	/**
-	 *
-	 * カート内の商品を取得する
-	 *
-	 * @return
-	 */
-	public List<CartItem> getItems() {
-		return items;
-	}
-
-	/**
-	 *
-	 * 商品が存在するか確認する
+	 * 商品が存在するか判定する。
 	 *
 	 * @param product
 	 * @return
@@ -119,19 +121,18 @@ public class Cart {
 	}
 
 	/**
+	 * 商品の合計金額を取得する。
 	 *
-	 * カート内のすべての商品の合計金額を取得する
-	 *
-	 * @return
+	 * @return 合計金額
 	 */
 	// TOREVIEW 変更
-	public int getTotalAmount() {
-		// fix 毎回 getTotalAmount が呼ばれて再計算している
-		this.totalAmount = new Price(0);
+	public Price getTotalPrice() {
+		// fix 毎回 method が呼ばれて再計算している
+		this.totalPrice = new Price(0);
 		List<CartItem> items = this.getItems();
 		for (CartItem item : items) {
-			this.totalAmount = item.multiply(new Price(item.getProductPrice()));
+			this.totalPrice = this.totalPrice.add(item.getTotalPrice());
 		}
-		return this.totalAmount.getValue();
+		return this.totalPrice;
 	}
 }

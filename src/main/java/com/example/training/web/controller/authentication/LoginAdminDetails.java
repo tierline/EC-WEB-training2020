@@ -20,7 +20,7 @@ public class LoginAdminDetails extends User {
   private Admin admin;
 
   /**
-   * データベースより検索したuserエンティティよりSpring Securityで使用するユーザー認証情報のインスタンスを生成する。
+   * データベースより検索したuserエンティティよりSpring Securityで使用するユーザー認証情報のインスタンスを作る。
    *
    * @param admin adminエンティティ
    */

@@ -4,6 +4,17 @@ import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 
+<<<<<<< HEAD
+=======
+import com.example.training.common.repository.MemberRepository;
+import com.example.training.web.domain.member.Email;
+import com.example.training.web.domain.member.Member;
+import com.example.training.web.domain.member.MemberEntity;
+import com.example.training.web.domain.member.form.MemberApplicationForm;
+import com.example.training.web.domain.member.form.MemberLoginForm;
+import com.example.training.web.domain.service.MemberApplicationService;
+
+>>>>>>> origin/kato
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -64,8 +75,16 @@ public class ApiMemberController {
 	@PostMapping("/login")
 	@ResponseBody
 	public Boolean login(@RequestBody MemberLoginForm memberLoginForm) {
+<<<<<<< HEAD
 		Email email = new Email(memberLoginForm.getEmail());
 		Boolean isMatched = digestPasswordService.isMatched(memberLoginForm);
+=======
+		String password = memberLoginForm.getPassword();
+		Email email = new Email(memberLoginForm.getEmail());
+		MemberEntity memberEntity = memberRepository.findByEmail(email).orElseThrow();
+		String hashPassword = memberEntity.getPassword();
+		Boolean isMatched = bCryptPasswordEncoder.matches(password, hashPassword);
+>>>>>>> origin/kato
 		if (isMatched) {
 			MemberSession memberSession = memberRepository.findByEmailSession(email).orElseThrow();
 			session.setAttribute(Member.SESSION_NAME, memberSession);
@@ -74,7 +93,7 @@ public class ApiMemberController {
 	}
 
 	/*
-	 * 住所情報があったら表示する
+	 * 住所情報があったら表示する。
 	 */
 	@GetMapping("/session")
 	@ResponseBody

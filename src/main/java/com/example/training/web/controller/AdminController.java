@@ -4,6 +4,13 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import com.example.training.common.repository.MemberRepository;
+import com.example.training.web.domain.admin.Admin;
+import com.example.training.web.domain.member.Member;
+import com.example.training.web.domain.member.MemberEntity;
+import com.example.training.web.domain.member.MemberId;
+import com.example.training.web.domain.member.form.MemberEditForm;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,13 +18,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import com.example.training.common.repository.MemberRepository;
-import com.example.training.web.domain.admin.Admin;
-import com.example.training.web.domain.member.Member;
-import com.example.training.web.domain.member.MemberEditForm;
-import com.example.training.web.domain.member.MemberEntity;
-import com.example.training.web.domain.member.MemberId;
 
 @Controller
 @RequestMapping("/admin")
@@ -35,7 +35,7 @@ public class AdminController {
 	}
 
 	/**
-	 * 会員のログイン画面を表示する
+	 * 会員のログイン画面を表示する。
 	 */
 	@GetMapping("/login")
 	public String login() {
@@ -47,7 +47,7 @@ public class AdminController {
 	}
 
 	/**
-	 * 会員情報の一覧を表示する
+	 * 会員情報の一覧を表示する。
 	 */
 	@GetMapping("/members")
 	public String list(Model model) {
@@ -57,7 +57,7 @@ public class AdminController {
 	}
 
 	/**
-	 * 会員情報編集画面を表示する
+	 * 会員情報編集画面を表示する。
 	 */
 	@GetMapping("/members/{id}/edit")
 	public String editForm(@PathVariable MemberId id, Model model, MemberEditForm memberEditForm) {
@@ -68,11 +68,14 @@ public class AdminController {
 	}
 
 	/**
-	 * 会員情報を編集する
+	 * 会員情報を編集する。
 	 */
 	@PostMapping("/members/{id}/edit")
-	public String edit(@PathVariable int id, MemberEditForm memberEditForm, Model model) {
+	public String edit(@PathVariable MemberId id, MemberEditForm memberEditForm, Model model) {
 		Admin admin = (Admin) session.getAttribute(Admin.SESSION_NAME);
+		// fix
+		// MemberEntity memberEntity = memberRepository.findById(id);
+		// Member member = new Member(memberEntity);
 		String lastUpdatedBy = admin.getName();
 		memberRepository.update(memberEditForm, lastUpdatedBy);
 		return "redirect:/admin/members";

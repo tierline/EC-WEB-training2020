@@ -23,8 +23,8 @@ import com.example.training.web.domain.order.Order;
 import com.example.training.web.domain.order.OrderForm;
 import com.example.training.web.domain.order.OrderFormEntity;
 import com.example.training.web.domain.order.OrderHistoryAssembler;
+import com.example.training.web.domain.order.OrderHistoryByMonth;
 import com.example.training.web.domain.order.OrderItem;
-import com.example.training.web.domain.order.OrderMonth;
 import com.example.training.web.domain.service.OrderService;
 
 @CrossOrigin
@@ -56,11 +56,20 @@ public class ApiOrderController {
 		MemberId memberId = member.getMemberId();
 		OrderForm orderForm = new OrderForm(orderFormEntity, memberId);
 		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
+<<<<<<< HEAD
 		Order order = orderService.order(orderForm, cart);
 //		memberRepository.updateAtOrder(orderForm);
 		session.setAttribute(Cart.SESSION_NAME, new Cart());
 
 		return order;
+=======
+		// int orderId = orderService.order(orderForm, cart);
+		memberRepository.updateAtOrder(orderForm);
+		session.setAttribute(Cart.SESSION_NAME, new Cart());
+
+		// return orderId;
+		return 0;
+>>>>>>> origin/kato
 	}
 
 	/**
@@ -68,20 +77,26 @@ public class ApiOrderController {
 	 */
 	@GetMapping("/orderDetails/{id}")
 	public Order orderDetails(@PathVariable Integer id) {
-		Order order = orderRepository.findById(id);
+		Order order = orderRepository.findByOrderId(id);
 
 		return order;
 	}
 
+	// fix 下と同じでは？
 	/**
 	 * 注文番号から注文商品を返す
 	 */
 	@GetMapping("/orderedItemList/{id}")
-	public List<OrderItem> orderedItemList(@PathVariable Integer id) {
-		Order order = orderRepository.findById(id);
-		List<OrderItem> items = orderRepository.findItemsByOrder(order);
+	public List<OrderItem> orderedItemList(@PathVariable int id) {
+		List<OrderItem> items = orderRepository.findOrderItemsByOrderId(id);
 
 		return items;
+	}
+
+	@GetMapping("/history/item/{id}")
+	public List<OrderItem> orderItemList(@PathVariable int id) {
+		List<OrderItem> list = orderRepository.findOrderItemsByOrderId(id);
+		return list;
 	}
 
 	/*
@@ -90,15 +105,10 @@ public class ApiOrderController {
 	// TOREVIEW
 	// sessionからの取得に変更
 	@GetMapping("/history")
-	public Map<Integer, List<OrderMonth>> history() {
+	public Map<Integer, List<OrderHistoryByMonth>> history() {
 		Member member = (Member) session.getAttribute(Member.SESSION_NAME);
-		Map<Integer, List<OrderMonth>> result = orderHistoryAssembler.create(member);
+		Map<Integer, List<OrderHistoryByMonth>> result = orderHistoryAssembler.create(member);
 		return result;
 	}
 
-	@GetMapping("/history/item/{id}")
-	public List<OrderItem> orderItemList(@PathVariable int id) {
-		List<OrderItem> list = orderRepository.findByOrderItem(id);
-		return list;
-	}
 }

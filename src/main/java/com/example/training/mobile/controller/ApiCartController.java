@@ -28,10 +28,9 @@ public class ApiCartController {
 	private ProductRepository productRepository;
 
 	/**
+	 * カートを取得する。
 	 *
-	 * 会員のカートを返す
-	 *
-	 * @return
+	 * @return カート
 	 */
 	@GetMapping("/")
 	public Cart getCart() {
@@ -40,20 +39,7 @@ public class ApiCartController {
 	}
 
 	/**
-	 *
-	 * カート内の商品を返す
-	 *
-	 * @return
-	 */
-	@GetMapping("/list")
-	public Object list() {
-		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
-		return cart;
-	}
-
-	/**
-	 *
-	 * カートに商品の追加する
+	 * カートに商品の追加する。
 	 *
 	 * @return
 	 */
@@ -67,8 +53,7 @@ public class ApiCartController {
 
 	// fix
 	/**
-	 *
-	 * カートの商品の数量を変更する
+	 * カートの商品の数量を変更する。
 	 *
 	 * @param id
 	 * @return
@@ -82,8 +67,7 @@ public class ApiCartController {
 	}
 
 	/**
-	 *
-	 * カートから特定の商品をすべて削除する
+	 * カートから特定の商品をすべて削除する。
 	 *
 	 * @param id
 	 * @return
@@ -98,8 +82,7 @@ public class ApiCartController {
 	}
 
 	/**
-	 *
-	 * カートに商品がないか確認する
+	 * カートに商品がないか確認する。
 	 *
 	 * @return
 	 */

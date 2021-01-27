@@ -12,6 +12,9 @@ ignore 1 lines;
 -- lines terminated by '\r\n'
 -- ignore 1 lines;
 
+-- 新しい方。INSERT INTO MEMBER(email, last_name, first_name, password, postcode, prefecture, city, block, phone_number, last_update_admin, status)
+-- VALUES("test@example.com", "坂本", "龍馬", "$2a$10$02gj3z.AQm2a9aSrj70yA.wmEfs83AUDtDu9VDOl6unq9GDwdAv5a", "5450021", "兵庫県", "神戸市東灘区", "56番地", "0785555525", "none", "approval");
+-- 下が古いもの --
 INSERT INTO MEMBER(email, last_name, first_name, password, postcode, prefecture, city, block, phone_number, last_update_admin, status)
 VALUES("test@example.com", "坂本", "龍馬", "$2a$10$uhuqnvtjTayBhSjs7ezeB.2DG5GlIERAawzRoCROyTxWpzwKy7T.e", "5450021", "兵庫県", "神戸市東灘区", "56番地", "0785555525", "none", "approval");
 

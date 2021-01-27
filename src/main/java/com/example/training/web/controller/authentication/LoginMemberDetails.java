@@ -21,12 +21,16 @@ public class LoginMemberDetails extends User {
 	private Member member;
 
 	/**
-	 * データベースより検索したuserエンティティよりSpring Securityで使用するユーザー認証情報のインスタンスを生成する。
+	 * データベースより検索したuserエンティティよりSpring Securityで使用するユーザー認証情報のインスタンスを作る。
 	 *
 	 * @param member memberエンティティ
 	 */
 	public LoginMemberDetails(Member member) {
+<<<<<<< HEAD
 		super(member.getEmail(), member.getDigestPassword(), createRole());
+=======
+		super(member.getEmail().getValue(), member.getDigestPassword().getValue(), createRole(member)); // fix
+>>>>>>> origin/kato
 		this.member = member;
 	}
 

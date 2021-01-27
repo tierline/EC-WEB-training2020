@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 import com.example.training.common.repository.MemberRepository;
 import com.example.training.web.domain.member.DigestPassword;
 import com.example.training.web.domain.member.Email;
-import com.example.training.web.domain.member.MemberLoginForm;
 import com.example.training.web.domain.member.MemberSession;
+import com.example.training.web.domain.member.form.MemberLoginForm;
 
 @Service
 public class DigestPasswordService {

@@ -1,21 +1,46 @@
 package com.example.training.web.domain.member;
 
-import lombok.Data;
+import lombok.Getter;
 
-@Data
+/**
+ * セッションに保存する会員情報のクラス
+ */
 public class MemberSession {
 
-	private Long memberId;
+  /**
+   * 会員ID
+   */
+  @Getter
+  private MemberId memberId;
+  /**
+   * Eメール
+   */
+  @Getter
+  private Email email;
 
-	private String email;
+  /**
+   * 基本コンストラクタ
+   *
+   * @param value
+   */
+  public MemberSession(Member member) {
+    MemberId memberId = member.getId();
+    Email email = member.getEmail();
+    if (memberId == null) {
+      throw new NullPointerException();
+    }
+    if (email == null) {
+      throw new NullPointerException();
+    }
+    this.memberId = memberId;
+    this.email = email;
+  }
 
-	private String password;
+  /**
+   * デフォルトコンストラクタ
+   */
+  public MemberSession() {
 
-	private String memberStatus;
+  }
 
-//	public MemberSession(MemberEntity entity) {
-//		this.memberId = new MemberId(entity.getMemberId());
-//		this.email = new Email(entity.getEmail());
-//		this.memberStatus = MemberStatus.getStatus(entity.getStatus());
-//	}
 }

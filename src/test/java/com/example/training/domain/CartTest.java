@@ -92,11 +92,11 @@ import com.example.training.web.domain.cart.CartItem;
 // Product product2 = new Product(2, "チョコ", 100);
 // Cart cart = new Cart();
 // cart.add(product1);
-// assertEquals(20, cart.getTotalAmount());
+// assertEquals(20, cart.getTotalPrice());
 // cart.add(product1);
 // cart.add(product1);
-// assertEquals(60, cart.getTotalAmount());
+// assertEquals(60, cart.getTotalPrice());
 // cart.add(product2);
-// assertEquals(160, cart.getTotalAmount());
+// assertEquals(160, cart.getTotalPrice());
 // }
 // }

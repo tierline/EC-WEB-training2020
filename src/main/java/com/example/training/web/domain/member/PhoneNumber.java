@@ -11,12 +11,10 @@ import lombok.Setter;
 @Setter
 public class PhoneNumber {
 
-	@NotEmpty
-	@Size(min = 10, max = 11, message = "電話番号は10桁〜11桁の間で入力してください")
-	@Pattern(regexp = "[0-9]*", message = "電話番号の形式が間違っています")
-	private String value;
+		private String value;
 
 	public PhoneNumber(String value) {
+		//if()
 		this.value = value;
 	}
 

@@ -15,21 +15,20 @@
 		"${phoneNumber.value}",
 		"${fullName.value}",
 		"${address.value}",
-		"${email.value}",
-		${price.value},
-		${price.value},
-		"${date.value}")
+		"${email}",
+		${totalPrice.value},
+		"${orderDateAndTime.value}")
 	</insert>
 
 	<insert id="createItem">
 		INSERT INTO ORDER_ITEM (order_id, name, price,
 		quantity, image_path)
 		VALUES(
-		${id},
-		"${item.name}",
-		${item.price.value},
-		${item.quantity.value},
-		"${item.imagePath}"
+		"${orderId}",
+		"${productName}",
+		"${productPrice.value}",
+		"${productQuantity.value}",
+		"${productImagePath}"
 		)
 	</insert>
 
@@ -37,13 +36,13 @@
 		resultType="com.example.training.web.domain.order.OrderItem">
 
 		SELECT
-		name, price, quantity
+		name, price, quantity, image_path
 		FROM
 		ORDER_ITEM
 		WHERE order_id =
 		${id}
-
 	</select>
+
 
 	<select id="findById"
 resultType="com.example.training.web.domain.order.Order">
@@ -56,25 +55,13 @@ resultType="com.example.training.web.domain.order.Order">
 	</select>
 
 	<select id="findByOrderMonthByMemberId"
-		resultType="com.example.training.web.domain.order.OrderMonth">
+		resultType="com.example.training.web.domain.order.OrderHistoryByMonth">
 		SELECT
 		id as orderId,
 		`date`
 		FROM ORDERS AS o
 		WHERE member_id = ${value}
 		ORDER BY `date` DESC
-	</select>
-
-	<select id="findByOrderItem"
-		resultType="com.example.training.web.domain.order.OrderItem">
-		SELECT
-		name,
-		price,
-		quantity,
-		image_path
-		FROM
-		ORDER_ITEM
-		WHERE order_id = ${id}
 	</select>
 
 </mapper>

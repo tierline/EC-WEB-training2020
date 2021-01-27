@@ -5,21 +5,57 @@ import com.example.training.web.domain.product.Price;
 import com.example.training.web.domain.product.Quantity;
 
 import lombok.Data;
+import lombok.Getter;
 
+/**
+ * 注文商品クラス
+ */
 @Data
 public class OrderItem {
-	private String name;
-	private Price price;
-	private Quantity quantity;
-	private String imagePath;
 
-	public OrderItem(CartItem item) {
-		this.name = item.getProductName();
-		this.price = item.getProductPrice();
-		this.imagePath = item.getProductImagePath();
-		this.quantity = item.getQuantity();
+	/**
+	 * 注文ID
+	 */
+	@Getter
+	private int orderId;
+
+	/**
+	 * 商品名
+	 */
+	private String productName;
+
+	/**
+	 * 商品価格
+	 */
+	private Price productPrice;
+
+	/**
+	 * 商品の個数
+	 */
+	private Quantity productQuantity;
+
+	/**
+	 * 商品画像のPATH
+	 */
+	private String productImagePath;
+
+	/**
+	 *
+	 * コントラクタ（カート内の商品から注文商品を作る）
+	 *
+	 * @param item カート内の商品
+	 */
+	public OrderItem(CartItem item, Order order) {
+		this.orderId = order.getId();
+		this.productName = item.getProductName();
+		this.productPrice = item.getProductPrice();
+		this.productQuantity = item.getQuantity();
+		this.productImagePath = item.getProductImagePath();
 	}
 
+	/**
+	 * デフォルトコンストラクタ
+	 */
 	public OrderItem() {
 	}
 

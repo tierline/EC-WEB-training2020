@@ -5,61 +5,86 @@ import com.example.training.web.domain.member.address.Block;
 import com.example.training.web.domain.member.address.City;
 import com.example.training.web.domain.member.address.Postcode;
 import com.example.training.web.domain.member.address.Prefecture;
+import com.example.training.web.domain.member.form.MemberApplicationForm;
 
 import lombok.Getter;
 
+/**
+ * 会員クラス
+ */
 @Getter
 public class Member {
 	public static final String SESSION_NAME = "MEMBER";
-	// 基本情報
-	private MemberId memberId;
-	private DigestPassword digestPassword; // fix
-	private FullName fullName;
-	private Address address;
-	private Email email;
-	private PhoneNumber phoneNumber;
-	private String lastUpdatedBy; // fix
-	private String status = "unapproved"; // fix
-	private Role roles; // fix: Role自作
-
-	/*
-	 * 新規会員登録時のメンバー作成
+	/**
+	 * 会員ID
 	 */
-	public Member(Email email, DigestPassword digestPassword) {
-		this.digestPassword = digestPassword;
-		// this.email = new Email(memberApplicationForm.getEmail()); fix
-		this.email = email;
-		this.lastUpdatedBy = "none";
-	}
+	private MemberId id;
+	/**
+	 * 会員パスワード（ハッシュ値）
+	 */
+	private DigestPassword digestPassword;
+	/**
+	 * 氏名
+	 */
+	private FullName fullName;
+	/**
+	 * 住所
+	 */
+	private Address address;
+	/**
+	 * Eメール
+	 */
+	private Email email;
+	/**
+	 * 電話番号
+	 */
+	private PhoneNumber phoneNumber;
+	/**
+	 * 最終更新者
+	 */
+	private String lastUpdatedBy;
+	/**
+	 * 承認状態
+	 */
+	private String status; // fix
+	/**
+	 * 権限
+	 */
+	private String roles = "ROLE_USER"; // fix: Role自作
 
-	public Member(MemberId id, Email email, FullName fullName, Address address, PhoneNumber phoneNumber,
-			String status) {
-		this.memberId = id;
-		// this.email = new Email(email); // fix
-		this.email = email;
-		this.fullName = fullName;
-		this.address = address;
-		this.phoneNumber = phoneNumber;
-		this.status = status;
-	}
-
-	/*
-	 * DBから取得した値で既存のメンバー作成
+	/**
+	 * DBから取得するためのコンストラクタ
+	 *
+	 * @param entity
 	 */
 	public Member(MemberEntity entity) {
-		this.memberId = new MemberId(entity.getMemberId());
+		this.id = new MemberId(entity.getMemberId());
 		this.digestPassword = new DigestPassword(entity.getPassword());
 		this.email = new Email(entity.getEmail());
 		this.fullName = new FullName(entity.getLastName(), entity.getFirstName());
 		this.address = new Address(new Postcode(entity.getPostcode()), new Prefecture(entity.getPrefecture()),
 				new City(entity.getCity()), new Block(entity.getBlock()));
 		this.phoneNumber = new PhoneNumber(entity.getPhoneNumber());
-		// fix new して
 		this.status = entity.getStatus();
-		this.lastUpdatedBy = entity.getLastUpdatedAdmin();
-		// this.lastUpdatedBy = new Admin(entity.getLastUpdatedBy());
+		this.lastUpdatedBy = entity.getLastUpdatedBy();
 	}
 
+	/**
+	 * 新規会員登録時のコンストラクタ
+	 *
+	 * @param memberApplicationForm
+	 * @param passwordDigest
+	 */
+	public Member(MemberApplicationForm memberApplicationForm, DigestPassword passwordDigest) {
+		this.digestPassword = passwordDigest;
+		this.email = new Email(memberApplicationForm.getEmail());
+		this.lastUpdatedBy = "none";
+		this.status = "unapproved";
+	}
+
+	/**
+	 * デフォルトコンストラクタ
+	 */
 	public Member() {
 
 	}
@@ -69,13 +94,6 @@ public class Member {
 	 */
 	public String getDigestPassword() {
 		return this.digestPassword.getValue();
-	}
-
-	/*
-	 * ログイン認証時に使う
-	 */
-	public String getEmail() {
-		return this.email.getValue();
 	}
 
 }

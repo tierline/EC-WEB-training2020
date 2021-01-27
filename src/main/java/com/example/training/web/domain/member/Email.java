@@ -1,32 +1,35 @@
 package com.example.training.web.domain.member;
 
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import lombok.Getter;
 
+/**
+ * Eメールを表す値オブジェクト
+ */
 public class Email {
 
-	@Size(min = 1, max = 128, message = "メールアドレスは1文字以上、128文字以内で入力してください")
-	@Pattern(regexp = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", message = "Eメールの形式が間違っています")
+	/**
+	 * Eメールの値
+	 */
+	@Getter
 	private String value;
 
+	/**
+	 * 基本コンストラクタ
+	 *
+	 * @param value
+	 */
 	public Email(String value) {
+		if (value == null) {
+			throw new NullPointerException();
+		}
 		this.value = value;
 	}
 
+	/**
+	 * デフォルトコンストラクタ
+	 */
 	public Email() {
 
 	}
-
-	public String getValue() {
-		return this.value;
-	}
-
-	public Email getEmail() {
-		return new Email(this.value);
-	}
-
-//	public static Email doTypeConverting(String email) {
-//		return new Email(email);
-//	}
 
 }
