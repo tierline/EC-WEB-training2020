@@ -71,7 +71,7 @@ public class Quantity {
 	 */
 	public Quantity subtract(Quantity quantity) {
 		if (!canSubtract(quantity)) {
-			throw new IllegalAddException("不正な値です。減算結果がマイナスです");
+			return new Quantity(MIN);
 		}
 		int removed = subtractValue(quantity);
 		return new Quantity(removed);

@@ -15,7 +15,7 @@ public class MemberEntity {
 	private String city;
 	private String block;
 	private String status;
-	private String lastUpdatedBy;
+	private String lastUpdatedAdmin;
 
 	public String getFullName() {
 		return this.lastName + this.firstName;

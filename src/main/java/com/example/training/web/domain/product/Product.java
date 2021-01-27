@@ -14,7 +14,7 @@ public class Product {
 	public Product(ProductEntity productEntity) {
 		this.id = productEntity.getId();
 		this.name = productEntity.getName();
-		this.price = new Price(productEntity.getPrice());
+		this.price = productEntity.getPrice();
 		this.imagePath = productEntity.getImagePath();
 		this.description = productEntity.getDescription();
 	}
@@ -24,7 +24,7 @@ public class Product {
 		this.name = name;
 	}
 
-	public Product(int id, String name, Price price) {
+	public Product(int id, String name, int price) {
 		this.id = id;
 		this.name = name;
 		this.price = price;
@@ -36,8 +36,20 @@ public class Product {
 
 	private int id;
 	private String name;
-	private Price price;
+	private int price;
 	private String imagePath;
 	private String description;
+
+//	public String getImagePath() {
+//		return this.imagePath;
+//	}
+//
+//	public String getName() {
+//		return this.name;
+//	}
+//
+//	public Price getPrice() {
+//		return this.price;
+//	}
 
 }

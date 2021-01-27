@@ -1,30 +1,10 @@
-<<<<<<< HEAD:src/main/java/com/example/training/mobile/ApiOrderController.java
-package com.example.training.mobile;
-=======
 package com.example.training.mobile.controller;
->>>>>>> origin/kato:src/main/java/com/example/training/mobile/controller/ApiOrderController.java
 
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
-<<<<<<< HEAD:src/main/java/com/example/training/mobile/ApiOrderController.java
-=======
-import com.example.training.common.repository.MemberRepository;
-import com.example.training.common.repository.OrderRepository;
-import com.example.training.web.domain.cart.Cart;
-import com.example.training.web.domain.member.Member;
-import com.example.training.web.domain.member.MemberId;
-import com.example.training.web.domain.order.Order;
-import com.example.training.web.domain.order.OrderForm;
-import com.example.training.web.domain.order.OrderFormEntity;
-import com.example.training.web.domain.order.OrderHistoryAssembler;
-import com.example.training.web.domain.order.OrderItem;
-import com.example.training.web.domain.order.OrderMonth;
-import com.example.training.web.domain.service.OrderService;
-
->>>>>>> origin/kato:src/main/java/com/example/training/mobile/controller/ApiOrderController.java
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,11 +16,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.training.common.repository.MemberRepository;
 import com.example.training.common.repository.OrderRepository;
-import com.example.training.web.domain.MemberSession;
 import com.example.training.web.domain.cart.Cart;
 import com.example.training.web.domain.member.Member;
+import com.example.training.web.domain.member.MemberId;
 import com.example.training.web.domain.order.Order;
 import com.example.training.web.domain.order.OrderForm;
+import com.example.training.web.domain.order.OrderFormEntity;
 import com.example.training.web.domain.order.OrderHistoryAssembler;
 import com.example.training.web.domain.order.OrderItem;
 import com.example.training.web.domain.order.OrderMonth;
@@ -70,23 +51,16 @@ public class ApiOrderController {
 	 * 注文処理を行う
 	 */
 	@PostMapping("/save")
-<<<<<<< HEAD:src/main/java/com/example/training/mobile/ApiOrderController.java
-	public Long save(@RequestBody OrderForm orderForm) {
-		MemberSession memberSession = (MemberSession) session.getAttribute(Member.SESSION_NAME);
-		Long memberId = memberSession.getMemberId();
-//		OrderForm orderForm = new OrderForm(orderForm, memberId);
-=======
-	public Integer save(@RequestBody OrderFormEntity order) {
+	public Order save(@RequestBody OrderFormEntity orderFormEntity) {
 		Member member = (Member) session.getAttribute(Member.SESSION_NAME);
-		MemberId memberId = member.getId();
-		OrderForm orderForm = new OrderForm(order, memberId);
->>>>>>> origin/kato:src/main/java/com/example/training/mobile/controller/ApiOrderController.java
+		MemberId memberId = member.getMemberId();
+		OrderForm orderForm = new OrderForm(orderFormEntity, memberId);
 		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
 		Order order = orderService.order(orderForm, cart);
 //		memberRepository.updateAtOrder(orderForm);
 		session.setAttribute(Cart.SESSION_NAME, new Cart());
 
-		return order.getOrderId();
+		return order;
 	}
 
 	/**

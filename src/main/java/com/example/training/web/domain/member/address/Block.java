@@ -1,24 +1,22 @@
 package com.example.training.web.domain.member.address;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
-
-import lombok.Getter;
-import lombok.Setter;
-
-@Getter
-@Setter
 public class Block {
 
-	@Size(max = 128, message = "入力できる文字数を超過しています。")
-	@NotEmpty
+	private final Integer MAX = 130;
 	private String value;
 
 	public Block(String value) {
+		if (value.length() > MAX) {
+			throw new IllegalArgumentException("最大文字数は130文字です");
+		}
 		this.value = value;
 	}
 
 	public Block() {
 
+	}
+
+	public String getValue() {
+		return this.value;
 	}
 }

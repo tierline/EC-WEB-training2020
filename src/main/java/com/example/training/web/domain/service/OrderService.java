@@ -4,6 +4,9 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.example.training.common.repository.MemberRepository;
 import com.example.training.common.repository.OrderRepository;
 import com.example.training.web.domain.cart.Cart;
@@ -11,9 +14,6 @@ import com.example.training.web.domain.member.Member;
 import com.example.training.web.domain.order.Order;
 import com.example.training.web.domain.order.OrderForm;
 import com.example.training.web.domain.order.OrderItem;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 @Service
 public class OrderService {
@@ -33,13 +33,13 @@ public class OrderService {
 	 * @param cart
 	 * @return 注文番号
 	 */
-	public int order(@Valid OrderForm orderForm, Cart cart) {
+	public Order order(@Valid OrderForm orderForm, Cart cart) {
 		Order order = orderForm.createOrder(cart);
 		this.saveByOrder(order, cart);
-		memberRepository.updateAtOrder(orderForm); // formは渡さないmemberとして！
 		Member member = new Member(memberRepository.findById(orderForm.getMemberId()));
 		// session.setAttribute(Member.SESSION_NAME, member); 不要
-		return order.getId(); // fix orderそのものを返す
+		memberRepository.updateAtOrder(member); // formは渡さないmemberとして！
+		return order; // fix orderそのものを返す
 	}
 
 	/**

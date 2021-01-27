@@ -21,7 +21,12 @@ public class MemberApplicationForm {
 	 * @param passwordDigest
 	 * @return 会員登録用のメンバーオブジェクト
 	 */
-	public Member createMember(Email email, DigestPassword passwordDigest) {
-		return new Member(email, passwordDigest);
+	public Member createMember(Email email, DigestPassword digestPassword) {
+		return new Member(email, digestPassword);
 	}
+
+	public String getEmail() {
+		return this.email;
+	}
+
 }

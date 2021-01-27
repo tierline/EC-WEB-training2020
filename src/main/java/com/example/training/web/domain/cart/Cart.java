@@ -57,7 +57,7 @@ public class Cart {
 		Optional<CartItem> itemOpt = getItem(product);
 		if (itemOpt.isPresent()) {
 			CartItem item = itemOpt.get();
-			item.resetQuantity(new Quantity(0));
+			item.resetQuantity();
 			;
 			if (item.isQuantityZero()) {
 				this.items.remove(item);
@@ -74,7 +74,7 @@ public class Cart {
 		Optional<CartItem> itemOpt = getItem(product);
 		if (itemOpt.isPresent()) {
 			CartItem item = itemOpt.get();
-			item.resetQuantity(new Quantity(0));
+			item.resetQuantity();
 			if (item.isQuantityZero()) {
 				this.items.remove(item);
 			}
@@ -110,7 +110,7 @@ public class Cart {
 	 */
 	public Optional<CartItem> getItem(Product product) {
 		for (CartItem item : items) {
-			int id = item.getProduct().getId();
+			int id = item.getProductId();
 			if (id == product.getId()) {
 				return Optional.of(item);
 			}
@@ -125,13 +125,13 @@ public class Cart {
 	 * @return
 	 */
 	// TOREVIEW 変更
-	public Price getTotalAmount() {
+	public int getTotalAmount() {
 		// fix 毎回 getTotalAmount が呼ばれて再計算している
 		this.totalAmount = new Price(0);
 		List<CartItem> items = this.getItems();
 		for (CartItem item : items) {
-			this.totalAmount = this.totalAmount.add(item.getTotalAmount());
+			this.totalAmount = item.multiply(new Price(item.getProductPrice()));
 		}
-		return this.totalAmount;
+		return this.totalAmount.getValue();
 	}
 }

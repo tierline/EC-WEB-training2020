@@ -21,6 +21,14 @@ public class DigestPassword {
 		this.value = passwordEncoder.encode(rawPassword.getValue());
 	}
 
+	/*
+	 * passwordの暗号化
+	 */
+	public DigestPassword(MemberApplicationForm memberApplicationForm) {
+		String rawPassword = memberApplicationForm.getPassword();
+		this.value = passwordEncoder.encode(rawPassword);
+	}
+
 	public String getValue() {
 		return this.value;
 	}

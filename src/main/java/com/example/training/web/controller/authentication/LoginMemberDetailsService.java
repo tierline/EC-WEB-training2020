@@ -36,7 +36,7 @@ public class LoginMemberDetailsService implements UserDetailsService {
 			throw new UsernameNotFoundException("User not found for email: " + email);
 		} else {
 			Member member = new Member(memberOpt.get());
-			if (member.getStatus().equals("unapproved")) {
+			if (member.getStatus().equals("UNAPPROVED")) {
 				throw new UsernameNotFoundException("Unauthorized user.: " + email);
 			} else {
 				return new LoginMemberDetails(member);

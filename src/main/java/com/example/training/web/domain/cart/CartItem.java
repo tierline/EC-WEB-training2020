@@ -1,5 +1,6 @@
 package com.example.training.web.domain.cart;
 
+import com.example.training.web.domain.product.Price;
 import com.example.training.web.domain.product.Product;
 import com.example.training.web.domain.product.Quantity;
 
@@ -41,20 +42,20 @@ public class CartItem {
 	}
 
 	public void removeQuantity(Quantity quantity) {
-		this.quantity = new Quantity(this.quantity.getValue() - quantity.getValue());
+		this.quantity = this.quantity.subtract(quantity);
 	}
 
-	public void removeAll() {
-		this.quantity = this.quantity.removeAll();
+	public void resetQuantity() {
+		this.quantity = this.quantity.reset();
 	}
 
-	public boolean isEmpty() {
-		return this.quantity.isEmpty();
+	public boolean isQuantityZero() {
+		return this.quantity.isZero();
 	}
 
 	// カート内の一つの商品の合計金額を取得
-	public int getTotalAmount() {
-		int price = this.getProductPrice() * this.getQuantity().getValue();
-		return price;
+	public Price multiply(Price price) {
+		return price.multiply(this.quantity);
 	}
+
 }

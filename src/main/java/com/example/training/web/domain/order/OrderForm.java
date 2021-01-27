@@ -2,23 +2,15 @@ package com.example.training.web.domain.order;
 
 import java.time.LocalDateTime;
 
-<<<<<<< HEAD
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-import com.example.training.web.domain.MemberEntity;
-import com.example.training.web.domain.cart.Cart;
-=======
-import javax.validation.Valid;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
-
 import com.example.training.web.domain.cart.Cart;
 import com.example.training.web.domain.member.FullName;
 import com.example.training.web.domain.member.Member;
+import com.example.training.web.domain.member.MemberEntity;
 import com.example.training.web.domain.member.MemberId;
 import com.example.training.web.domain.member.PhoneNumber;
 import com.example.training.web.domain.member.address.Address;
@@ -26,7 +18,6 @@ import com.example.training.web.domain.member.address.Block;
 import com.example.training.web.domain.member.address.City;
 import com.example.training.web.domain.member.address.Postcode;
 import com.example.training.web.domain.member.address.Prefecture;
->>>>>>> origin/kato
 
 import lombok.Data;
 
@@ -82,7 +73,6 @@ public class OrderForm {
 	public OrderForm(OrderForm orderForm, Long memberId) {
 
 	}
-
 
 	public Order createOrder(Cart cart) {
 		return new Order(this, cart);

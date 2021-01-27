@@ -1,21 +1,28 @@
 package com.example.training.web.domain.member.address;
 
-import javax.validation.constraints.Size;
-
-import lombok.Getter;
-import lombok.Setter;
-
-@Getter
-@Setter
 public class City {
-	@Size(min = 1, max = 20, message = "入力できる文字数を超過しています。")
+	/*
+	 * 最大入力文字数
+	 */
+	private final Integer MAX = 50;
+	private final Integer MIN = 1;
 	private String value;
 
 	public City(String value) {
+		if (value.length() >= MAX) {
+			throw new IllegalArgumentException("最大入力文字数は50文字までです");
+		}
+		if (value.length() < MIN) {
+			throw new IllegalArgumentException("最低入力文字数は1文字です");
+		}
 		this.value = value;
 	}
 
 	public City() {
 
+	}
+
+	public String getValue() {
+		return this.value;
 	}
 }

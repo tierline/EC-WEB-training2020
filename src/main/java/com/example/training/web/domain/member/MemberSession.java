@@ -1,6 +1,4 @@
-package com.example.training.web.domain;
-
-import com.example.training.web.domain.member.MemberStatus;
+package com.example.training.web.domain.member;
 
 import lombok.Data;
 
@@ -13,7 +11,7 @@ public class MemberSession {
 
 	private String password;
 
-	private MemberStatus memberStatus;
+	private String memberStatus;
 
 //	public MemberSession(MemberEntity entity) {
 //		this.memberId = new MemberId(entity.getMemberId());

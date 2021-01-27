@@ -40,7 +40,7 @@
           <tr th:each="item : ${cart.items}">
             <td>
               <img
-                th:src="@{'/image/' + ${item.productImagePath}}"
+                th:src="@{'/image/' + ${item.productImage}}"
                 alt=""
                 class="card-img-top"
                 style="width: 200px; height: 200px; object-fit: contain"
@@ -49,7 +49,7 @@
             <td class="h5 pt-3" th:text="${item.productName}"></td>
             <td
               class="h5 pt-3"
-              th:text="${'￥' + item.productPrice.value}"
+              th:text="${'￥' + item.productPrice}"
             ></td>
             <td>
               <form
@@ -83,7 +83,7 @@
         </table>
         <hr />
         <div class="d-flex justify-content-center pt-3">
-          <h4>合計金額[[${cart.totalAmount.value}]]円</h4>
+          <h4>合計金額[[${cart.totalAmount}]]円</h4>
         </div>
         <div class="d-flex justify-content-center pt-3">
           <a href="/member/order/form"

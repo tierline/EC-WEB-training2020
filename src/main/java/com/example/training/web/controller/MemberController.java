@@ -85,7 +85,7 @@ public class MemberController {
 			return applicate(memberApplicationForm, model);
 		}
 
-		Email email = memberApplicationForm.getEmail();
+		Email email = new Email(memberApplicationForm.getEmail());
 		Optional<MemberEntity> member = memberRepository.findByEmail(email);
 		if (member.isPresent()) {
 			model.addAttribute("errorMessage",

@@ -16,7 +16,7 @@ import lombok.Data;
 
 @Data
 public class Order {
-	private int id;
+	private Long orderId;
 	private MemberId memberId;
 	private FullName fullName;
 	private Address address;
@@ -43,8 +43,8 @@ public class Order {
 	}
 
 	// TOREVIEW 要修正、必要か？
-	public Order(int orderId, MemberId memberId, LocalDateTime date) {
-		this.id = orderId;
+	public Order(Long orderId, MemberId memberId, LocalDateTime date) {
+		this.orderId = orderId;
 		this.memberId = memberId;
 		this.date = new Date(date);
 	}

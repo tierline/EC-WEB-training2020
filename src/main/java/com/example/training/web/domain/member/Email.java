@@ -3,9 +3,6 @@ package com.example.training.web.domain.member;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-import lombok.Getter;
-
-@Getter
 public class Email {
 
 	@Size(min = 1, max = 128, message = "メールアドレスは1文字以上、128文字以内で入力してください")
@@ -18,6 +15,14 @@ public class Email {
 
 	public Email() {
 
+	}
+
+	public String getValue() {
+		return this.value;
+	}
+
+	public Email getEmail() {
+		return new Email(this.value);
 	}
 
 //	public static Email doTypeConverting(String email) {

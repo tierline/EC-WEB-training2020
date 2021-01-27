@@ -24,7 +24,20 @@
 		FROM
 		MEMBER
 		WHERE
-		email = "${email}"
+		email = "${email.value}"
+	</select>
+	
+	<select id="findByEmailSession"
+		resultType="com.example.training.web.domain.member.MemberSession">
+		SELECT
+		id as memberId,
+		password,
+		email,
+		status
+		FROM
+		MEMBER
+		WHERE
+		email = "${email.value}"
 	</select>
 
 	<select id="findById"
@@ -95,15 +108,15 @@
 
 	<update id="updateAtOrder">
 		UPDATE MEMBER SET
-		first_name=#{orderForm.fullName.firstName},
-		last_name=#{orderForm.fullName.lastName},
-		phone_number=#{orderForm.phoneNumber.value},
-		postcode=#{orderForm.address.postcode.value},
-		prefecture=#{orderForm.address.prefecture.value},
-		city=#{orderForm.address.city.value},
-		block=#{orderForm.address.block.value}
+		first_name=#{member.fullName.firstName},
+		last_name=#{member.fullName.lastName},
+		phone_number=#{member.phoneNumber.value},
+		postcode=#{member.address.postcode.value},
+		prefecture=#{member.address.prefecture.value},
+		city=#{member.address.city.value},
+		block=#{member.address.block.value}
 		WHERE id=
-		#{orderForm.memberId.value}
+		#{member.memberId.value}
 	</update>
 
 

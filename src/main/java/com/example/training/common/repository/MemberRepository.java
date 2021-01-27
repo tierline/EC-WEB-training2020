@@ -6,13 +6,12 @@ import java.util.Optional;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import com.example.training.web.domain.MemberSession;
 import com.example.training.web.domain.member.Email;
 import com.example.training.web.domain.member.Member;
 import com.example.training.web.domain.member.MemberEditForm;
 import com.example.training.web.domain.member.MemberEntity;
 import com.example.training.web.domain.member.MemberId;
-import com.example.training.web.domain.order.OrderForm;
+import com.example.training.web.domain.member.MemberSession;
 
 @Mapper
 public interface MemberRepository {
@@ -29,7 +28,7 @@ public interface MemberRepository {
 
 	public Member findAddress(String email);
 
-	public void updateAtOrder(@Param("orderForm") OrderForm orderForm);// formを引数にとらない
+	public void updateAtOrder(@Param("member") Member member);// formを引数にとらない
 
 	public Optional<MemberSession> findByEmailSession(Email email);
 

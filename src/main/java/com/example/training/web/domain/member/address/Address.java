@@ -1,20 +1,26 @@
 package com.example.training.web.domain.member.address;
 
-import javax.validation.Valid;
-
 import lombok.Getter;
 
 @Getter
 public class Address {
 
 	private String value;
-	@Valid
+	/*
+	 * 郵便番号
+	 */
 	private Postcode postcode;
-	@Valid
+	/*
+	 * 都道府県
+	 */
 	private Prefecture prefecture;
-	@Valid
+	/*
+	 * 市区町村
+	 */
 	private City city;
-	@Valid
+	/*
+	 * 番地等
+	 */
 	private Block block;
 
 	public Address(Postcode postcode, Prefecture prefecture, City city, Block block) {
@@ -28,6 +34,9 @@ public class Address {
 
 	}
 
+	/*
+	 * 郵便番号から住所、すべてを繋げて返す
+	 */
 	public String getValue() {
 		this.value = "〒" + postcode.getValue() + " " + prefecture.getValue() + " " + city.getValue() + " "
 				+ block.getValue();

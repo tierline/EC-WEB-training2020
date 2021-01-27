@@ -26,7 +26,7 @@ public class LoginMemberDetails extends User {
 	 * @param member memberエンティティ
 	 */
 	public LoginMemberDetails(Member member) {
-		super(member.getEmail().toString(), member.getDigestPassword(), createRole());
+		super(member.getEmail(), member.getDigestPassword(), createRole());
 		this.member = member;
 	}
 

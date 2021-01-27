@@ -13,9 +13,9 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import org.springframework.stereotype.Component;
 
 import com.example.training.common.repository.MemberRepository;
-import com.example.training.web.domain.MemberSession;
 import com.example.training.web.domain.member.Email;
 import com.example.training.web.domain.member.Member;
+import com.example.training.web.domain.member.MemberSession;
 
 @Component
 public class MemberSuccessHandler implements AuthenticationSuccessHandler {

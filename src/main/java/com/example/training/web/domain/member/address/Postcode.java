@@ -1,24 +1,39 @@
 package com.example.training.web.domain.member.address;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
-
-import lombok.Getter;
-import lombok.Setter;
-
-@Getter
-@Setter
 public class Postcode {
-	@NotEmpty
-	@Size(min = 7, max = 8)
-	@Pattern(regexp = "^[0-9]{3}[0-9]{4}$", message = "郵便番号の形式が間違っています")
+
+	/*
+	 * ハイフンなしの郵便番号の長さ
+	 */
+	private final Integer LENGTH = 7;
+
 	private String value;
 
+	/*
+	 * 郵便番号の長さ、使用されている文字の確認 OKなら作成する
+	 */
 	public Postcode(String value) {
+		if (value.length() != LENGTH) {
+			throw new IllegalArgumentException("郵便番号はハイフンなしの7桁のみです");
+		}
+//		if (!canRegexp(value)) {
+//			throw new IllegalArgumentException("半角数字のみです");
+//		}
 		this.value = value;
 	}
 
 	public Postcode() {
+	}
+
+	public String getValue() {
+		return this.value;
+	}
+
+	/*
+	 * 半角数字のみかの確認
+	 */
+	private Boolean canRegexp(String value) {
+		String regexp = "[0-9]";
+		return value.matches(regexp);
 	}
 }

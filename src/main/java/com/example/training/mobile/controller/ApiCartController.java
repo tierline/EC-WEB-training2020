@@ -1,20 +1,7 @@
-<<<<<<< HEAD:src/main/java/com/example/training/mobile/ApiCartController.java
-package com.example.training.mobile;
-
-import javax.servlet.http.HttpSession;
-
-=======
 package com.example.training.mobile.controller;
 
 import javax.servlet.http.HttpSession;
 
-import com.example.training.common.repository.ProductRepository;
-import com.example.training.web.domain.cart.Cart;
-import com.example.training.web.domain.product.Product;
-import com.example.training.web.domain.product.ProductEntity;
-import com.example.training.web.domain.product.Quantity;
-
->>>>>>> origin/kato:src/main/java/com/example/training/mobile/controller/ApiCartController.java
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,9 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.training.common.repository.ProductRepository;
-import com.example.training.web.domain.Product;
-import com.example.training.web.domain.Quantity;
 import com.example.training.web.domain.cart.Cart;
+import com.example.training.web.domain.product.Product;
+import com.example.training.web.domain.product.ProductEntity;
+import com.example.training.web.domain.product.Quantity;
 
 @CrossOrigin
 @RestController
@@ -88,12 +76,8 @@ public class ApiCartController {
 	@PostMapping("/changeQuantity/{productId}/{quantity}")
 	public void changeItemQuantity(@PathVariable int productId, @PathVariable int quantity) {
 		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
-<<<<<<< HEAD:src/main/java/com/example/training/mobile/ApiCartController.java
-		Product product = productRepository.findId(productId).orElseThrow();
-=======
 		ProductEntity productEntity = productRepository.findId(productId).orElseThrow();
 		Product product = new Product(productEntity);
->>>>>>> origin/kato:src/main/java/com/example/training/mobile/controller/ApiCartController.java
 		cart.changeItemQuantity(product, new Quantity(quantity));
 	}
 

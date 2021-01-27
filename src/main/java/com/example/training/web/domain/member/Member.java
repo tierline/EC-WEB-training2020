@@ -13,22 +13,23 @@ public class Member {
 	public static final String SESSION_NAME = "MEMBER";
 	// 基本情報
 	private MemberId memberId;
-	private String digestPassword; // fix
+	private DigestPassword digestPassword; // fix
 	private FullName fullName;
 	private Address address;
-	// Passwordクラス
 	private Email email;
 	private PhoneNumber phoneNumber;
 	private String lastUpdatedBy; // fix
-	private String status; // fix
-	private String roles = "ROLE_USER"; // fix: Role自作
+	private String status = "unapproved"; // fix
+	private Role roles; // fix: Role自作
 
-	public Member(MemberApplicationForm memberApplicationForm, String passwordDigest) {
-		this.digestPassword = passwordDigest;
+	/*
+	 * 新規会員登録時のメンバー作成
+	 */
+	public Member(Email email, DigestPassword digestPassword) {
+		this.digestPassword = digestPassword;
 		// this.email = new Email(memberApplicationForm.getEmail()); fix
-		this.email = memberApplicationForm.getEmail();
+		this.email = email;
 		this.lastUpdatedBy = "none";
-		this.status = "unapproved";
 	}
 
 	public Member(MemberId id, Email email, FullName fullName, Address address, PhoneNumber phoneNumber,
@@ -42,10 +43,12 @@ public class Member {
 		this.status = status;
 	}
 
+	/*
+	 * DBから取得した値で既存のメンバー作成
+	 */
 	public Member(MemberEntity entity) {
 		this.memberId = new MemberId(entity.getMemberId());
-//		 this.password = new DigestPassword(entity.getPassword());
-		this.digestPassword = entity.getPassword();
+		this.digestPassword = new DigestPassword(entity.getPassword());
 		this.email = new Email(entity.getEmail());
 		this.fullName = new FullName(entity.getLastName(), entity.getFirstName());
 		this.address = new Address(new Postcode(entity.getPostcode()), new Prefecture(entity.getPrefecture()),
@@ -53,13 +56,26 @@ public class Member {
 		this.phoneNumber = new PhoneNumber(entity.getPhoneNumber());
 		// fix new して
 		this.status = entity.getStatus();
-		this.lastUpdatedBy = entity.getLastUpdatedBy();
-		// this.status = new MemberStatus(entity.getStatus());
+		this.lastUpdatedBy = entity.getLastUpdatedAdmin();
 		// this.lastUpdatedBy = new Admin(entity.getLastUpdatedBy());
 	}
 
 	public Member() {
 
+	}
+
+	/*
+	 * ログイン認証時に使う
+	 */
+	public String getDigestPassword() {
+		return this.digestPassword.getValue();
+	}
+
+	/*
+	 * ログイン認証時に使う
+	 */
+	public String getEmail() {
+		return this.email.getValue();
 	}
 
 }
