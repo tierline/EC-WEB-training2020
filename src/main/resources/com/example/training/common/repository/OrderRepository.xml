@@ -7,71 +7,59 @@
 <mapper
 	namespace="com.example.training.common.repository.OrderRepository">
 
-	<insert id="save" useGeneratedKeys="true" keyProperty="id">
+	<insert id="create" useGeneratedKeys="true" keyProperty="id">
 		INSERT
-		INTO orders (member_id, phone_number, name, address, email, price, date)
+		INTO ORDERS (member_id, phone_number, name, address, email, price, date)
 		VALUES(
-		"${memberId}",
-		"${phoneNumber}",
-		"${name}",
-		"${address}",
+		"${memberId.value}",
+		"${phoneNumber.value}",
+		"${fullName.firstName}",
+		"${address.value}",
 		"${email}",
-		${price},
-		"${date}")
+		${totalPrice.value},
+		"${orderDateAndTime.value}")
 	</insert>
 
-	<insert id="saveItem">
-		INSERT INTO order_items (order_id, name, price,
+	<insert id="createItem">
+		INSERT INTO ORDER_ITEM (order_id, name, price,
 		quantity, image_path)
 		VALUES(
-		${id},
-		"${item.name}",
-		${item.price},
-		${item.quantity},
-		"${item.imagePath}"
+		"${orderId}",
+		"${productName}",
+		"${productPrice.value}",
+		"${productQuantity.value}",
+		"${productImagePath}"
 		)
 	</insert>
 
-	<select id="findItemsByOrder"
+	<select id="findItemsById"
 		resultType="com.example.training.common.domain.OrderItem">
 		SELECT
-		name, price, quantity
+		name, price, quantity, image_path
 		FROM
-		order_items
+		ORDER_ITEM
 		WHERE order_id =
 		${id}
-
 	</select>
+
 
 	<select id="findById"
 		resultType="com.example.training.common.domain.Order">
 		SELECT
 		*
 		FROM
-		orders
+		ORDERS
 		WHERE id = ${id}
 	</select>
 
-	<select id="findByOrderMonth"
-		resultType="com.example.training.common.domain.OrderMonth">
+	<select id="findByOrderMonthByMemberId"
+		resultType="com.example.training.web.controller.order.OrderHistoryAssembler">
 		SELECT
 		id as orderId,
 		`date`
-		FROM orders AS o
-		WHERE member_id = ${id}
+		FROM ORDERS AS o
+		WHERE member_id = ${value}
 		ORDER BY `date` DESC
-	</select>
-
-	<select id="findByOrderItem"
-		resultType="com.example.training.common.domain.OrderItem">
-		SELECT
-		name,
-		price,
-		quantity,
-		image_path
-		FROM
-		order_items
-		WHERE order_id = ${id}
 	</select>
 
 </mapper>

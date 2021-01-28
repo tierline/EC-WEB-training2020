@@ -6,28 +6,28 @@
 <mapper
 	namespace="com.example.training.common.repository.ProductRepository">
 	<select id="findAll"
-		resultType="com.example.training.common.domain.Product">
+		resultType="com.example.training.common.entity.ProductEntity">
 		SELECT
 		*
 		FROM
-		product
+		PRODUCT
 	</select>
 
-	<select id="findId"
-		resultType="com.example.training.common.domain.Product">
+	<select id="findById"
+		resultType="com.example.training.common.entity.ProductEntity">
 		SELECT
 		*
 		FROM
-		product
+		PRODUCT
 		WHERE
 		id = ${id}
 	</select>
 	<select id="findName"
-		resultType="com.example.training.common.domain.Product">
+		resultType="com.example.training.common.entity.ProductEntity">
 		SELECT
 		*
 		FROM
-		product
+		PRODUCT
 		WHERE
 		name LIKE
 		'%${word}%'
