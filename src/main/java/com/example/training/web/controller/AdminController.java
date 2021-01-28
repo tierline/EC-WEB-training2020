@@ -19,6 +19,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+/**
+ * 管理者のコントローラ
+ */
 @Controller
 @RequestMapping("/admin")
 public class AdminController {

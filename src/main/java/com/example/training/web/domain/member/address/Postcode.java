@@ -1,24 +1,31 @@
 package com.example.training.web.domain.member.address;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
-
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * 郵便番号を表す値オブジェクト
+ */
 @Getter
 @Setter
 public class Postcode {
-	@NotEmpty
-	@Size(min = 7, max = 8)
-	@Pattern(regexp = "^[0-9]{3}[0-9]{4}$", message = "郵便番号の形式が間違っています")
+	/**
+	 * 郵便番号の値
+	 */
 	private String value;
 
+	/**
+	 * 基本コンストラクタ
+	 *
+	 * @param value
+	 */
 	public Postcode(String value) {
 		this.value = value;
 	}
 
+	/**
+	 * デフォルトコンストラクタ
+	 */
 	public Postcode() {
 	}
 }

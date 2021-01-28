@@ -6,6 +6,9 @@ import com.example.training.web.domain.admin.Admin;
 
 import org.apache.ibatis.annotations.Mapper;
 
+/**
+ * 管理者のリポジトリ
+ */
 @Mapper
 public interface AdminRepository {
 

@@ -23,6 +23,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+/**
+ * 会員のコントローラ
+ */
 @Controller
 @RequestMapping("/member")
 public class MemberController {
@@ -78,7 +81,6 @@ public class MemberController {
 	 * @param model
 	 * @return 完了画面
 	 */
-	// TOREVIEW
 	@PostMapping("applicate")
 	public String applicate(@Valid MemberApplicationForm memberApplicationForm, BindingResult result, Model model) {
 		if (result.hasErrors()) {

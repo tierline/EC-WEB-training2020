@@ -1,23 +1,32 @@
 package com.example.training.web.domain.member.address;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
-
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * 番地を表す値オブジェクト
+ */
 @Getter
 @Setter
 public class Block {
 
-	@Size(max = 128, message = "入力できる文字数を超過しています。")
-	@NotEmpty
+	/**
+	 * 番地の値
+	 */
 	private String value;
 
+	/**
+	 * 基本コンストラクタ
+	 *
+	 * @param value
+	 */
 	public Block(String value) {
 		this.value = value;
 	}
 
+	/**
+	 * デフォルトコンストラクタ
+	 */
 	public Block() {
 
 	}

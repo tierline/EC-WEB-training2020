@@ -23,6 +23,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+/**
+ * 注文のコントローラ
+ */
 @Controller
 @RequestMapping("/member/order")
 public class OrderController {

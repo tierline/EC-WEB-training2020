@@ -20,8 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
- * @author
- *
+ * カートのコントローラ
  */
 @Controller
 @RequestMapping("/member/cart")

@@ -11,6 +11,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * 会員新規作成のドメインサービス
+ */
 @Service
 public class MemberApplicationService {
 
@@ -21,9 +24,14 @@ public class MemberApplicationService {
   @Autowired
   private MemberRepository memberRepository;
 
+  /**
+   * 会員を新規作成する。
+   *
+   * @param memberApplicationForm 会員作成フォーム
+   */
   @Transactional
   public void run(MemberApplicationForm memberApplicationForm) {
-    String rawPassword = memberApplicationForm.getPassword();
+    String rawPassword = memberApplicationForm.getPassword().toString();
     String digestPasswordString = passwordEncoder.encode(rawPassword);
     DigestPassword digestPassword = new DigestPassword(digestPasswordString);
     Member member = memberApplicationForm.createMember(digestPassword);

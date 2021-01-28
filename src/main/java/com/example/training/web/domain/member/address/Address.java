@@ -1,26 +1,46 @@
 package com.example.training.web.domain.member.address;
 
-import javax.validation.Valid;
-
 import lombok.Getter;
 import lombok.Setter;
 
-//setterなしで書くには
-//TOREVIEW
+/**
+ * 住所を表す値オブジェクト
+ */
+// setterなしで書くには
+// TOREVIEW
 @Getter
 @Setter
 public class Address {
 
+	/**
+	 * 住所の値
+	 */
 	private String value;
-	@Valid
+	/**
+	 * 郵便番号
+	 */
 	private Postcode postcode;
-	@Valid
+	/**
+	 * 都道府県
+	 */
 	private Prefecture prefecture;
-	@Valid
+	/**
+	 * 市区町村
+	 */
 	private City city;
-	@Valid
+	/**
+	 * 番地
+	 */
 	private Block block;
 
+	/**
+	 * 基本コンストラクタ
+	 *
+	 * @param postcode
+	 * @param prefecture
+	 * @param city
+	 * @param block
+	 */
 	public Address(Postcode postcode, Prefecture prefecture, City city, Block block) {
 		this.postcode = postcode;
 		this.prefecture = prefecture;
@@ -28,10 +48,18 @@ public class Address {
 		this.block = block;
 	}
 
+	/**
+	 * デフォルトコンストラクタ
+	 */
 	public Address() {
 
 	}
 
+	/**
+	 * 住所の全文表示
+	 *
+	 * @return
+	 */
 	public String getValue() {
 		this.value = "〒" + postcode.getValue() + " " + prefecture.getValue() + " " + city.getValue() + " "
 				+ block.getValue();

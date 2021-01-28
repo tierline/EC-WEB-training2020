@@ -29,6 +29,12 @@ public class MainController {
 	@Autowired
 	protected MessageSource messageSource;
 
+	/**
+	 * トップ画面を表示する。
+	 *
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("/")
 	public String index(Model model) {
 		List<ProductEntity> productEntities = productRepository.findAll();

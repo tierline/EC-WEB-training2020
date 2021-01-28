@@ -11,7 +11,7 @@ import com.example.training.web.domain.member.MemberId;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
- * 会員のリポジトリー
+ * 会員のリポジトリ
  */
 @Mapper
 public interface MemberRepository {

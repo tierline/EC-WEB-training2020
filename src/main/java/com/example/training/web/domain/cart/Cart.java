@@ -16,12 +16,12 @@ import lombok.Getter;
 public class Cart {
 	public static final String SESSION_NAME = "CART";
 	/**
-	 * 商品
+	 * カート内の商品
 	 */
 	@Getter
 	private List<CartItem> items = new ArrayList<CartItem>();
 	/**
-	 * 合計金額
+	 * カート内の商品の合計金額
 	 */
 	private Price totalPrice = new Price(0);
 

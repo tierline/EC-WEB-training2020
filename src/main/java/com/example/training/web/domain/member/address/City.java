@@ -1,20 +1,31 @@
 package com.example.training.web.domain.member.address;
 
-import javax.validation.constraints.Size;
-
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * 市区町村を表す値オブジェクト
+ */
 @Getter
 @Setter
 public class City {
-	@Size(min = 1, max = 20, message = "入力できる文字数を超過しています。")
+	/**
+	 * 市区町村の値
+	 */
 	private String value;
 
+	/**
+	 * 基本コンストラクタ
+	 *
+	 * @param value
+	 */
 	public City(String value) {
 		this.value = value;
 	}
 
+	/**
+	 * デフォルトコンストラクタ
+	 */
 	public City() {
 
 	}

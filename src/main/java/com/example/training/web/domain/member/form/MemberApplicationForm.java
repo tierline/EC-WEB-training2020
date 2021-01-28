@@ -6,20 +6,17 @@ import javax.validation.constraints.Size;
 import com.example.training.web.domain.member.DigestPassword;
 import com.example.training.web.domain.member.Member;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
 
 /**
  * 会員新規登録フォームのクラス
  */
-@AllArgsConstructor
-@RequiredArgsConstructor
+
 @Data
 public class MemberApplicationForm {
 
 	/**
-	 * fix: 型をつける Eメール
+	 * Eメール
 	 */
 	private String email;
 

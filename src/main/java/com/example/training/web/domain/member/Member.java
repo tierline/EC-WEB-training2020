@@ -96,6 +96,13 @@ public class Member {
 		this.memberId = order.getMemberId();
 	}
 
+	/**
+	 * 会員情報編集のためのコンストラクタ
+	 *
+	 * @param memberEditForm
+	 * @param adminName
+	 * @param memberId
+	 */
 	public Member(MemberEditForm memberEditForm, String adminName, MemberId memberId) {
 		this.memberId = memberId;
 		this.lastUpdatedBy = adminName;
