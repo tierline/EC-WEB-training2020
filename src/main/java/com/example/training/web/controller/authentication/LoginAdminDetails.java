@@ -25,7 +25,7 @@ public class LoginAdminDetails extends User {
    * @param admin adminエンティティ
    */
   public LoginAdminDetails(Admin admin) {
-    super(admin.getName(), admin.getPassword(), createRole(admin));
+    super(admin.getName(), admin.getPassword().getValue(), createRole(admin));
     this.admin = admin;
   }
 

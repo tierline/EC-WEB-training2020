@@ -25,7 +25,7 @@ public class ProductController {
 	 */
 	@GetMapping("detail/{productId}")
 	public String detail(@PathVariable int productId, Model model) {
-		var product = productRepository.findId(productId).orElseThrow(() -> new IllegalArgumentException());
+		var product = productRepository.findById(productId).orElseThrow(() -> new IllegalArgumentException());
 		model.addAttribute("product", product);
 		return "product/detail";
 	}

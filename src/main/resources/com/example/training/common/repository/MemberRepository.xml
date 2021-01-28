@@ -29,7 +29,7 @@
 
 	<select id="findById"
 		resultType="com.example.training.web.domain.member.MemberEntity">
-		SELECT id as memberId,
+		SELECT member_id as memberId,
 		email,
 		phone_number,
 		last_name,
@@ -60,7 +60,7 @@
 		FROM MEMBER
 	</select>
 
-	<insert id="create" useGeneratedKeys="true">
+	<insert id="save" useGeneratedKeys="true">
 		INSERT INTO MEMBER (email, password, last_update_admin, status) VALUES (
 		"${email.value}",
 		"${digestPassword.value}",

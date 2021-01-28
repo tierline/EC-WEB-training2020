@@ -32,7 +32,7 @@
 		)
 	</insert>
 
-	<select id="findItemsByOrder"
+	<select id="findItemsById"
 		resultType="com.example.training.web.domain.order.OrderItem">
 		SELECT
 		name, price, quantity, image_path

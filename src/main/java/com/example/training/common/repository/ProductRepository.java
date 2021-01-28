@@ -16,7 +16,7 @@ public interface ProductRepository {
 	/**
 	 * 商品IDで商品を取得する。
 	 */
-	public Optional<ProductEntity> findId(int productId);
+	public Optional<ProductEntity> findById(int productId);
 
 	/**
 	 * 単語で商品を取得する。

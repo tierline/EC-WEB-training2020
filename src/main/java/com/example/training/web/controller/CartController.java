@@ -41,10 +41,10 @@ public class CartController {
 	 * @param id
 	 * @return
 	 */
-	@GetMapping("/add/{id}")
-	public String add(@PathVariable int id) {
+	@GetMapping("/add/{productId}")
+	public String add(@PathVariable int productId) {
 		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
-		ProductEntity productEntity = productRepository.findId(id).orElseThrow();
+		ProductEntity productEntity = productRepository.findById(productId).orElseThrow();
 		Product product = new Product(productEntity);
 
 		cart.add(product);
@@ -57,10 +57,10 @@ public class CartController {
 	 * @param id
 	 * @return
 	 */
-	@PostMapping(path = "/changeQuantity/{id}", consumes = "application/x-www-form-urlencoded")
-	public String changeItemQuantity(@PathVariable int id, int quantity) {
+	@PostMapping(path = "/changeQuantity/{productId}", consumes = "application/x-www-form-urlencoded")
+	public String changeItemQuantity(@PathVariable int productId, int quantity) {
 		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
-		ProductEntity productEntity = productRepository.findId(id).orElseThrow();
+		ProductEntity productEntity = productRepository.findById(productId).orElseThrow();
 		cart.changeItemQuantity(new Product(productEntity), new Quantity(quantity));
 		return "redirect:/member/cart/list";
 	}
@@ -74,7 +74,7 @@ public class CartController {
 	@GetMapping("/delete/{id}")
 	public String delete(@PathVariable int id) {
 		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
-		ProductEntity productEntity = productRepository.findId(id).orElseThrow();
+		ProductEntity productEntity = productRepository.findById(id).orElseThrow();
 		Product product = new Product(productEntity);
 		cart.remove(product);
 

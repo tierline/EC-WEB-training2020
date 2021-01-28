@@ -46,7 +46,7 @@ public class ApiCartController {
 	@PostMapping("/add/{productId}")
 	public void add(@PathVariable int productId) {
 		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
-		ProductEntity productEntity = productRepository.findId(productId).orElseThrow();
+		ProductEntity productEntity = productRepository.findById(productId).orElseThrow();
 		Product product = new Product(productEntity);
 		cart.add(product);
 	}
@@ -60,7 +60,7 @@ public class ApiCartController {
 	@PostMapping("/changeQuantity/{productId}/{quantity}")
 	public void changeItemQuantity(@PathVariable int productId, @PathVariable int quantity) {
 		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
-		ProductEntity productEntity = productRepository.findId(productId).orElseThrow();
+		ProductEntity productEntity = productRepository.findById(productId).orElseThrow();
 		Product product = new Product(productEntity);
 		cart.changeItemQuantity(product, new Quantity(quantity));
 	}
@@ -68,13 +68,13 @@ public class ApiCartController {
 	/**
 	 * カートから特定の商品をすべて削除する。
 	 *
-	 * @param id
+	 * @param productId
 	 * @return
 	 */
 	@PostMapping("/remove/{productId}")
 	public Cart cartFromParticularProductsAllDelete(@PathVariable int productId) {
 		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
-		ProductEntity productEntity = productRepository.findId(productId).orElseThrow();
+		ProductEntity productEntity = productRepository.findById(productId).orElseThrow();
 		Product product = new Product(productEntity);
 		cart.remove(product);
 		return cart;

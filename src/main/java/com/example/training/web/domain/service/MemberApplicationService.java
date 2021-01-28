@@ -27,6 +27,6 @@ public class MemberApplicationService {
     String digestPasswordString = passwordEncoder.encode(rawPassword);
     DigestPassword digestPassword = new DigestPassword(digestPasswordString);
     Member member = memberApplicationForm.createMember(digestPassword);
-    memberRepository.create(member);
+    memberRepository.save(member);
   }
 }

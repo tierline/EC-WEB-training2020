@@ -70,7 +70,7 @@ public class ApiOrderController {
 	 */
 	@GetMapping("/orderDetails/{id}")
 	public Order orderDetails(@PathVariable Integer id) {
-		Order order = orderRepository.findByOrderId(id);
+		Order order = orderRepository.findById(id);
 
 		return order;
 	}
@@ -81,14 +81,14 @@ public class ApiOrderController {
 	 */
 	@GetMapping("/orderedItemList/{id}")
 	public List<OrderItem> orderedItemList(@PathVariable int id) {
-		List<OrderItem> items = orderRepository.findOrderItemsByOrderId(id);
+		List<OrderItem> items = orderRepository.findOrderItemsById(id);
 
 		return items;
 	}
 
 	@GetMapping("/history/item/{id}")
 	public List<OrderItem> orderItemList(@PathVariable int id) {
-		List<OrderItem> list = orderRepository.findOrderItemsByOrderId(id);
+		List<OrderItem> list = orderRepository.findOrderItemsById(id);
 		return list;
 	}
 

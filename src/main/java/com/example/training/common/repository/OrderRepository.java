@@ -21,7 +21,7 @@ public interface OrderRepository {
 	 * @param id
 	 * @return 注文内容
 	 */
-	public Order findByOrderId(int id);
+	public Order findById(int id);
 
 	/**
 	 * 注文IDで注文商品を取得する。
@@ -29,7 +29,7 @@ public interface OrderRepository {
 	 * @param order
 	 * @return 注文商品リスト
 	 */
-	public List<OrderItem> findOrderItemsByOrderId(int id);
+	public List<OrderItem> findOrderItemsById(int id);
 
 	/**
 	 * 会員IDで月毎の注文内容を取得する。

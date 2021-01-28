@@ -1,5 +1,7 @@
 package com.example.training.web.domain.admin;
 
+import com.example.training.web.domain.member.DigestPassword;
+
 import lombok.Data;
 
 /**
@@ -19,7 +21,7 @@ public class Admin {
   /**
    * パスワード
    */
-  private String password;
+  private DigestPassword password;
   /**
    * 権限
    */

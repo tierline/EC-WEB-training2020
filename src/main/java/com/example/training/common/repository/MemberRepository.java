@@ -36,7 +36,7 @@ public interface MemberRepository {
 	 *
 	 * @param member
 	 */
-	public void create(Member member);
+	public void save(Member member);
 
 	/**
 	 * フォーム内容で会員情報を更新する。
