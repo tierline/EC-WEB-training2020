@@ -3,7 +3,7 @@ package com.example.training.web.domain.member;
 import lombok.Getter;
 
 /**
- *
+ * 会員の氏名を表す値オブジェクト
  */
 @Getter
 public class FullName {

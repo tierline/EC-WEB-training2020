@@ -3,7 +3,7 @@ package com.example.training.web.domain.member;
 import lombok.Getter;
 
 /**
- * パスワード（ハッシュ値）の値オブジェクト
+ * パスワード（ハッシュ値）を表す値オブジェクト
  */
 public class DigestPassword {
 

@@ -1,25 +1,30 @@
 package com.example.training.web.domain.member;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
-
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * 電話番号を表す値オブジェクト
+ */
 @Getter
 @Setter
 public class PhoneNumber {
 
-	@NotEmpty
-	@Size(min = 10, max = 11, message = "電話番号は10桁〜11桁の間で入力してください")
-	@Pattern(regexp = "[0-9]*", message = "電話番号の形式が間違っています")
+	/**
+	 * 電話番号の値
+	 */
 	private String value;
 
+	/**
+	 * 基本コンストラクタ
+	 */
 	public PhoneNumber(String value) {
 		this.value = value;
 	}
 
+	/**
+	 * デフォルトコンストラクタ
+	 */
 	public PhoneNumber() {
 
 	}
