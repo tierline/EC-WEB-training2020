@@ -4,16 +4,14 @@ import java.util.List;
 import java.util.Optional;
 
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 
-import com.example.training.web.domain.member.Email;
-import com.example.training.web.domain.member.Member;
-import com.example.training.web.domain.member.MemberEntity;
-import com.example.training.web.domain.member.MemberId;
-import com.example.training.web.domain.member.form.MemberEditForm;
+import com.example.training.common.domain.Member;
+import com.example.training.common.domain.value.Email;
+import com.example.training.common.domain.value.id.MemberId;
+import com.example.training.common.entity.MemberEntity;
 
 /**
- * 会員のリポジトリー
+ * 会員のリポジトリ
  */
 @Mapper
 public interface MemberRepository {
@@ -38,17 +36,21 @@ public interface MemberRepository {
 	 *
 	 * @param member
 	 */
-	public void create(Member member);
+	public void save(Member member);
 
 	/**
-	 * 会員情報を更新する。
+	 * フォーム内容で会員情報を更新する。
 	 *
 	 * @param memberEditForm
 	 * @param lastUpdatedBy
 	 */
-	public void update(@Param("memberEditForm") MemberEditForm memberEditForm,
-			@Param("lastUpdatedBy") String lastUpdatedBy);// formを引数にとらない
+	public void updateByAdmin(Member member);
 
-	public void updateAtOrder(Member member);// formを引数にとらない
+	/**
+	 * 注文内容で会員情報を更新する。
+	 *
+	 * @param member 会員
+	 */
+	public void updateAtOrder(Member member);
 
 }

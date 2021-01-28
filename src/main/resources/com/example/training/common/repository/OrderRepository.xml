@@ -32,19 +32,19 @@
 		)
 	</insert>
 
-	<select id="findOrderItemsByOrderId"
-		resultType="com.example.training.web.domain.order.OrderItem">
+	<select id="findOrderItemsById"
+		resultType="com.example.training.common.domain.OrderItem">
 		SELECT
 		name, price, quantity, image_path
 		FROM
 		ORDER_ITEM
-		WHERE order_id =
-		${value}
+		WHERE order_id = ${value}
 	</select>
 
 
-	<select id="findByOrderId"
-resultType="com.example.training.web.domain.order.Order">
+
+	<select id="findById"
+		resultType="com.example.training.common.domain.Order">
 		SELECT
 		*
 		FROM
@@ -52,8 +52,10 @@ resultType="com.example.training.web.domain.order.Order">
 		WHERE id = ${value}
 	</select>
 
+
+
 	<select id="findOrderHistoryByMonthByMemberId"
-		resultType="com.example.training.web.domain.order.OrderHistoryByMonth">
+		resultType="com.example.training.web.controller.order.OrderHistoryByMonth">
 		SELECT
 		id as orderId,
 		`date`

@@ -6,7 +6,7 @@
 <mapper
 	namespace="com.example.training.common.repository.AdminRepository">
 	<select id="findByName"
-		resultType="com.example.training.web.domain.admin.Admin">
+		resultType="com.example.training.common.domain.Admin">
 		SELECT
 		*
 		FROM

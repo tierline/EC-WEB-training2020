@@ -4,10 +4,6 @@ create database training;
 
 use training;
 
--- TOREVIEW : sql を書かずに mybatis で定義できないか --
--- TABLE 名は大文字に。 mybatis-config から設定できる --
--- 会社方針：テーブル名は単数形 --
-
 CREATE TABLE ADMIN (
   id INT AUTO_INCREMENT,
   name VARCHAR(128),
@@ -17,7 +13,7 @@ CREATE TABLE ADMIN (
 );
 
 CREATE TABLE MEMBER (
-  id INT(11) NOT NULL AUTO_INCREMENT, -- fix: Long型？ --
+  id INT(11) NOT NULL AUTO_INCREMENT,
   password VARCHAR(256),
   email VARCHAR(128),
   phone_number VARCHAR(16),

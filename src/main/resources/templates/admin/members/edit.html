@@ -24,12 +24,13 @@
       <div class="pt-3">
         <form
           th:method="post"
-          th:object="${memberEditForm}"
-          th:action="@{/admin/members/{id}/edit(id=*{id})}"
+          th:object="${member}"
+          th:action="@{/admin/members/{memberId}/edit(memberId=*{memberId})}"
         >
           <div class="form-group">
             <label>メールアドレス</label>
             <input
+              readonly
               type="email"
               class="form-control"
               name="email"

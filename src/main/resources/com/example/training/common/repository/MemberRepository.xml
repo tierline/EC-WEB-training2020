@@ -7,7 +7,7 @@
 	namespace="com.example.training.common.repository.MemberRepository">
 
 	<select id="findByEmail"
-		resultType="com.example.training.web.domain.member.MemberEntity">
+		resultType="com.example.training.common.entity.MemberEntity">
 		SELECT
 		id as memberId,
 		password,
@@ -28,23 +28,25 @@
 	</select>
 
 	<select id="findById"
-		resultType="com.example.training.web.domain.member.MemberEntity">
-		SELECT id as meberId,
+		resultType="com.example.training.common.entity.MemberEntity">
+		SELECT member_id as memberId,
 		email,
 		phone_number,
 		last_name,
 		first_name,
+		password,
 		postcode,
 		prefecture,
 		city,
-		block
+		block,
+		status
 		FROM MEMBER WHERE id = "${value}"
 	</select>
 
 	<select id="findAll"
-		resultType="com.example.training.web.domain.member.MemberEntity">
+		resultType="com.example.training.common.entity.MemberEntity">
 		SELECT
-		id as meberId,
+		id as memberId,
 		email,
 		phone_number,
 		last_name,
@@ -58,7 +60,7 @@
 		FROM MEMBER
 	</select>
 
-	<insert id="create" useGeneratedKeys="true">
+	<insert id="save" useGeneratedKeys="true">
 		INSERT INTO MEMBER (email, password, last_update_admin, status) VALUES (
 		"${email.value}",
 		"${digestPassword.value}",
@@ -67,19 +69,18 @@
 		)
 	</insert>
 
-	<update id="update">
+	<update id="updateByAdmin">
 		UPDATE MEMBER SET
-		email=#{memberEditForm.email},
 		last_update_admin=#{lastUpdatedBy},
-		status=#{memberEditForm.status}
+		status=#{status}
 		WHERE
-		id= #{memberEditForm.id}
+		id= #{memberId.value}
 	</update>
 
 	<update id="updateAtOrder">
 		UPDATE MEMBER SET
-		first_name=#{fullName.firstName},
 		last_name=#{fullName.lastName},
+		first_name=#{fullName.firstName},
 		phone_number=#{phoneNumber.value},
 		postcode=#{address.postcode.value},
 		prefecture=#{address.prefecture.value},

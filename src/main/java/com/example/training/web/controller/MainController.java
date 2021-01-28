@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.training.common.domain.Product;
+import com.example.training.common.entity.ProductEntity;
 import com.example.training.common.repository.ProductRepository;
-import com.example.training.web.domain.product.Product;
-import com.example.training.web.domain.product.ProductEntity;
 
 @Controller
 public class MainController {
@@ -29,10 +29,13 @@ public class MainController {
 	@Autowired
 	protected MessageSource messageSource;
 
-	/*
-	*商品一覧の取得
-	*
-	*/
+	/**
+	 * トップ画面を表示する。
+	 *
+	 * @param model
+	 * @return
+	 */
+
 	@GetMapping("/")
 	public String index(Model model) {
 		List<ProductEntity> productEntities = productRepository.findAll();
@@ -51,6 +54,10 @@ public class MainController {
 	 * @param word
 	 * @return
 	 */
+	// TODO: 問い合わせはQuery, Mobileのフォームは Command
+	// 更新系：command : DBにINSERT, DELETE等をかける場合
+	// 登録系：query : DBにSELECTをかける場合
+	// 検索は SELECT をかける登録系なので Query。freeword -> query
 	@PostMapping("/search")
 	public String search(Model model, @RequestParam("freeWord") String freeWord) {
 		List<ProductEntity> productEntities = productRepository.findName(freeWord);
