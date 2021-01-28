@@ -7,7 +7,7 @@
 	namespace="com.example.training.common.repository.MemberRepository">
 
 	<select id="findByEmail"
-		resultType="com.example.training.web.domain.member.MemberEntity">
+		resultType="com.example.training.common.entity.MemberEntity">
 		SELECT
 		id as memberId,
 		password,
@@ -28,7 +28,7 @@
 	</select>
 
 	<select id="findById"
-		resultType="com.example.training.web.domain.member.MemberEntity">
+		resultType="com.example.training.common.entity.MemberEntity">
 		SELECT member_id as memberId,
 		email,
 		phone_number,
@@ -44,7 +44,7 @@
 	</select>
 
 	<select id="findAll"
-		resultType="com.example.training.web.domain.member.MemberEntity">
+		resultType="com.example.training.common.entity.MemberEntity">
 		SELECT
 		id as memberId,
 		email,

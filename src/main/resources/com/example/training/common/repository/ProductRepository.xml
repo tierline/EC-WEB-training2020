@@ -6,7 +6,7 @@
 <mapper
 	namespace="com.example.training.common.repository.ProductRepository">
 	<select id="findAll"
-		resultType="com.example.training.web.domain.product.ProductEntity">
+		resultType="com.example.training.common.entity.ProductEntity">
 		SELECT
 		*
 		FROM
@@ -14,7 +14,7 @@
 	</select>
 
 	<select id="findById"
-		resultType="com.example.training.web.domain.product.ProductEntity">
+		resultType="com.example.training.common.entity.ProductEntity">
 		SELECT
 		*
 		FROM
@@ -23,7 +23,7 @@
 		id = ${id}
 	</select>
 	<select id="findName"
-		resultType="com.example.training.web.domain.product.ProductEntity">
+		resultType="com.example.training.common.entity.ProductEntity">
 		SELECT
 		*
 		FROM

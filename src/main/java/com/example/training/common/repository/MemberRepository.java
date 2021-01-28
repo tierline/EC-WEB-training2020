@@ -3,10 +3,10 @@ package com.example.training.common.repository;
 import java.util.List;
 import java.util.Optional;
 
-import com.example.training.web.domain.member.Email;
-import com.example.training.web.domain.member.Member;
-import com.example.training.web.domain.member.MemberEntity;
-import com.example.training.web.domain.member.MemberId;
+import com.example.training.common.domain.Member;
+import com.example.training.common.domain.value.Email;
+import com.example.training.common.domain.value.id.MemberId;
+import com.example.training.common.entity.MemberEntity;
 
 import org.apache.ibatis.annotations.Mapper;
 

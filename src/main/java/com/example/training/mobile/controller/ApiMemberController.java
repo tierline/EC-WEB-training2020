@@ -4,13 +4,13 @@ import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 
+import com.example.training.common.domain.Member;
+import com.example.training.common.domain.value.Email;
+import com.example.training.common.entity.MemberEntity;
 import com.example.training.common.repository.MemberRepository;
-import com.example.training.web.domain.member.Email;
-import com.example.training.web.domain.member.Member;
-import com.example.training.web.domain.member.MemberEntity;
-import com.example.training.web.domain.member.form.MemberApplicationForm;
-import com.example.training.web.domain.member.form.MemberLoginForm;
-import com.example.training.web.domain.service.MemberApplicationService;
+import com.example.training.common.service.MemberApplicationService;
+import com.example.training.web.controller.member.MemberApplicationForm;
+import com.example.training.web.controller.member.MemberLoginForm;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -22,6 +22,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * 会員のコントローラ(Mobile)
+ */
+// TODO: ApiMemberC -> MemberController
 @RestController
 @RequestMapping("/api/member")
 
@@ -42,6 +46,7 @@ public class ApiMemberController {
 	@CrossOrigin
 	@PostMapping("/applicate")
 	@ResponseBody
+	// TODO ~command
 	public Boolean applicate(@RequestBody MemberApplicationForm memberApplicationForm) {
 		Email email = new Email(memberApplicationForm.getEmail());
 		Optional<MemberEntity> memberOpt = memberRepository.findByEmail(email);
@@ -55,7 +60,12 @@ public class ApiMemberController {
 		}
 	}
 
-	// fix
+	/**
+	 *
+	 *
+	 * @param memberLoginForm
+	 * @return
+	 */
 	@CrossOrigin
 	@PostMapping("/login")
 	@ResponseBody

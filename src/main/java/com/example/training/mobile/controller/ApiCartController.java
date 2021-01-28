@@ -2,11 +2,11 @@ package com.example.training.mobile.controller;
 
 import javax.servlet.http.HttpSession;
 
+import com.example.training.common.domain.Cart;
+import com.example.training.common.domain.Product;
+import com.example.training.common.domain.value.Quantity;
+import com.example.training.common.entity.ProductEntity;
 import com.example.training.common.repository.ProductRepository;
-import com.example.training.web.domain.cart.Cart;
-import com.example.training.web.domain.product.Product;
-import com.example.training.web.domain.product.ProductEntity;
-import com.example.training.web.domain.product.Quantity;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -16,6 +16,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * カートコントローラ(Mobile)
+ */
 @CrossOrigin
 @RestController
 @RequestMapping("/api/member/cart")
@@ -32,10 +35,14 @@ public class ApiCartController {
 	 *
 	 * @return カート
 	 */
+	// TODO 転送用オブジェクトで返す
 	@GetMapping("/")
-	public Cart getCart() {
-		Cart cartEntity = (Cart) session.getAttribute(Cart.SESSION_NAME);
-		return cartEntity;
+	public void getCart() {
+		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
+		// new CartDto(cart);
+		// CartDto cartDto = (CartDto) session.getAttribute(Cart.SESSION_NAME);
+		// int hoge = 0;
+		// return cartDto;
 	}
 
 	/**

@@ -5,18 +5,17 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import com.example.training.common.domain.Cart;
+import com.example.training.common.domain.Member;
+import com.example.training.common.domain.Order;
+import com.example.training.common.domain.OrderItem;
+import com.example.training.common.domain.value.id.MemberId;
 import com.example.training.common.repository.MemberRepository;
 import com.example.training.common.repository.OrderRepository;
-import com.example.training.web.domain.cart.Cart;
-import com.example.training.web.domain.member.Member;
-import com.example.training.web.domain.member.MemberId;
-import com.example.training.web.domain.order.Order;
-import com.example.training.web.domain.order.OrderForm;
-import com.example.training.web.domain.order.OrderFormEntity;
-import com.example.training.web.domain.order.OrderHistoryAssembler;
-import com.example.training.web.domain.order.OrderHistoryByMonth;
-import com.example.training.web.domain.order.OrderItem;
-import com.example.training.web.domain.service.OrderService;
+import com.example.training.common.service.OrderService;
+import com.example.training.web.controller.order.OrderForm;
+import com.example.training.web.controller.order.OrderHistoryAssembler;
+import com.example.training.web.controller.order.OrderHistoryByMonth;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -27,9 +26,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * 注文のコントローラ(Mobile)
+ */
 @CrossOrigin
 @RestController
 @RequestMapping("/api/member/order")
+// TODO API
 public class ApiOrderController {
 
 	@Autowired
@@ -51,7 +54,7 @@ public class ApiOrderController {
 	 * 注文処理を行う
 	 */
 	@PostMapping("/save")
-	public Integer save(@RequestBody OrderFormEntity order) {
+	public Integer save(@RequestBody OrderSaveCommand order) {
 		Member member = (Member) session.getAttribute(Member.SESSION_NAME);
 		MemberId memberId = member.getMemberId();
 		OrderForm orderForm = new OrderForm(order, memberId);

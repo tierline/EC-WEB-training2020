@@ -2,7 +2,7 @@ package com.example.training.common.repository;
 
 import java.util.Optional;
 
-import com.example.training.web.domain.admin.Admin;
+import com.example.training.common.domain.Admin;
 
 import org.apache.ibatis.annotations.Mapper;
 

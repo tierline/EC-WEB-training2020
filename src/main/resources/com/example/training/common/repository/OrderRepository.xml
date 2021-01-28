@@ -33,7 +33,7 @@
 	</insert>
 
 	<select id="findItemsById"
-		resultType="com.example.training.web.domain.order.OrderItem">
+		resultType="com.example.training.common.domain.OrderItem">
 		SELECT
 		name, price, quantity, image_path
 		FROM
@@ -44,7 +44,7 @@
 
 
 	<select id="findById"
-		resultType="com.example.training.web.domain.order.Order">
+		resultType="com.example.training.common.domain.Order">
 		SELECT
 		*
 		FROM
@@ -53,7 +53,7 @@
 	</select>
 
 	<select id="findByOrderMonthByMemberId"
-		resultType="com.example.training.web.domain.order.OrderHistoryByMonth">
+		resultType="com.example.training.web.controller.order.OrderHistoryAssembler">
 		SELECT
 		id as orderId,
 		`date`

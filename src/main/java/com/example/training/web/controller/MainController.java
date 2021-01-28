@@ -6,9 +6,9 @@ import java.util.Locale;
 
 import javax.servlet.http.HttpSession;
 
+import com.example.training.common.domain.Product;
+import com.example.training.common.entity.ProductEntity;
 import com.example.training.common.repository.ProductRepository;
-import com.example.training.web.domain.product.Product;
-import com.example.training.web.domain.product.ProductEntity;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -53,6 +53,10 @@ public class MainController {
 	 * @param word
 	 * @return
 	 */
+	// TODO: 問い合わせはQuery, Mobileのフォームは Command
+	// 更新系：command : DBにINSERT, DELETE等をかける場合
+	// 登録系：query : DBにSELECTをかける場合
+	// 検索は SELECT をかける登録系なので Query。freeword -> query
 	@PostMapping("/search")
 	public String search(Model model, @RequestParam("freeWord") String freeWord) {
 		List<ProductEntity> productEntities = productRepository.findName(freeWord);
