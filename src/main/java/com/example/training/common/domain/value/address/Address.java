@@ -1,7 +1,6 @@
 package com.example.training.common.domain.value.address;
 
 import lombok.Getter;
-import lombok.Setter;
 
 /**
  * 住所を表す値オブジェクト
@@ -9,22 +8,21 @@ import lombok.Setter;
 // setterなしで書くには
 // TOREVIEW
 @Getter
-@Setter
 public class Address {
 
 	/**
 	 * 住所の値
 	 */
 	private String value;
-	/**
+	/*
 	 * 郵便番号
 	 */
 	private Postcode postcode;
-	/**
+	/*
 	 * 都道府県
 	 */
 	private Prefecture prefecture;
-	/**
+	/*
 	 * 市区町村
 	 */
 	private City city;
@@ -55,10 +53,12 @@ public class Address {
 
 	}
 
-	/**
-	 * 住所の全文表示
+	/*
+	 * 郵便番号から住所、すべてを繋げて返す ======= /** 住所の全文表示
 	 *
-	 * @return
+	 * @return >>>>>>>
+	 * origin/kato:src/main/java/com/example/training/common/domain/value/address/
+	 * Address.java
 	 */
 	public String getValue() {
 		this.value = "〒" + postcode.getValue() + " " + prefecture.getValue() + " " + city.getValue() + " "

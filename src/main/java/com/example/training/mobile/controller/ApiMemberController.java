@@ -4,14 +4,6 @@ import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 
-import com.example.training.common.domain.Member;
-import com.example.training.common.domain.value.Email;
-import com.example.training.common.entity.MemberEntity;
-import com.example.training.common.repository.MemberRepository;
-import com.example.training.common.service.MemberApplicationService;
-import com.example.training.web.controller.member.MemberApplicationForm;
-import com.example.training.web.controller.member.MemberLoginForm;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -21,6 +13,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.example.training.common.domain.Member;
+import com.example.training.common.domain.value.Email;
+import com.example.training.common.entity.MemberEntity;
+import com.example.training.common.http.MemberSession;
+import com.example.training.common.repository.MemberRepository;
+import com.example.training.common.service.MemberApplicationService;
+import com.example.training.web.controller.member.MemberApplicationForm;
+import com.example.training.web.controller.member.MemberLoginForm;
 
 /**
  * 会員のコントローラ(Mobile)
@@ -77,7 +78,8 @@ public class ApiMemberController {
 		Boolean isMatched = bCryptPasswordEncoder.matches(password, hashPassword);
 		if (isMatched) {
 			Member member = new Member(memberEntity);
-			session.setAttribute(Member.SESSION_NAME, member);
+			MemberSession memberSession = new MemberSession(member);
+			session.setAttribute(Member.SESSION_NAME, memberSession);
 		}
 		return isMatched;
 	}

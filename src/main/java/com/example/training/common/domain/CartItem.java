@@ -128,7 +128,6 @@ public class CartItem {
 
 	/**
 	 *
-	 *
 	 * @param product
 	 * @return
 	 */

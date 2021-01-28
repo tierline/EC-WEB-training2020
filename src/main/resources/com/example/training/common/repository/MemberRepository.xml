@@ -79,15 +79,15 @@
 
 	<update id="updateAtOrder">
 		UPDATE MEMBER SET
-		last_name=#{fullName.lastName},
-		first_name=#{fullName.firstName},
+		last_name=#{fullName.lastName.value},
+		first_name=#{fullName.firstName.value},
 		phone_number=#{phoneNumber.value},
 		postcode=#{address.postcode.value},
 		prefecture=#{address.prefecture.value},
 		city=#{address.city.value},
 		block=#{address.block.value}
-		WHERE
-		id = #{memberId.value}
+		WHERE id=
+		#{memberId.value}
 	</update>
 
 

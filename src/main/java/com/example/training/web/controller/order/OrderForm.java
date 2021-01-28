@@ -130,17 +130,17 @@ public class OrderForm {
 	 *
 	 * @param member 会員
 	 */
-	public void setMemberInfo(MemberDto memberEntity) {
-		this.lastName = memberEntity.getLastName();
-		this.firstName = memberEntity.getFirstName();
-		this.email = memberEntity.getEmail();
-		this.phoneNumber = memberEntity.getPhoneNumber();
-		this.postcode = memberEntity.getPostcode();
-		this.prefecture = memberEntity.getPrefecture();
-		this.city = memberEntity.getCity();
-		this.block = memberEntity.getBlock();
+	public void setMemberInfo(MemberDto memberDto) {
+		this.lastName = memberDto.getLastName();
+		this.firstName = memberDto.getFirstName();
+		this.email = memberDto.getEmail();
+		this.phoneNumber = memberDto.getPhoneNumber();
+		this.postcode = memberDto.getPostcode();
+		this.prefecture = memberDto.getPrefecture();
+		this.city = memberDto.getCity();
+		this.block = memberDto.getBlock();
 		this.orderDateAndTime = getOrderDateAndTime();
-		this.memberId = memberEntity.getMemberId();
+		this.memberId = memberDto.getMemberId();
 	}
 
 }

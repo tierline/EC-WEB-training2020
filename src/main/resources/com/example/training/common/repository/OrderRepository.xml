@@ -13,9 +13,9 @@
 		VALUES(
 		"${memberId.value}",
 		"${phoneNumber.value}",
-		"${fullName.firstName}",
+		"${fullName.value}",
 		"${address.value}",
-		"${email}",
+		"${email.value}",
 		${totalPrice.value},
 		"${orderDateAndTime.value}")
 	</insert>
@@ -24,23 +24,23 @@
 		INSERT INTO ORDER_ITEM (order_id, name, price,
 		quantity, image_path)
 		VALUES(
-		"${orderId}",
-		"${productName}",
-		"${productPrice.value}",
-		"${productQuantity.value}",
-		"${productImagePath}"
+		"${orderItem.orderId.value}",
+		"${orderItem.productName}",
+		"${orderItem.productPrice.value}",
+		"${orderItem.productQuantity.value}",
+		"${orderItem.productImagePath}"
 		)
 	</insert>
 
-	<select id="findItemsById"
+	<select id="findOrderItemsById"
 		resultType="com.example.training.common.domain.OrderItem">
 		SELECT
 		name, price, quantity, image_path
 		FROM
 		ORDER_ITEM
-		WHERE order_id =
-		${id}
+		WHERE order_id = ${value}
 	</select>
+
 
 
 	<select id="findById"
@@ -49,11 +49,13 @@
 		*
 		FROM
 		ORDERS
-		WHERE id = ${id}
+		WHERE id = ${value}
 	</select>
 
-	<select id="findByOrderMonthByMemberId"
-		resultType="com.example.training.web.controller.order.OrderHistoryAssembler">
+
+
+	<select id="findOrderHistoryByMonthByMemberId"
+		resultType="com.example.training.web.controller.order.OrderHistoryByMonth">
 		SELECT
 		id as orderId,
 		`date`

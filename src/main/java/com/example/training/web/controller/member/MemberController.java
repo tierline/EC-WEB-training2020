@@ -90,9 +90,9 @@ public class MemberController {
 		if (memberEntity.isPresent()) {
 			model.addAttribute("errorMessage", messageSource.getMessage("error.applicate.duplicate", null, Locale.JAPAN));
 			return "member/applicate";
-		} else {
-			memberApplicationService.run(memberApplicationForm);
-			return "redirect:/member/applicated";
 		}
+		memberApplicationService.run(memberApplicationForm);
+		return "redirect:/member/applicated";
+
 	}
 }

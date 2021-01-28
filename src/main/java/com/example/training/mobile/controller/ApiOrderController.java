@@ -5,18 +5,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
-import com.example.training.common.domain.Cart;
-import com.example.training.common.domain.Member;
-import com.example.training.common.domain.Order;
-import com.example.training.common.domain.OrderItem;
-import com.example.training.common.domain.value.id.MemberId;
-import com.example.training.common.repository.MemberRepository;
-import com.example.training.common.repository.OrderRepository;
-import com.example.training.common.service.OrderService;
-import com.example.training.web.controller.order.OrderForm;
-import com.example.training.web.controller.order.OrderHistoryAssembler;
-import com.example.training.web.controller.order.OrderHistoryByMonth;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +13,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.example.training.common.domain.Cart;
+import com.example.training.common.domain.Member;
+import com.example.training.common.domain.Order;
+import com.example.training.common.domain.OrderItem;
+import com.example.training.common.domain.value.id.MemberId;
+import com.example.training.common.domain.value.id.OrderId;
+import com.example.training.common.repository.MemberRepository;
+import com.example.training.common.repository.OrderRepository;
+import com.example.training.common.service.OrderService;
+import com.example.training.web.controller.order.OrderForm;
+import com.example.training.web.controller.order.OrderHistoryAssembler;
+import com.example.training.web.controller.order.OrderHistoryByMonth;
 
 /**
  * 注文のコントローラ(Mobile)
@@ -53,12 +54,18 @@ public class ApiOrderController {
 	/**
 	 * 注文処理を行う
 	 */
+	// TODO
 	@PostMapping("/save")
 	public Integer save(@RequestBody OrderSaveCommand order) {
 		Member member = (Member) session.getAttribute(Member.SESSION_NAME);
 		MemberId memberId = member.getMemberId();
 		OrderForm orderForm = new OrderForm(order, memberId);
 		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
+		Order order = orderService.order(orderForm, cart);
+//		memberRepository.updateAtOrder(orderForm);
+		// session.setAttribute(Cart.SESSION_NAME, new Cart());
+
+		// return order;
 		// int orderId = orderService.order(orderForm, cart);
 		// memberRepository.updateAtOrder(orderForm);
 		session.setAttribute(Cart.SESSION_NAME, new Cart());
@@ -72,26 +79,30 @@ public class ApiOrderController {
 	 * 注文番号から注文明細を返す
 	 */
 	@GetMapping("/orderDetails/{id}")
-	public Order orderDetails(@PathVariable Integer id) {
-		Order order = orderRepository.findById(id);
+	public Order orderDetails(@PathVariable Long id) {
+		OrderId orderId = new OrderId(id);
+		Order order = orderRepository.findById(orderId);
 
 		return order;
 	}
 
 	// fix 下と同じでは？
+	// TODO どちらか削除
 	/**
 	 * 注文番号から注文商品を返す
 	 */
 	@GetMapping("/orderedItemList/{id}")
-	public List<OrderItem> orderedItemList(@PathVariable int id) {
-		List<OrderItem> items = orderRepository.findOrderItemsById(id);
+	public List<OrderItem> orderedItemList(@PathVariable Long id) {
+		OrderId orderId = new OrderId(id);
+		List<OrderItem> items = orderRepository.findOrderItemsById(orderId);
 
 		return items;
 	}
 
 	@GetMapping("/history/item/{id}")
-	public List<OrderItem> orderItemList(@PathVariable int id) {
-		List<OrderItem> list = orderRepository.findOrderItemsById(id);
+	public List<OrderItem> orderItemList(@PathVariable Long id) {
+		OrderId orderId = new OrderId(id);
+		List<OrderItem> list = orderRepository.findOrderItemsById(orderId);
 		return list;
 	}
 

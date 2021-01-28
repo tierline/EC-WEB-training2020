@@ -1,33 +1,29 @@
 package com.example.training.common.domain.value.address;
 
-import lombok.Getter;
-import lombok.Setter;
+import com.example.training.common.domain.value.Assertion;
 
-/**
- * 番地を表す値オブジェクト
+import lombok.Getter;
+
+/*
+ * 番地
  */
-@Getter
-@Setter
 public class Block {
 
-	/**
-	 * 番地の値
-	 */
+	private final Integer MAX = 130;
+	private final Integer MIN = 0;
+	@Getter
 	private String value;
 
 	/**
 	 * 基本コンストラクタ
-	 *
-	 * @param value
 	 */
 	public Block(String value) {
+		Assertion.length(value, MIN, MAX);
 		this.value = value;
 	}
 
-	/**
-	 * デフォルトコンストラクタ
-	 */
 	public Block() {
 
 	}
+
 }
