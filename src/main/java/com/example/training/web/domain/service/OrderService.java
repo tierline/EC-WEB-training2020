@@ -2,14 +2,15 @@ package com.example.training.web.domain.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.example.training.common.repository.MemberRepository;
 import com.example.training.common.repository.OrderRepository;
 import com.example.training.web.domain.cart.Cart;
+import com.example.training.web.domain.member.Member;
 import com.example.training.web.domain.order.Order;
 import com.example.training.web.domain.order.OrderItem;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 /**
  * 注文（ドメイン）のサービスクラス
@@ -33,8 +34,9 @@ public class OrderService {
 	 */
 	public Order order(Order order, Cart cart) {
 		this.saveByOrder(order, cart);
-		// memberRepository.updateAtOrder(orderForm); // formは渡さないmemberとして！ fix :
-		// update(member)に変更する。
+		Member member = new Member(order);
+		// if()チェックボックス設置更新するかしないか
+		memberRepository.updateAtOrder(member);
 		return order;
 	}
 
@@ -43,6 +45,7 @@ public class OrderService {
 	 *
 	 * @param order 注文内容
 	 * @param cart  カート
+	 * 
 	 */
 	private void saveByOrder(Order order, Cart cart) {
 		orderRepository.create(order);

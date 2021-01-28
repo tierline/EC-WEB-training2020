@@ -3,12 +3,13 @@ package com.example.training.common.repository;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.example.training.web.domain.member.MemberId;
 import com.example.training.web.domain.order.Order;
 import com.example.training.web.domain.order.OrderHistoryByMonth;
+import com.example.training.web.domain.order.OrderId;
 import com.example.training.web.domain.order.OrderItem;
-
 
 /**
  * 注文リポジトリ
@@ -22,7 +23,7 @@ public interface OrderRepository {
 	 * @param id
 	 * @return 注文内容
 	 */
-	public Order findByOrderId(int id);
+	public Order findByOrderId(OrderId id);
 
 	/**
 	 * 注文IDで注文商品を取得する。
@@ -30,7 +31,7 @@ public interface OrderRepository {
 	 * @param order
 	 * @return 注文商品リスト
 	 */
-	public List<OrderItem> findOrderItemsByOrderId(int id);
+	public List<OrderItem> findOrderItemsByOrderId(OrderId id);
 
 	/**
 	 * 会員IDで月毎の注文内容を取得する。
@@ -45,13 +46,13 @@ public interface OrderRepository {
 	 *
 	 * @param order 注文内容
 	 */
-	public int create(Order order);
+	public Long create(Order order);
 
 	/**
 	 * 注文商品を保存する。
 	 *
 	 * @param item 注文商品
 	 */
-	public void createItem(OrderItem item);
+	public void createItem(@Param("orderItem") OrderItem item);
 
 }

@@ -11,7 +11,7 @@ public class DigestPassword {
    * パスワードの値
    */
   @Getter
-  public String value;
+  private String value;
 
   // @Service をつけてみても、null になる。値オブジェクト内で暗号化すべきか？ するとしたら、どうするか。
   // @Autowired

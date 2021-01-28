@@ -30,7 +30,7 @@ public class Order {
 	/**
 	 * 注文ID
 	 */
-	private int id;
+	private Long id;
 	/**
 	 * 会員ID
 	 */
@@ -84,7 +84,7 @@ public class Order {
 	 * @param memberId 会員ID
 	 * @param date     注文日時
 	 */
-	public Order(int orderId, MemberId memberId, LocalDateTime orderDateAndTime) {
+	public Order(Long orderId, MemberId memberId, LocalDateTime orderDateAndTime) {
 		this.id = orderId;
 		this.memberId = memberId;
 		this.orderDateAndTime = new Date(orderDateAndTime);

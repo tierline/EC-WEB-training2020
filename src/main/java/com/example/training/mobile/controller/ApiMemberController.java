@@ -11,7 +11,6 @@ import com.example.training.web.domain.member.MemberEntity;
 import com.example.training.web.domain.member.MemberSession;
 import com.example.training.web.domain.member.form.MemberApplicationForm;
 import com.example.training.web.domain.member.form.MemberLoginForm;
-import com.example.training.web.domain.service.DigestPasswordService;
 import com.example.training.web.domain.service.MemberApplicationService;
 
 import org.springframework.beans.factory.annotation.Autowired;

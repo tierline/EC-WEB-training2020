@@ -15,7 +15,7 @@
 		"${phoneNumber.value}",
 		"${fullName.value}",
 		"${address.value}",
-		"${email}",
+		"${email.value}",
 		${totalPrice.value},
 		"${orderDateAndTime.value}")
 	</insert>
@@ -24,37 +24,35 @@
 		INSERT INTO ORDER_ITEM (order_id, name, price,
 		quantity, image_path)
 		VALUES(
-		"${orderId}",
-		"${productName}",
-		"${productPrice.value}",
-		"${productQuantity.value}",
-		"${productImagePath}"
+		"${orderItem.orderId.value}",
+		"${orderItem.productName}",
+		"${orderItem.productPrice.value}",
+		"${orderItem.productQuantity.value}",
+		"${orderItem.productImagePath}"
 		)
 	</insert>
 
-	<select id="findItemsByOrder"
+	<select id="findOrderItemsByOrderId"
 		resultType="com.example.training.web.domain.order.OrderItem">
-
 		SELECT
 		name, price, quantity, image_path
 		FROM
 		ORDER_ITEM
 		WHERE order_id =
-		${id}
+		${value}
 	</select>
 
 
-	<select id="findById"
+	<select id="findByOrderId"
 resultType="com.example.training.web.domain.order.Order">
-
 		SELECT
 		*
 		FROM
 		ORDERS
-		WHERE id = ${id}
+		WHERE id = ${value}
 	</select>
 
-	<select id="findByOrderMonthByMemberId"
+	<select id="findOrderHistoryByMonthByMemberId"
 		resultType="com.example.training.web.domain.order.OrderHistoryByMonth">
 		SELECT
 		id as orderId,

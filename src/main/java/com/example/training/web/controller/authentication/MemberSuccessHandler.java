@@ -7,16 +7,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.stereotype.Component;
+
 import com.example.training.common.repository.MemberRepository;
 import com.example.training.web.domain.member.Email;
 import com.example.training.web.domain.member.Member;
 import com.example.training.web.domain.member.MemberEntity;
 import com.example.training.web.domain.member.MemberSession;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
-import org.springframework.stereotype.Component;
 
 @Component
 public class MemberSuccessHandler implements AuthenticationSuccessHandler {

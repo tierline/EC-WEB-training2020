@@ -15,31 +15,30 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = false)
 public class LoginMemberDetails extends User {
-	private static final long serialVersionUID = 1L;
-	// DBより検索したMemberエンティティ
-	// アプリケーションから利用されるのでフィールドに定義
-	private Member member;
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * データベースより検索したuserエンティティよりSpring Securityで使用するユーザー認証情報のインスタンスを作る。
-	 *
-	 * @param member memberエンティティ
-	 */
-	public LoginMemberDetails(Member member) {
-		super(member.getEmail().getValue(), member.getDigestPassword().getValue(), createRole()); // fix
-		this.member = member;
-	}
+    private Member member;
 
-	public Member getMember() {
-		return member;
-	}
+    /**
+     * データベースより検索したuserエンティティよりSpring Securityで使用するユーザー認証情報のインスタンスを作る。
+     *
+     * @param member memberエンティティ
+     */
+    public LoginMemberDetails(Member member) {
+        super(member.getEmail().getValue(), member.getDigestPassword().getValue(), createRole()); // fix
+        this.member = member;
+    }
 
-	/*
-	 * roleのセット
-	 */
-	private static Collection<? extends GrantedAuthority> createRole() {
-		String role = Role.ROLE_USER.toString();
-		return AuthorityUtils.commaSeparatedStringToAuthorityList(role);
-	}
+    public Member getMember() {
+        return member;
+    }
+
+    /*
+     * roleのセット
+     */
+    private static Collection<? extends GrantedAuthority> createRole() {
+        String role = Role.ROLE_USER.toString();
+        return AuthorityUtils.commaSeparatedStringToAuthorityList(role);
+    }
 
 }

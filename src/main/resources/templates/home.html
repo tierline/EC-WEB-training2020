@@ -29,7 +29,7 @@
                   th:text="${product.name}"
                   class="font-weight-bold h5"
                 ></span>
-                <span th:text="${'¥' + product.price + '円'}"></span>
+                <span th:text="${'¥' + product.price.value + '円'}"></span>
               </h5>
               <hr />
               <div class="d-flex justify-content-around">

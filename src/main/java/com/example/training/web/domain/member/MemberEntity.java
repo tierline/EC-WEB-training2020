@@ -15,6 +15,7 @@ public class MemberEntity {
 	private String phoneNumber;
 	private String postcode;
 	private String prefecture;
+	
 	private String city;
 	private String block;
 	private String status;

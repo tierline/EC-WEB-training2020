@@ -37,7 +37,7 @@ public class Product {
 	public Product(ProductEntity productEntity) {
 		this.id = productEntity.getId();
 		this.name = productEntity.getName();
-		this.price = productEntity.getPrice();
+		this.price = new Price(productEntity.getPrice());
 		this.imagePath = productEntity.getImagePath();
 		this.description = productEntity.getDescription();
 	}

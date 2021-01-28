@@ -5,7 +5,6 @@ import com.example.training.web.domain.product.Price;
 import com.example.training.web.domain.product.Quantity;
 
 import lombok.Data;
-import lombok.Getter;
 
 /**
  * 注文商品クラス
@@ -16,8 +15,7 @@ public class OrderItem {
 	/**
 	 * 注文ID
 	 */
-	@Getter
-	private int orderId;
+	private OrderId orderId;
 
 	/**
 	 * 商品名
@@ -46,7 +44,7 @@ public class OrderItem {
 	 * @param item カート内の商品
 	 */
 	public OrderItem(CartItem item, Order order) {
-		this.orderId = order.getId();
+		this.orderId = new OrderId(order.getId());
 		this.productName = item.getProductName();
 		this.productPrice = item.getProductPrice();
 		this.productQuantity = item.getQuantity();

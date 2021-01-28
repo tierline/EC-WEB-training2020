@@ -29,6 +29,10 @@ public class MainController {
 	@Autowired
 	protected MessageSource messageSource;
 
+	/*
+	*商品一覧の取得
+	*
+	*/
 	@GetMapping("/")
 	public String index(Model model) {
 		List<ProductEntity> productEntities = productRepository.findAll();

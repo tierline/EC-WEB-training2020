@@ -6,6 +6,7 @@ import com.example.training.web.domain.member.address.City;
 import com.example.training.web.domain.member.address.Postcode;
 import com.example.training.web.domain.member.address.Prefecture;
 import com.example.training.web.domain.member.form.MemberApplicationForm;
+import com.example.training.web.domain.order.Order;
 
 import lombok.Getter;
 
@@ -82,18 +83,21 @@ public class Member {
 		this.status = "unapproved";
 	}
 
+	/*
+	 * オーダー時、メンバー情報更新
+	 */
+	public Member(Order order) {
+		this.id = order.getMemberId();
+		this.fullName = order.getFullName();
+		this.address = order.getAddress();
+		this.phoneNumber = order.getPhoneNumber();
+		this.email = order.getEmail();
+	}
+
 	/**
 	 * デフォルトコンストラクタ
 	 */
 	public Member() {
 
 	}
-
-	/*
-	 * ログイン認証時に使う
-	 */
-	public String getDigestPassword() {
-		return this.digestPassword.getValue();
-	}
-
 }

@@ -40,20 +40,20 @@
           <tr th:each="item : ${cart.items}">
             <td>
               <img
-                th:src="@{'/image/' + ${item.productImage}}"
+                th:src="@{'/image/' + ${item.product.imagePath}}"
                 alt=""
                 class="card-img-top"
                 style="width: 200px; height: 200px; object-fit: contain"
               />
             </td>
-            <td class="h5 pt-3" th:text="${item.productName}"></td>
+            <td class="h5 pt-3" th:text="${item.product.name}"></td>
             <td
               class="h5 pt-3"
-              th:text="${'￥' + item.productPrice}"
+              th:text="${'￥' + item.product.price.value}"
             ></td>
             <td>
               <form
-                th:action="@{/member/cart/changeQuantity/{id}(id=${item.productId})}"
+                th:action="@{/member/cart/changeQuantity/{id}(id=${item.product.id})}"
                 method="post"
               >
                 <select
@@ -74,7 +74,7 @@
             </td>
             <td>
               <a
-                th:href="@{/member/cart/delete/{id}(id=${item.productId})}"
+                th:href="@{/member/cart/delete/{id}(id=${item.product.id})}"
                 class="btn btn-danger"
                 >削除</a
               >

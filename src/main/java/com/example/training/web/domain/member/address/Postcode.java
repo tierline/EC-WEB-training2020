@@ -32,8 +32,8 @@ public class Postcode {
 	/*
 	 * 半角数字のみかの確認
 	 */
-	private Boolean canRegexp(String value) {
-		String regexp = "[0-9]";
-		return value.matches(regexp);
-	}
+	// private Boolean canRegexp(String value) {
+	// 	String regexp = "[0-9]";
+	// 	return value.matches(regexp);
+	// }
 }
