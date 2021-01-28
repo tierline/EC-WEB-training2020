@@ -4,12 +4,8 @@ create database training;
 
 use training;
 
--- TOREVIEW : sql を書かずに mybatis で定義できないか --
--- TABLE 名は大文字に。 mybatis-config から設定できる --
--- 会社方針：テーブル名は単数形 --
-
 CREATE TABLE ADMIN (
-  id INT AUTO_INCREMENT,
+  id BIGINT AUTO_INCREMENT,
   name VARCHAR(128),
   password VARCHAR(256),
   PRIMARY KEY (id),
@@ -17,7 +13,7 @@ CREATE TABLE ADMIN (
 );
 
 CREATE TABLE MEMBER (
-  id INT(11) NOT NULL AUTO_INCREMENT, -- fix: Long型？ --
+  id BIGINT NOT NULL AUTO_INCREMENT,
   password VARCHAR(256),
   email VARCHAR(128),
   phone_number VARCHAR(16),
@@ -37,14 +33,14 @@ CREATE TABLE MEMBER (
 );
 
 CREATE TABLE CATEGORY(
-  id INT AUTO_INCREMENT,
+  id BIGINT AUTO_INCREMENT,
   name VARCHAR(16),
   PRIMARY KEY (id)
 );
 
 CREATE TABLE PRODUCT(
-  id INT AUTO_INCREMENT,
-  category_id INT,
+  id BIGINT AUTO_INCREMENT,
+  category_id BIGINT,
   name VARCHAR(128),
   price INT,
   image_path VARCHAR(20),
@@ -53,8 +49,8 @@ CREATE TABLE PRODUCT(
 );
 
 CREATE TABLE ORDER_ITEM (
-  id INT(11) NOT NULL AUTO_INCREMENT,
-  order_id INT(11),
+  id BIGINT NOT NULL AUTO_INCREMENT,
+  order_id BIGINT(11),
   name VARCHAR(128),
   price INT(11),
   image_path VARCHAR(20),
@@ -64,8 +60,8 @@ CREATE TABLE ORDER_ITEM (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE ORDERS (
-  id INT(11) NOT NULL AUTO_INCREMENT,
-  member_id INT(11) NOT NULL,
+  id BIGINT NOT NULL AUTO_INCREMENT,
+  member_id BIGINT(11) NOT NULL,
   email VARCHAR(128),
   phone_number VARCHAR(16),
   name VARCHAR(32),
