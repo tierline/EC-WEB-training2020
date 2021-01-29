@@ -20,7 +20,7 @@ public class MemberDto {
   private String city;
   private String block;
   private String status;
-  private String lastUpdatedBy;
+  private String lastUpdate;
   private String roles = "ROLE_USER";
 
   /**
@@ -41,7 +41,7 @@ public class MemberDto {
     this.block = member.getAddress().getBlock().getValue();
 
     this.status = member.getStatus();
-    this.lastUpdatedBy = member.getLastUpdatedBy();
+    this.lastUpdate = member.getLastUpdate();
     this.roles = member.getRoles();
   }
 }

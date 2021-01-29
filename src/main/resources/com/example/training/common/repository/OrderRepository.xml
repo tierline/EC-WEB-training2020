@@ -7,20 +7,20 @@
 <mapper
 	namespace="com.example.training.common.repository.OrderRepository">
 
-	<insert id="create" useGeneratedKeys="true" keyProperty="id">
+	<insert id="save" useGeneratedKeys="true" keyProperty="id">
 		INSERT
 		INTO ORDERS (member_id, phone_number, name, address, email, price, date)
 		VALUES(
 		"${memberId.value}",
 		"${phoneNumber.value}",
-		"${fullName.firstName}",
+		"${fullName.getValue}",
 		"${address.value}",
 		"${email}",
 		${totalPrice.value},
 		"${orderDateAndTime.value}")
 	</insert>
 
-	<insert id="createItem">
+	<insert id="saveItem">
 		INSERT INTO ORDER_ITEM (order_id, name, price,
 		quantity, image_path)
 		VALUES(
@@ -41,7 +41,6 @@
 		WHERE order_id =
 		${id}
 	</select>
-
 
 	<select id="findById"
 		resultType="com.example.training.common.domain.Order">

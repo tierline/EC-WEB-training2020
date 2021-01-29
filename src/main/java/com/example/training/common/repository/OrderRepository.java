@@ -44,13 +44,13 @@ public interface OrderRepository {
 	 *
 	 * @param order 注文内容
 	 */
-	public int create(Order order);
+	public int save(Order order);
 
 	/**
 	 * 注文商品を保存する。
 	 *
 	 * @param item 注文商品
 	 */
-	public void createItem(OrderItem item);
+	public void saveItem(OrderItem item);
 
 }
