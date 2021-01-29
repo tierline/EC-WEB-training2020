@@ -29,7 +29,7 @@ import com.example.training.web.controller.member.MemberDTO;
 @RestController
 @RequestMapping("/api/member")
 
-public class ApiMemberController {
+public class MemberControllerAPI {
 
 	@Autowired
 	private HttpSession session;

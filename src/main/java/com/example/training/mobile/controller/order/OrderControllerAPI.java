@@ -36,7 +36,7 @@ import com.example.training.web.controller.order.OrderHistoryByMonth;
 @RestController
 @RequestMapping("/api/member/order")
 // TODO API
-public class ApiOrderController {
+public class OrderControllerAPI {
 
 	@Autowired
 	private HttpSession session;

@@ -17,7 +17,7 @@ import com.example.training.common.repository.ProductRepository;
 @CrossOrigin
 @RestController
 @RequestMapping("/api/product")
-public class ApiProductController {
+public class ProductControllerAPI {
 
 	@Autowired
 	private ProductRepository productRepository;
