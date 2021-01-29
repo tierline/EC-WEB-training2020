@@ -11,7 +11,7 @@ import com.example.training.common.domain.Order;
 import com.example.training.common.domain.value.Date;
 import com.example.training.common.domain.value.id.MemberId;
 import com.example.training.mobile.controller.OrderSaveCommand;
-import com.example.training.web.controller.member.MemberDto;
+import com.example.training.web.controller.member.MemberDTO;
 
 import lombok.Data;
 
@@ -130,17 +130,17 @@ public class OrderForm {
 	 *
 	 * @param member 会員
 	 */
-	public void setMemberInfo(MemberDto memberEntity) {
-		this.lastName = memberEntity.getLastName();
-		this.firstName = memberEntity.getFirstName();
-		this.email = memberEntity.getEmail();
-		this.phoneNumber = memberEntity.getPhoneNumber();
-		this.postcode = memberEntity.getPostcode();
-		this.prefecture = memberEntity.getPrefecture();
-		this.city = memberEntity.getCity();
-		this.block = memberEntity.getBlock();
+	public void setMemberInfo(MemberDTO memberDTO) {
+		this.lastName = memberDTO.getLastName();
+		this.firstName = memberDTO.getFirstName();
+		this.email = memberDTO.getEmail();
+		this.phoneNumber = memberDTO.getPhoneNumber();
+		this.postcode = memberDTO.getPostcode();
+		this.prefecture = memberDTO.getPrefecture();
+		this.city = memberDTO.getCity();
+		this.block = memberDTO.getBlock();
 		this.orderDateAndTime = getOrderDateAndTime();
-		this.memberId = memberEntity.getMemberId();
+		this.memberId = memberDTO.getMemberId();
 	}
 
 }

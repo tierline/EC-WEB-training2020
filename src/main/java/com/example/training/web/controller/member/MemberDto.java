@@ -1,6 +1,7 @@
 package com.example.training.web.controller.member;
 
 import com.example.training.common.domain.Member;
+import com.example.training.common.entity.MemberEntity;
 
 import lombok.Getter;
 
@@ -8,10 +9,9 @@ import lombok.Getter;
  * 会員のデータ転送用オブジェクト
  */
 @Getter
-public class MemberDto {
+public class MemberDTO {
   private Long memberId;
   private String email;
-  private String password;
   private String lastName;
   private String firstName;
   private String phoneNumber;
@@ -19,19 +19,15 @@ public class MemberDto {
   private String prefecture;
   private String city;
   private String block;
-  private String status;
-  private String lastUpdate;
-  private String roles = "ROLE_USER";
 
   /**
    * 住所入力フォームに会員情報をセットするためのコンストラクタ
    *
    * @param member
    */
-  public MemberDto(Member member) {
+  public MemberDTO(Member member) {
     this.memberId = member.getMemberId().getValue();
     this.email = member.getEmail().getValue();
-    this.password = member.getDigestPassword().getValue();
     this.lastName = member.getFullName().getLastName().getValue();
     this.firstName = member.getFullName().getFirstName().getValue();
     this.phoneNumber = member.getPhoneNumber().getValue();
@@ -39,9 +35,22 @@ public class MemberDto {
     this.prefecture = member.getAddress().getPrefecture().getValue();
     this.city = member.getAddress().getCity().getValue();
     this.block = member.getAddress().getBlock().getValue();
+  }
 
-    this.status = member.getStatus();
-    this.lastUpdate = member.getLastUpdate();
-    this.roles = member.getRoles();
+  /**
+   * Mobile版の住所フォームのためのコンストラクタ
+   *
+   * @param memberEntity
+   */
+  public MemberDTO(MemberEntity memberEntity) {
+    this.memberId = memberEntity.getMemberId();
+    this.email = memberEntity.getEmail();
+    this.lastName = memberEntity.getLastName();
+    this.firstName = memberEntity.getFirstName();
+    this.phoneNumber = memberEntity.getPhoneNumber();
+    this.postcode = memberEntity.getPostcode();
+    this.prefecture = memberEntity.getPrefecture();
+    this.city = memberEntity.getCity();
+    this.block = memberEntity.getBlock();
   }
 }

@@ -1,4 +1,4 @@
-package com.example.training.mobile.controller;
+package com.example.training.mobile.controller.product;
 
 import java.util.List;
 

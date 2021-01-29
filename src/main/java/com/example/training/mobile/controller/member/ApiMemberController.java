@@ -1,4 +1,4 @@
-package com.example.training.mobile.controller;
+package com.example.training.mobile.controller.member;
 
 import java.util.Optional;
 
@@ -7,9 +7,11 @@ import javax.servlet.http.HttpSession;
 import com.example.training.common.domain.Member;
 import com.example.training.common.domain.value.Email;
 import com.example.training.common.entity.MemberEntity;
+import com.example.training.common.http.MemberSession;
 import com.example.training.common.repository.MemberRepository;
 import com.example.training.common.service.MemberApplicationService;
 import com.example.training.web.controller.member.MemberApplicationForm;
+import com.example.training.web.controller.member.MemberDTO;
 import com.example.training.web.controller.member.MemberLoginForm;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,19 +79,23 @@ public class ApiMemberController {
 		Boolean isMatched = bCryptPasswordEncoder.matches(password, hashPassword);
 		if (isMatched) {
 			Member member = new Member(memberEntity);
-			session.setAttribute(Member.SESSION_NAME, member);
+			MemberSession memberSession = new MemberSession(member);
+			session.setAttribute(Member.SESSION_NAME, memberSession);
 		}
 		return isMatched;
 	}
 
 	/*
-	 * 住所情報があったら表示する。
+	 * 会員のセッション情報を取得する。
 	 */
 	@GetMapping("/session")
 	@ResponseBody
-	public Member fetchMemberSession() {
-		Member member = (Member) session.getAttribute(Member.SESSION_NAME); // fix
-		return member;
+	public MemberDTO fetchMemberSession() {
+		MemberSession member = (MemberSession) session.getAttribute(Member.SESSION_NAME);
+		Email email = member.getEmail();
+		MemberEntity memberEntity = memberRepository.findByEmail(email).orElseThrow();
+		MemberDTO memberDTO = new MemberDTO(memberEntity);
+		return memberDTO;
 	}
 
 }
