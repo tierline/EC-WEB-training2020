@@ -3,15 +3,7 @@ package com.example.training.web.controller.order;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-
+import com.example.training.common.controller.OrderSaveCommand;
 import com.example.training.common.domain.Cart;
 import com.example.training.common.domain.Member;
 import com.example.training.common.domain.Order;
@@ -22,6 +14,15 @@ import com.example.training.common.repository.MemberRepository;
 import com.example.training.common.service.OrderService;
 import com.example.training.mobile.controller.order.OrderDTO;
 import com.example.training.web.controller.member.MemberDTO;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * 注文のコントローラ
@@ -42,23 +43,23 @@ public class OrderController {
 	/**
 	 * お届け先入力フォームを表示する。
 	 *
-	 * @param orderForm
+	 * @param orderSaveCommand
 	 * @param model
 	 * @return お届け先入力フォーム画面
 	 */
 	@GetMapping("/form")
-	public String form(OrderForm orderForm, Model model) {
+	public String form(OrderSaveCommand orderSaveCommand, Model model) {
 		MemberSession memberSession = (MemberSession) session.getAttribute(Member.SESSION_NAME);
 		Email email = memberSession.getEmail();
 		MemberEntity memberEntity = memberRepository.findByEmail(email).orElseThrow();
 		Member member = new Member(memberEntity);
-		OrderForm sessionOrderForm = (OrderForm) session.getAttribute(OrderForm.SESSION_NAME);
-		if (sessionOrderForm != null) {
-			model.addAttribute("orderForm", sessionOrderForm);
+		OrderSaveCommand sessionOrderSaveCommand = (OrderSaveCommand) session.getAttribute(OrderSaveCommand.SESSION_NAME);
+		if (sessionOrderSaveCommand != null) {
+			model.addAttribute("orderSaveCommand", sessionOrderSaveCommand);
 		} else {
 			MemberDTO memberDto = new MemberDTO(member);
-			orderForm.setMemberInfo(memberDto);
-			session.setAttribute(OrderForm.SESSION_NAME, orderForm);
+			orderSaveCommand.setMemberInfo(memberDto);
+			session.setAttribute(OrderSaveCommand.SESSION_NAME, orderSaveCommand);
 		}
 		return "member/order/form";
 	}
@@ -66,19 +67,19 @@ public class OrderController {
 	/**
 	 * 注文確認画面を表示する。
 	 *
-	 * @param orderForm
+	 * @param orderSaveCommand
 	 * @param result
 	 * @param model
 	 * @return 注文確認画面
 	 */
 	@PostMapping("/confirmation")
-	public String confirmation(@Valid OrderForm orderForm, BindingResult result, Model model) {
-		session.setAttribute(OrderForm.SESSION_NAME, orderForm);
+	public String confirmation(@Valid OrderSaveCommand orderSaveCommand, BindingResult result, Model model) {
+		session.setAttribute(OrderSaveCommand.SESSION_NAME, orderSaveCommand);
 		if (result.hasErrors()) {
-			return form(orderForm, model);
+			return form(orderSaveCommand, model);
 		} else {
 			Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
-			Order order = new Order(orderForm, cart);
+			Order order = new Order(orderSaveCommand, cart);
 			OrderDTO orderDTO = new OrderDTO(order);
 			model.addAttribute("cart", cart);
 			model.addAttribute("order", orderDTO);
@@ -94,11 +95,11 @@ public class OrderController {
 	@PostMapping("/save")
 	public String save() {
 		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
-		OrderForm orderForm = (OrderForm) session.getAttribute(OrderForm.SESSION_NAME);
-		Order order = orderForm.createOrderFrom(cart);
+		OrderSaveCommand orderSaveCommand = (OrderSaveCommand) session.getAttribute(OrderSaveCommand.SESSION_NAME);
+		Order order = orderSaveCommand.createOrderFrom(cart);
 		Order ordered = orderService.order(order, cart);
 		session.setAttribute(Cart.SESSION_NAME, new Cart());
-		session.removeAttribute(OrderForm.SESSION_NAME);
+		session.removeAttribute(OrderSaveCommand.SESSION_NAME);
 		return "redirect:/member/order/complete/" + ordered.getId();
 	}
 

@@ -2,11 +2,11 @@ package com.example.training.common.http.security;
 
 import java.util.Collection;
 
+import com.example.training.common.domain.Member;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.User;
-
-import com.example.training.common.domain.Member;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -35,7 +35,6 @@ public class LoginMemberDetails extends User {
 	/*
 	 * roleのセット
 	 */
-	// TODO
 	private static Collection<? extends GrantedAuthority> createRole() {
 		String role = "ROLE_USER";
 		return AuthorityUtils.commaSeparatedStringToAuthorityList(role);

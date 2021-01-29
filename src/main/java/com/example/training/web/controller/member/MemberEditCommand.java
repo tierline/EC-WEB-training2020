@@ -10,7 +10,7 @@ import lombok.Data;
  * 会員情報編集フォームのクラス
  */
 @Data
-public class MemberEditForm {
+public class MemberEditCommand {
 
 	/**
 	 * 会員ID

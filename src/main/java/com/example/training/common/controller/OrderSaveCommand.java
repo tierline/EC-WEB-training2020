@@ -1,4 +1,4 @@
-package com.example.training.web.controller.order;
+package com.example.training.common.controller;
 
 import java.time.LocalDateTime;
 
@@ -17,7 +17,7 @@ import lombok.Data;
  * 注文フォームクラス
  */
 @Data
-public class OrderForm {
+public class OrderSaveCommand {
 	public static final String SESSION_NAME = "ORDER_FORM";
 
 	/**
@@ -91,18 +91,18 @@ public class OrderForm {
 	/**
 	 * Mobileの注文用コンストラクタ
 	 *
-	 * @param orderFormEntity
+	 * @param orderSaveCommand
 	 * @param memberId
 	 */
-	public OrderForm(OrderForm orderFormEntity, MemberId memberId) {
-		this.lastName = orderFormEntity.getLastName();
-		this.firstName = orderFormEntity.getFirstName();
-		this.email = orderFormEntity.getEmail();
-		this.phoneNumber = orderFormEntity.getPhoneNumber();
-		this.postcode = orderFormEntity.getPostcode();
-		this.prefecture = orderFormEntity.getPrefecture();
-		this.city = orderFormEntity.getCity();
-		this.block = orderFormEntity.getBlock();
+	public OrderSaveCommand(OrderSaveCommand orderSaveCommand, MemberId memberId) {
+		this.lastName = orderSaveCommand.getLastName();
+		this.firstName = orderSaveCommand.getFirstName();
+		this.email = orderSaveCommand.getEmail();
+		this.phoneNumber = orderSaveCommand.getPhoneNumber();
+		this.postcode = orderSaveCommand.getPostcode();
+		this.prefecture = orderSaveCommand.getPrefecture();
+		this.city = orderSaveCommand.getCity();
+		this.block = orderSaveCommand.getBlock();
 		this.orderDateAndTime = getOrderDateAndTime();
 		this.memberId = memberId.getValue();
 	}
@@ -110,7 +110,7 @@ public class OrderForm {
 	/**
 	 * デフォルトコンストラクタ
 	 */
-	public OrderForm() {
+	public OrderSaveCommand() {
 	}
 
 	/**

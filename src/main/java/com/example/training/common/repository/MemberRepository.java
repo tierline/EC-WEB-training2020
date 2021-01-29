@@ -3,12 +3,12 @@ package com.example.training.common.repository;
 import java.util.List;
 import java.util.Optional;
 
-import org.apache.ibatis.annotations.Mapper;
-
 import com.example.training.common.domain.Member;
 import com.example.training.common.domain.value.Email;
 import com.example.training.common.domain.value.id.MemberId;
 import com.example.training.common.entity.MemberEntity;
+
+import org.apache.ibatis.annotations.Mapper;
 
 /**
  * 会員のリポジトリ
@@ -41,7 +41,7 @@ public interface MemberRepository {
 	/**
 	 * フォーム内容で会員情報を更新する。
 	 *
-	 * @param memberEditForm
+	 * @param memberEditCommand
 	 * @param lastUpdate
 	 */
 	public void updateByAdmin(Member member);

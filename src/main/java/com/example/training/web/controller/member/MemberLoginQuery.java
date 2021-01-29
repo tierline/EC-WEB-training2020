@@ -9,7 +9,7 @@ import lombok.Data;
  * 会員ログインフォームのクラス
  */
 @Data
-public class MemberLoginForm {
+public class MemberLoginQuery {
 
   /**
    * 会員Eメールアドレス

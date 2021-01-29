@@ -27,14 +27,14 @@ public class MemberApplicationService {
 	/**
 	 * 会員を新規作成する。
 	 *
-	 * @param memberApplicationForm 会員作成フォーム
+	 * @param memberApplicationCommand 会員作成フォーム
 	 */
 	@Transactional
-	public void run(MemberApplicationCommand memberApplicationForm) {
-		String rawPassword = memberApplicationForm.getPassword().toString();
+	public void run(MemberApplicationCommand memberApplicationCommand) {
+		String rawPassword = memberApplicationCommand.getPassword().toString();
 		String digestPasswordString = passwordEncoder.encode(rawPassword);
 		DigestPassword digestPassword = new DigestPassword(digestPasswordString);
-		Member member = memberApplicationForm.createMember(digestPassword);
+		Member member = memberApplicationCommand.createMember(digestPassword);
 		memberRepository.save(member);
 	}
 }

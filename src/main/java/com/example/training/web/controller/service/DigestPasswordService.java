@@ -1,15 +1,15 @@
 package com.example.training.web.controller.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
-
 import com.example.training.common.domain.value.DigestPassword;
 import com.example.training.common.domain.value.Email;
 import com.example.training.common.entity.MemberEntity;
 import com.example.training.common.repository.MemberRepository;
-import com.example.training.web.controller.member.MemberLoginForm;
+import com.example.training.web.controller.member.MemberLoginQuery;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 
 @Service
 public class DigestPasswordService {
@@ -27,9 +27,9 @@ public class DigestPasswordService {
 	 * 登録されているパスワードと一致するか
 	 */
 	// TODO
-	public Boolean isMatched(MemberLoginForm memberLoginForm) {
-		Email email = new Email(memberLoginForm.getEmail());
-		String rawPassword = memberLoginForm.getPassword();
+	public Boolean isMatched(MemberLoginQuery memberLoginCommand) {
+		Email email = new Email(memberLoginCommand.getEmail());
+		String rawPassword = memberLoginCommand.getPassword();
 		MemberEntity memberEntity = memberRepository.findByEmail(email).orElseThrow();
 		String digestPassword = memberEntity.getPassword();
 		return bCryptPasswordEncoder.matches(rawPassword, digestPassword);
