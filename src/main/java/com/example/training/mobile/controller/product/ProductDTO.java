@@ -26,8 +26,8 @@ public class ProductDTO {
     this.price = product.getPrice().getValue();
     this.description = product.getDescription();
     this.imagePath = product.getImagePath();
-
   }
+
   /**
    * この方法で試すと、priceの値が取得できなかったためコメントアウト中。
    *

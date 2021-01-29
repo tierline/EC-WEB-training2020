@@ -11,6 +11,7 @@ import com.example.training.common.entity.MemberEntity;
 import com.example.training.common.http.MemberSession;
 import com.example.training.common.repository.MemberRepository;
 import com.example.training.common.service.OrderService;
+import com.example.training.mobile.controller.order.OrderDTO;
 import com.example.training.web.controller.member.MemberDTO;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,8 +79,9 @@ public class OrderController {
 		} else {
 			Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
 			Order order = new Order(orderForm, cart);
+			OrderDTO orderDTO = new OrderDTO(order);
 			model.addAttribute("cart", cart);
-			model.addAttribute("order", order);
+			model.addAttribute("order", orderDTO);
 			return "member/order/confirmation";
 		}
 	}

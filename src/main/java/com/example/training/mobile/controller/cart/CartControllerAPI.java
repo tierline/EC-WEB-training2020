@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin
 @RestController
 @RequestMapping("/api/member/cart")
-public class ApiCartController {
+public class CartControllerAPI {
 
 	@Autowired
 	private HttpSession session;
@@ -82,20 +82,5 @@ public class ApiCartController {
 		Product product = new Product(productEntity);
 		cart.remove(product);
 		return cart;
-	}
-
-	/**
-	 * カートに商品がないか確認する。
-	 *
-	 * @return
-	 */
-	@GetMapping("/hasItem")
-	public Boolean cartHasItem() {
-		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
-		if (0 < cart.getSize()) {
-			return true;
-		} else {
-			return false;
-		}
 	}
 }

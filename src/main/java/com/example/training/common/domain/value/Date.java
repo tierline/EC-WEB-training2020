@@ -1,27 +1,27 @@
-package com.example.training.common.domain.value;
+// package com.example.training.common.domain.value;
 
-import java.time.LocalDateTime;
+// import java.time.LocalDateTime;
 
-import lombok.Getter;
+// import lombok.Getter;
 
-/**
- * TODO: LocalDateTime で。
- */
-public class Date {
+// /**
+// * TODO: LocalDateTime で。
+// */
+// public class Date {
 
-  /**
-   * 日時の値
-   */
-  @Getter
-  private LocalDateTime value;
+// /**
+// * 日時の値
+// */
+// @Getter
+// private LocalDateTime value;
 
-  /**
-   * 基本コンストラクタ。
-   *
-   * @param dateAndTime
-   */
-  public Date(LocalDateTime dateAndTime) {
-    this.value = dateAndTime;
-  }
+// /**
+// * 基本コンストラクタ。
+// *
+// * @param dateAndTime
+// */
+// public Date(LocalDateTime dateAndTime) {
+// this.value = dateAndTime;
+// }
 
-}
+// }

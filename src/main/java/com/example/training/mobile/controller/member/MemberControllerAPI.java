@@ -31,7 +31,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/member")
 
-public class ApiMemberController {
+public class MemberControllerAPI {
 
 	@Autowired
 	private HttpSession session;
@@ -58,7 +58,6 @@ public class ApiMemberController {
 			Member member = new Member(memberEntity.get());
 			MemberSession memberSession = new MemberSession(member);
 			session.setAttribute(Member.SESSION_NAME, memberSession);
-
 			return true;
 		} else {
 			return false;

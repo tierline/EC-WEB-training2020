@@ -1,7 +1,8 @@
 package com.example.training.mobile.controller.order;
 
+import java.time.format.DateTimeFormatter;
+
 import com.example.training.common.domain.Order;
-import com.example.training.common.domain.value.Date;
 
 import lombok.Getter;
 
@@ -17,7 +18,7 @@ public class OrderDTO {
   /**
    * 会員ID
    */
-  private int memberId;
+  private Long memberId;
   /**
    * 会員の氏名
    */
@@ -41,7 +42,7 @@ public class OrderDTO {
   /**
    * 注文日時
    */
-  private Date orderDateAndTime;
+  private String orderDateAndTime;
 
   // TODO: これでやりたいが現状nullになる
   // public OrderDTO(Order order) {
@@ -49,7 +50,15 @@ public class OrderDTO {
   // }
 
   public OrderDTO(Order order) {
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy年MM月dd日 hh時mm分ss秒");
     this.id = order.getId();
+    this.memberId = order.getMemberId().getValue();
+    this.fullName = order.getFullName().getValue();
+    this.address = order.getAddress().getValue();
+    this.email = order.getEmail().getValue();
+    this.phoneNumber = order.getPhoneNumber().getValue();
+    this.totalPrice = order.getId();
+    this.orderDateAndTime = order.getOrderDateAndTime().format(formatter);
   }
 
 }

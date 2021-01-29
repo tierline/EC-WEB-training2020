@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.training.common.domain.value.Date;
 import com.example.training.common.domain.value.Email;
 import com.example.training.common.domain.value.FullName;
 import com.example.training.common.domain.value.Name;
@@ -59,7 +58,7 @@ public class Order {
 	/**
 	 * 注文日時
 	 */
-	private Date orderDateAndTime;
+	private LocalDateTime orderDateAndTime;
 
 	/**
 	 * 注文処理用コンストラクタ
@@ -88,7 +87,7 @@ public class Order {
 	public Order(int orderId, MemberId memberId, LocalDateTime orderDateAndTime) {
 		this.id = orderId;
 		this.memberId = memberId;
-		this.orderDateAndTime = new Date(orderDateAndTime);
+		this.orderDateAndTime = orderDateAndTime;
 	}
 
 	/**

@@ -8,7 +8,6 @@ import javax.validation.constraints.Size;
 
 import com.example.training.common.domain.Cart;
 import com.example.training.common.domain.Order;
-import com.example.training.common.domain.value.Date;
 import com.example.training.common.domain.value.id.MemberId;
 import com.example.training.web.controller.member.MemberDTO;
 
@@ -87,7 +86,7 @@ public class OrderForm {
 	/**
 	 * 注文日時
 	 */
-	private Date orderDateAndTime = new Date(LocalDateTime.now());
+	private LocalDateTime orderDateAndTime = LocalDateTime.now();
 
 	/**
 	 * Mobileの注文用コンストラクタ
