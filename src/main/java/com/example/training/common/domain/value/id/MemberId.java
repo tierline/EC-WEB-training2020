@@ -8,7 +8,7 @@ import lombok.Getter;
 @Getter
 public class MemberId extends LongId {
 
-  public MemberId(long memberId) {
-  }
+	public MemberId(Long memberId) {
+	}
 
 }

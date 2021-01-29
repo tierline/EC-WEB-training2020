@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.example.training.common.domain.Member;
 import com.example.training.common.domain.value.DigestPassword;
 import com.example.training.common.repository.MemberRepository;
-import com.example.training.web.controller.member.MemberApplicationForm;
+import com.example.training.web.controller.member.MemberApplicationCommand;
 
 /**
  * 会員新規作成のドメインサービス
@@ -30,7 +30,7 @@ public class MemberApplicationService {
 	 * @param memberApplicationForm 会員作成フォーム
 	 */
 	@Transactional
-	public void run(MemberApplicationForm memberApplicationForm) {
+	public void run(MemberApplicationCommand memberApplicationForm) {
 		String rawPassword = memberApplicationForm.getPassword().toString();
 		String digestPasswordString = passwordEncoder.encode(rawPassword);
 		DigestPassword digestPassword = new DigestPassword(digestPasswordString);

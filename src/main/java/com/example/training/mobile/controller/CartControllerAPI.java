@@ -22,7 +22,7 @@ import com.example.training.common.repository.ProductRepository;
 @CrossOrigin
 @RestController
 @RequestMapping("/api/member/cart")
-public class ApiCartController {
+public class CartControllerAPI {
 
 	@Autowired
 	private HttpSession session;
