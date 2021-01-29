@@ -12,7 +12,7 @@ import com.example.training.common.domain.value.address.Postcode;
 import com.example.training.common.domain.value.address.Prefecture;
 import com.example.training.common.domain.value.id.MemberId;
 import com.example.training.common.entity.MemberEntity;
-import com.example.training.web.controller.member.MemberApplicationForm;
+import com.example.training.web.controller.member.MemberApplicationCommand;
 import com.example.training.web.controller.member.MemberEditForm;
 
 import lombok.Getter;
@@ -83,7 +83,7 @@ public class Member {
 	 * @param memberApplicationForm
 	 * @param passwordDigest
 	 */
-	public Member(MemberApplicationForm memberApplicationForm, DigestPassword passwordDigest) {
+	public Member(MemberApplicationCommand memberApplicationForm, DigestPassword passwordDigest) {
 		this.digestPassword = passwordDigest;
 		this.email = new Email(memberApplicationForm.getEmail());
 		this.lastUpdate = "none";

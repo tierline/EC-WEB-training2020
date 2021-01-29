@@ -6,12 +6,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.example.training.common.domain.Member;
 import com.example.training.common.domain.value.id.MemberId;
 import com.example.training.common.repository.OrderRepository;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 /**
  * 注文履歴データを組み立てるクラス

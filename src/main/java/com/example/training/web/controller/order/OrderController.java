@@ -3,6 +3,15 @@ package com.example.training.web.controller.order;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
 import com.example.training.common.domain.Cart;
 import com.example.training.common.domain.Member;
 import com.example.training.common.domain.Order;
@@ -13,15 +22,6 @@ import com.example.training.common.repository.MemberRepository;
 import com.example.training.common.service.OrderService;
 import com.example.training.mobile.controller.order.OrderDTO;
 import com.example.training.web.controller.member.MemberDTO;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * 注文のコントローラ
@@ -110,7 +110,7 @@ public class OrderController {
 	 * @return 注文完了画面
 	 */
 	@GetMapping("/complete/{orderId}")
-	public String complete(@PathVariable int orderId, Model model) {
+	public String complete(@PathVariable String orderId, Model model) {
 		model.addAttribute("orderId", orderId);
 		return "member/order/complete";
 	}

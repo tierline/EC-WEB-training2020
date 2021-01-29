@@ -10,13 +10,13 @@ import lombok.Getter;
 @Getter
 public class OrderHistoryByMonth {
 
-	/**
-	 * 注文ID
-	 */
-	private int orderId;
+    /**
+     * 注文ID
+     */
+    private int orderId;
 
-	/**
-	 * 注文日時
-	 */
-	private LocalDateTime date;
+    /**
+     * 注文日時
+     */
+    private LocalDateTime date;
 }

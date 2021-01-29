@@ -13,9 +13,9 @@
 		VALUES(
 		"${memberId.value}",
 		"${phoneNumber.value}",
-		"${fullName.getValue}",
+		"${fullName.value}",
 		"${address.value}",
-		"${email}",
+		"${email.value}",
 		${totalPrice.value},
 		"${orderDateAndTime}")
 	</insert>
@@ -24,7 +24,7 @@
 		INSERT INTO ORDER_ITEM (order_id, name, price,
 		quantity, image_path)
 		VALUES(
-		"${orderId}",
+		"${orderId.value}",
 		"${name}",
 		"${price.value}",
 		"${quantity.value}",
@@ -38,8 +38,7 @@
 		name, price, quantity, image_path
 		FROM
 		ORDER_ITEM
-		WHERE order_id =
-		${id}
+		WHERE order_id = ${value}
 	</select>
 
 	<select id="findById"
@@ -48,7 +47,7 @@
 		*
 		FROM
 		ORDERS
-		WHERE id = ${id}
+		WHERE id = ${value}
 	</select>
 
 	<select id="findOrderHistoryByMonthByMemberId"

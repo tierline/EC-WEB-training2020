@@ -7,12 +7,6 @@ import java.util.Optional;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-import com.example.training.common.domain.Member;
-import com.example.training.common.domain.value.Email;
-import com.example.training.common.entity.MemberEntity;
-import com.example.training.common.repository.MemberRepository;
-import com.example.training.common.service.MemberApplicationService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
@@ -21,6 +15,12 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.example.training.common.domain.Member;
+import com.example.training.common.domain.value.Email;
+import com.example.training.common.entity.MemberEntity;
+import com.example.training.common.repository.MemberRepository;
+import com.example.training.common.service.MemberApplicationService;
 
 /**
  * 会員のコントローラ
@@ -59,7 +59,7 @@ public class MemberController {
 	 * 会員登録ページを表示する。
 	 */
 	@GetMapping("applicate")
-	public String applicate(MemberApplicationForm memberApplicationForm, Model model) {
+	public String applicate(MemberApplicationCommand memberApplicationForm, Model model) {
 		model.addAttribute("memberApplicationForm", memberApplicationForm);
 		return "member/applicate";
 	}
@@ -81,18 +81,19 @@ public class MemberController {
 	 * @return 完了画面
 	 */
 	@PostMapping("applicate")
-	public String applicate(@Valid MemberApplicationForm memberApplicationForm, BindingResult result, Model model) {
+	public String applicate(@Valid MemberApplicationCommand memberApplicationForm, BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			return applicate(memberApplicationForm, model);
 		}
 		Email email = new Email(memberApplicationForm.getEmail());
 		Optional<MemberEntity> memberEntity = memberRepository.findByEmail(email);
 		if (memberEntity.isPresent()) {
-			model.addAttribute("errorMessage", messageSource.getMessage("error.applicate.duplicate", null, Locale.JAPAN));
+			model.addAttribute("errorMessage",
+					messageSource.getMessage("error.applicate.duplicate", null, Locale.JAPAN));
 			return "member/applicate";
-		} else {
-			memberApplicationService.run(memberApplicationForm);
-			return "redirect:/member/applicated";
 		}
+		memberApplicationService.run(memberApplicationForm);
+		return "redirect:/member/applicated";
+
 	}
 }

@@ -5,10 +5,20 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.example.training.common.domain.Cart;
 import com.example.training.common.domain.Member;
 import com.example.training.common.domain.Order;
 import com.example.training.common.domain.value.Email;
+import com.example.training.common.domain.value.id.OrderId;
 import com.example.training.common.entity.MemberEntity;
 import com.example.training.common.entity.OrderItemEntity;
 import com.example.training.common.http.MemberSession;
@@ -18,15 +28,6 @@ import com.example.training.common.service.OrderService;
 import com.example.training.web.controller.order.OrderForm;
 import com.example.training.web.controller.order.OrderHistoryAssembler;
 import com.example.training.web.controller.order.OrderHistoryByMonth;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 注文のコントローラ(Mobile)
@@ -55,6 +56,7 @@ public class OrderControllerAPI {
 	/**
 	 * 注文処理を行う
 	 */
+
 	// TODO: OrderForm -> OrderSaveCommand
 	@PostMapping("/save")
 	public OrderDTO save(@RequestBody OrderForm orderForm) {
@@ -70,8 +72,9 @@ public class OrderControllerAPI {
 	 * 注文番号から注文"明細"を返す
 	 */
 	@GetMapping("/orderDetails/{id}")
-	public Order orderDetails(@PathVariable Integer id) {
-		Order order = orderRepository.findById(id);
+	public Order orderDetails(@PathVariable Long id) {
+		OrderId orderId = new OrderId(id);
+		Order order = orderRepository.findById(orderId);
 
 		return order;
 	}
@@ -79,11 +82,19 @@ public class OrderControllerAPI {
 	/**
 	 * 注文番号から注文"商品"を返す
 	 */
-	@GetMapping("/orderedItemList/{orderId}")
-	public List<OrderItemEntity> orderedItemList(@PathVariable int orderId) {
+	@GetMapping("/orderedItemList/{id}")
+	public List<OrderItemEntity> orderedItemList(@PathVariable Long id) {
+		OrderId orderId = new OrderId(id);
 		List<OrderItemEntity> items = orderRepository.findOrderItemsById(orderId);
 
 		return items;
+	}
+
+	@GetMapping("/history/item/{id}")
+	public List<OrderItemEntity> orderItemList(@PathVariable Long id) {
+		OrderId orderId = new OrderId(id);
+		List<OrderItemEntity> list = orderRepository.findOrderItemsById(orderId);
+		return list;
 	}
 
 	/**

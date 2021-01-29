@@ -14,7 +14,7 @@ public class OrderDTO {
   /**
    * 注文ID
    */
-  private int id;
+  private Long id;
   /**
    * 会員ID
    */
@@ -49,6 +49,11 @@ public class OrderDTO {
   // BeanUtils.copyProperties(order, this);
   // }
 
+  /**
+   * 注文内容から生成するためのコンストラクタ
+   *
+   * @param order
+   */
   public OrderDTO(Order order) {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy年MM月dd日 hh時mm分ss秒");
     this.id = order.getId();
@@ -57,7 +62,7 @@ public class OrderDTO {
     this.address = order.getAddress().getValue();
     this.email = order.getEmail().getValue();
     this.phoneNumber = order.getPhoneNumber().getValue();
-    this.totalPrice = order.getId();
+    this.totalPrice = order.getTotalPrice().getValue();
     this.orderDateAndTime = order.getOrderDateAndTime().format(formatter);
   }
 

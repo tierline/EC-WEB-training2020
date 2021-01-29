@@ -72,7 +72,6 @@ public class Cart {
 		if (itemOpt.isPresent()) {
 			CartItem item = itemOpt.get();
 			item.clearQuantity(new Quantity(0));
-			;
 			if (item.isQuantityZero()) {
 				this.items.remove(item);
 			}
@@ -80,6 +79,7 @@ public class Cart {
 	}
 
 	/**
+	 *
 	 * 商品の数を取得する。
 	 *
 	 * @return 商品数

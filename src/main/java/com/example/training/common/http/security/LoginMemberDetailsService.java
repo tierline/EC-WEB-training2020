@@ -14,10 +14,11 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+
 @Component("LoginMemberDetailsService")
 public class LoginMemberDetailsService implements UserDetailsService {
 	@Autowired
-	MemberRepository memberRepository;
+	private MemberRepository memberRepository;
 
 	/**
 	 * メールアドレスで検索したユーザーのuserエンティティをLoginUserDetailsクラスのインスタンスへ変換する

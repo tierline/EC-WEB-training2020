@@ -86,8 +86,8 @@
 		prefecture=#{address.prefecture.value},
 		city=#{address.city.value},
 		block=#{address.block.value}
-		WHERE
-		id = #{memberId.value}
+		WHERE id=
+		#{memberId.value}
 	</update>
 
 

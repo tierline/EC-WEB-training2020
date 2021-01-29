@@ -6,10 +6,6 @@ import java.util.Locale;
 
 import javax.servlet.http.HttpSession;
 
-import com.example.training.common.domain.Product;
-import com.example.training.common.entity.ProductEntity;
-import com.example.training.common.repository.ProductRepository;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
@@ -17,6 +13,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import com.example.training.common.domain.Product;
+import com.example.training.common.entity.ProductEntity;
+import com.example.training.common.repository.ProductRepository;
 
 @Controller
 public class MainController {
@@ -35,6 +35,7 @@ public class MainController {
 	 * @param model
 	 * @return
 	 */
+
 	@GetMapping("/")
 	public String index(Model model) {
 		List<ProductEntity> productEntities = productRepository.findAll();

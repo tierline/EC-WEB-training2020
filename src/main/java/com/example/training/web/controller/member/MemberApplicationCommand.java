@@ -13,7 +13,7 @@ import lombok.Data;
  */
 
 @Data
-public class MemberApplicationForm {
+public class MemberApplicationCommand {
 
 	/**
 	 * Eメール

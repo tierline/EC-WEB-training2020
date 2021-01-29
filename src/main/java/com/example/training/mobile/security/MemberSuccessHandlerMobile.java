@@ -1,4 +1,4 @@
-package com.example.training.web.security;
+package com.example.training.mobile.security;
 
 import java.io.IOException;
 
@@ -19,7 +19,7 @@ import com.example.training.common.http.MemberSession;
 import com.example.training.common.repository.MemberRepository;
 
 @Component
-public class MemberSuccessHandler implements AuthenticationSuccessHandler {
+public class MemberSuccessHandlerMobile implements AuthenticationSuccessHandler {
 
 	@Autowired
 	protected HttpSession session;

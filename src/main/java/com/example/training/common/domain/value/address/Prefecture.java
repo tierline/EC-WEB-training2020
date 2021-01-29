@@ -1,33 +1,30 @@
 package com.example.training.common.domain.value.address;
 
-import lombok.Getter;
-import lombok.Setter;
+import com.example.training.common.domain.value.Assertion;
 
 /**
  * 都道府県を表す値オブジェクト
  */
-@Getter
-@Setter
 public class Prefecture {
 
-	/**
-	 * 都道府県の値
-	 */
+	private final Integer MIN = 3;
+	private final Integer MAX = 4;
 	private String value;
 
 	/**
 	 * 基本コンストラクタ
-	 *
-	 * @param value
 	 */
 	public Prefecture(String value) {
+		Assertion.isNull(value);
+		Assertion.length(value, MIN, MAX);
 		this.value = value;
 	}
 
-	/**
-	 * デフォルトコンストラクタ
-	 */
 	public Prefecture() {
 
+	}
+
+	public String getValue() {
+		return this.value;
 	}
 }

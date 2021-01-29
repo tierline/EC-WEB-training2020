@@ -2,9 +2,9 @@ package com.example.training.common.domain;
 
 import com.example.training.common.domain.value.Price;
 import com.example.training.common.domain.value.Quantity;
+import com.example.training.common.domain.value.id.OrderId;
 
 import lombok.Data;
-import lombok.Getter;
 
 /**
  * 注文商品クラス
@@ -15,8 +15,7 @@ public class OrderItem {
 	/**
 	 * 注文ID
 	 */
-	@Getter
-	private int orderId;
+	private OrderId orderId;
 
 	/**
 	 * 商品名
@@ -45,7 +44,7 @@ public class OrderItem {
 	 * @param item カート内の商品
 	 */
 	public OrderItem(CartItem item, Order order) {
-		this.orderId = order.getId();
+		this.orderId = new OrderId(order.getId());
 		this.name = item.getProductName();
 		this.price = item.getProductPrice();
 		this.quantity = item.getQuantity();

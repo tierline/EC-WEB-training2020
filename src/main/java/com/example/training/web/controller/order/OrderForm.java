@@ -128,6 +128,7 @@ public class OrderForm {
 	 *
 	 * @param member 会員
 	 */
+
 	public void setMemberInfo(MemberDTO memberDTO) {
 		this.lastName = memberDTO.getLastName();
 		this.firstName = memberDTO.getFirstName();

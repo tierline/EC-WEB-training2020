@@ -3,13 +3,14 @@ package com.example.training.common.repository;
 import java.util.List;
 import java.util.Optional;
 
-import com.example.training.common.entity.ProductEntity;
-
 import org.apache.ibatis.annotations.Mapper;
+
+import com.example.training.common.entity.ProductEntity;
 
 /**
  * 商品リポジトリ
  */
+
 @Mapper
 public interface ProductRepository {
 

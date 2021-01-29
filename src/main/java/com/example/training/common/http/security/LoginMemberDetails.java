@@ -2,11 +2,11 @@ package com.example.training.common.http.security;
 
 import java.util.Collection;
 
-import com.example.training.common.domain.Member;
-
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.User;
+
+import com.example.training.common.domain.Member;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -15,8 +15,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false)
 public class LoginMemberDetails extends User {
 	private static final long serialVersionUID = 1L;
-	// DBより検索したMemberエンティティ
-	// アプリケーションから利用されるのでフィールドに定義
+
 	private Member member;
 
 	/**
@@ -25,7 +24,7 @@ public class LoginMemberDetails extends User {
 	 * @param member memberエンティティ
 	 */
 	public LoginMemberDetails(Member member) {
-		super(member.getEmail().getValue(), member.getDigestPassword().getValue(), createRole(member)); // fix
+		super(member.getEmail().getValue(), member.getDigestPassword().getValue(), createRole()); // fix
 		this.member = member;
 	}
 
@@ -33,9 +32,13 @@ public class LoginMemberDetails extends User {
 		return member;
 	}
 
-	private static Collection<? extends GrantedAuthority> createRole(Member member) {
-		String authorityString = member.getRoles();
-		return AuthorityUtils.commaSeparatedStringToAuthorityList(authorityString);
+	/*
+	 * roleのセット
+	 */
+	// TODO
+	private static Collection<? extends GrantedAuthority> createRole() {
+		String role = "ROLE_USER";
+		return AuthorityUtils.commaSeparatedStringToAuthorityList(role);
 	}
 
 }
