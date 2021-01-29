@@ -19,7 +19,6 @@ class LongId {
 
 	// 要バリデーション追加
 	public LongId(String value) {
-		// TODO try catch
 		this.value = Long.parseLong(value);
 	}
 

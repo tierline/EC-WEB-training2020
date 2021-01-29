@@ -50,7 +50,7 @@ public class Member {
 	/**
 	 * 最終更新者
 	 */
-	private String lastUpdatedBy;
+	private String lastUpdate;
 	/**
 	 * 承認状態
 	 */
@@ -74,7 +74,7 @@ public class Member {
 				new City(entity.getCity()), new Block(entity.getBlock()));
 		this.phoneNumber = new PhoneNumber(entity.getPhoneNumber());
 		this.status = entity.getStatus();
-		this.lastUpdatedBy = entity.getLastUpdatedBy();
+		this.lastUpdate = entity.getLastUpdate();
 	}
 
 	/**
@@ -86,7 +86,7 @@ public class Member {
 	public Member(MemberApplicationCommand memberApplicationForm, DigestPassword passwordDigest) {
 		this.digestPassword = passwordDigest;
 		this.email = new Email(memberApplicationForm.getEmail());
-		this.lastUpdatedBy = "none";
+		this.lastUpdate = "none";
 		this.status = "unapproved";
 	}
 
@@ -111,7 +111,7 @@ public class Member {
 	 */
 	public Member(MemberEditForm memberEditForm, String adminName, MemberId memberId) {
 		this.memberId = memberId;
-		this.lastUpdatedBy = adminName;
+		this.lastUpdate = adminName;
 		this.status = memberEditForm.getStatus();
 	}
 

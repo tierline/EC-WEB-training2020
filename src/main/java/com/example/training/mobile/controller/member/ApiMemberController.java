@@ -1,4 +1,4 @@
-package com.example.training.mobile.controller;
+package com.example.training.mobile.controller.member;
 
 import java.util.Optional;
 
@@ -16,9 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.training.common.domain.Member;
 import com.example.training.common.domain.value.Email;
 import com.example.training.common.entity.MemberEntity;
+import com.example.training.common.http.MemberSession;
 import com.example.training.common.repository.MemberRepository;
 import com.example.training.common.service.MemberApplicationService;
 import com.example.training.web.controller.member.MemberApplicationCommand;
+import com.example.training.web.controller.member.MemberDTO;
 
 /**
  * 会員のコントローラ(Mobile)
@@ -27,7 +29,7 @@ import com.example.training.web.controller.member.MemberApplicationCommand;
 @RestController
 @RequestMapping("/api/member")
 
-public class MemberControllerAPI {
+public class ApiMemberController {
 
 	@Autowired
 	private HttpSession session;
@@ -49,8 +51,11 @@ public class MemberControllerAPI {
 		Optional<MemberEntity> memberOpt = memberRepository.findByEmail(email);
 		if (memberOpt.isEmpty()) {
 			memberApplicationService.run(memberApplicationForm);
-			Optional<MemberEntity> member = memberRepository.findByEmail(email);
-			session.setAttribute(Member.SESSION_NAME, member);
+			Optional<MemberEntity> memberEntity = memberRepository.findByEmail(email);
+			Member member = new Member(memberEntity.get());
+			MemberSession memberSession = new MemberSession(member);
+			session.setAttribute(Member.SESSION_NAME, memberSession);
+
 			return true;
 		} else {
 			return false;
@@ -80,15 +85,18 @@ public class MemberControllerAPI {
 //		return isMatched;
 //		return "/api/member/login";
 //	}
-
 	/*
-	 * 住所情報があったら表示する。
+	 * 会員のセッション情報を取得する。
 	 */
 	@GetMapping("/session")
+
 	@ResponseBody
-	public Member fetchMemberSession() {
-		Member member = (Member) session.getAttribute(Member.SESSION_NAME); // fix
-		return member;
+	public MemberDTO fetchMemberSession() {
+		MemberSession member = (MemberSession) session.getAttribute(Member.SESSION_NAME);
+		Email email = member.getEmail();
+		MemberEntity memberEntity = memberRepository.findByEmail(email).orElseThrow();
+		MemberDTO memberDTO = new MemberDTO(memberEntity);
+		return memberDTO;
 	}
 
 }

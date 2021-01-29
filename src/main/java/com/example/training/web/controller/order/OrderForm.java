@@ -10,8 +10,7 @@ import com.example.training.common.domain.Cart;
 import com.example.training.common.domain.Order;
 import com.example.training.common.domain.value.Date;
 import com.example.training.common.domain.value.id.MemberId;
-import com.example.training.mobile.controller.OrderSaveCommand;
-import com.example.training.web.controller.member.MemberDto;
+import com.example.training.web.controller.member.MemberDTO;
 
 import lombok.Data;
 
@@ -96,7 +95,7 @@ public class OrderForm {
 	 * @param orderFormEntity
 	 * @param memberId
 	 */
-	public OrderForm(OrderSaveCommand orderFormEntity, MemberId memberId) {
+	public OrderForm(OrderForm orderFormEntity, MemberId memberId) {
 		this.lastName = orderFormEntity.getLastName();
 		this.firstName = orderFormEntity.getFirstName();
 		this.email = orderFormEntity.getEmail();
@@ -130,17 +129,18 @@ public class OrderForm {
 	 *
 	 * @param member 会員
 	 */
-	public void setMemberInfo(MemberDto memberDto) {
-		this.lastName = memberDto.getLastName();
-		this.firstName = memberDto.getFirstName();
-		this.email = memberDto.getEmail();
-		this.phoneNumber = memberDto.getPhoneNumber();
-		this.postcode = memberDto.getPostcode();
-		this.prefecture = memberDto.getPrefecture();
-		this.city = memberDto.getCity();
-		this.block = memberDto.getBlock();
+
+	public void setMemberInfo(MemberDTO memberDTO) {
+		this.lastName = memberDTO.getLastName();
+		this.firstName = memberDTO.getFirstName();
+		this.email = memberDTO.getEmail();
+		this.phoneNumber = memberDTO.getPhoneNumber();
+		this.postcode = memberDTO.getPostcode();
+		this.prefecture = memberDTO.getPrefecture();
+		this.city = memberDTO.getCity();
+		this.block = memberDTO.getBlock();
 		this.orderDateAndTime = getOrderDateAndTime();
-		this.memberId = memberDto.getMemberId();
+		this.memberId = memberDTO.getMemberId();
 	}
 
 }

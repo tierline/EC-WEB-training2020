@@ -20,7 +20,7 @@ import com.example.training.common.entity.MemberEntity;
 import com.example.training.common.http.MemberSession;
 import com.example.training.common.repository.MemberRepository;
 import com.example.training.common.service.OrderService;
-import com.example.training.web.controller.member.MemberDto;
+import com.example.training.web.controller.member.MemberDTO;
 
 /**
  * 注文のコントローラ
@@ -55,7 +55,7 @@ public class OrderController {
 		if (sessionOrderForm != null) {
 			model.addAttribute("orderForm", sessionOrderForm);
 		} else {
-			MemberDto memberDto = new MemberDto(member);
+			MemberDTO memberDto = new MemberDTO(member);
 			orderForm.setMemberInfo(memberDto);
 			session.setAttribute(OrderForm.SESSION_NAME, orderForm);
 		}

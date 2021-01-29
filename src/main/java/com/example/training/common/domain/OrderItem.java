@@ -20,22 +20,22 @@ public class OrderItem {
 	/**
 	 * 商品名
 	 */
-	private String productName;
+	private String name;
 
 	/**
 	 * 商品価格
 	 */
-	private Price productPrice;
+	private Price price;
 
 	/**
 	 * 商品の個数
 	 */
-	private Quantity productQuantity;
+	private Quantity quantity;
 
 	/**
 	 * 商品画像のPATH
 	 */
-	private String productImagePath;
+	private String imagePath;
 
 	/**
 	 *
@@ -45,10 +45,10 @@ public class OrderItem {
 	 */
 	public OrderItem(CartItem item, Order order) {
 		this.orderId = new OrderId(order.getId());
-		this.productName = item.getProductName();
-		this.productPrice = item.getProductPrice();
-		this.productQuantity = item.getQuantity();
-		this.productImagePath = item.getProductImagePath();
+		this.name = item.getProductName();
+		this.price = item.getProductPrice();
+		this.quantity = item.getQuantity();
+		this.imagePath = item.getProductImagePath();
 	}
 
 	/**

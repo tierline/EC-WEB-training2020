@@ -4,7 +4,7 @@ import lombok.Getter;
 
 @Getter
 public class OrderId extends LongId {
-	public OrderId(Long orderId) {
-
+	public OrderId(Long id) {
+		super(id);
 	}
 }

@@ -1,4 +1,4 @@
-package com.example.training.mobile.controller;
+package com.example.training.mobile.controller.product;
 
 import java.util.List;
 
@@ -17,7 +17,7 @@ import com.example.training.common.repository.ProductRepository;
 @CrossOrigin
 @RestController
 @RequestMapping("/api/product")
-public class ProductControllerAPI {
+public class ApiProductController {
 
 	@Autowired
 	private ProductRepository productRepository;

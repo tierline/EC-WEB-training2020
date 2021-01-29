@@ -42,7 +42,7 @@ public interface MemberRepository {
 	 * フォーム内容で会員情報を更新する。
 	 *
 	 * @param memberEditForm
-	 * @param lastUpdatedBy
+	 * @param lastUpdate
 	 */
 	public void updateByAdmin(Member member);
 

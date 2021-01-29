@@ -14,6 +14,8 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import org.springframework.stereotype.Component;
 
 import com.example.training.common.domain.Admin;
+import com.example.training.common.entity.AdminEntity;
+import com.example.training.common.http.AdminSession;
 import com.example.training.common.repository.AdminRepository;
 
 /**
@@ -39,13 +41,14 @@ public class AdminSuccessHandler implements AuthenticationSuccessHandler {
 			Authentication authentication) throws IOException, ServletException {
 		// 認証したユーザのemail
 		String name = authentication.getName();
-		Optional<Admin> admin = adminRepository.findByName(name);
-		if (admin.isEmpty()) {
+		Optional<AdminEntity> adminEntity = adminRepository.findByName(name);
+		if (adminEntity.isEmpty()) {
 		} else {
 			// セッションにユーザ情報を格納する
-			session.setAttribute(Admin.SESSION_NAME, admin.get());
+			Admin admin = new Admin(adminEntity.get());
+			AdminSession adminSession = new AdminSession(admin);
+			session.setAttribute(Admin.SESSION_NAME, adminSession);
 			response.sendRedirect("/admin");
 		}
 	}
-
 }

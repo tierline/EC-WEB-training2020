@@ -1,6 +1,7 @@
 package com.example.training.common.domain;
 
 import com.example.training.common.domain.value.DigestPassword;
+import com.example.training.common.entity.AdminEntity;
 
 import lombok.Data;
 
@@ -13,7 +14,7 @@ public class Admin {
   /**
    * 管理者ID
    */
-  private int id;
+  private Long id;
   /**
    * 名前
    */
@@ -26,5 +27,17 @@ public class Admin {
    * 権限
    */
   private String roles = "ROLE_USER,ROLE_ADMIN";
+
+  /**
+   * DBから取得するためのコンストラクタ
+   *
+   * @param adminEntity
+   */
+  public Admin(AdminEntity adminEntity) {
+    this.id = adminEntity.getId();
+    this.name = adminEntity.getName();
+    this.password = new DigestPassword(adminEntity.getPassword());
+    this.roles = adminEntity.getRoles();
+  }
 
 }

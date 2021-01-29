@@ -7,7 +7,7 @@
 <mapper
 	namespace="com.example.training.common.repository.OrderRepository">
 
-	<insert id="create" useGeneratedKeys="true" keyProperty="id">
+	<insert id="save" useGeneratedKeys="true" keyProperty="id">
 		INSERT
 		INTO ORDERS (member_id, phone_number, name, address, email, price, date)
 		VALUES(
@@ -20,28 +20,26 @@
 		"${orderDateAndTime.value}")
 	</insert>
 
-	<insert id="createItem">
+	<insert id="saveItem">
 		INSERT INTO ORDER_ITEM (order_id, name, price,
 		quantity, image_path)
 		VALUES(
-		"${orderItem.orderId.value}",
-		"${orderItem.productName}",
-		"${orderItem.productPrice.value}",
-		"${orderItem.productQuantity.value}",
-		"${orderItem.productImagePath}"
+		"${orderId.value}",
+		"${name}",
+		"${price.value}",
+		"${quantity.value}",
+		"${imagePath}"
 		)
 	</insert>
 
 	<select id="findOrderItemsById"
-		resultType="com.example.training.common.domain.OrderItem">
+		resultType="com.example.training.common.entity.OrderItemEntity">
 		SELECT
 		name, price, quantity, image_path
 		FROM
 		ORDER_ITEM
 		WHERE order_id = ${value}
 	</select>
-
-
 
 	<select id="findById"
 		resultType="com.example.training.common.domain.Order">
@@ -51,8 +49,6 @@
 		ORDERS
 		WHERE id = ${value}
 	</select>
-
-
 
 	<select id="findOrderHistoryByMonthByMemberId"
 		resultType="com.example.training.web.controller.order.OrderHistoryByMonth">

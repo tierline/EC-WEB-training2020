@@ -19,7 +19,7 @@
 		prefecture,
 		city,
 		block,
-		last_update_admin,
+		last_update,
 		status
 		FROM
 		MEMBER
@@ -29,7 +29,7 @@
 
 	<select id="findById"
 		resultType="com.example.training.common.entity.MemberEntity">
-		SELECT member_id as memberId,
+		SELECT id as memberId,
 		email,
 		phone_number,
 		last_name,
@@ -56,22 +56,22 @@
 		city,
 		block,
 		status,
-		last_update_admin
+		last_update
 		FROM MEMBER
 	</select>
 
 	<insert id="save" useGeneratedKeys="true">
-		INSERT INTO MEMBER (email, password, last_update_admin, status) VALUES (
+		INSERT INTO MEMBER (email, password, last_update, status) VALUES (
 		"${email.value}",
 		"${digestPassword.value}",
-		"${lastUpdatedBy}",
+		"${lastUpdate}",
 		"${status}"
 		)
 	</insert>
 
 	<update id="updateByAdmin">
 		UPDATE MEMBER SET
-		last_update_admin=#{lastUpdatedBy},
+		last_update=#{lastUpdate},
 		status=#{status}
 		WHERE
 		id= #{memberId.value}

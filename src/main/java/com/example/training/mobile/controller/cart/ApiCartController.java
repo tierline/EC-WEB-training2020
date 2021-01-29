@@ -1,4 +1,4 @@
-package com.example.training.mobile.controller;
+package com.example.training.mobile.controller.cart;
 
 import javax.servlet.http.HttpSession;
 
@@ -22,7 +22,7 @@ import com.example.training.common.repository.ProductRepository;
 @CrossOrigin
 @RestController
 @RequestMapping("/api/member/cart")
-public class CartControllerAPI {
+public class ApiCartController {
 
 	@Autowired
 	private HttpSession session;
@@ -35,14 +35,11 @@ public class CartControllerAPI {
 	 *
 	 * @return カート
 	 */
-	// TODO 転送用オブジェクトで返す
 	@GetMapping("/")
-	public void getCart() {
+	public CartDTO getCart() {
 		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
-		// new CartDto(cart);
-		// CartDto cartDto = (CartDto) session.getAttribute(Cart.SESSION_NAME);
-		// int hoge = 0;
-		// return cartDto;
+		CartDTO cartDTO = new CartDTO(cart);
+		return cartDTO;
 	}
 
 	/**
