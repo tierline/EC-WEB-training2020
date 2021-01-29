@@ -1,4 +1,4 @@
-package com.example.training.mobile.controller;
+package com.example.training.mobile.controller.order;
 
 import java.util.List;
 import java.util.Map;
@@ -8,8 +8,10 @@ import javax.servlet.http.HttpSession;
 import com.example.training.common.domain.Cart;
 import com.example.training.common.domain.Member;
 import com.example.training.common.domain.Order;
-import com.example.training.common.domain.OrderItem;
-import com.example.training.common.domain.value.id.MemberId;
+import com.example.training.common.domain.value.Email;
+import com.example.training.common.entity.MemberEntity;
+import com.example.training.common.entity.OrderItemEntity;
+import com.example.training.common.http.MemberSession;
 import com.example.training.common.repository.MemberRepository;
 import com.example.training.common.repository.OrderRepository;
 import com.example.training.common.service.OrderService;
@@ -53,23 +55,19 @@ public class ApiOrderController {
 	/**
 	 * 注文処理を行う
 	 */
+	// TODO: OrderForm -> OrderSaveCommand
 	@PostMapping("/save")
-	public Integer save(@RequestBody OrderSaveCommand order) {
-		Member member = (Member) session.getAttribute(Member.SESSION_NAME);
-		MemberId memberId = member.getMemberId();
-		OrderForm orderForm = new OrderForm(order, memberId);
+	public OrderDTO save(@RequestBody OrderForm orderForm) {
 		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
-		// int orderId = orderService.order(orderForm, cart);
-		// memberRepository.updateAtOrder(orderForm);
+		Order order = new Order(orderForm, cart);
+		Order ordered = orderService.order(order, cart);
+		OrderDTO orderDTO = new OrderDTO(ordered);
 		session.setAttribute(Cart.SESSION_NAME, new Cart());
-
-		// TODO : orderを返すように。
-		// return orderId;
-		return 0;
+		return orderDTO;
 	}
 
 	/**
-	 * 注文番号から注文明細を返す
+	 * 注文番号から注文"明細"を返す
 	 */
 	@GetMapping("/orderDetails/{id}")
 	public Order orderDetails(@PathVariable Integer id) {
@@ -78,31 +76,27 @@ public class ApiOrderController {
 		return order;
 	}
 
-	// fix 下と同じでは？
 	/**
-	 * 注文番号から注文商品を返す
+	 * 注文番号から注文"商品"を返す
 	 */
-	@GetMapping("/orderedItemList/{id}")
-	public List<OrderItem> orderedItemList(@PathVariable int id) {
-		List<OrderItem> items = orderRepository.findOrderItemsById(id);
+	@GetMapping("/orderedItemList/{orderId}")
+	public List<OrderItemEntity> orderedItemList(@PathVariable int orderId) {
+		List<OrderItemEntity> items = orderRepository.findOrderItemsById(orderId);
 
 		return items;
 	}
 
-	@GetMapping("/history/item/{id}")
-	public List<OrderItem> orderItemList(@PathVariable int id) {
-		List<OrderItem> list = orderRepository.findOrderItemsById(id);
-		return list;
-	}
-
-	/*
-	 * 購入履歴の取得
+	/**
+	 * 会員の購入履歴を取得する
+	 *
+	 * @return 月毎の購入履歴
 	 */
-	// TOREVIEW
-	// sessionからの取得に変更
 	@GetMapping("/history")
 	public Map<Integer, List<OrderHistoryByMonth>> history() {
-		Member member = (Member) session.getAttribute(Member.SESSION_NAME);
+		MemberSession memberSession = (MemberSession) session.getAttribute(Member.SESSION_NAME);
+		Email email = memberSession.getEmail();
+		MemberEntity memberEntity = memberRepository.findByEmail(email).orElseThrow();
+		Member member = new Member(memberEntity);
 		Map<Integer, List<OrderHistoryByMonth>> result = orderHistoryAssembler.create(member);
 		return result;
 	}

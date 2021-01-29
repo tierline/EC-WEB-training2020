@@ -54,8 +54,11 @@ public class ApiMemberController {
 		Optional<MemberEntity> memberOpt = memberRepository.findByEmail(email);
 		if (memberOpt.isEmpty()) {
 			memberApplicationService.run(memberApplicationForm);
-			Optional<MemberEntity> member = memberRepository.findByEmail(email);
-			session.setAttribute(Member.SESSION_NAME, member);
+			Optional<MemberEntity> memberEntity = memberRepository.findByEmail(email);
+			Member member = new Member(memberEntity.get());
+			MemberSession memberSession = new MemberSession(member);
+			session.setAttribute(Member.SESSION_NAME, memberSession);
+
 			return true;
 		} else {
 			return false;

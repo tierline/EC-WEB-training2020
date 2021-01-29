@@ -1,4 +1,4 @@
-package com.example.training.mobile.controller;
+package com.example.training.mobile.controller.order;
 
 import lombok.Data;
 
@@ -15,4 +15,5 @@ public class OrderSaveCommand {
   private String prefecture;
   private String city;
   private String block;
+
 }

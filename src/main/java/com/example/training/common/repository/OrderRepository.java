@@ -5,6 +5,7 @@ import java.util.List;
 import com.example.training.common.domain.Order;
 import com.example.training.common.domain.OrderItem;
 import com.example.training.common.domain.value.id.MemberId;
+import com.example.training.common.entity.OrderItemEntity;
 import com.example.training.web.controller.order.OrderHistoryByMonth;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -29,7 +30,7 @@ public interface OrderRepository {
 	 * @param order
 	 * @return 注文商品リスト
 	 */
-	public List<OrderItem> findOrderItemsById(int id);
+	public List<OrderItemEntity> findOrderItemsById(int id);
 
 	/**
 	 * 会員IDで月毎の注文内容を取得する。
