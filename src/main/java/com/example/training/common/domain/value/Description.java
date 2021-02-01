@@ -1,4 +1,4 @@
-package com.example.training.common.domain;
+package com.example.training.common.domain.value;
 
 import lombok.Getter;
 

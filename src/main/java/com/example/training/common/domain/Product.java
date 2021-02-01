@@ -1,5 +1,6 @@
 package com.example.training.common.domain;
 
+import com.example.training.common.domain.value.Description;
 import com.example.training.common.domain.value.ImagePath;
 import com.example.training.common.domain.value.Price;
 import com.example.training.common.domain.value.ProductName;

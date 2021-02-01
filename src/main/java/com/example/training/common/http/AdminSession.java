@@ -30,11 +30,11 @@ public class AdminSession {
    */
   public AdminSession(Admin admin) {
     AdminId id = admin.getId();
-    String name = admin.getName();
-    Assertion.isNull(admin.getId().toString(), admin.getName());
+    Name name = admin.getName();
+    Assertion.isNull(admin.getId().toString(), admin.getName().getValue());
 
     this.id = id;
-    this.name = new Name(name);
+    this.name = name;
   }
 
   /**

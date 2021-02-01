@@ -1,6 +1,7 @@
 package com.example.training.common.domain;
 
 import com.example.training.common.domain.value.DigestPassword;
+import com.example.training.common.domain.value.Name;
 import com.example.training.common.domain.value.id.AdminId;
 import com.example.training.common.entity.AdminEntity;
 
@@ -21,7 +22,7 @@ public class Admin {
   /**
    * 名前
    */
-  private String name;
+  private Name name;
 
   /**
    * パスワード
@@ -40,7 +41,7 @@ public class Admin {
    */
   public Admin(AdminEntity adminEntity) {
     this.id = new AdminId(adminEntity.getId());
-    this.name = adminEntity.getName();
+    this.name = new Name(adminEntity.getName());
     this.password = new DigestPassword(adminEntity.getPassword());
     this.roles = adminEntity.getRoles();
   }

@@ -44,7 +44,7 @@ public class MainController {
 		for (ProductEntity productEntity : productEntities) {
 			productsDTO.add(new ProductDTO(productEntity));
 		}
-		model.addAttribute("products", productsDTO);
+		model.addAttribute("products", productEntities);
 		return "index";
 	}
 
