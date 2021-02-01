@@ -1,14 +1,14 @@
 package com.example.training.common.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.example.training.common.domain.Member;
 import com.example.training.common.domain.value.DigestPassword;
 import com.example.training.common.repository.MemberRepository;
 import com.example.training.web.controller.member.MemberApplicationCommand;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import com.example.training.web.controller.service.DigestPasswordService;
 
 /**
  * 会員新規作成のドメインサービス
@@ -17,12 +17,13 @@ import org.springframework.transaction.annotation.Transactional;
 public class MemberApplicationService {
 
 	// fix DigestPasswordオブジェクトの中でエンコードする方法に失敗している状態。
-	// ServiceからServiceを呼んでいいのか。
-	@Autowired
-	private PasswordEncoder passwordEncoder;
+	// ServiceからServiceを呼んでいいのか？
 
 	@Autowired
 	private MemberRepository memberRepository;
+
+	@Autowired
+	private DigestPasswordService digestPasswordService;
 
 	/**
 	 * 会員を新規作成する。
@@ -32,9 +33,8 @@ public class MemberApplicationService {
 	@Transactional
 	public void run(MemberApplicationCommand memberApplicationForm) {
 		String rawPassword = memberApplicationForm.getPassword().toString();
-		String digestPasswordString = passwordEncoder.encode(rawPassword);
-		DigestPassword digestPassword = new DigestPassword(digestPasswordString);
-		Member member = memberApplicationForm.createMember(digestPassword);
+		DigestPassword password = digestPasswordService.generate(rawPassword);
+		Member member = memberApplicationForm.createMember(password);
 		memberRepository.save(member);
 	}
 }

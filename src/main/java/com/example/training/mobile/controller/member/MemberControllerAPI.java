@@ -5,7 +5,8 @@ import java.util.Optional;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,7 +29,6 @@ import com.example.training.web.controller.member.MemberDTO;
 // TODO: ApiMemberC -> MemberController
 @RestController
 @RequestMapping("/api/member")
-
 public class MemberControllerAPI {
 
 	@Autowired
@@ -40,56 +40,28 @@ public class MemberControllerAPI {
 	@Autowired
 	private MemberRepository memberRepository;
 
-	@Autowired
-	private BCryptPasswordEncoder bCryptPasswordEncoder;
-
 	@CrossOrigin
 	@PostMapping("/applicate")
 	// TODO ~command
-	public Boolean applicate(MemberApplicationCommand memberApplicationForm) {
+	public ResponseEntity<?> applicate(MemberApplicationCommand memberApplicationForm) {
 		Email email = new Email(memberApplicationForm.getEmail());
 		Optional<MemberEntity> memberOpt = memberRepository.findByEmail(email);
 		if (memberOpt.isEmpty()) {
 			memberApplicationService.run(memberApplicationForm);
-			Optional<MemberEntity> memberEntity = memberRepository.findByEmail(email);
-			Member member = new Member(memberEntity.get());
-			MemberSession memberSession = new MemberSession(member);
+			MemberEntity entity = memberRepository.findByEmail(email).orElseThrow();
+//			Member member = new Member(memberEntity.get());
+			MemberSession memberSession = new MemberSession(entity);
 			session.setAttribute(Member.SESSION_NAME, memberSession);
-
-			return true;
+			return new ResponseEntity<>(true, HttpStatus.OK);
 		} else {
-			return false;
+			return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
 		}
 	}
 
-	/**
-	 *
-	 *
-	 * @param memberLoginForm
-	 * @return
-	 */
-//	@CrossOrigin
-//	@PostMapping("/login")
-//	@ResponseBody
-//	public String login(@RequestBody MemberLoginForm memberLoginForm) {
-//		String password = memberLoginForm.getPassword();
-//		Email email = new Email(memberLoginForm.getEmail());
-//		MemberEntity memberEntity = memberRepository.findByEmail(email).orElseThrow();
-//		String hashPassword = memberEntity.getPassword();
-//		Boolean isMatched = bCryptPasswordEncoder.matches(password, hashPassword);
-//		if (isMatched) {
-//			Member member = new Member(memberEntity);
-//			MemberSession memberSession = new MemberSession(member);
-//			session.setAttribute(Member.SESSION_NAME, memberSession);
-//		}
-//		return isMatched;
-//		return "/api/member/login";
-//	}
 	/*
 	 * 会員のセッション情報を取得する。
 	 */
 	@GetMapping("/session")
-
 	@ResponseBody
 	public MemberDTO fetchMemberSession() {
 		MemberSession member = (MemberSession) session.getAttribute(Member.SESSION_NAME);
@@ -98,5 +70,4 @@ public class MemberControllerAPI {
 		MemberDTO memberDTO = new MemberDTO(memberEntity);
 		return memberDTO;
 	}
-
 }

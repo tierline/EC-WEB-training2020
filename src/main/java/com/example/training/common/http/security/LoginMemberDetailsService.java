@@ -1,12 +1,5 @@
 package com.example.training.common.http.security;
 
-import java.util.Optional;
-
-import com.example.training.common.domain.Member;
-import com.example.training.common.domain.value.Email;
-import com.example.training.common.entity.MemberEntity;
-import com.example.training.common.repository.MemberRepository;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -14,6 +7,10 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.training.common.domain.Member;
+import com.example.training.common.domain.value.Email;
+import com.example.training.common.entity.MemberEntity;
+import com.example.training.common.repository.MemberRepository;
 
 @Component("LoginMemberDetailsService")
 public class LoginMemberDetailsService implements UserDetailsService {
@@ -31,16 +28,12 @@ public class LoginMemberDetailsService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String stringEmail) throws UsernameNotFoundException {
 		Email email = new Email(stringEmail);
-		Optional<MemberEntity> memberEntityOpt = memberRepository.findByEmail(email);
-		if (memberEntityOpt.isEmpty()) {
-			throw new UsernameNotFoundException("Eメールで会員が見つけられませんでした。: " + email);
-		} else {
-			Member member = new Member(memberEntityOpt.get());
-			if (member.getStatus().equals("unapproved")) {
-				throw new UsernameNotFoundException("承認されていない会員です。: " + email);
-			} else {
-				return new LoginMemberDetails(member);
-			}
+		MemberEntity entity = memberRepository.findByEmail(email).orElseThrow();
+		// TODO 新規登録>ログイン>DBに名前、住所等のデータがないため承認されていてもここで止まる
+		Member member = new Member(entity);
+		if (member.getStatus().equals("unapproved")) {
+			throw new UsernameNotFoundException("承認されていない会員です。: " + email);
 		}
+		return new LoginMemberDetails(member);
 	}
 }

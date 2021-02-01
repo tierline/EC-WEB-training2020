@@ -83,8 +83,8 @@ public class Member {
 	 * @param memberApplicationForm
 	 * @param passwordDigest
 	 */
-	public Member(MemberApplicationCommand memberApplicationForm, DigestPassword passwordDigest) {
-		this.digestPassword = passwordDigest;
+	public Member(MemberApplicationCommand memberApplicationForm, DigestPassword password) {
+		this.digestPassword = password;
 		this.email = new Email(memberApplicationForm.getEmail());
 		this.lastUpdate = "none";
 		this.status = "unapproved";

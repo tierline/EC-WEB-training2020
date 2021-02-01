@@ -7,6 +7,7 @@ import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.User;
 
 import com.example.training.common.domain.Member;
+import com.example.training.common.domain.value.Role;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -37,7 +38,7 @@ public class LoginMemberDetails extends User {
 	 */
 	// TODO
 	private static Collection<? extends GrantedAuthority> createRole() {
-		String role = "ROLE_USER";
+		String role = Role.ROLE_USER.toString();
 		return AuthorityUtils.commaSeparatedStringToAuthorityList(role);
 	}
 
