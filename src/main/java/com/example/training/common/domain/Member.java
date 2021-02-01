@@ -84,6 +84,7 @@ public class Member {
 	 * @param memberApplicationCommand
 	 * @param passwordDigest
 	 */
+
 	public Member(MemberApplicationCommand memberApplicationCommand, DigestPassword passwordDigest) {
 		this.digestPassword = passwordDigest;
 		this.email = new Email(memberApplicationCommand.getEmail());

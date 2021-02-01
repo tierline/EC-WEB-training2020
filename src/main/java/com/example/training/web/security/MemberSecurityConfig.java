@@ -4,7 +4,6 @@ import com.example.training.common.http.security.LoginMemberDetailsService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -61,9 +60,10 @@ public class MemberSecurityConfig extends WebSecurityConfigurerAdapter {
 		auth.userDetailsService(service).passwordEncoder(new BCryptPasswordEncoder());
 	}
 
-	@Bean
-	public BCryptPasswordEncoder bCryptPasswordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
+// TODO 必要？
+//	@Bean
+//	public BCryptPasswordEncoder bCryptPasswordEncoder() {
+//		return new BCryptPasswordEncoder();
+//	}
 
 }

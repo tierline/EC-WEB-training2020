@@ -7,32 +7,30 @@ import lombok.Getter;
  */
 public class DigestPassword {
 
-  /**
-   * パスワードの値
-   */
-  @Getter
-  private String value;
+	/**
+	 * パスワードの値
+	 */
+	@Getter
+	private String value;
 
-  // @Service をつけてみても、null になる。値オブジェクト内で暗号化すべきか？ するとしたら、どうするか。
-  // @Autowired
-  // private PasswordEncoder passwordEncoder;
+	// @Service をつけてみても、null になる。値オブジェクト内で暗号化すべきか？ するとしたら、どうするか。
+	// @Autowired
+	// private PasswordEncoder passwordEncoder;
 
-  /**
-   * 基本コンストラクタ。平文のパスワードをハッシュ値に変換する。
-   *
-   * @param digestPassword 平文のパスワード
-   */
-  public DigestPassword(String value) {
-    if (value == null) {
-      throw new NullPointerException();
-    }
-    this.value = value;
-  }
+	/**
+	 * 基本コンストラクタ。平文のパスワードをハッシュ値に変換する。
+	 *
+	 * @param digestPassword 平文のパスワード
+	 */
+	public DigestPassword(String value) {
+		Assertion.isNull(value);
+		this.value = value;
+	}
 
-  /**
-   * デフォルトコンストラクタ
-   */
-  public DigestPassword() {
-  }
+	/**
+	 * デフォルトコンストラクタ
+	 */
+	public DigestPassword() {
+	}
 
 }

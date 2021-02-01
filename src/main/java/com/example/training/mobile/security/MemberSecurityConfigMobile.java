@@ -24,16 +24,8 @@ public class MemberSecurityConfigMobile extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private MemberSuccessHandlerMobile successHandler;
 
-//	/**
-//	 * セキュリティの対象から外す
-//	 */
-//	@Override
-//	public void configure(WebSecurity web) throws Exception {
-//		// @formatter:off
-//		web.ignoring().mvcMatchers("/static/**", "/webjars/**", "/js/**") // 静的リソースに認証が行われないようにする。
-//		;
-//		// @formatter:on
-//	}
+	@Autowired
+	private MemberFailureHandlerMobile failureHandler;
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -43,9 +35,11 @@ public class MemberSecurityConfigMobile extends WebSecurityConfigurerAdapter {
  		    .antMatchers("/api/member/login", "/api/member/applicate").permitAll()
  		    .mvcMatchers("/api/**").hasRole("USER")// USERロールを持っていたら許可
  		    .anyRequest().authenticated() // 上記以外は認証ユーザがアクセスできる
- 		    .and().formLogin().loginProcessingUrl("/api/member/login")
+ 		    .and().formLogin().loginProcessingUrl("/api/member/login")//formデータのpost先
       	    .usernameParameter("email").passwordParameter("password")
-	        .successHandler(successHandler).and().logout().logoutUrl("/api/member/logout")
+	        .successHandler(successHandler)//成功時
+	        .failureHandler(failureHandler)//失敗時
+	        .and().logout().logoutUrl("/api/member/logout").logoutSuccessUrl("/")
 	        .deleteCookies("JSESSIONID").invalidateHttpSession(true) // ログアウト時のセッション破棄を有効化
 	        .and().csrf().disable();
 		// @formatter:on
@@ -55,5 +49,4 @@ public class MemberSecurityConfigMobile extends WebSecurityConfigurerAdapter {
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(service).passwordEncoder(new BCryptPasswordEncoder());
 	}
-
 }
