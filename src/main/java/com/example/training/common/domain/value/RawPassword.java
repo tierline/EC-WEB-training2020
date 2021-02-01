@@ -2,6 +2,7 @@ package com.example.training.common.domain.value;
 
 import lombok.Getter;
 
+// TODO 削除しても構わない？
 public class RawPassword {
 	@Getter
 	private String value;

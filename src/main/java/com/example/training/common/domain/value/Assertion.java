@@ -1,5 +1,8 @@
 package com.example.training.common.domain.value;
 
+/**
+ * テストメソッドのクラス
+ */
 public class Assertion {
 
   /**

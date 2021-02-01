@@ -2,6 +2,9 @@ package com.example.training.common.domain.value;
 
 import lombok.Getter;
 
+/**
+ * 名前を表す値オブジェクト
+ */
 @Getter
 public class Name {
   /**
