@@ -31,7 +31,7 @@ public class LoginMemberDetailsService implements UserDetailsService {
 		MemberEntity entity = memberRepository.findByEmail(email).orElseThrow();
 		// TODO 新規登録>ログイン>DBに名前、住所等のデータがないため承認されていてもここで止まる
 		Member member = new Member(entity);
-		if (member.getStatus().equals("unapproved")) {
+		if (member.getStatus().equals("UNAPPROVED")) {
 			throw new UsernameNotFoundException("承認されていない会員です。: " + email);
 		}
 		return new LoginMemberDetails(member);
