@@ -5,11 +5,11 @@ import lombok.Getter;
 /**
  * 名前を表す値オブジェクト
  */
-@Getter
 public class Name {
   /**
    * 名前の値
    */
+  @Getter
   private String value;
   /**
    * 名前の最大値

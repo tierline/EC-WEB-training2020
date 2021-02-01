@@ -6,12 +6,12 @@ import com.example.training.common.domain.value.ProductName;
 import com.example.training.common.domain.value.Quantity;
 import com.example.training.common.domain.value.id.OrderId;
 
-import lombok.Data;
+import lombok.Getter;
 
 /**
  * 注文商品クラス
  */
-@Data
+@Getter
 public class OrderItem {
 
 	/**

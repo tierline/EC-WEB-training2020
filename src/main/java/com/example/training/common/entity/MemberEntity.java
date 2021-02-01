@@ -2,12 +2,12 @@ package com.example.training.common.entity;
 
 import com.example.training.common.domain.value.MemberStatus;
 
-import lombok.Data;
+import lombok.Getter;
 
 /**
  * キャスト用エンティティ（DB取得時）
  */
-@Data
+@Getter
 public class MemberEntity {
 	private Long memberId;
 	private String email;

@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import com.example.training.common.domain.Member;
 import com.example.training.common.domain.value.id.MemberId;
 import com.example.training.common.repository.OrderRepository;
 
@@ -28,8 +27,7 @@ public class OrderHistoryAssembler {
 	 * @param member 会員
 	 * @return 月別注文履歴リスト
 	 */
-	public Map<Integer, List<OrderHistoryByMonth>> create(Member member) {
-		MemberId memberId = member.getMemberId();
+	public Map<Integer, List<OrderHistoryByMonth>> create(MemberId memberId) {
 		List<OrderHistoryByMonth> orderHistoryByMonthList = orderRepository.findOrderHistoryByMonthByMemberId(memberId);
 		Map<Integer, List<OrderHistoryByMonth>> map = new TreeMap<>();
 		for (OrderHistoryByMonth orderHistoryByMonth : orderHistoryByMonthList) {

@@ -6,12 +6,12 @@ import com.example.training.common.domain.value.Role;
 import com.example.training.common.domain.value.id.AdminId;
 import com.example.training.common.entity.AdminEntity;
 
-import lombok.Data;
+import lombok.Getter;
 
 /**
  * 管理者のクラス
  */
-@Data
+@Getter
 public class Admin {
   public static final String SESSION_NAME = "ADMIN";
 

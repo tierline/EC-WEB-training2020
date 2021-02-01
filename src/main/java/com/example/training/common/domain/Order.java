@@ -18,14 +18,14 @@ import com.example.training.common.domain.value.address.Prefecture;
 import com.example.training.common.domain.value.id.MemberId;
 import com.example.training.common.domain.value.id.OrderId;
 
-import lombok.Data;
+import lombok.Getter;
 
 /**
  *
  * 注文クラス
  *
  */
-@Data
+@Getter
 public class Order {
 
 	/**

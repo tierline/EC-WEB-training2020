@@ -5,8 +5,6 @@ import lombok.Getter;
 /**
  * 住所を表す値オブジェクト
  */
-// setterなしで書くには
-// TOREVIEW
 @Getter
 public class Address {
 

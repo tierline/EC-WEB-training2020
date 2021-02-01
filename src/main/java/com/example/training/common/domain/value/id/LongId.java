@@ -3,17 +3,15 @@ package com.example.training.common.domain.value.id;
 import com.example.training.common.domain.value.Assertion;
 
 import lombok.Getter;
-import lombok.Setter;
 
 /**
  * IDを表す値オブジェクト
  */
-@Getter
-@Setter
 class LongId {
 	/**
 	 * IDの値
 	 */
+	@Getter
 	private final Long value;
 
 	private final Long MIN = 0L;

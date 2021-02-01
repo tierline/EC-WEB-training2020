@@ -3,12 +3,12 @@ package com.example.training.web.controller.member;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
-import lombok.Data;
+import lombok.Getter;
 
 /**
  * 会員ログインフォームのクラス
  */
-@Data
+@Getter
 public class MemberLoginQuery {
 
   /**

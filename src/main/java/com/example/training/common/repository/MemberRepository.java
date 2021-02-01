@@ -24,7 +24,7 @@ public interface MemberRepository {
 	/**
 	 * IDで取得する。
 	 */
-	public MemberEntity findById(MemberId memberId);
+	public Optional<MemberEntity> findById(MemberId memberId);
 
 	/**
 	 * 全ての会員を取得する。
