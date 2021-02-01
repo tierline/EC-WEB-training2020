@@ -26,7 +26,6 @@ public class DigestPasswordService {
 	/*
 	 * 登録されているパスワードと一致するか
 	 */
-	// TODO
 	public Boolean isMatched(MemberLoginQuery memberLoginCommand) {
 		Email email = new Email(memberLoginCommand.getEmail());
 		String rawPassword = memberLoginCommand.getPassword();

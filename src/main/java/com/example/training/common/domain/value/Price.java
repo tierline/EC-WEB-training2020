@@ -29,12 +29,7 @@ public class Price {
    * @param price 価格
    */
   public Price(int price) {
-    if (value < MIN) {
-      throw new IllegalArgumentException("価格が最小値を下回っています");
-    }
-    if (value > MAX) {
-      throw new IllegalArgumentException("価格が最大値を超えています");
-    }
+    Assertion.range(value, MIN, MAX);
 
     this.value = price;
   }

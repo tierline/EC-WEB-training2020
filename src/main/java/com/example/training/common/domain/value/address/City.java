@@ -13,6 +13,10 @@ public class City {
 	 */
 	private final Integer MAX = 50;
 	private final Integer MIN = 1;
+
+	/**
+	 * 市区町村の値
+	 */
 	@Getter
 	private String value;
 
@@ -24,6 +28,9 @@ public class City {
 		this.value = value;
 	}
 
+	/**
+	 * デフォルトコンストラクタ
+	 */
 	public City() {
 
 	}
