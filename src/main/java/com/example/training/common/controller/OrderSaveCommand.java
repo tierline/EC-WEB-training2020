@@ -108,12 +108,6 @@ public class OrderSaveCommand {
 	}
 
 	/**
-	 * デフォルトコンストラクタ
-	 */
-	public OrderSaveCommand() {
-	}
-
-	/**
 	 * カートから注文クラスを作る。
 	 *
 	 * @param cart
@@ -124,11 +118,16 @@ public class OrderSaveCommand {
 	}
 
 	/**
+	 * デフォルトコンストラクタ
+	 */
+	public OrderSaveCommand() {
+	}
+
+	/**
 	 * お届け先入力フォームに会員情報をセットする。
 	 *
 	 * @param member 会員
 	 */
-
 	public void setMemberInfo(MemberDTO memberDTO) {
 		this.lastName = memberDTO.getLastName();
 		this.firstName = memberDTO.getFirstName();
