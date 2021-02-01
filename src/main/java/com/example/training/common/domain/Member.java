@@ -88,7 +88,7 @@ public class Member {
 		this.digestPassword = passwordDigest;
 		this.email = new Email(memberApplicationCommand.getEmail());
 		this.lastUpdate = "none";
-		this.status = "unapproved";
+		this.status = "approved";
 	}
 
 	/**

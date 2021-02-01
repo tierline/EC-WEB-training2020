@@ -32,7 +32,7 @@ public class MemberSecurityConfigMobile extends WebSecurityConfigurerAdapter {
 
 		// @formatter:off
  		http.mvcMatcher("/api/**").authorizeRequests()
- 		    .antMatchers("/api/member/login", "/api/member/applicate").permitAll()
+ 		    .antMatchers("/api/member/test", "/api/member/login", "/api/member/applicate").permitAll()
  		    .mvcMatchers("/api/**").hasRole("USER")// USERロールを持っていたら許可
  		    .anyRequest().authenticated() // 上記以外は認証ユーザがアクセスできる
  		    .and().formLogin().loginProcessingUrl("/api/member/login")//formデータのpost先

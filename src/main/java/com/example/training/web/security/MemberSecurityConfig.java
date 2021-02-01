@@ -1,7 +1,5 @@
 package com.example.training.web.security;
 
-import com.example.training.common.http.security.LoginMemberDetailsService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Configuration;
@@ -13,6 +11,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.firewall.DefaultHttpFirewall;
+
+import com.example.training.common.http.security.LoginMemberDetailsService;
 
 @Configuration
 @EnableWebSecurity
@@ -42,7 +42,7 @@ public class MemberSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
-		// @formatter:off
+	// @formatter:off
 		http.mvcMatcher("/member/**").authorizeRequests()
 				.mvcMatchers("/member/login", "/member/applicate", "/member/applicated").permitAll()
 				.mvcMatchers("/member/**").hasRole("USER") // member以下は USERロールを持つ認証ユーザのみアクセスできる。

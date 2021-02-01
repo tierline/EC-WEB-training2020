@@ -2,6 +2,8 @@ package com.example.training.mobile.controller.member;
 
 import java.util.Optional;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,32 +42,26 @@ public class MemberControllerAPI {
 	@Autowired
 	private MemberRepository memberRepository;
 
+	/*
+	 * 新規登録処理 登録完了後ログイン
+	 */
 	@CrossOrigin
 	@PostMapping("/applicate")
 	// TODO ~command
-	public ResponseEntity<?> applicate(MemberApplicationCommand memberApplicationCommand) {
+	public ResponseEntity<Boolean> applicate(MemberApplicationCommand memberApplicationCommand,
+			HttpServletRequest request) throws ServletException {
 		Email email = new Email(memberApplicationCommand.getEmail());
 		Optional<MemberEntity> memberOpt = memberRepository.findByEmail(email);
 		if (memberOpt.isEmpty()) {
 			memberApplicationService.run(memberApplicationCommand);
 			MemberEntity entity = memberRepository.findByEmail(email).orElseThrow();
-//			Member member = new Member(memberEntity.get());
 			MemberSession memberSession = new MemberSession(entity);
 			session.setAttribute(Member.SESSION_NAME, memberSession);
+			request.login(memberApplicationCommand.getEmail(), memberApplicationCommand.getPassword());
 			return new ResponseEntity<>(true, HttpStatus.OK);
 		}
 		return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
 	}
-//	public Boolean applicate(MemberApplicationCommand memberApplicationCommand) {
-//		Email email = new Email(memberApplicationCommand.getEmail());
-//		Optional<MemberEntity> memberOpt = memberRepository.findByEmail(email);
-//		if (memberOpt.isEmpty()) {
-//			memberApplicationService.run(memberApplicationCommand);
-//			Optional<MemberEntity> memberEntity = memberRepository.findByEmail(email);
-//			Member member = new Member(memberEntity.get());
-//			MemberSession memberSession = new MemberSession(member);
-//			session.setAttribute(Member.SESSION_NAME, memberSession);
-//			return true;
 
 	/*
 	 * 会員のセッション情報を取得する。
