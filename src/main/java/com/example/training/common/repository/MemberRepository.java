@@ -32,7 +32,7 @@ public interface MemberRepository {
 	public List<MemberEntity> findAll();
 
 	/**
-	 * 会員を作る。
+	 * 会員を生成する。
 	 *
 	 * @param member
 	 */

@@ -2,12 +2,12 @@ package com.example.training.common.http.security;
 
 import java.util.Collection;
 
+import com.example.training.common.domain.Member;
+import com.example.training.common.domain.value.Role;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.User;
-
-import com.example.training.common.domain.Member;
-import com.example.training.common.domain.value.Role;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -20,12 +20,12 @@ public class LoginMemberDetails extends User {
 	private Member member;
 
 	/**
-	 * データベースより検索したuserエンティティよりSpring Securityで使用するユーザー認証情報のインスタンスを作る。
+	 * データベースより検索したuserエンティティよりSpring Securityで使用するユーザー認証情報のインスタンスを生成する。
 	 *
 	 * @param member memberエンティティ
 	 */
 	public LoginMemberDetails(Member member) {
-		super(member.getEmail().getValue(), member.getDigestPassword().getValue(), createRole()); // fix
+		super(member.getEmail().getValue(), member.getDigestPassword().getValue(), createRole(member.getRoles())); // fix
 		this.member = member;
 	}
 
@@ -36,9 +36,8 @@ public class LoginMemberDetails extends User {
 	/*
 	 * roleのセット
 	 */
-	private static Collection<? extends GrantedAuthority> createRole() {
-		String role = Role.ROLE_USER.toString();
-		return AuthorityUtils.commaSeparatedStringToAuthorityList(role);
+	private static Collection<? extends GrantedAuthority> createRole(Role role) {
+		return AuthorityUtils.commaSeparatedStringToAuthorityList(role.getValue());
 	}
 
 }

@@ -2,6 +2,7 @@ package com.example.training.common.domain;
 
 import com.example.training.common.domain.value.DigestPassword;
 import com.example.training.common.domain.value.Name;
+import com.example.training.common.domain.value.Role;
 import com.example.training.common.domain.value.id.AdminId;
 import com.example.training.common.entity.AdminEntity;
 
@@ -32,7 +33,7 @@ public class Admin {
   /**
    * 権限
    */
-  private String roles = "ROLE_USER,ROLE_ADMIN";
+  private Role roles = new Role("ROLE_USER,ROLE_ADMIN");
 
   /**
    * DBから取得するためのコンストラクタ
@@ -43,7 +44,7 @@ public class Admin {
     this.id = new AdminId(adminEntity.getId());
     this.name = new Name(adminEntity.getName());
     this.password = new DigestPassword(adminEntity.getPassword());
-    this.roles = adminEntity.getRoles();
+    this.roles = new Role(adminEntity.getRoles());
   }
 
 }

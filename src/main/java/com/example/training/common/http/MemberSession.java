@@ -1,6 +1,7 @@
 package com.example.training.common.http;
 
 import com.example.training.common.domain.Member;
+import com.example.training.common.domain.value.Assertion;
 import com.example.training.common.domain.value.Email;
 import com.example.training.common.domain.value.id.MemberId;
 import com.example.training.common.entity.MemberEntity;
@@ -31,12 +32,8 @@ public class MemberSession {
 	public MemberSession(Member member) {
 		MemberId memberId = member.getMemberId();
 		Email email = member.getEmail();
-		if (memberId == null) {
-			throw new NullPointerException();
-		}
-		if (email == null) {
-			throw new NullPointerException();
-		}
+		Assertion.isNull(memberId.getValue());
+		Assertion.isNull(email.getValue());
 		this.memberId = memberId;
 		this.email = email;
 	}
@@ -47,7 +44,6 @@ public class MemberSession {
 	public MemberSession(MemberEntity entity) {
 		this.memberId = new MemberId(entity.getMemberId());
 		this.email = new Email(entity.getEmail());
-
 	}
 
 	/**

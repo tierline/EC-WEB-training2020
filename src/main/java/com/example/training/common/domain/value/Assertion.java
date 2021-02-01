@@ -23,6 +23,15 @@ public class Assertion {
   }
 
   /**
+   * Long型の数値がNullかテストする。
+   *
+   * @param value
+   */
+  public static void isNull(Long value) {
+    assert (value == null);
+  }
+
+  /**
    * 文字列の長さをテストする
    *
    * @param value

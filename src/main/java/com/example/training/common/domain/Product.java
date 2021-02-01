@@ -36,7 +36,7 @@ public class Product {
 	private Description description;
 
 	/**
-	 * DBから得るためのコンストラクタ
+	 * DBから取得するためのコンストラクタ
 	 *
 	 * @param productEntity
 	 */

@@ -3,6 +3,7 @@ package com.example.training.common.http.security;
 import java.util.Collection;
 
 import com.example.training.common.domain.Admin;
+import com.example.training.common.domain.value.Role;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -20,12 +21,12 @@ public class LoginAdminDetails extends User {
   private Admin admin;
 
   /**
-   * データベースより検索したuserエンティティよりSpring Securityで使用するユーザー認証情報のインスタンスを作る。
+   * データベースより検索したuserエンティティよりSpring Securityで使用するユーザー認証情報のインスタンスを生成する。
    *
    * @param admin adminエンティティ
    */
   public LoginAdminDetails(Admin admin) {
-    super(admin.getName().getValue(), admin.getPassword().getValue(), createRole(admin));
+    super(admin.getName().getValue(), admin.getPassword().getValue(), createRole(admin.getRoles()));
     this.admin = admin;
   }
 
@@ -33,9 +34,8 @@ public class LoginAdminDetails extends User {
     return admin;
   }
 
-  private static Collection<? extends GrantedAuthority> createRole(Admin admin) {
-    String authorityString = admin.getRoles();
-    return AuthorityUtils.commaSeparatedStringToAuthorityList(authorityString);
+  private static Collection<? extends GrantedAuthority> createRole(Role role) {
+    return AuthorityUtils.commaSeparatedStringToAuthorityList(role.getValue());
   }
 
 }

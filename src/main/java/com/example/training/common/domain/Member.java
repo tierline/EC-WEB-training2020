@@ -6,6 +6,7 @@ import com.example.training.common.domain.value.FullName;
 import com.example.training.common.domain.value.MemberStatus;
 import com.example.training.common.domain.value.Name;
 import com.example.training.common.domain.value.PhoneNumber;
+import com.example.training.common.domain.value.Role;
 import com.example.training.common.domain.value.address.Address;
 import com.example.training.common.domain.value.address.Block;
 import com.example.training.common.domain.value.address.City;
@@ -59,7 +60,7 @@ public class Member {
 	/**
 	 * 権限
 	 */
-	private String roles = "ROLE_USER";
+	private Role roles = new Role("ROLE_USER");
 
 	/**
 	 * DBから取得するためのコンストラクタ

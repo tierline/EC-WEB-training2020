@@ -4,6 +4,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import com.example.training.common.controller.CartDTO;
+import com.example.training.common.controller.MemberDTO;
 import com.example.training.common.controller.OrderSaveCommand;
 import com.example.training.common.domain.Cart;
 import com.example.training.common.domain.Member;
@@ -13,7 +14,6 @@ import com.example.training.common.entity.MemberEntity;
 import com.example.training.common.http.MemberSession;
 import com.example.training.common.repository.MemberRepository;
 import com.example.training.common.service.OrderService;
-import com.example.training.web.controller.member.MemberDTO;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -49,9 +49,12 @@ public class OrderController {
 	 */
 	@GetMapping("/form")
 	public String form(OrderSaveCommand orderSaveCommand, Model model) {
+		/**
+		 * TODO: セッション情報から会員のインスタンスを生成するまでが長い
+		 */
 		MemberSession memberSession = (MemberSession) session.getAttribute(Member.SESSION_NAME);
 		Email email = memberSession.getEmail();
-		MemberEntity memberEntity = memberRepository.findByEmail(email).orElseThrow();
+		MemberEntity memberEntity = memberRepository.findByEmail(email).orElseThrow(NullPointerException::new);
 		Member member = new Member(memberEntity);
 		OrderSaveCommand sessionOrderSaveCommand = (OrderSaveCommand) session.getAttribute(OrderSaveCommand.SESSION_NAME);
 		if (sessionOrderSaveCommand != null) {

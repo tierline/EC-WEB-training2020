@@ -15,7 +15,13 @@ import lombok.Getter;
 @Getter
 public class CartDTO {
 
+  /**
+   * カート内の商品
+   */
   private List<CartItemDTO> items = new ArrayList<CartItemDTO>();
+  /**
+   * カート内の商品の合計金額
+   */
   private int totalPrice;
 
   /**

@@ -29,7 +29,7 @@ public class LoginMemberDetailsService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String stringEmail) throws UsernameNotFoundException {
 		Email email = new Email(stringEmail);
-		MemberEntity entity = memberRepository.findByEmail(email).orElseThrow();
+		MemberEntity entity = memberRepository.findByEmail(email).orElseThrow(NullPointerException::new);
 		Member member = new Member(entity);
 		if (member.getStatus().equals(MemberStatus.UNAPPROVED)) {
 			throw new UsernameNotFoundException("承認されていない会員です。: " + email);

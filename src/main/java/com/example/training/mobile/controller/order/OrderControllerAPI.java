@@ -105,7 +105,7 @@ public class OrderControllerAPI {
 	public Map<Integer, List<OrderHistoryByMonth>> history() {
 		MemberSession memberSession = (MemberSession) session.getAttribute(Member.SESSION_NAME);
 		Email email = memberSession.getEmail();
-		MemberEntity memberEntity = memberRepository.findByEmail(email).orElseThrow();
+		MemberEntity memberEntity = memberRepository.findByEmail(email).orElseThrow(NullPointerException::new);
 		Member member = new Member(memberEntity);
 		Map<Integer, List<OrderHistoryByMonth>> result = orderHistoryAssembler.create(member);
 		return result;

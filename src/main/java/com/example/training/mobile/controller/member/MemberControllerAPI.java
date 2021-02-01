@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 
+import com.example.training.common.controller.MemberDTO;
 import com.example.training.common.domain.Member;
 import com.example.training.common.domain.value.Email;
 import com.example.training.common.entity.MemberEntity;
@@ -11,7 +12,6 @@ import com.example.training.common.http.MemberSession;
 import com.example.training.common.repository.MemberRepository;
 import com.example.training.common.service.MemberApplicationService;
 import com.example.training.web.controller.member.MemberApplicationCommand;
-import com.example.training.web.controller.member.MemberDTO;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -39,6 +39,12 @@ public class MemberControllerAPI {
 	@Autowired
 	private MemberRepository memberRepository;
 
+	/**
+	 * 新規会員登録処理をする。
+	 *
+	 * @param memberApplicationCommand
+	 * @return
+	 */
 	@CrossOrigin
 	@PostMapping("/applicate")
 	public ResponseEntity<?> applicate(MemberApplicationCommand memberApplicationCommand) {
@@ -46,7 +52,7 @@ public class MemberControllerAPI {
 		Optional<MemberEntity> memberOpt = memberRepository.findByEmail(email);
 		if (memberOpt.isEmpty()) {
 			memberApplicationService.run(memberApplicationCommand);
-			MemberEntity entity = memberRepository.findByEmail(email).orElseThrow();
+			MemberEntity entity = memberRepository.findByEmail(email).orElseThrow(NullPointerException::new);
 			MemberSession memberSession = new MemberSession(entity);
 			session.setAttribute(Member.SESSION_NAME, memberSession);
 			return new ResponseEntity<>(true, HttpStatus.OK);
@@ -62,7 +68,7 @@ public class MemberControllerAPI {
 	public MemberDTO fetchMemberSession() {
 		MemberSession member = (MemberSession) session.getAttribute(Member.SESSION_NAME);
 		Email email = member.getEmail();
-		MemberEntity memberEntity = memberRepository.findByEmail(email).orElseThrow();
+		MemberEntity memberEntity = memberRepository.findByEmail(email).orElseThrow(NullPointerException::new);
 		MemberDTO memberDTO = new MemberDTO(memberEntity);
 		return memberDTO;
 	}

@@ -19,6 +19,7 @@ public class ProductName {
    * @param value
    */
   public ProductName(String value) {
+    Assertion.isNull(value);
     this.value = value;
   }
 }

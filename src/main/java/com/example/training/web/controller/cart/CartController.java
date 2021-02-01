@@ -44,7 +44,7 @@ public class CartController {
 	@GetMapping("/add/{productId}")
 	public String add(@PathVariable int productId) {
 		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
-		ProductEntity productEntity = productRepository.findById(productId).orElseThrow();
+		ProductEntity productEntity = productRepository.findById(productId).orElseThrow(NullPointerException::new);
 		Product product = new Product(productEntity);
 
 		cart.add(product);
@@ -60,7 +60,7 @@ public class CartController {
 	@PostMapping(path = "/changeQuantity/{productId}", consumes = "application/x-www-form-urlencoded")
 	public String changeItemQuantity(@PathVariable int productId, int quantity) {
 		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
-		ProductEntity productEntity = productRepository.findById(productId).orElseThrow();
+		ProductEntity productEntity = productRepository.findById(productId).orElseThrow(NullPointerException::new);
 		Product product = new Product(productEntity);
 		cart.changeItemQuantity(product, new Quantity(quantity));
 		return "redirect:/member/cart/list";
@@ -75,7 +75,7 @@ public class CartController {
 	@GetMapping("/delete/{id}")
 	public String delete(@PathVariable int id) {
 		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
-		ProductEntity productEntity = productRepository.findById(id).orElseThrow();
+		ProductEntity productEntity = productRepository.findById(id).orElseThrow(NullPointerException::new);
 		Product product = new Product(productEntity);
 		cart.remove(product);
 

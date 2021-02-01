@@ -30,8 +30,10 @@ public class Order {
 
 	/**
 	 * 注文ID
+	 *
+	 * MEMO: まず id=0L で生成し注文時の処理 useGenerateKeys で自動採番された値がセットされる。
 	 */
-	private OrderId id;
+	private OrderId id = new OrderId(0L);
 	/**
 	 * 会員ID
 	 */
@@ -68,8 +70,6 @@ public class Order {
 	 * @param cart             カート
 	 */
 	public Order(OrderSaveCommand orderSaveCommand, Cart cart) {
-		// MEMO: まず id=0 で生成し注文時の処理 useGenerateKeys で自動採番された値がセットされる。
-		this.id = new OrderId(0L);
 		this.memberId = new MemberId(orderSaveCommand.getMemberId());
 		this.fullName = new FullName(new Name(orderSaveCommand.getLastName()), new Name(orderSaveCommand.getFirstName()));
 		this.address = new Address(new Postcode(orderSaveCommand.getPostcode()),
@@ -101,7 +101,7 @@ public class Order {
 	}
 
 	/**
-	 * 注文商品を作る。
+	 * 注文商品を生成する。
 	 *
 	 * @param cart カート
 	 * @return 注文した商品
