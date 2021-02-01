@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import com.example.training.common.domain.Admin;
 import com.example.training.common.domain.Member;
+import com.example.training.common.domain.value.Name;
 import com.example.training.common.domain.value.id.MemberId;
 import com.example.training.common.entity.MemberEntity;
 import com.example.training.common.http.AdminSession;
@@ -79,7 +80,7 @@ public class AdminController {
 	@PostMapping("/members/{memberId}/edit")
 	public String edit(@PathVariable MemberId memberId, MemberEditCommand memberEditCommand) {
 		AdminSession adminSession = (AdminSession) session.getAttribute(Admin.SESSION_NAME);
-		String adminName = adminSession.getName();
+		Name adminName = adminSession.getName();
 		Member member = new Member(memberEditCommand, adminName, memberId);
 		memberRepository.updateByAdmin(member);
 		return "redirect:/admin/members";

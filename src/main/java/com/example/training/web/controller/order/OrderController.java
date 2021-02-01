@@ -3,6 +3,7 @@ package com.example.training.web.controller.order;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import com.example.training.common.controller.CartDTO;
 import com.example.training.common.controller.OrderSaveCommand;
 import com.example.training.common.domain.Cart;
 import com.example.training.common.domain.Member;
@@ -12,7 +13,6 @@ import com.example.training.common.entity.MemberEntity;
 import com.example.training.common.http.MemberSession;
 import com.example.training.common.repository.MemberRepository;
 import com.example.training.common.service.OrderService;
-import com.example.training.mobile.controller.order.OrderDTO;
 import com.example.training.web.controller.member.MemberDTO;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,10 +79,9 @@ public class OrderController {
 			return form(orderSaveCommand, model);
 		} else {
 			Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
-			Order order = new Order(orderSaveCommand, cart);
-			OrderDTO orderDTO = new OrderDTO(order);
-			model.addAttribute("cart", cart);
-			model.addAttribute("order", orderDTO);
+			CartDTO cartDTO = new CartDTO(cart);
+			model.addAttribute("cart", cartDTO);
+			model.addAttribute("orderSaveCommand", orderSaveCommand);
 			return "member/order/confirmation";
 		}
 	}
@@ -100,7 +99,7 @@ public class OrderController {
 		Order ordered = orderService.order(order, cart);
 		session.setAttribute(Cart.SESSION_NAME, new Cart());
 		session.removeAttribute(OrderSaveCommand.SESSION_NAME);
-		return "redirect:/member/order/complete/" + ordered.getId();
+		return "redirect:/member/order/complete/" + ordered.getId().getValue();
 	}
 
 	/**

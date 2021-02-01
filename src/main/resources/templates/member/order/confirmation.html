@@ -17,28 +17,34 @@
     </div>
     <div class="container pb-5">
       <div class="mt-4">
-        <form action="/member/order/save" th:object="${order}" method="post">
+        <form
+          action="/member/order/save"
+          th:object="${orderSaveCommand}"
+          method="post"
+        >
           <table class="table table-bordered table-light">
             <tbody>
               <tr>
                 <td class="table-secondary">注文日</td>
-                <td th:text="${order.orderDateAndTime}"></td>
+                <td
+                  th:text="${orderSaveCommand.formattedOrderDateAndTime}"
+                ></td>
               </tr>
               <tr>
                 <td class="table-secondary">お名前</td>
-                <td th:text="${order.fullName}"></td>
+                <td th:text="${orderSaveCommand.fullName}"></td>
               </tr>
               <tr>
                 <td class="table-secondary">お届け先</td>
-                <td th:text="${order.address}"></td>
+                <td th:text="${orderSaveCommand.address}"></td>
               </tr>
               <tr>
                 <td class="table-secondary">メールアドレス</td>
-                <td th:text="${order.email}"></td>
+                <td th:text="${orderSaveCommand.email}"></td>
               </tr>
               <tr>
                 <td class="table-secondary">電話番号</td>
-                <td th:text="${order.phoneNumber}"></td>
+                <td th:text="${orderSaveCommand.phoneNumber}"></td>
               </tr>
             </tbody>
           </table>
@@ -56,17 +62,16 @@
               <tr th:each="item : ${cart.items}">
                 <td>
                   <img
-                    th:src="@{'/image/' + ${item.productImagePath}}"
+                    th:src="@{'/image/' + ${item.imagePath}}"
                     alt=""
                     class="card-img-top"
                     style="width: 100px; height: 100px; object-fit: contain"
                   />
                 </td>
-                <td th:text="${item.productName}"></td>
-                <td th:text="${item.quantity.value}"></td>
-                <td th:text="${item.productPrice.value}"></td>
-                <td th:text="${item.totalPrice.value}"></td>
-                
+                <td th:text="${item.name}"></td>
+                <td th:text="${item.quantity}"></td>
+                <td th:text="${item.price}"></td>
+                <td th:text="${item.price * item.quantity}"></td>
               </tr>
             </tbody>
           </table>
@@ -74,7 +79,7 @@
             <span>
               合計注文金額：￥
               <span
-                th:text="${cart.totalPrice.value}"
+                th:text="${cart.totalPrice}"
                 class="h5 font-weight-bold"
               ></span>
               円

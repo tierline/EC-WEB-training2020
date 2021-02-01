@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import com.example.training.common.domain.Member;
 import com.example.training.common.domain.value.Email;
+import com.example.training.common.domain.value.MemberStatus;
 import com.example.training.common.entity.MemberEntity;
 import com.example.training.common.repository.MemberRepository;
 
@@ -35,7 +36,7 @@ public class LoginMemberDetailsService implements UserDetailsService {
 			throw new UsernameNotFoundException("Eメールで会員が見つけられませんでした。: " + email);
 		} else {
 			Member member = new Member(memberEntityOpt.get());
-			if (member.getStatus().equals("unapproved")) {
+			if (member.getStatus().equals(MemberStatus.UNAPPROVED)) {
 				throw new UsernameNotFoundException("承認されていない会員です。: " + email);
 			} else {
 				return new LoginMemberDetails(member);

@@ -1,4 +1,4 @@
-package com.example.training.mobile.controller.order;
+package com.example.training.common.controller;
 
 import java.time.format.DateTimeFormatter;
 
@@ -56,7 +56,7 @@ public class OrderDTO {
    */
   public OrderDTO(Order order) {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy年MM月dd日 hh時mm分ss秒");
-    this.id = order.getId();
+    this.id = order.getId().getValue();
     this.memberId = order.getMemberId().getValue();
     this.fullName = order.getFullName().getValue();
     this.address = order.getAddress().getValue();

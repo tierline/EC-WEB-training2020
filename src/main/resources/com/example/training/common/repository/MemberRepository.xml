@@ -71,7 +71,7 @@
 
 	<update id="updateByAdmin">
 		UPDATE MEMBER SET
-		last_update=#{lastUpdate},
+		last_update=#{lastUpdate.value},
 		status=#{status}
 		WHERE
 		id= #{memberId.value}

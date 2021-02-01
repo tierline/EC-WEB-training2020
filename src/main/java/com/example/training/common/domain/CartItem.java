@@ -1,7 +1,10 @@
 package com.example.training.common.domain;
 
+import com.example.training.common.domain.value.ImagePath;
 import com.example.training.common.domain.value.Price;
+import com.example.training.common.domain.value.ProductName;
 import com.example.training.common.domain.value.Quantity;
+import com.example.training.common.domain.value.id.ProductId;
 
 /**
  * カート内の商品クラス
@@ -95,7 +98,7 @@ public class CartItem {
 	 *
 	 * @return 商品ID
 	 */
-	public int getProductId() {
+	public ProductId getProductId() {
 		return this.getProduct().getId();
 	}
 
@@ -104,7 +107,7 @@ public class CartItem {
 	 *
 	 * @return 商品画像PATH
 	 */
-	public String getProductImagePath() {
+	public ImagePath getProductImagePath() {
 		return this.getProduct().getImagePath();
 	}
 
@@ -113,7 +116,7 @@ public class CartItem {
 	 *
 	 * @return 商品名
 	 */
-	public String getProductName() {
+	public ProductName getProductName() {
 		return this.getProduct().getName();
 	}
 

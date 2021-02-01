@@ -1,6 +1,9 @@
 package com.example.training.common.domain;
 
+import com.example.training.common.domain.value.ImagePath;
 import com.example.training.common.domain.value.Price;
+import com.example.training.common.domain.value.ProductName;
+import com.example.training.common.domain.value.id.ProductId;
 import com.example.training.common.entity.ProductEntity;
 
 import lombok.Getter;
@@ -13,11 +16,11 @@ public class Product {
 	/**
 	 * 商品ID
 	 */
-	private int id;
+	private ProductId id;
 	/**
 	 * 商品名
 	 */
-	private String name;
+	private ProductName name;
 	/**
 	 * 商品価格
 	 */
@@ -25,11 +28,11 @@ public class Product {
 	/**
 	 * 商品画像PATH
 	 */
-	private String imagePath;
+	private ImagePath imagePath;
 	/**
 	 * 商品説明文
 	 */
-	private String description;
+	private Description description;
 
 	/**
 	 * DBから得るためのコンストラクタ
@@ -37,26 +40,26 @@ public class Product {
 	 * @param productEntity
 	 */
 	public Product(ProductEntity productEntity) {
-		this.id = productEntity.getId();
-		this.name = productEntity.getName();
+		this.id = new ProductId(productEntity.getId());
+		this.name = new ProductName(productEntity.getName());
 		this.price = new Price(productEntity.getPrice());
-		this.imagePath = productEntity.getImagePath();
-		this.description = productEntity.getDescription();
+		this.imagePath = new ImagePath(productEntity.getImagePath());
+		this.description = new Description(productEntity.getDescription());
 	}
 
 	/**
 	 * テスト用コンストラクタ
 	 */
-	public Product(int id, String name) {
-		this.id = id;
+	public Product(Long id, ProductName name) {
+		this.id = new ProductId(id);
 		this.name = name;
 	}
 
 	/**
 	 * テスト用コンストラクタ
 	 */
-	public Product(int id, String name, Price price) {
-		this.id = id;
+	public Product(Long id, ProductName name, Price price) {
+		this.id = new ProductId(id);
 		this.name = name;
 		this.price = price;
 	}
@@ -68,8 +71,11 @@ public class Product {
 
 	}
 
+	/**
+	 * 自身とオブジェクトが等しいか判定する
+	 */
 	@Override
 	public boolean equals(Object object) {
-		return this.id == ((Product) object).id;
+		return this.id.getValue() == ((Product) object).id.getValue();
 	}
 }

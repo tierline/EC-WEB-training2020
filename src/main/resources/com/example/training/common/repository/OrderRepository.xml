@@ -7,7 +7,8 @@
 <mapper
 	namespace="com.example.training.common.repository.OrderRepository">
 
-	<insert id="save" useGeneratedKeys="true" keyProperty="id">
+	<!-- useGenerateKeys で注文時に自動採番された値を order の id.value プロパティにセットする -->
+	<insert id="save" useGeneratedKeys="true" keyProperty="id.value">
 		INSERT
 		INTO ORDERS (member_id, phone_number, name, address, email, price, date)
 		VALUES(
@@ -25,10 +26,10 @@
 		quantity, image_path)
 		VALUES(
 		"${orderId.value}",
-		"${name}",
+		"${name.value}",
 		"${price.value}",
 		"${quantity.value}",
-		"${imagePath}"
+		"${imagePath.value}"
 		)
 	</insert>
 

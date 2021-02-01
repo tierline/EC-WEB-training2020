@@ -4,6 +4,8 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
+import com.example.training.common.domain.value.MemberStatus;
+
 import lombok.Data;
 
 /**
@@ -30,6 +32,6 @@ public class MemberEditCommand {
 	 * 会員の承認状態
 	 */
 	@NotEmpty
-	private String status;
+	private MemberStatus status;
 
 }

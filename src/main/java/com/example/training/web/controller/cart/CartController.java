@@ -4,6 +4,7 @@ import java.util.Locale;
 
 import javax.servlet.http.HttpSession;
 
+import com.example.training.common.controller.CartDTO;
 import com.example.training.common.domain.Cart;
 import com.example.training.common.domain.Product;
 import com.example.training.common.domain.value.Quantity;
@@ -60,7 +61,8 @@ public class CartController {
 	public String changeItemQuantity(@PathVariable int productId, int quantity) {
 		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
 		ProductEntity productEntity = productRepository.findById(productId).orElseThrow();
-		cart.changeItemQuantity(new Product(productEntity), new Quantity(quantity));
+		Product product = new Product(productEntity);
+		cart.changeItemQuantity(product, new Quantity(quantity));
 		return "redirect:/member/cart/list";
 	}
 
@@ -82,7 +84,6 @@ public class CartController {
 
 	/**
 	 * カート内商品の一覧画面を表示する。
-	 *
 	 */
 	@GetMapping("/list")
 	public String get(Model model) {
@@ -90,7 +91,8 @@ public class CartController {
 		if (cart.getSize() == 0) {
 			model.addAttribute("errorMessage", messageSource.getMessage("error.cart.noProduct", null, Locale.JAPAN));
 		}
-		model.addAttribute("cart", cart);
+		CartDTO cartDTO = new CartDTO(cart);
+		model.addAttribute("cart", cartDTO);
 		return "member/cart";
 	}
 }

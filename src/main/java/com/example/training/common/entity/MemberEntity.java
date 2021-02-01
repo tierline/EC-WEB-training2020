@@ -1,5 +1,7 @@
 package com.example.training.common.entity;
 
+import com.example.training.common.domain.value.MemberStatus;
+
 import lombok.Data;
 
 /**
@@ -18,7 +20,7 @@ public class MemberEntity {
 
 	private String city;
 	private String block;
-	private String status;
+	private MemberStatus status;
 	private String lastUpdate;
 	private String roles = "ROLE_USER";
 

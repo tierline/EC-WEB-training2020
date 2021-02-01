@@ -4,6 +4,9 @@ import com.example.training.common.domain.CartItem;
 
 import lombok.Getter;
 
+/**
+ * カート内商品の転送用オブジェクト
+ */
 @Getter
 public class CartItemDTO {
   /**
@@ -11,7 +14,7 @@ public class CartItemDTO {
    */
   private int quantity;
 
-  private int id;
+  private Long id;
   private String name;
   private int price;
   private String description;
@@ -21,11 +24,11 @@ public class CartItemDTO {
    * 基本コンストラクタ
    */
   public CartItemDTO(CartItem cartItem) {
-    this.id = cartItem.getProductId();
-    this.name = cartItem.getProductName();
+    this.id = cartItem.getProductId().getValue();
+    this.name = cartItem.getProductName().getValue();
     this.price = cartItem.getProductPrice().getValue();
-    this.description = cartItem.getProduct().getDescription();
-    this.imagePath = cartItem.getProductImagePath();
+    this.description = cartItem.getProduct().getDescription().getValue();
+    this.imagePath = cartItem.getProductImagePath().getValue();
     this.quantity = cartItem.getQuantity().getValue();
   }
 }

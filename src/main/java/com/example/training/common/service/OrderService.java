@@ -44,7 +44,6 @@ public class OrderService {
 	 *
 	 * @param order 注文内容
 	 * @param cart  カート
-	 *
 	 */
 	private void saveByOrder(Order order, Cart cart) {
 		orderRepository.save(order);
