@@ -60,10 +60,4 @@ public class MemberSecurityConfig extends WebSecurityConfigurerAdapter {
 		auth.userDetailsService(service).passwordEncoder(new BCryptPasswordEncoder());
 	}
 
-// TODO 必要？
-//	@Bean
-//	public BCryptPasswordEncoder bCryptPasswordEncoder() {
-//		return new BCryptPasswordEncoder();
-//	}
-
 }

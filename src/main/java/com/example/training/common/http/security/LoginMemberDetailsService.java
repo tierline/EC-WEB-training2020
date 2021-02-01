@@ -2,6 +2,7 @@ package com.example.training.common.http.security;
 
 import com.example.training.common.domain.Member;
 import com.example.training.common.domain.value.Email;
+import com.example.training.common.domain.value.MemberStatus;
 import com.example.training.common.entity.MemberEntity;
 import com.example.training.common.repository.MemberRepository;
 
@@ -29,9 +30,8 @@ public class LoginMemberDetailsService implements UserDetailsService {
 	public UserDetails loadUserByUsername(String stringEmail) throws UsernameNotFoundException {
 		Email email = new Email(stringEmail);
 		MemberEntity entity = memberRepository.findByEmail(email).orElseThrow();
-		// TODO 新規登録>ログイン>DBに名前、住所等のデータがないため承認されていてもここで止まる
 		Member member = new Member(entity);
-		if (member.getStatus().equals("UNAPPROVED")) {
+		if (member.getStatus().equals(MemberStatus.UNAPPROVED)) {
 			throw new UsernameNotFoundException("承認されていない会員です。: " + email);
 		}
 		return new LoginMemberDetails(member);

@@ -4,6 +4,15 @@ import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 
+import com.example.training.common.domain.Member;
+import com.example.training.common.domain.value.Email;
+import com.example.training.common.entity.MemberEntity;
+import com.example.training.common.http.MemberSession;
+import com.example.training.common.repository.MemberRepository;
+import com.example.training.common.service.MemberApplicationService;
+import com.example.training.web.controller.member.MemberApplicationCommand;
+import com.example.training.web.controller.member.MemberDTO;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,19 +23,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.training.common.domain.Member;
-import com.example.training.common.domain.value.Email;
-import com.example.training.common.entity.MemberEntity;
-import com.example.training.common.http.MemberSession;
-import com.example.training.common.repository.MemberRepository;
-import com.example.training.common.service.MemberApplicationService;
-import com.example.training.web.controller.member.MemberApplicationCommand;
-import com.example.training.web.controller.member.MemberDTO;
-
 /**
  * 会員のコントローラ(Mobile)
  */
-// TODO: ApiMemberC -> MemberController
 @RestController
 @RequestMapping("/api/member")
 public class MemberControllerAPI {
@@ -42,36 +41,23 @@ public class MemberControllerAPI {
 
 	@CrossOrigin
 	@PostMapping("/applicate")
-	// TODO ~command
 	public ResponseEntity<?> applicate(MemberApplicationCommand memberApplicationCommand) {
 		Email email = new Email(memberApplicationCommand.getEmail());
 		Optional<MemberEntity> memberOpt = memberRepository.findByEmail(email);
 		if (memberOpt.isEmpty()) {
 			memberApplicationService.run(memberApplicationCommand);
 			MemberEntity entity = memberRepository.findByEmail(email).orElseThrow();
-//			Member member = new Member(memberEntity.get());
 			MemberSession memberSession = new MemberSession(entity);
 			session.setAttribute(Member.SESSION_NAME, memberSession);
 			return new ResponseEntity<>(true, HttpStatus.OK);
 		}
 		return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
 	}
-//	public Boolean applicate(MemberApplicationCommand memberApplicationCommand) {
-//		Email email = new Email(memberApplicationCommand.getEmail());
-//		Optional<MemberEntity> memberOpt = memberRepository.findByEmail(email);
-//		if (memberOpt.isEmpty()) {
-//			memberApplicationService.run(memberApplicationCommand);
-//			Optional<MemberEntity> memberEntity = memberRepository.findByEmail(email);
-//			Member member = new Member(memberEntity.get());
-//			MemberSession memberSession = new MemberSession(member);
-//			session.setAttribute(Member.SESSION_NAME, memberSession);
-//			return true;
 
 	/*
 	 * 会員のセッション情報を取得する。
 	 */
 	@GetMapping("/session")
-
 	@ResponseBody
 	public MemberDTO fetchMemberSession() {
 		MemberSession member = (MemberSession) session.getAttribute(Member.SESSION_NAME);
