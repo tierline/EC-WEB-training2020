@@ -2,6 +2,8 @@ package com.example.training.mobile.controller.member;
 
 import java.util.Optional;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import com.example.training.common.controller.MemberDTO;
@@ -39,15 +41,13 @@ public class MemberControllerAPI {
 	@Autowired
 	private MemberRepository memberRepository;
 
-	/**
-	 * 新規会員登録処理をする。
-	 *
-	 * @param memberApplicationCommand
-	 * @return
+	/*
+	 * 新規登録処理 登録完了後ログイン
 	 */
 	@CrossOrigin
 	@PostMapping("/applicate")
-	public ResponseEntity<?> applicate(MemberApplicationCommand memberApplicationCommand) {
+	public ResponseEntity<Boolean> applicate(MemberApplicationCommand memberApplicationCommand,
+			HttpServletRequest request) throws ServletException {
 		Email email = new Email(memberApplicationCommand.getEmail());
 		Optional<MemberEntity> memberOpt = memberRepository.findByEmail(email);
 		if (memberOpt.isEmpty()) {
@@ -55,6 +55,7 @@ public class MemberControllerAPI {
 			MemberEntity entity = memberRepository.findByEmail(email).orElseThrow(NullPointerException::new);
 			MemberSession memberSession = new MemberSession(entity);
 			session.setAttribute(Member.SESSION_NAME, memberSession);
+			request.login(memberApplicationCommand.getEmail(), memberApplicationCommand.getPassword());
 			return new ResponseEntity<>(true, HttpStatus.OK);
 		}
 		return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);

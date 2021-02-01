@@ -85,12 +85,13 @@ public class Member {
 	 * @param memberApplicationCommand
 	 * @param passwordDigest
 	 */
-
+//TODO
 	public Member(MemberApplicationCommand memberApplicationCommand, DigestPassword passwordDigest) {
 		this.digestPassword = passwordDigest;
 		this.email = new Email(memberApplicationCommand.getEmail());
 		this.lastUpdate = new Name("none");
-		this.status = MemberStatus.UNAPPROVED;
+		this.status = MemberStatus.UNAPPROVED;// mobileの時どうするか
+
 	}
 
 	/**
