@@ -36,7 +36,6 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin
 @RestController
 @RequestMapping("/api/member/order")
-// TODO API
 public class OrderControllerAPI {
 
 	@Autowired
@@ -58,7 +57,6 @@ public class OrderControllerAPI {
 	 * 注文処理を行う
 	 */
 
-	// TODO: OrderSaveCommand -> OrderSaveCommand
 	@PostMapping("/save")
 	public OrderDTO save(@RequestBody OrderSaveCommand orderSaveCommand) {
 		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);

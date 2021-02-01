@@ -73,7 +73,7 @@ public class Cart {
 		Optional<CartItem> itemOpt = getItem(product);
 		if (itemOpt.isPresent()) {
 			CartItem item = itemOpt.get();
-			item.clearQuantity(new Quantity(0));
+			item.clearQuantity();
 			if (item.isQuantityZero()) {
 				this.items.remove(item);
 			}

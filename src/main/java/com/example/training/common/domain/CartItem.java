@@ -57,11 +57,11 @@ public class CartItem {
 	}
 
 	/**
-	 * TODO: 引数いる？ 商品数をゼロにする。
+	 * 商品数をゼロにする。
 	 *
 	 * @param quantity 個数ゼロの商品
 	 */
-	public void clearQuantity(Quantity quantity) {
+	public void clearQuantity() {
 		this.quantity = quantity.clear();
 	}
 

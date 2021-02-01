@@ -7,7 +7,6 @@ import java.util.Locale;
 import javax.servlet.http.HttpSession;
 
 import com.example.training.common.controller.ProductDTO;
-import com.example.training.common.domain.Product;
 import com.example.training.common.entity.ProductEntity;
 import com.example.training.common.repository.ProductRepository;
 
@@ -55,20 +54,16 @@ public class MainController {
 	 * @param word
 	 * @return
 	 */
-	// TODO: 問い合わせはQuery, Mobileのフォームは Command
-	// 更新系：command : DBにINSERT, DELETE等をかける場合
-	// 登録系：query : DBにSELECTをかける場合
-	// 検索は SELECT をかける登録系なので Query。freeword -> query
 	@PostMapping("/search")
-	public String search(Model model, @RequestParam("freeWord") String freeWord) {
-		List<ProductEntity> productEntities = productRepository.findName(freeWord);
-		List<Product> products = new ArrayList<Product>();
+	public String search(Model model, @RequestParam("searchQuery") String searchQuery) {
+		List<ProductEntity> productEntities = productRepository.findName(searchQuery);
+		List<ProductDTO> productsDTO = new ArrayList<ProductDTO>();
 		for (ProductEntity productEntity : productEntities) {
-			products.add(new Product(productEntity));
+			productsDTO.add(new ProductDTO(productEntity));
 		}
-		model.addAttribute("freeWord", freeWord);
-		model.addAttribute("products", products);
-		if (products.size() == 0) {
+		model.addAttribute("searchQuery", searchQuery);
+		model.addAttribute("products", productsDTO);
+		if (productsDTO.size() == 0) {
 			model.addAttribute("errorMessage", messageSource.getMessage("error.search.noProduct", null, Locale.JAPAN));
 		}
 		return "search";

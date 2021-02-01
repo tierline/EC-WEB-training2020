@@ -30,7 +30,7 @@
 		PRODUCT
 		WHERE
 		name LIKE
-		'%${word}%'
+		'%${searchQuery}%'
 	</select>
 
 </mapper>
