@@ -64,7 +64,7 @@
 		INSERT INTO MEMBER (email, password, last_update, status) VALUES (
 		"${email.value}",
 		"${digestPassword.value}",
-		"${lastUpdate}",
+		"${lastUpdate.value}",
 		"${status}"
 		)
 	</insert>

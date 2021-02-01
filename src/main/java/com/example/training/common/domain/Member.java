@@ -113,7 +113,7 @@ public class Member {
 	public Member(MemberEditCommand memberEditCommand, Name adminName, MemberId memberId) {
 		this.memberId = memberId;
 		this.lastUpdate = adminName;
-		this.status = memberEditCommand.getStatus();
+		this.status = MemberStatus.valueOf(memberEditCommand.getStatus());
 	}
 
 	/**
