@@ -2,6 +2,8 @@ package com.example.training.common.http;
 
 import com.example.training.common.domain.Admin;
 import com.example.training.common.domain.value.Assertion;
+import com.example.training.common.domain.value.Name;
+import com.example.training.common.domain.value.id.AdminId;
 
 import lombok.Getter;
 
@@ -14,12 +16,12 @@ public class AdminSession {
    * 会員ID
    */
   @Getter
-  private Long id;
+  private AdminId id;
   /**
    * Eメール
    */
   @Getter
-  private String name;
+  private Name name;
 
   /**
    * 基本コンストラクタ
@@ -27,9 +29,9 @@ public class AdminSession {
    * @param value
    */
   public AdminSession(Admin admin) {
-    Long id = admin.getId();
-    String name = admin.getName();
-    Assertion.isNull(admin.getId().toString(), admin.getName());
+    AdminId id = admin.getId();
+    Name name = admin.getName();
+    Assertion.isNull(admin.getId().toString(), admin.getName().getValue());
 
     this.id = id;
     this.name = name;

@@ -1,6 +1,7 @@
 package com.example.training.common.controller;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
@@ -8,7 +9,6 @@ import javax.validation.constraints.Size;
 
 import com.example.training.common.domain.Cart;
 import com.example.training.common.domain.Order;
-import com.example.training.common.domain.value.id.MemberId;
 import com.example.training.web.controller.member.MemberDTO;
 
 import lombok.Data;
@@ -89,31 +89,6 @@ public class OrderSaveCommand {
 	private LocalDateTime orderDateAndTime = LocalDateTime.now();
 
 	/**
-	 * Mobileの注文用コンストラクタ
-	 *
-	 * @param orderSaveCommand
-	 * @param memberId
-	 */
-	public OrderSaveCommand(OrderSaveCommand orderSaveCommand, MemberId memberId) {
-		this.lastName = orderSaveCommand.getLastName();
-		this.firstName = orderSaveCommand.getFirstName();
-		this.email = orderSaveCommand.getEmail();
-		this.phoneNumber = orderSaveCommand.getPhoneNumber();
-		this.postcode = orderSaveCommand.getPostcode();
-		this.prefecture = orderSaveCommand.getPrefecture();
-		this.city = orderSaveCommand.getCity();
-		this.block = orderSaveCommand.getBlock();
-		this.orderDateAndTime = getOrderDateAndTime();
-		this.memberId = memberId.getValue();
-	}
-
-	/**
-	 * デフォルトコンストラクタ
-	 */
-	public OrderSaveCommand() {
-	}
-
-	/**
 	 * カートから注文クラスを作る。
 	 *
 	 * @param cart
@@ -124,11 +99,16 @@ public class OrderSaveCommand {
 	}
 
 	/**
+	 * デフォルトコンストラクタ
+	 */
+	public OrderSaveCommand() {
+	}
+
+	/**
 	 * お届け先入力フォームに会員情報をセットする。
 	 *
 	 * @param member 会員
 	 */
-
 	public void setMemberInfo(MemberDTO memberDTO) {
 		this.lastName = memberDTO.getLastName();
 		this.firstName = memberDTO.getFirstName();
@@ -140,6 +120,32 @@ public class OrderSaveCommand {
 		this.block = memberDTO.getBlock();
 		this.orderDateAndTime = getOrderDateAndTime();
 		this.memberId = memberDTO.getMemberId();
+	}
+
+	/**
+	 * 氏名を取得する。
+	 *
+	 * @return
+	 */
+	public String getFullName() {
+		return lastName + firstName;
+	}
+
+	/**
+	 * 住所全文を取得する。
+	 */
+	public String getAddress() {
+		return "〒" + postcode + " " + prefecture + " " + city + " " + block;
+	}
+
+	/**
+	 * フォーマットされた注文日時を返す。
+	 *
+	 * @return
+	 */
+	public String getFormattedOrderDateAndTime() {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy年MM月dd日 hh時mm分ss秒");
+		return orderDateAndTime.format(formatter);
 	}
 
 }

@@ -1,23 +1,39 @@
 package com.example.training.common.domain.value.id;
 
+import com.example.training.common.domain.value.Assertion;
+
 import lombok.Getter;
+import lombok.Setter;
 
 /**
- * 会員IDを表す値オブジェクト
+ * IDを表す値オブジェクト
  */
 @Getter
+@Setter
 class LongId {
 	/**
-	 * 会員IDの値
+	 * IDの値
 	 */
 	private final Long value;
 
-	// 要バリデーション追加
+	private final Long MIN = 0L;
+	private final Long MAX = Long.MAX_VALUE;
+
+	/**
+	 * 基本コンストラクタ
+	 *
+	 * @param value
+	 */
 	public LongId(Long value) {
+		Assertion.range(value, MIN, MAX);
 		this.value = value;
 	}
 
-	// 要バリデーション追加
+	/**
+	 * 基本コンストラクタ
+	 *
+	 * @param value
+	 */
 	public LongId(String value) {
 		this.value = Long.parseLong(value);
 	}

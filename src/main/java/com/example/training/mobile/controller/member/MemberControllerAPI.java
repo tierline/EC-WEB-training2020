@@ -6,6 +6,15 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.example.training.common.domain.Member;
+import com.example.training.common.domain.value.Email;
+import com.example.training.common.entity.MemberEntity;
+import com.example.training.common.http.MemberSession;
+import com.example.training.common.repository.MemberRepository;
+import com.example.training.common.service.MemberApplicationService;
+import com.example.training.web.controller.member.MemberApplicationCommand;
+import com.example.training.web.controller.member.MemberDTO;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,19 +25,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.training.common.domain.Member;
-import com.example.training.common.domain.value.Email;
-import com.example.training.common.entity.MemberEntity;
-import com.example.training.common.http.MemberSession;
-import com.example.training.common.repository.MemberRepository;
-import com.example.training.common.service.MemberApplicationService;
-import com.example.training.web.controller.member.MemberApplicationCommand;
-import com.example.training.web.controller.member.MemberDTO;
-
 /**
  * 会員のコントローラ(Mobile)
  */
-// TODO: ApiMemberC -> MemberController
 @RestController
 @RequestMapping("/api/member")
 public class MemberControllerAPI {
@@ -67,7 +66,6 @@ public class MemberControllerAPI {
 	 * 会員のセッション情報を取得する。
 	 */
 	@GetMapping("/session")
-
 	@ResponseBody
 	public MemberDTO fetchMemberSession() {
 		MemberSession member = (MemberSession) session.getAttribute(Member.SESSION_NAME);

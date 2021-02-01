@@ -8,10 +8,20 @@ import lombok.Getter;
 @Getter
 public class MemberId extends LongId {
 
+	/**
+	 * 基本コンストラクタ
+	 *
+	 * @param id
+	 */
 	public MemberId(Long id) {
 		super(id);
 	}
 
+	/**
+	 * 基本コンストラクタ
+	 *
+	 * @param id
+	 */
 	public MemberId(String id) {
 		super(id);
 	}

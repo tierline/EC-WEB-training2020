@@ -1,10 +1,10 @@
 package com.example.training.web.controller.service;
 
+import com.example.training.common.domain.value.DigestPassword;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import com.example.training.common.domain.value.DigestPassword;
 
 @Service
 public class DigestPasswordService {

@@ -14,11 +14,13 @@ import lombok.Getter;
  */
 public class Cart {
 	public static final String SESSION_NAME = "CART";
+
 	/**
 	 * カート内の商品
 	 */
 	@Getter
 	private List<CartItem> items = new ArrayList<CartItem>();
+
 	/**
 	 * カート内の商品の合計金額
 	 */
@@ -71,7 +73,7 @@ public class Cart {
 		Optional<CartItem> itemOpt = getItem(product);
 		if (itemOpt.isPresent()) {
 			CartItem item = itemOpt.get();
-			item.clearQuantity(new Quantity(0));
+			item.clearQuantity();
 			if (item.isQuantityZero()) {
 				this.items.remove(item);
 			}

@@ -54,11 +54,8 @@ public class Address {
 	}
 
 	/*
-	 * 郵便番号から住所、すべてを繋げて返す ======= /** 住所の全文表示
+	 * 郵便番号から住所、すべてを繋げて返す
 	 *
-	 * @return >>>>>>>
-	 * origin/kato:src/main/java/com/example/training/common/domain/value/address/
-	 * Address.java
 	 */
 	public String getValue() {
 		this.value = "〒" + postcode.getValue() + " " + prefecture.getValue() + " " + city.getValue() + " "

@@ -1,6 +1,8 @@
 package com.example.training.common.domain;
 
+import com.example.training.common.domain.value.ImagePath;
 import com.example.training.common.domain.value.Price;
+import com.example.training.common.domain.value.ProductName;
 import com.example.training.common.domain.value.Quantity;
 import com.example.training.common.domain.value.id.OrderId;
 
@@ -20,7 +22,7 @@ public class OrderItem {
 	/**
 	 * 商品名
 	 */
-	private String name;
+	private ProductName name;
 
 	/**
 	 * 商品価格
@@ -35,7 +37,7 @@ public class OrderItem {
 	/**
 	 * 商品画像のPATH
 	 */
-	private String imagePath;
+	private ImagePath imagePath;
 
 	/**
 	 *
@@ -44,7 +46,7 @@ public class OrderItem {
 	 * @param item カート内の商品
 	 */
 	public OrderItem(CartItem item, Order order) {
-		this.orderId = new OrderId(order.getId());
+		this.orderId = order.getId();
 		this.name = item.getProductName();
 		this.price = item.getProductPrice();
 		this.quantity = item.getQuantity();

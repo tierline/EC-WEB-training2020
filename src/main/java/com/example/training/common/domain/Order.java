@@ -16,6 +16,7 @@ import com.example.training.common.domain.value.address.City;
 import com.example.training.common.domain.value.address.Postcode;
 import com.example.training.common.domain.value.address.Prefecture;
 import com.example.training.common.domain.value.id.MemberId;
+import com.example.training.common.domain.value.id.OrderId;
 
 import lombok.Data;
 
@@ -30,7 +31,7 @@ public class Order {
 	/**
 	 * 注文ID
 	 */
-	private Long id;
+	private OrderId id;
 	/**
 	 * 会員ID
 	 */
@@ -67,6 +68,8 @@ public class Order {
 	 * @param cart             カート
 	 */
 	public Order(OrderSaveCommand orderSaveCommand, Cart cart) {
+		// MEMO: まず id=0 で生成し注文時の処理 useGenerateKeys で自動採番された値がセットされる。
+		this.id = new OrderId(0L);
 		this.memberId = new MemberId(orderSaveCommand.getMemberId());
 		this.fullName = new FullName(new Name(orderSaveCommand.getLastName()), new Name(orderSaveCommand.getFirstName()));
 		this.address = new Address(new Postcode(orderSaveCommand.getPostcode()),
@@ -86,7 +89,7 @@ public class Order {
 	 * @param date     注文日時
 	 */
 	public Order(Long orderId, MemberId memberId, LocalDateTime orderDateAndTime) {
-		this.id = orderId;
+		this.id = new OrderId(orderId);
 		this.memberId = memberId;
 		this.orderDateAndTime = orderDateAndTime;
 	}

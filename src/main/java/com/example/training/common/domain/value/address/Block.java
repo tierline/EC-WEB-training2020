@@ -9,10 +9,20 @@ import lombok.Getter;
  */
 public class Block {
 
-	private final Integer MAX = 130;
-	private final Integer MIN = 0;
+	/**
+	 * 番地の値
+	 */
 	@Getter
 	private String value;
+
+	/**
+	 * 番地の文字数の最大値
+	 */
+	private final Integer MAX = 130;
+	/**
+	 * 番地の文字数の最小値
+	 */
+	private final Integer MIN = 0;
 
 	/**
 	 * 基本コンストラクタ
@@ -22,6 +32,9 @@ public class Block {
 		this.value = value;
 	}
 
+	/**
+	 * デフォルトコンストラクタ
+	 */
 	public Block() {
 
 	}

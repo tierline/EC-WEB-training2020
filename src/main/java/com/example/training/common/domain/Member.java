@@ -3,6 +3,7 @@ package com.example.training.common.domain;
 import com.example.training.common.domain.value.DigestPassword;
 import com.example.training.common.domain.value.Email;
 import com.example.training.common.domain.value.FullName;
+import com.example.training.common.domain.value.MemberStatus;
 import com.example.training.common.domain.value.Name;
 import com.example.training.common.domain.value.PhoneNumber;
 import com.example.training.common.domain.value.address.Address;
@@ -50,15 +51,15 @@ public class Member {
 	/**
 	 * 最終更新者
 	 */
-	private String lastUpdate;
+	private Name lastUpdate;
 	/**
 	 * 承認状態
 	 */
-	private String status; // fix
+	private MemberStatus status;
 	/**
 	 * 権限
 	 */
-	private String roles = "ROLE_USER"; // fix: Role自作
+	private String roles = "ROLE_USER";
 
 	/**
 	 * DBから取得するためのコンストラクタ
@@ -74,7 +75,7 @@ public class Member {
 				new City(entity.getCity()), new Block(entity.getBlock()));
 		this.phoneNumber = new PhoneNumber(entity.getPhoneNumber());
 		this.status = entity.getStatus();
-		this.lastUpdate = entity.getLastUpdate();
+		this.lastUpdate = new Name(entity.getLastUpdate());
 	}
 
 	/**
@@ -83,12 +84,13 @@ public class Member {
 	 * @param memberApplicationCommand
 	 * @param passwordDigest
 	 */
-
+//TODO
 	public Member(MemberApplicationCommand memberApplicationCommand, DigestPassword passwordDigest) {
 		this.digestPassword = passwordDigest;
 		this.email = new Email(memberApplicationCommand.getEmail());
-		this.lastUpdate = "none";
-		this.status = "approved";
+		this.lastUpdate = new Name("none");
+		this.status = MemberStatus.UNAPPROVED;// mobileの時どうするか
+
 	}
 
 	/**
@@ -110,10 +112,10 @@ public class Member {
 	 * @param adminName
 	 * @param memberId
 	 */
-	public Member(MemberEditCommand memberEditCommand, String adminName, MemberId memberId) {
+	public Member(MemberEditCommand memberEditCommand, Name adminName, MemberId memberId) {
 		this.memberId = memberId;
 		this.lastUpdate = adminName;
-		this.status = memberEditCommand.getStatus();
+		this.status = MemberStatus.valueOf(memberEditCommand.getStatus());
 	}
 
 	/**

@@ -2,14 +2,14 @@ package com.example.training.common.repository;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Mapper;
-
 import com.example.training.common.domain.Order;
 import com.example.training.common.domain.OrderItem;
 import com.example.training.common.domain.value.id.MemberId;
 import com.example.training.common.domain.value.id.OrderId;
 import com.example.training.common.entity.OrderItemEntity;
 import com.example.training.web.controller.order.OrderHistoryByMonth;
+
+import org.apache.ibatis.annotations.Mapper;
 
 /**
  * 注文リポジトリ
@@ -47,7 +47,7 @@ public interface OrderRepository {
 	 *
 	 * @param order 注文内容
 	 */
-	public int save(Order order);
+	public Long save(Order order);
 
 	/**
 	 * 注文商品を保存する。

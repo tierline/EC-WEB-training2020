@@ -28,15 +28,11 @@ public class Quantity {
 	/**
 	 * 基本コンストラクタ
 	 *
-	 * @param value
+	 * @param value 数量の値
 	 */
 	public Quantity(int value) {
-		if (value < MIN) {
-			throw new IllegalArgumentException("数量の最小値を下回っています");
-		}
-		if (value > MAX) {
-			throw new IllegalArgumentException("数量の最大値を超えています");
-		}
+		Assertion.range(value, MIN, MAX);
+
 		this.value = value;
 	}
 

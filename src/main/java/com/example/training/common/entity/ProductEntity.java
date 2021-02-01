@@ -7,7 +7,7 @@ import lombok.Data;
  */
 @Data
 public class ProductEntity {
-    private int id;
+    private Long id;
     private String name;
     private int price;
     private String imagePath;

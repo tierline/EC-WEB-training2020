@@ -8,10 +8,20 @@ import lombok.Getter;
 public class Email {
 
 	/**
-	 * Eメールの値 TODO: value は final で。
+	 * Eメールの値
 	 */
 	@Getter
 	private String value;
+
+	/**
+	 * Eメールの長さの最小値
+	 */
+	private final Integer MIN = 3;
+
+	/**
+	 * Eメールの長さの最大値
+	 */
+	private final Integer MAX = 256;
 
 	/**
 	 * 基本コンストラクタ
@@ -19,9 +29,9 @@ public class Email {
 	 * @param value
 	 */
 	public Email(String value) {
-		if (value == null) {
-			throw new NullPointerException();
-		}
+		Assertion.isNull(value);
+		Assertion.length(value, MIN, MAX);
+
 		this.value = value;
 	}
 

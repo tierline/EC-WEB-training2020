@@ -33,7 +33,7 @@ public class MemberSecurityConfig extends WebSecurityConfigurerAdapter {
 	public void configure(WebSecurity web) throws Exception {
 		// @formatter:off
 		web.ignoring().mvcMatchers("/static/**", "/webjars/**", "/js/**"); // 静的リソースに認証が行われないようにする。
-		// 以下二行を設定しないと The request was rejected because the URL　contained a potentially malicious String ";" のエラー
+		// 以下二行を設定しないと The request was rejected because the URL contained a potentially malicious String ";" のエラー
 		DefaultHttpFirewall firewall = new DefaultHttpFirewall();
 		web.httpFirewall(firewall);
 		// @formatter:on
@@ -59,11 +59,5 @@ public class MemberSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(service).passwordEncoder(new BCryptPasswordEncoder());
 	}
-
-// TODO 必要？
-//	@Bean
-//	public BCryptPasswordEncoder bCryptPasswordEncoder() {
-//		return new BCryptPasswordEncoder();
-//	}
 
 }

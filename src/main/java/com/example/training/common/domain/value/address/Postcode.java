@@ -1,40 +1,41 @@
 package com.example.training.common.domain.value.address;
 
+import com.example.training.common.domain.value.Assertion;
+
 import lombok.Getter;
 
 /**
  * 郵便番号を表す値オブジェクト
  */
 public class Postcode {
-	// TODO
-	/*
-	 * ハイフンなしの郵便番号の長さ
-	 */
-	private final Integer LENGTH = 7;
 	@Getter
 	private String value;
 
 	/*
-	 * 郵便番号の長さ、使用されている文字の確認 OKなら作成する TODO: 新規作成時は value が null なので郵便番号を生成できない。
+	 * ハイフンなしの郵便番号の長さ
+	 */
+	private final Integer LENGTH = 7;
+
+	/**
+	 * 正規表現
+	 */
+	private final String REGEXP = "[0-9]";
+
+	/*
+	 * 基本コンストラクタ
 	 */
 	public Postcode(String value) {
-		if (value != null && value.length() != LENGTH) {
-			throw new IllegalArgumentException("郵便番号はハイフンなしの7桁のみです");
-		}
-		// if (!canRegexp(value)) {
-		// throw new IllegalArgumentException("半角数字のみです");
-		// }
+		Assertion.isNull(value);
+		Assertion.length(value, LENGTH, LENGTH);
+		Assertion.matches(value, REGEXP);
+
 		this.value = value;
 	}
 
+	/**
+	 * デフォルトコンストラクタ
+	 */
 	public Postcode() {
 	}
 
-	/*
-	 * 半角数字のみかの確認
-	 */
-	// private Boolean canRegexp(String value) {
-	// String regexp = "[0-9]";
-	// return value.matches(regexp);
-	// }
 }

@@ -17,7 +17,10 @@
     <div class="container py-5">
       <h2 th:text="${errorMessage}">XXXXX</h2>
       <p>
-        検索ワード：<span class="font-weight-bold" th:text="${word}"></span>
+        検索ワード：<span
+          class="font-weight-bold"
+          th:text="${searchQuery}"
+        ></span>
       </p>
       <div th:flagment="home" class="row">
         <div th:each="item: ${products}" class="text-center mx-auto">
