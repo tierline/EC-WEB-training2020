@@ -1,5 +1,7 @@
 package com.example.training.web.security;
 
+import com.example.training.common.http.security.LoginMemberDetailsService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Configuration;
@@ -10,8 +12,7 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
-import com.example.training.common.http.security.LoginMemberDetailsService;
+import org.springframework.security.web.firewall.DefaultHttpFirewall;
 
 @Configuration
 @EnableWebSecurity
@@ -31,8 +32,10 @@ public class MemberSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	public void configure(WebSecurity web) throws Exception {
 		// @formatter:off
-		web.ignoring().mvcMatchers("/static/**", "/webjars/**", "/js/**") // 静的リソースに認証が行われないようにする。
-		;
+		web.ignoring().mvcMatchers("/static/**", "/webjars/**", "/js/**"); // 静的リソースに認証が行われないようにする。
+		// 以下二行を設定しないと The request was rejected because the URL　contained a potentially malicious String ";" のエラー
+		DefaultHttpFirewall firewall = new DefaultHttpFirewall();
+		web.httpFirewall(firewall);
 		// @formatter:on
 	}
 

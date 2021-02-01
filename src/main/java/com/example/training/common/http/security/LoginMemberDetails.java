@@ -36,7 +36,6 @@ public class LoginMemberDetails extends User {
 	/*
 	 * roleのセット
 	 */
-	// TODO
 	private static Collection<? extends GrantedAuthority> createRole() {
 		String role = Role.ROLE_USER.toString();
 		return AuthorityUtils.commaSeparatedStringToAuthorityList(role);

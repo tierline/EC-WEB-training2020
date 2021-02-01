@@ -23,7 +23,7 @@
 		<hr />
 		<a href="/member/cart/list"><i class="fi-arrow-left"></i> 戻る</a>
 		<div class="d-flex justify-content-center">
-		<form action="/member/order/confirmation" th:object="${orderForm}" method="post">
+		<form action="/member/order/confirmation" th:object="${orderSaveCommand}" method="post">
 			<div class="form-group">
 						<label for="lastName">姓
 							<span class="badge badge-danger">必須</span>

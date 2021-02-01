@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.training.common.domain.value.Date;
+import com.example.training.common.controller.OrderSaveCommand;
 import com.example.training.common.domain.value.Email;
 import com.example.training.common.domain.value.FullName;
 import com.example.training.common.domain.value.Name;
@@ -16,7 +16,6 @@ import com.example.training.common.domain.value.address.City;
 import com.example.training.common.domain.value.address.Postcode;
 import com.example.training.common.domain.value.address.Prefecture;
 import com.example.training.common.domain.value.id.MemberId;
-import com.example.training.web.controller.order.OrderForm;
 
 import lombok.Data;
 
@@ -59,22 +58,23 @@ public class Order {
 	/**
 	 * 注文日時
 	 */
-	private Date orderDateAndTime;
+	private LocalDateTime orderDateAndTime;
 
 	/**
 	 * 注文処理用コンストラクタ
 	 *
-	 * @param orderForm 住所入力フォーム
-	 * @param cart      カート
+	 * @param orderSaveCommand 住所入力フォーム
+	 * @param cart             カート
 	 */
-	public Order(OrderForm orderForm, Cart cart) {
-		this.memberId = new MemberId(orderForm.getMemberId());
-		this.fullName = new FullName(new Name(orderForm.getLastName()), new Name(orderForm.getFirstName()));
-		this.address = new Address(new Postcode(orderForm.getPostcode()), new Prefecture(orderForm.getPrefecture()),
-				new City(orderForm.getCity()), new Block(orderForm.getBlock()));
-		this.email = new Email(orderForm.getEmail());
-		this.phoneNumber = new PhoneNumber(orderForm.getPhoneNumber());
-		this.orderDateAndTime = orderForm.getOrderDateAndTime();
+	public Order(OrderSaveCommand orderSaveCommand, Cart cart) {
+		this.memberId = new MemberId(orderSaveCommand.getMemberId());
+		this.fullName = new FullName(new Name(orderSaveCommand.getLastName()), new Name(orderSaveCommand.getFirstName()));
+		this.address = new Address(new Postcode(orderSaveCommand.getPostcode()),
+				new Prefecture(orderSaveCommand.getPrefecture()), new City(orderSaveCommand.getCity()),
+				new Block(orderSaveCommand.getBlock()));
+		this.email = new Email(orderSaveCommand.getEmail());
+		this.phoneNumber = new PhoneNumber(orderSaveCommand.getPhoneNumber());
+		this.orderDateAndTime = orderSaveCommand.getOrderDateAndTime();
 		this.totalPrice = cart.getTotalPrice();
 	}
 
@@ -88,7 +88,7 @@ public class Order {
 	public Order(Long orderId, MemberId memberId, LocalDateTime orderDateAndTime) {
 		this.id = orderId;
 		this.memberId = memberId;
-		this.orderDateAndTime = new Date(orderDateAndTime);
+		this.orderDateAndTime = orderDateAndTime;
 	}
 
 	/**

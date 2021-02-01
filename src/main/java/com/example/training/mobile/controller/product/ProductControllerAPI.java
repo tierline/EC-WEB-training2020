@@ -22,6 +22,9 @@ public class ProductControllerAPI {
 	@Autowired
 	private ProductRepository productRepository;
 
+	/**
+	 * 全ての商品を取得する。
+	 */
 	@GetMapping("/")
 	public List<ProductEntity> product() {
 		List<ProductEntity> productEntities = productRepository.findAll();

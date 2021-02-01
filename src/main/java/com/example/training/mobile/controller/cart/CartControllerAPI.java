@@ -84,19 +84,4 @@ public class CartControllerAPI {
 		cart.remove(product);
 		return cart;
 	}
-
-	/**
-	 * カートに商品がないか確認する。
-	 *
-	 * @return
-	 */
-	@GetMapping("/hasItem")
-	public Boolean cartHasItem() {
-		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
-		if (0 < cart.getSize()) {
-			return true;
-		} else {
-			return false;
-		}
-	}
 }

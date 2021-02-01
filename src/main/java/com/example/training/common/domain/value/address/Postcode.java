@@ -6,7 +6,7 @@ import lombok.Getter;
  * 郵便番号を表す値オブジェクト
  */
 public class Postcode {
-// TODO
+	// TODO
 	/*
 	 * ハイフンなしの郵便番号の長さ
 	 */
@@ -15,15 +15,15 @@ public class Postcode {
 	private String value;
 
 	/*
-	 * 郵便番号の長さ、使用されている文字の確認 OKなら作成する
+	 * 郵便番号の長さ、使用されている文字の確認 OKなら作成する TODO: 新規作成時は value が null なので郵便番号を生成できない。
 	 */
 	public Postcode(String value) {
-		if (value.length() != LENGTH) {
+		if (value != null && value.length() != LENGTH) {
 			throw new IllegalArgumentException("郵便番号はハイフンなしの7桁のみです");
 		}
-//		if (!canRegexp(value)) {
-//			throw new IllegalArgumentException("半角数字のみです");
-//		}
+		// if (!canRegexp(value)) {
+		// throw new IllegalArgumentException("半角数字のみです");
+		// }
 		this.value = value;
 	}
 

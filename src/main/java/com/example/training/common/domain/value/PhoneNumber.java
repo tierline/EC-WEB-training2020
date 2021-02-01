@@ -19,7 +19,6 @@ public class PhoneNumber {
 	/**
 	 * 基本コンストラクタ
 	 */
-	// TODO
 	public PhoneNumber(String value) {
 		Assertion.isNull(value);
 		Assertion.length(value, MIN, MAX);

@@ -10,7 +10,7 @@ import com.example.training.common.domain.value.id.MemberId;
 import com.example.training.common.entity.MemberEntity;
 import com.example.training.common.http.AdminSession;
 import com.example.training.common.repository.MemberRepository;
-import com.example.training.web.controller.member.MemberEditForm;
+import com.example.training.web.controller.member.MemberEditCommand;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -77,10 +77,10 @@ public class AdminController {
 	 * 会員情報を編集する。
 	 */
 	@PostMapping("/members/{memberId}/edit")
-	public String edit(@PathVariable MemberId memberId, MemberEditForm memberEditForm) {
+	public String edit(@PathVariable MemberId memberId, MemberEditCommand memberEditCommand) {
 		AdminSession adminSession = (AdminSession) session.getAttribute(Admin.SESSION_NAME);
 		String adminName = adminSession.getName();
-		Member member = new Member(memberEditForm, adminName, memberId);
+		Member member = new Member(memberEditCommand, adminName, memberId);
 		memberRepository.updateByAdmin(member);
 		return "redirect:/admin/members";
 	}

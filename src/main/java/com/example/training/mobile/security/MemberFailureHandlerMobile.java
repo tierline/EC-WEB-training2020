@@ -20,6 +20,6 @@ public class MemberFailureHandlerMobile implements AuthenticationFailureHandler 
 	@Override
 	public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
 			AuthenticationException exception) throws IOException, ServletException {
-		response.sendError(HttpStatus.UNAUTHORIZED.value());
+		response.sendError(HttpStatus.UNAUTHORIZED.value(), "認証に失敗しました。");
 	}
 }

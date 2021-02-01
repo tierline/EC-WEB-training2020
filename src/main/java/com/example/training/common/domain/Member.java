@@ -13,7 +13,7 @@ import com.example.training.common.domain.value.address.Prefecture;
 import com.example.training.common.domain.value.id.MemberId;
 import com.example.training.common.entity.MemberEntity;
 import com.example.training.web.controller.member.MemberApplicationCommand;
-import com.example.training.web.controller.member.MemberEditForm;
+import com.example.training.web.controller.member.MemberEditCommand;
 
 import lombok.Getter;
 
@@ -80,12 +80,13 @@ public class Member {
 	/**
 	 * 新規会員登録時のコンストラクタ
 	 *
-	 * @param memberApplicationForm
+	 * @param memberApplicationCommand
 	 * @param passwordDigest
 	 */
-	public Member(MemberApplicationCommand memberApplicationForm, DigestPassword password) {
-		this.digestPassword = password;
-		this.email = new Email(memberApplicationForm.getEmail());
+
+	public Member(MemberApplicationCommand memberApplicationCommand, DigestPassword passwordDigest) {
+		this.digestPassword = passwordDigest;
+		this.email = new Email(memberApplicationCommand.getEmail());
 		this.lastUpdate = "none";
 		this.status = "unapproved";
 	}
@@ -105,14 +106,14 @@ public class Member {
 	/**
 	 * 会員情報編集のためのコンストラクタ
 	 *
-	 * @param memberEditForm
+	 * @param memberEditCommand
 	 * @param adminName
 	 * @param memberId
 	 */
-	public Member(MemberEditForm memberEditForm, String adminName, MemberId memberId) {
+	public Member(MemberEditCommand memberEditCommand, String adminName, MemberId memberId) {
 		this.memberId = memberId;
 		this.lastUpdate = adminName;
-		this.status = memberEditForm.getStatus();
+		this.status = memberEditCommand.getStatus();
 	}
 
 	/**

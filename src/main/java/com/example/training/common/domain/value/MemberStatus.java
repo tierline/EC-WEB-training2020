@@ -11,10 +11,10 @@ public enum MemberStatus {
 	public static MemberStatus getStatus(String memberStatus) {
 		MemberStatus value = MemberStatus.valueOf(memberStatus);
 		return value;
-//		for (MemberStatus status : MemberStatus.values()) {
-//			if(status == memberStatus) {
-//				return status.();
-//			}
-//		}
+		// for (MemberStatus status : MemberStatus.values()) {
+		// if(status == memberStatus) {
+		// return status.();
+		// }
+		// }
 	}
 };

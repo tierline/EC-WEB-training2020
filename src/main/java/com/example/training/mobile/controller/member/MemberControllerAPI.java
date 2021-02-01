@@ -43,25 +43,35 @@ public class MemberControllerAPI {
 	@CrossOrigin
 	@PostMapping("/applicate")
 	// TODO ~command
-	public ResponseEntity<?> applicate(MemberApplicationCommand memberApplicationForm) {
-		Email email = new Email(memberApplicationForm.getEmail());
+	public ResponseEntity<?> applicate(MemberApplicationCommand memberApplicationCommand) {
+		Email email = new Email(memberApplicationCommand.getEmail());
 		Optional<MemberEntity> memberOpt = memberRepository.findByEmail(email);
 		if (memberOpt.isEmpty()) {
-			memberApplicationService.run(memberApplicationForm);
+			memberApplicationService.run(memberApplicationCommand);
 			MemberEntity entity = memberRepository.findByEmail(email).orElseThrow();
 //			Member member = new Member(memberEntity.get());
 			MemberSession memberSession = new MemberSession(entity);
 			session.setAttribute(Member.SESSION_NAME, memberSession);
 			return new ResponseEntity<>(true, HttpStatus.OK);
-		} else {
-			return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
 		}
+		return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
 	}
+//	public Boolean applicate(MemberApplicationCommand memberApplicationCommand) {
+//		Email email = new Email(memberApplicationCommand.getEmail());
+//		Optional<MemberEntity> memberOpt = memberRepository.findByEmail(email);
+//		if (memberOpt.isEmpty()) {
+//			memberApplicationService.run(memberApplicationCommand);
+//			Optional<MemberEntity> memberEntity = memberRepository.findByEmail(email);
+//			Member member = new Member(memberEntity.get());
+//			MemberSession memberSession = new MemberSession(member);
+//			session.setAttribute(Member.SESSION_NAME, memberSession);
+//			return true;
 
 	/*
 	 * 会員のセッション情報を取得する。
 	 */
 	@GetMapping("/session")
+
 	@ResponseBody
 	public MemberDTO fetchMemberSession() {
 		MemberSession member = (MemberSession) session.getAttribute(Member.SESSION_NAME);

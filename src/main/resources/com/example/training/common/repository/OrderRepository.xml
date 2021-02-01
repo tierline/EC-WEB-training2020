@@ -17,7 +17,7 @@
 		"${address.value}",
 		"${email.value}",
 		${totalPrice.value},
-		"${orderDateAndTime.value}")
+		"${orderDateAndTime}")
 	</insert>
 
 	<insert id="saveItem">

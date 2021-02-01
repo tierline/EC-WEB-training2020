@@ -39,7 +39,7 @@ public class MemberSecurityConfigMobile extends WebSecurityConfigurerAdapter {
       	    .usernameParameter("email").passwordParameter("password")
 	        .successHandler(successHandler)//成功時
 	        .failureHandler(failureHandler)//失敗時
-	        .and().logout().logoutUrl("/api/member/logout")
+	        .and().logout().logoutUrl("/api/member/logout").logoutSuccessUrl("/")
 	        .deleteCookies("JSESSIONID").invalidateHttpSession(true) // ログアウト時のセッション破棄を有効化
 	        .and().csrf().disable();
 		// @formatter:on
