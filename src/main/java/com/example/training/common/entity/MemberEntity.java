@@ -1,6 +1,7 @@
 package com.example.training.common.entity;
 
 import com.example.training.common.domain.value.MemberStatus;
+import com.example.training.common.domain.value.Role;
 
 import lombok.Data;
 
@@ -21,6 +22,6 @@ public class MemberEntity {
 	private String block;
 	private MemberStatus status;
 	private String lastUpdate;
-	private String roles = "ROLE_USER";
+	private Role roles = Role.ROLE_USER;
 
 }

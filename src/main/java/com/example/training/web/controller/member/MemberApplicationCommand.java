@@ -5,6 +5,7 @@ import javax.validation.constraints.Size;
 
 import com.example.training.common.domain.Member;
 import com.example.training.common.domain.value.DigestPassword;
+import com.example.training.common.domain.value.MemberStatus;
 
 import lombok.Data;
 
@@ -36,6 +37,14 @@ public class MemberApplicationCommand {
 	 */
 	public Member createMember(DigestPassword digestPassword) {
 		return new Member(this, digestPassword);
+	}
+
+	/*
+	 * mobile版の新規登録用のMemberを作る
+	 * 
+	 */
+	public Member createMember(DigestPassword digestPassword, MemberStatus status) {
+		return new Member(this, digestPassword, status);
 	}
 
 }

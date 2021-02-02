@@ -6,15 +6,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import com.example.training.common.domain.Member;
-import com.example.training.common.domain.value.Email;
-import com.example.training.common.entity.MemberEntity;
-import com.example.training.common.http.MemberSession;
-import com.example.training.common.repository.MemberRepository;
-import com.example.training.common.service.MemberApplicationService;
-import com.example.training.web.controller.member.MemberApplicationCommand;
-import com.example.training.web.controller.member.MemberDTO;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +15,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.example.training.common.domain.Member;
+import com.example.training.common.domain.value.Email;
+import com.example.training.common.entity.MemberEntity;
+import com.example.training.common.http.MemberSession;
+import com.example.training.common.repository.MemberRepository;
+import com.example.training.mobile.service.MemberApplicationMobileService;
+import com.example.training.web.controller.member.MemberApplicationCommand;
+import com.example.training.web.controller.member.MemberDTO;
 
 /**
  * 会員のコントローラ(Mobile)
@@ -36,7 +36,7 @@ public class MemberControllerAPI {
 	private HttpSession session;
 
 	@Autowired
-	private MemberApplicationService memberApplicationService;
+	private MemberApplicationMobileService memberApplicationMobileService;
 
 	@Autowired
 	private MemberRepository memberRepository;
@@ -46,20 +46,20 @@ public class MemberControllerAPI {
 	 */
 	@CrossOrigin
 	@PostMapping("/applicate")
-	// TODO ~command
-	public ResponseEntity<Boolean> applicate(MemberApplicationCommand memberApplicationCommand,
-			HttpServletRequest request) throws ServletException {
+	// TODO
+	public ResponseEntity<?> applicate(MemberApplicationCommand memberApplicationCommand, HttpServletRequest request)
+			throws ServletException {
 		Email email = new Email(memberApplicationCommand.getEmail());
 		Optional<MemberEntity> memberOpt = memberRepository.findByEmail(email);
 		if (memberOpt.isEmpty()) {
-			memberApplicationService.run(memberApplicationCommand);
+			memberApplicationMobileService.run(memberApplicationCommand);
 			MemberEntity entity = memberRepository.findByEmail(email).orElseThrow();
 			MemberSession memberSession = new MemberSession(entity);
 			session.setAttribute(Member.SESSION_NAME, memberSession);
 			request.login(memberApplicationCommand.getEmail(), memberApplicationCommand.getPassword());
-			return new ResponseEntity<>(true, HttpStatus.OK);
+			return new ResponseEntity<>(HttpStatus.OK);
 		}
-		return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 	}
 
 	/*

@@ -6,6 +6,7 @@ import com.example.training.common.domain.value.FullName;
 import com.example.training.common.domain.value.MemberStatus;
 import com.example.training.common.domain.value.Name;
 import com.example.training.common.domain.value.PhoneNumber;
+import com.example.training.common.domain.value.Role;
 import com.example.training.common.domain.value.address.Address;
 import com.example.training.common.domain.value.address.Block;
 import com.example.training.common.domain.value.address.City;
@@ -59,7 +60,7 @@ public class Member {
 	/**
 	 * 権限
 	 */
-	private String roles = "ROLE_USER";
+	private Role roles = Role.ROLE_USER;
 
 	/**
 	 * DBから取得するためのコンストラクタ
@@ -85,12 +86,22 @@ public class Member {
 	 * @param passwordDigest
 	 */
 //TODO
-	public Member(MemberApplicationCommand memberApplicationCommand, DigestPassword passwordDigest) {
-		this.digestPassword = passwordDigest;
+	public Member(MemberApplicationCommand memberApplicationCommand, DigestPassword digestPassword) {
+		this.digestPassword = digestPassword;
 		this.email = new Email(memberApplicationCommand.getEmail());
 		this.lastUpdate = new Name("none");
 		this.status = MemberStatus.UNAPPROVED;// mobileの時どうするか
+	}
 
+	/*
+	 * mobile版新規登録
+	 */
+	public Member(MemberApplicationCommand memberApplicationCommand, DigestPassword digestPassword,
+			MemberStatus status) {
+		this.digestPassword = digestPassword;
+		this.email = new Email(memberApplicationCommand.getEmail());
+		this.lastUpdate = new Name("none");
+		this.status = status;
 	}
 
 	/**
