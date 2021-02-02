@@ -1,7 +1,7 @@
 package com.example.training.common.domain.value;
 
 /**
- * テストメソッドのクラス
+ * テストメソッドのクラス。式が真になることを期待する。
  */
 public class Assertion {
 
@@ -11,7 +11,7 @@ public class Assertion {
    * @param value
    */
   public static void isNull(String value) {
-    assert (value == null);
+    assert (value != null);
   }
 
   /**
@@ -31,7 +31,7 @@ public class Assertion {
    * @param value
    */
   public static void isNull(Long value) {
-    assert (value == null);
+    assert (value != null);
   }
 
   /**
@@ -40,7 +40,7 @@ public class Assertion {
    * @param value
    */
   public static void length(String value, int min, int max) {
-    assert (value.length() < min || value.length() > max);
+    assert (value.length() > min || value.length() < max);
   }
 
   /**
@@ -62,7 +62,7 @@ public class Assertion {
    * @param value
    */
   public static void range(int value, int min, int max) {
-    assert (value < min || value > max);
+    assert (value > min || value < max);
   }
 
   /**
@@ -71,7 +71,7 @@ public class Assertion {
    * @param value
    */
   public static void range(Long value, Long min, Long max) {
-    assert (value < min || value > max);
+    assert (value > min || value < max);
   }
 
   /**

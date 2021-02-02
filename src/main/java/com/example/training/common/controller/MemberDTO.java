@@ -2,6 +2,9 @@ package com.example.training.common.controller;
 
 import com.example.training.common.domain.Member;
 import com.example.training.common.entity.MemberEntity;
+import com.example.training.common.repository.MemberRepository;
+
+import org.springframework.beans.factory.annotation.Autowired;
 
 import lombok.Getter;
 
@@ -10,6 +13,9 @@ import lombok.Getter;
  */
 @Getter
 public class MemberDTO {
+  @Autowired
+  private MemberRepository memberRepository;
+
   private Long memberId;
   private String email;
   private String lastName;
