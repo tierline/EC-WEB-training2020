@@ -7,19 +7,28 @@ import lombok.Getter;
  */
 public class ImagePath {
 
-  /**
-   * 画像PATHの値
-   */
-  @Getter
-  public String value;
+	/**
+	 * 画像PATHの値
+	 */
+	@Getter
+	public String value;
 
-  /**
-   * 基本コンストラクタ
-   *
-   * @param value
-   */
-  public ImagePath(String value) {
-    this.value = value;
-  }
+	/**
+	 * 基本コンストラクタ
+	 *
+	 * @param value
+	 */
+	public ImagePath(String value) {
+		Assertion.isNull(value);
+		Assertion.matches(value, regex());
+		this.value = value;
+	}
+
+	/*
+	 * 半角英数字とハイフン、アンダーバー、ドット
+	 */
+	private String regex() {
+		return "[0-9a-zA-Z\\-\\_\\.]+";
+	}
 
 }

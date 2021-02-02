@@ -28,7 +28,6 @@ public class MemberApplicationService {
 	 * @param memberApplicationCommand 会員作成フォーム
 	 */
 	@Transactional
-
 	public void run(MemberApplicationCommand memberApplicationCommand) {
 		String rawPassword = memberApplicationCommand.getPassword().toString();
 		DigestPassword password = digestPasswordService.generate(rawPassword);

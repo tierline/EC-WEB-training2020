@@ -7,19 +7,19 @@ import lombok.Getter;
  */
 public class ProductName {
 
-  /**
-   * 画像PATHの値
-   */
-  @Getter
-  public String value;
+	/**
+	 * 画像PATHの値
+	 */
+	@Getter
+	public String value;
 
-  /**
-   * 基本コンストラクタ
-   *
-   * @param value
-   */
-  public ProductName(String value) {
-    Assertion.isNull(value);
-    this.value = value;
-  }
+	/**
+	 * 基本コンストラクタ
+	 *
+	 * @param value
+	 */
+	public ProductName(String value) {
+		Assertion.isNull(value);
+		this.value = value;
+	}
 }

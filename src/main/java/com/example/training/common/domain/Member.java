@@ -60,7 +60,7 @@ public class Member {
 	/**
 	 * 権限
 	 */
-	private Role roles = new Role("ROLE_USER");
+	private Role roles = Role.ROLE_USER;
 
 	/**
 	 * DBから取得するためのコンストラクタ
@@ -97,11 +97,21 @@ public class Member {
 	 * @param memberApplicationCommand
 	 * @param passwordDigest
 	 */
-	public Member(MemberApplicationCommand memberApplicationCommand, DigestPassword passwordDigest) {
-		this.digestPassword = passwordDigest;
+	public Member(MemberApplicationCommand memberApplicationCommand, DigestPassword digestPassword) {
+		this.digestPassword = digestPassword;
 		this.email = new Email(memberApplicationCommand.getEmail());
 		this.lastUpdate = new Name("none");
-		this.status = MemberStatus.UNAPPROVED;// mobileの時どうするか
+		this.status = MemberStatus.UNAPPROVED;
+	}
+
+	/*
+	 * mobile版新規登録
+	 */
+	public Member(MemberApplicationCommand memberApplicationCommand, DigestPassword digestPassword, MemberStatus status) {
+		this.digestPassword = digestPassword;
+		this.email = new Email(memberApplicationCommand.getEmail());
+		this.lastUpdate = new Name("none");
+		this.status = status;
 	}
 
 	/**

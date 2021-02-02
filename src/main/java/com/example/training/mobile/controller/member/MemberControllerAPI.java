@@ -12,7 +12,7 @@ import com.example.training.common.domain.value.Email;
 import com.example.training.common.entity.MemberEntity;
 import com.example.training.common.http.MemberSession;
 import com.example.training.common.repository.MemberRepository;
-import com.example.training.common.service.MemberApplicationService;
+import com.example.training.mobile.service.MemberApplicationMobileService;
 import com.example.training.web.controller.member.MemberApplicationCommand;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +36,7 @@ public class MemberControllerAPI {
 	private HttpSession session;
 
 	@Autowired
-	private MemberApplicationService memberApplicationService;
+	private MemberApplicationMobileService memberApplicationMobileService;
 
 	@Autowired
 	private MemberRepository memberRepository;
@@ -46,19 +46,19 @@ public class MemberControllerAPI {
 	 */
 	@CrossOrigin
 	@PostMapping("/applicate")
-	public ResponseEntity<Boolean> applicate(MemberApplicationCommand memberApplicationCommand,
-			HttpServletRequest request) throws ServletException {
+	public ResponseEntity<?> applicate(MemberApplicationCommand memberApplicationCommand, HttpServletRequest request)
+			throws ServletException {
 		Email email = new Email(memberApplicationCommand.getEmail());
 		Optional<MemberEntity> memberOpt = memberRepository.findByEmail(email);
 		if (memberOpt.isEmpty()) {
-			memberApplicationService.run(memberApplicationCommand);
-			MemberEntity entity = memberRepository.findByEmail(email).orElseThrow(NullPointerException::new);
+			memberApplicationMobileService.run(memberApplicationCommand);
+			MemberEntity entity = memberRepository.findByEmail(email).orElseThrow();
 			MemberSession memberSession = new MemberSession(entity);
 			session.setAttribute(Member.SESSION_NAME, memberSession);
 			request.login(memberApplicationCommand.getEmail(), memberApplicationCommand.getPassword());
-			return new ResponseEntity<>(true, HttpStatus.OK);
+			return new ResponseEntity<>(HttpStatus.OK);
 		}
-		return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 	}
 
 	/*

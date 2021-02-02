@@ -24,7 +24,7 @@ public class LoginAdminDetails extends User {
    * @param admin adminエンティティ
    */
   public LoginAdminDetails(Admin admin) {
-    super(admin.getName().getValue(), admin.getPassword().getValue(), createRole(admin.getRoles()));
+    super(admin.getName().getValue(), admin.getPassword().getValue(), createRole());
     this.admin = admin;
   }
 
@@ -32,8 +32,8 @@ public class LoginAdminDetails extends User {
     return admin;
   }
 
-  private static Collection<? extends GrantedAuthority> createRole(Role role) {
-    return AuthorityUtils.commaSeparatedStringToAuthorityList(role.getValue());
+  private static Collection<? extends GrantedAuthority> createRole() {
+    return AuthorityUtils.commaSeparatedStringToAuthorityList(Role.ADMIN_USER.toString());
   }
 
 }

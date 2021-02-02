@@ -13,38 +13,38 @@ import lombok.Getter;
  */
 @Getter
 public class Admin {
-  public static final String SESSION_NAME = "ADMIN";
+	public static final String SESSION_NAME = "ADMIN";
 
-  /**
-   * 管理者ID
-   */
-  private AdminId id;
+	/**
+	 * 管理者ID
+	 */
+	private AdminId id;
 
-  /**
-   * 名前
-   */
-  private Name name;
+	/**
+	 * 名前
+	 */
+	private Name name;
 
-  /**
-   * パスワード
-   */
-  private DigestPassword password;
+	/**
+	 * パスワード
+	 */
+	private DigestPassword password;
 
-  /**
-   * 権限
-   */
-  private Role roles = new Role("ROLE_USER,ROLE_ADMIN");
+	/**
+	 * 権限
+	 */
+	private Role roles;
 
-  /**
-   * DBから取得するためのコンストラクタ
-   *
-   * @param adminEntity
-   */
-  public Admin(AdminEntity adminEntity) {
-    this.id = new AdminId(adminEntity.getId());
-    this.name = new Name(adminEntity.getName());
-    this.password = new DigestPassword(adminEntity.getPassword());
-    this.roles = new Role(adminEntity.getRoles());
-  }
+	/**
+	 * DBから取得するためのコンストラクタ
+	 *
+	 * @param adminEntity
+	 */
+	public Admin(AdminEntity adminEntity) {
+		this.id = new AdminId(adminEntity.getId());
+		this.name = new Name(adminEntity.getName());
+		this.password = new DigestPassword(adminEntity.getPassword());
+		this.roles = Role.ADMIN_USER;
+	}
 
 }
