@@ -10,7 +10,7 @@ import com.example.training.mobile.controller.cart.CartItemDTO;
 import lombok.Getter;
 
 /**
- * カートのデータ転送用オブジェクト fix :まだ未使用です...。
+ * カートのデータ転送用オブジェクト
  */
 @Getter
 public class CartDTO {

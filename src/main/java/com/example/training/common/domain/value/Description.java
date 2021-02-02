@@ -19,6 +19,7 @@ public class Description {
    * @param value
    */
   public Description(String value) {
+    Assertion.isNull(value);
     this.value = value;
   }
 

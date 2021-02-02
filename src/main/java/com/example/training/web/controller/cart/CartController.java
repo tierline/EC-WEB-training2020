@@ -8,6 +8,7 @@ import com.example.training.common.controller.CartDTO;
 import com.example.training.common.domain.Cart;
 import com.example.training.common.domain.Product;
 import com.example.training.common.domain.value.Quantity;
+import com.example.training.common.domain.value.id.ProductId;
 import com.example.training.common.entity.ProductEntity;
 import com.example.training.common.repository.ProductRepository;
 
@@ -41,9 +42,10 @@ public class CartController {
 	 * @param id
 	 * @return
 	 */
-	@GetMapping("/add/{productId}")
-	public String add(@PathVariable int productId) {
+	@GetMapping("/add/{id}")
+	public String add(@PathVariable Long id) {
 		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
+		ProductId productId = new ProductId(id);
 		ProductEntity productEntity = productRepository.findById(productId).orElseThrow(NullPointerException::new);
 		Product product = new Product(productEntity);
 
@@ -57,8 +59,9 @@ public class CartController {
 	 * @param id
 	 * @return
 	 */
-	@PostMapping(path = "/changeQuantity/{productId}", consumes = "application/x-www-form-urlencoded")
-	public String changeItemQuantity(@PathVariable int productId, int quantity) {
+	@PostMapping(path = "/changeQuantity/{id}", consumes = "application/x-www-form-urlencoded")
+	public String changeItemQuantity(@PathVariable Long id, int quantity) {
+		ProductId productId = new ProductId(id);
 		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
 		ProductEntity productEntity = productRepository.findById(productId).orElseThrow(NullPointerException::new);
 		Product product = new Product(productEntity);
@@ -69,14 +72,15 @@ public class CartController {
 	/**
 	 * カート内の商品を1つ削除する。
 	 *
-	 * @param id
+	 * @param productId
 	 * @return
 	 */
 	@GetMapping("/delete/{id}")
-	public String delete(@PathVariable int id) {
+	public String delete(@PathVariable Long id) {
+		ProductId productId = new ProductId(id);
 		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
-		ProductEntity productEntity = productRepository.findById(id).orElseThrow(NullPointerException::new);
-		Product product = new Product(productEntity);
+		ProductEntity entity = productRepository.findById(productId).orElseThrow(NullPointerException::new);
+		Product product = new Product(entity);
 		cart.remove(product);
 
 		return "redirect:/member/cart/list";

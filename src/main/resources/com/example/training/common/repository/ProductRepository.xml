@@ -20,7 +20,7 @@
 		FROM
 		PRODUCT
 		WHERE
-		id = ${id}
+		id = ${value}
 	</select>
 	<select id="findName"
 		resultType="com.example.training.common.entity.ProductEntity">

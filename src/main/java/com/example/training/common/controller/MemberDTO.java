@@ -2,9 +2,6 @@ package com.example.training.common.controller;
 
 import com.example.training.common.domain.Member;
 import com.example.training.common.entity.MemberEntity;
-import com.example.training.common.repository.MemberRepository;
-
-import org.springframework.beans.factory.annotation.Autowired;
 
 import lombok.Getter;
 
@@ -13,8 +10,6 @@ import lombok.Getter;
  */
 @Getter
 public class MemberDTO {
-  @Autowired
-  private MemberRepository memberRepository;
 
   private Long memberId;
   private String email;
@@ -46,17 +41,17 @@ public class MemberDTO {
   /**
    * Mobile版の住所フォームのためのコンストラクタ
    *
-   * @param memberEntity
+   * @param entity
    */
-  public MemberDTO(MemberEntity memberEntity) {
-    this.memberId = memberEntity.getMemberId();
-    this.email = memberEntity.getEmail();
-    this.lastName = memberEntity.getLastName();
-    this.firstName = memberEntity.getFirstName();
-    this.phoneNumber = memberEntity.getPhoneNumber();
-    this.postcode = memberEntity.getPostcode();
-    this.prefecture = memberEntity.getPrefecture();
-    this.city = memberEntity.getCity();
-    this.block = memberEntity.getBlock();
+  public MemberDTO(MemberEntity entity) {
+    this.memberId = entity.getMemberId();
+    this.email = entity.getEmail();
+    this.lastName = entity.getLastName();
+    this.firstName = entity.getFirstName();
+    this.phoneNumber = entity.getPhoneNumber();
+    this.postcode = entity.getPostcode();
+    this.prefecture = entity.getPrefecture();
+    this.city = entity.getCity();
+    this.block = entity.getBlock();
   }
 }

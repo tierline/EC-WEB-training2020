@@ -6,6 +6,7 @@ import com.example.training.common.controller.CartDTO;
 import com.example.training.common.domain.Cart;
 import com.example.training.common.domain.Product;
 import com.example.training.common.domain.value.Quantity;
+import com.example.training.common.domain.value.id.ProductId;
 import com.example.training.common.entity.ProductEntity;
 import com.example.training.common.repository.ProductRepository;
 
@@ -48,8 +49,9 @@ public class CartControllerAPI {
 	 *
 	 * @return
 	 */
-	@PostMapping("/add/{productId}")
-	public void add(@PathVariable int productId) {
+	@PostMapping("/add/{id}")
+	public void add(@PathVariable Long id) {
+		ProductId productId = new ProductId(id);
 		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
 		ProductEntity productEntity = productRepository.findById(productId).orElseThrow(NullPointerException::new);
 		Product product = new Product(productEntity);
@@ -62,8 +64,9 @@ public class CartControllerAPI {
 	 * @param id
 	 * @return
 	 */
-	@PostMapping("/changeQuantity/{productId}/{quantity}")
-	public void changeItemQuantity(@PathVariable int productId, @PathVariable int quantity) {
+	@PostMapping("/changeQuantity/{id}/{quantity}")
+	public void changeItemQuantity(@PathVariable Long id, @PathVariable int quantity) {
+		ProductId productId = new ProductId(id);
 		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
 		ProductEntity productEntity = productRepository.findById(productId).orElseThrow(NullPointerException::new);
 		Product product = new Product(productEntity);
@@ -76,8 +79,9 @@ public class CartControllerAPI {
 	 * @param productId
 	 * @return
 	 */
-	@PostMapping("/remove/{productId}")
-	public Cart cartFromParticularProductsAllDelete(@PathVariable int productId) {
+	@PostMapping("/remove/{id}")
+	public Cart cartFromParticularProductsAllDelete(@PathVariable Long id) {
+		ProductId productId = new ProductId(id);
 		Cart cart = (Cart) session.getAttribute(Cart.SESSION_NAME);
 		ProductEntity productEntity = productRepository.findById(productId).orElseThrow(NullPointerException::new);
 		Product product = new Product(productEntity);

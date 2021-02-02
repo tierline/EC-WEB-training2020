@@ -66,27 +66,26 @@ public class Order {
 	/**
 	 * 注文処理用コンストラクタ
 	 *
-	 * @param orderSaveCommand 住所入力フォーム
-	 * @param cart             カート
+	 * @param command 住所入力フォーム
+	 * @param cart    カート
 	 */
-	public Order(OrderSaveCommand orderSaveCommand, Cart cart) {
-		this.memberId = new MemberId(orderSaveCommand.getMemberId());
-		this.fullName = new FullName(new Name(orderSaveCommand.getLastName()), new Name(orderSaveCommand.getFirstName()));
-		this.address = new Address(new Postcode(orderSaveCommand.getPostcode()),
-				new Prefecture(orderSaveCommand.getPrefecture()), new City(orderSaveCommand.getCity()),
-				new Block(orderSaveCommand.getBlock()));
-		this.email = new Email(orderSaveCommand.getEmail());
-		this.phoneNumber = new PhoneNumber(orderSaveCommand.getPhoneNumber());
-		this.orderDateAndTime = orderSaveCommand.getOrderDateAndTime();
+	public Order(OrderSaveCommand command, Cart cart) {
+		this.memberId = new MemberId(command.getMemberId());
+		this.fullName = new FullName(new Name(command.getLastName()), new Name(command.getFirstName()));
+		this.address = new Address(new Postcode(command.getPostcode()), new Prefecture(command.getPrefecture()),
+				new City(command.getCity()), new Block(command.getBlock()));
+		this.email = new Email(command.getEmail());
+		this.phoneNumber = new PhoneNumber(command.getPhoneNumber());
+		this.orderDateAndTime = command.getOrderDateAndTime();
 		this.totalPrice = cart.getTotalPrice();
 	}
 
 	/**
 	 * テスト用コンストラクタ
 	 *
-	 * @param orderId  注文ID
-	 * @param memberId 会員ID
-	 * @param date     注文日時
+	 * @param orderId          注文ID
+	 * @param memberId         会員ID
+	 * @param orderDateAndTime 注文日時
 	 */
 	public Order(OrderId orderId, MemberId memberId, LocalDateTime orderDateAndTime) {
 		this.id = orderId;

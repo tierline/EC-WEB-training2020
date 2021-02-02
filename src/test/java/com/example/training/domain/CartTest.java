@@ -1,13 +1,11 @@
 package com.example.training.domain;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-
 import com.example.training.common.domain.Cart;
 import com.example.training.common.domain.Product;
 import com.example.training.common.domain.value.ProductName;
 import com.example.training.common.domain.value.id.ProductId;
 
+import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -23,7 +21,7 @@ class CartTest {
   @Test
   void create() {
     Cart cart = new Cart();
-    assertNotNull(cart);
+    Assert.assertNotNull(cart);
   }
 
   /**
@@ -31,26 +29,22 @@ class CartTest {
    */
   @Test
   void add() {
-    Product product = new Product(new ProductId(20L), new ProductName("ガム"));
+    Product product = new Product(new ProductId(1L), new ProductName("ガム"));
     Cart cart = new Cart();
     cart.add(product);
-    assertEquals(product, cart.getItem(product).get());
+    Assert.assertEquals(product, cart.getItem(product).get().getProduct());
   }
 
-  // /**
-  // * カートに商品が指定した数量個、追加できる。
-  // */
-  // @Test
-  // void addWithQuantity() {
-  // Product product = new Product(new ProductId(1L), new ProductName("ガム"));
-  // Cart cart = new Cart();
-  // // cart.add(product, new Quantity(1));
-  // // assertEquals(1, cart.getSize());
-  // // cart.add(product, new Quantity(0));
-  // // assertEquals(1, cart.getSize());
-  // cart.add(product, new Quantity(100));
-  // assertEquals(100, cart.getItem(product).get().getQuantity().getValue());
-  // }
+  /**
+   * カートに商品が指定した数量個、追加できる。
+   */
+  @Test
+  void addWithQuantity() {
+    Product product = new Product(new ProductId(1L), new ProductName("ガム"));
+    Cart cart = new Cart();
+    cart.add(product);
+    Assert.assertEquals(1, cart.getItem(product).get().getQuantity().getValue());
+  }
 
   // /**
   // * カートから商品を削除できる。

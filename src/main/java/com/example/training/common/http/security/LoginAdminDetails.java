@@ -33,7 +33,7 @@ public class LoginAdminDetails extends User {
   }
 
   private static Collection<? extends GrantedAuthority> createRole() {
-    return AuthorityUtils.commaSeparatedStringToAuthorityList(Role.ADMIN_USER.toString());
+    return AuthorityUtils.commaSeparatedStringToAuthorityList(Role.ROLE_ADMIN.toString());
   }
 
 }

@@ -40,12 +40,12 @@ public class Product {
 	 *
 	 * @param productEntity
 	 */
-	public Product(ProductEntity productEntity) {
-		this.id = new ProductId(productEntity.getId());
-		this.name = new ProductName(productEntity.getName());
-		this.price = new Price(productEntity.getPrice());
-		this.imagePath = new ImagePath(productEntity.getImagePath());
-		this.description = new Description(productEntity.getDescription());
+	public Product(ProductEntity entity) {
+		this.id = new ProductId(entity.getId());
+		this.name = new ProductName(entity.getName());
+		this.price = new Price(entity.getPrice());
+		this.imagePath = new ImagePath(entity.getImagePath());
+		this.description = new Description(entity.getDescription());
 	}
 
 	/**

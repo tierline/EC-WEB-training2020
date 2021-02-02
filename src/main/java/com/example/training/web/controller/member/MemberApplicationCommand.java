@@ -35,16 +35,16 @@ public class MemberApplicationCommand {
 	 * @param passwordDigest
 	 * @return 会員登録用のメンバーオブジェクト
 	 */
-	public Member createMember(DigestPassword digestPassword) {
-		return new Member(this, digestPassword);
+	public Member createMember(DigestPassword password) {
+		return new Member(this, password);
 	}
 
 	/*
 	 * mobile版の新規登録用のMemberを作る
-	 * 
+	 *
 	 */
-	public Member createMember(DigestPassword digestPassword, MemberStatus status) {
-		return new Member(this, digestPassword, status);
+	public Member createMember(DigestPassword password, MemberStatus status) {
+		return new Member(this, password, status);
 	}
 
 }

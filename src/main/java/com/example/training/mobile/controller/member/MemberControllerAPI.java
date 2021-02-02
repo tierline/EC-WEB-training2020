@@ -46,16 +46,16 @@ public class MemberControllerAPI {
 	 */
 	@CrossOrigin
 	@PostMapping("/applicate")
-	public ResponseEntity<?> applicate(MemberApplicationCommand memberApplicationCommand, HttpServletRequest request)
+	public ResponseEntity<?> applicate(MemberApplicationCommand command, HttpServletRequest request)
 			throws ServletException {
-		Email email = new Email(memberApplicationCommand.getEmail());
+		Email email = new Email(command.getEmail());
 		Optional<MemberEntity> memberOpt = memberRepository.findByEmail(email);
 		if (memberOpt.isEmpty()) {
-			memberApplicationMobileService.run(memberApplicationCommand);
+			memberApplicationMobileService.run(command);
 			MemberEntity entity = memberRepository.findByEmail(email).orElseThrow();
 			MemberSession memberSession = new MemberSession(entity);
 			session.setAttribute(Member.SESSION_NAME, memberSession);
-			request.login(memberApplicationCommand.getEmail(), memberApplicationCommand.getPassword());
+			request.login(command.getEmail(), command.getPassword());
 			return new ResponseEntity<>(HttpStatus.OK);
 		}
 		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

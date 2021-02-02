@@ -12,7 +12,7 @@
 		FROM
 		ADMIN
 		WHERE
-		name = "${name}"
+		name = "${value}"
 	</select>
 
 </mapper>
