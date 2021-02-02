@@ -88,8 +88,8 @@ public class Order {
 	 * @param memberId 会員ID
 	 * @param date     注文日時
 	 */
-	public Order(Long orderId, MemberId memberId, LocalDateTime orderDateAndTime) {
-		this.id = new OrderId(orderId);
+	public Order(OrderId orderId, MemberId memberId, LocalDateTime orderDateAndTime) {
+		this.id = orderId;
 		this.memberId = memberId;
 		this.orderDateAndTime = orderDateAndTime;
 	}
