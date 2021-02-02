@@ -1,4 +1,4 @@
-package com.example.training.web.controller.member;
+package com.example.training.common.controller;
 
 import com.example.training.common.domain.Member;
 import com.example.training.common.entity.MemberEntity;

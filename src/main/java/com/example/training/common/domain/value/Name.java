@@ -2,11 +2,14 @@ package com.example.training.common.domain.value;
 
 import lombok.Getter;
 
-@Getter
+/**
+ * 名前を表す値オブジェクト
+ */
 public class Name {
   /**
    * 名前の値
    */
+  @Getter
   private String value;
   /**
    * 名前の最大値

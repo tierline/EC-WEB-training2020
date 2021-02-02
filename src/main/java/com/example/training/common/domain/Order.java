@@ -18,20 +18,22 @@ import com.example.training.common.domain.value.address.Prefecture;
 import com.example.training.common.domain.value.id.MemberId;
 import com.example.training.common.domain.value.id.OrderId;
 
-import lombok.Data;
+import lombok.Getter;
 
 /**
  *
  * 注文クラス
  *
  */
-@Data
+@Getter
 public class Order {
 
 	/**
 	 * 注文ID
+	 *
+	 * MEMO: まず id=0L で生成し注文時の処理 useGenerateKeys で自動採番された値がセットされる。
 	 */
-	private OrderId id;
+	private OrderId id = new OrderId(0L);
 	/**
 	 * 会員ID
 	 */
@@ -68,8 +70,6 @@ public class Order {
 	 * @param cart             カート
 	 */
 	public Order(OrderSaveCommand orderSaveCommand, Cart cart) {
-		// MEMO: まず id=0 で生成し注文時の処理 useGenerateKeys で自動採番された値がセットされる。
-		this.id = new OrderId(0L);
 		this.memberId = new MemberId(orderSaveCommand.getMemberId());
 		this.fullName = new FullName(new Name(orderSaveCommand.getLastName()), new Name(orderSaveCommand.getFirstName()));
 		this.address = new Address(new Postcode(orderSaveCommand.getPostcode()),
@@ -88,8 +88,8 @@ public class Order {
 	 * @param memberId 会員ID
 	 * @param date     注文日時
 	 */
-	public Order(Long orderId, MemberId memberId, LocalDateTime orderDateAndTime) {
-		this.id = new OrderId(orderId);
+	public Order(OrderId orderId, MemberId memberId, LocalDateTime orderDateAndTime) {
+		this.id = orderId;
 		this.memberId = memberId;
 		this.orderDateAndTime = orderDateAndTime;
 	}
@@ -101,7 +101,7 @@ public class Order {
 	}
 
 	/**
-	 * 注文商品を作る。
+	 * 注文商品を生成する。
 	 *
 	 * @param cart カート
 	 * @return 注文した商品

@@ -24,7 +24,7 @@ public interface MemberRepository {
 	/**
 	 * IDで取得する。
 	 */
-	public MemberEntity findById(MemberId memberId);
+	public Optional<MemberEntity> findById(MemberId memberId);
 
 	/**
 	 * 全ての会員を取得する。
@@ -32,7 +32,7 @@ public interface MemberRepository {
 	public List<MemberEntity> findAll();
 
 	/**
-	 * 会員を作る。
+	 * 会員を生成する。
 	 *
 	 * @param member
 	 */

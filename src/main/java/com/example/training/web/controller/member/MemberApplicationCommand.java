@@ -30,7 +30,7 @@ public class MemberApplicationCommand {
 
 	/**
 	 *
-	 * 新規会員登録用のMemberを作る。
+	 * 新規会員登録用のMemberを生成する。
 	 *
 	 * @param passwordDigest
 	 * @return 会員登録用のメンバーオブジェクト

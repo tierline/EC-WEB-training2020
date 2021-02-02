@@ -69,7 +69,7 @@ public class AdminController {
 	 */
 	@GetMapping("/members/{memberId}/edit")
 	public String editForm(@PathVariable MemberId memberId, Model model) {
-		MemberEntity memberEntity = memberRepository.findById(memberId);
+		MemberEntity memberEntity = memberRepository.findById(memberId).orElseThrow(NullPointerException::new);
 		model.addAttribute("member", memberEntity);
 		return "admin/members/edit";
 	}

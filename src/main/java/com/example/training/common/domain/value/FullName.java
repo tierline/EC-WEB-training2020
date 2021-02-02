@@ -5,16 +5,17 @@ import lombok.Getter;
 /**
  * 会員の氏名を表す値オブジェクト
  */
-@Getter
 public class FullName {
 	/**
 	 * 姓
 	 */
+	@Getter
 	private Name lastName;
 
 	/**
 	 * 名
 	 */
+	@Getter
 	private Name firstName;
 
 	/**

@@ -5,12 +5,12 @@ import com.example.training.common.entity.ProductEntity;
 
 import org.springframework.beans.BeanUtils;
 
-import lombok.Data;
+import lombok.Getter;
 
 /**
  * 商品のデータ転送用オブジェクト
  */
-@Data
+@Getter
 public class ProductDTO {
   private Long id;
   private String name;

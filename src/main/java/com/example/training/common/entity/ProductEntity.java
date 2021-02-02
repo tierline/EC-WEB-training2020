@@ -1,11 +1,11 @@
 package com.example.training.common.entity;
 
-import lombok.Data;
+import lombok.Getter;
 
 /**
  * キャスト用エンティティ（DB取得時）
  */
-@Data
+@Getter
 public class ProductEntity {
     private Long id;
     private String name;

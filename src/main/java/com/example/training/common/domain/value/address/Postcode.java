@@ -8,6 +8,9 @@ import lombok.Getter;
  * 郵便番号を表す値オブジェクト
  */
 public class Postcode {
+	/**
+	 * 郵便番号の値
+	 */
 	@Getter
 	private String value;
 

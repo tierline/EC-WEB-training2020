@@ -13,10 +13,6 @@ public class DigestPassword {
 	@Getter
 	private String value;
 
-	// @Service をつけてみても、null になる。値オブジェクト内で暗号化すべきか？ するとしたら、どうするか。
-	// @Autowired
-	// private PasswordEncoder passwordEncoder;
-
 	/**
 	 * 基本コンストラクタ。平文のパスワードをハッシュ値に変換する。
 	 *

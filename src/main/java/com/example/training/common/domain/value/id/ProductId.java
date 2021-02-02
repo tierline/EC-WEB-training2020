@@ -1,5 +1,8 @@
 package com.example.training.common.domain.value.id;
 
+/**
+ * 商品IDの値オブジェクト
+ */
 public class ProductId extends LongId {
 
   /**

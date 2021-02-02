@@ -1,11 +1,11 @@
 package com.example.training.common.entity;
 
-import lombok.Data;
+import lombok.Getter;
 
 /**
  * 注文商品のDB取得のためのエンティティ Productの違いはとは orderId フィールドの有無
  */
-@Data
+@Getter
 public class OrderItemEntity {
   /**
    * 注文ID

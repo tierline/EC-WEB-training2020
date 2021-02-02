@@ -8,7 +8,13 @@ import lombok.Getter;
 
 public class PhoneNumber {
 
+	/**
+	 * 電話番号の最小値
+	 */
 	private final Integer MIN = 10;
+	/**
+	 * 電話番号の最大値
+	 */
 	private final Integer MAX = 11;
 	/**
 	 * 電話番号の値

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.training.common.controller.MemberDTO;
 import com.example.training.common.domain.Member;
 import com.example.training.common.domain.value.Email;
 import com.example.training.common.entity.MemberEntity;
@@ -23,7 +24,6 @@ import com.example.training.common.http.MemberSession;
 import com.example.training.common.repository.MemberRepository;
 import com.example.training.mobile.service.MemberApplicationMobileService;
 import com.example.training.web.controller.member.MemberApplicationCommand;
-import com.example.training.web.controller.member.MemberDTO;
 
 /**
  * 会員のコントローラ(Mobile)
@@ -46,6 +46,7 @@ public class MemberControllerAPI {
 	 */
 	@CrossOrigin
 	@PostMapping("/applicate")
+
 	// TODO
 	public ResponseEntity<?> applicate(MemberApplicationCommand memberApplicationCommand, HttpServletRequest request)
 			throws ServletException {
@@ -70,7 +71,7 @@ public class MemberControllerAPI {
 	public MemberDTO fetchMemberSession() {
 		MemberSession member = (MemberSession) session.getAttribute(Member.SESSION_NAME);
 		Email email = member.getEmail();
-		MemberEntity memberEntity = memberRepository.findByEmail(email).orElseThrow();
+		MemberEntity memberEntity = memberRepository.findByEmail(email).orElseThrow(NullPointerException::new);
 		MemberDTO memberDTO = new MemberDTO(memberEntity);
 		return memberDTO;
 	}

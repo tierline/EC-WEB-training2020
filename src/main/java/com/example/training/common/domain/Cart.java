@@ -57,7 +57,7 @@ public class Cart {
 	 * @param quantity 商品数
 	 */
 	public void changeItemQuantity(Product product, Quantity quantity) {
-		CartItem item = getItem(product).orElseThrow();
+		CartItem item = getItem(product).orElseThrow(NullPointerException::new);
 		item.changeQuantity(quantity);
 		if (item.isQuantityZero()) {
 			this.items.remove(item);

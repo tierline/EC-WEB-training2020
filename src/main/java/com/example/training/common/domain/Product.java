@@ -36,7 +36,7 @@ public class Product {
 	private Description description;
 
 	/**
-	 * DBから得るためのコンストラクタ
+	 * DBから取得するためのコンストラクタ
 	 *
 	 * @param productEntity
 	 */
@@ -51,16 +51,16 @@ public class Product {
 	/**
 	 * テスト用コンストラクタ
 	 */
-	public Product(Long id, ProductName name) {
-		this.id = new ProductId(id);
+	public Product(ProductId id, ProductName name) {
+		this.id = id;
 		this.name = name;
 	}
 
 	/**
 	 * テスト用コンストラクタ
 	 */
-	public Product(Long id, ProductName name, Price price) {
-		this.id = new ProductId(id);
+	public Product(ProductId id, ProductName name, Price price) {
+		this.id = id;
 		this.name = name;
 		this.price = price;
 	}

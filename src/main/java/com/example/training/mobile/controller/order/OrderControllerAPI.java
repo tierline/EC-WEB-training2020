@@ -11,6 +11,7 @@ import com.example.training.common.domain.Cart;
 import com.example.training.common.domain.Member;
 import com.example.training.common.domain.Order;
 import com.example.training.common.domain.value.Email;
+import com.example.training.common.domain.value.id.MemberId;
 import com.example.training.common.domain.value.id.OrderId;
 import com.example.training.common.entity.MemberEntity;
 import com.example.training.common.entity.OrderItemEntity;
@@ -89,13 +90,6 @@ public class OrderControllerAPI {
 		return items;
 	}
 
-	@GetMapping("/history/item/{id}")
-	public List<OrderItemEntity> orderItemList(@PathVariable Long id) {
-		OrderId orderId = new OrderId(id);
-		List<OrderItemEntity> list = orderRepository.findOrderItemsById(orderId);
-		return list;
-	}
-
 	/**
 	 * 会員の購入履歴を取得する
 	 *
@@ -105,9 +99,10 @@ public class OrderControllerAPI {
 	public Map<Integer, List<OrderHistoryByMonth>> history() {
 		MemberSession memberSession = (MemberSession) session.getAttribute(Member.SESSION_NAME);
 		Email email = memberSession.getEmail();
-		MemberEntity memberEntity = memberRepository.findByEmail(email).orElseThrow();
+		MemberEntity memberEntity = memberRepository.findByEmail(email).orElseThrow(NullPointerException::new);
 		Member member = new Member(memberEntity);
-		Map<Integer, List<OrderHistoryByMonth>> result = orderHistoryAssembler.create(member);
+		MemberId memberId = member.getMemberId();
+		Map<Integer, List<OrderHistoryByMonth>> result = orderHistoryAssembler.create(memberId);
 		return result;
 	}
 

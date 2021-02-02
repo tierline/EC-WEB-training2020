@@ -29,7 +29,7 @@ public class ProductController {
 	 */
 	@GetMapping("detail/{productId}")
 	public String detail(@PathVariable int productId, Model model) {
-		ProductEntity product = productRepository.findById(productId).orElseThrow(() -> new IllegalArgumentException());
+		ProductEntity product = productRepository.findById(productId).orElseThrow(NullPointerException::new);
 		model.addAttribute("product", product);
 		return "product/detail";
 	}

@@ -90,7 +90,7 @@ public class Member {
 		this.digestPassword = digestPassword;
 		this.email = new Email(memberApplicationCommand.getEmail());
 		this.lastUpdate = new Name("none");
-		this.status = MemberStatus.UNAPPROVED;// mobileの時どうするか
+		this.status = MemberStatus.UNAPPROVED;
 	}
 
 	/*

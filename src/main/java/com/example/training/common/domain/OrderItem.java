@@ -6,12 +6,12 @@ import com.example.training.common.domain.value.ProductName;
 import com.example.training.common.domain.value.Quantity;
 import com.example.training.common.domain.value.id.OrderId;
 
-import lombok.Data;
+import lombok.Getter;
 
 /**
  * 注文商品クラス
  */
-@Data
+@Getter
 public class OrderItem {
 
 	/**
@@ -41,7 +41,7 @@ public class OrderItem {
 
 	/**
 	 *
-	 * コントラクタ（カート内の商品から注文商品を作る）
+	 * コントラクタ（カート内の商品から注文商品を生成する）
 	 *
 	 * @param item カート内の商品
 	 */

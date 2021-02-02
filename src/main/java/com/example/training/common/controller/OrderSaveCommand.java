@@ -9,7 +9,6 @@ import javax.validation.constraints.Size;
 
 import com.example.training.common.domain.Cart;
 import com.example.training.common.domain.Order;
-import com.example.training.web.controller.member.MemberDTO;
 
 import lombok.Data;
 
@@ -89,7 +88,7 @@ public class OrderSaveCommand {
 	private LocalDateTime orderDateAndTime = LocalDateTime.now();
 
 	/**
-	 * カートから注文クラスを作る。
+	 * カートから注文クラスを生成する。
 	 *
 	 * @param cart
 	 * @return 注文クラス
