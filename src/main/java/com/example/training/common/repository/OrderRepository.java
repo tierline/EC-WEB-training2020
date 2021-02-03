@@ -23,7 +23,6 @@ public interface OrderRepository {
 	 * @param id
 	 * @return 注文内容
 	 */
-
 	public Order findById(OrderId id);
 
 	/**

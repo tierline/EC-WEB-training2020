@@ -8,7 +8,6 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import com.example.training.common.domain.Member;
-import com.example.training.common.domain.value.Email;
 import com.example.training.common.entity.MemberEntity;
 import com.example.training.common.repository.MemberRepository;
 import com.example.training.common.service.MemberApplicationService;
@@ -75,23 +74,22 @@ public class MemberController {
 	/**
 	 * 会員の新規登録処理をする。
 	 *
-	 * @param memberApplicationCommand
+	 * @param command
 	 * @param result
 	 * @param model
 	 * @return 完了画面
 	 */
 	@PostMapping("applicate")
-	public String applicate(@Valid MemberApplicationCommand memberApplicationCommand, BindingResult result, Model model) {
+	public String applicate(@Valid MemberApplicationCommand command, BindingResult result, Model model) {
 		if (result.hasErrors()) {
-			return applicate(memberApplicationCommand, model);
+			return applicate(command, model);
 		}
-		Email email = new Email(memberApplicationCommand.getEmail());
-		Optional<MemberEntity> memberEntity = memberRepository.findByEmail(email);
+		Optional<MemberEntity> memberEntity = memberRepository.findByEmail(command.getEmail());
 		if (memberEntity.isPresent()) {
 			model.addAttribute("errorMessage", messageSource.getMessage("error.applicate.duplicate", null, Locale.JAPAN));
 			return "member/applicate";
 		}
-		memberApplicationService.run(memberApplicationCommand);
+		memberApplicationService.run(command);
 		return "redirect:/member/applicated";
 
 	}

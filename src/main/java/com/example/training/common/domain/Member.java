@@ -94,12 +94,12 @@ public class Member {
 	/**
 	 * 新規会員登録時のコンストラクタ
 	 *
-	 * @param memberApplicationCommand
-	 * @param passwordDigest
+	 * @param command
+	 * @param password
 	 */
-	public Member(MemberApplicationCommand memberApplicationCommand, DigestPassword digestPassword) {
-		this.digestPassword = digestPassword;
-		this.email = new Email(memberApplicationCommand.getEmail());
+	public Member(MemberApplicationCommand command, DigestPassword password) {
+		this.digestPassword = password;
+		this.email = command.getEmail();
 		this.lastUpdate = new Name("none");
 		this.status = MemberStatus.UNAPPROVED;
 	}
@@ -107,9 +107,9 @@ public class Member {
 	/*
 	 * mobile版新規登録
 	 */
-	public Member(MemberApplicationCommand memberApplicationCommand, DigestPassword digestPassword, MemberStatus status) {
-		this.digestPassword = digestPassword;
-		this.email = new Email(memberApplicationCommand.getEmail());
+	public Member(MemberApplicationCommand command, DigestPassword password, MemberStatus status) {
+		this.digestPassword = password;
+		this.email = command.getEmail();
 		this.lastUpdate = new Name("none");
 		this.status = status;
 	}

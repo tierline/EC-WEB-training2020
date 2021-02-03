@@ -113,16 +113,4 @@ public class Order {
 		return results;
 	}
 
-	/**
-	 * 合計金額をセットする。
-	 *
-	 * @param cart カート
-	 */
-	public void setPrice(Cart cart) {
-		Price total = new Price(0);
-		for (CartItem item : cart.getItems()) {
-			item.getTotalPrice().add(total);
-		}
-		this.totalPrice = total;
-	}
 }

@@ -5,6 +5,7 @@ import javax.validation.constraints.Size;
 
 import com.example.training.common.domain.Member;
 import com.example.training.common.domain.value.DigestPassword;
+import com.example.training.common.domain.value.Email;
 import com.example.training.common.domain.value.MemberStatus;
 
 import lombok.Data;
@@ -29,7 +30,6 @@ public class MemberApplicationCommand {
 	private String password;
 
 	/**
-	 *
 	 * 新規会員登録用のMemberを生成する。
 	 *
 	 * @param passwordDigest
@@ -45,6 +45,10 @@ public class MemberApplicationCommand {
 	 */
 	public Member createMember(DigestPassword password, MemberStatus status) {
 		return new Member(this, password, status);
+	}
+
+	public Email createEmail() {
+		return new Email(this.email);
 	}
 
 }
