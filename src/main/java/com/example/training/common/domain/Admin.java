@@ -38,13 +38,13 @@ public class Admin {
 	/**
 	 * DBから取得するためのコンストラクタ
 	 *
-	 * @param adminEntity
+	 * @param entity
 	 */
-	public Admin(AdminEntity adminEntity) {
-		this.id = new AdminId(adminEntity.getId());
-		this.name = new Name(adminEntity.getName());
-		this.password = new DigestPassword(adminEntity.getPassword());
-		this.roles = Role.ADMIN_USER;
+	public Admin(AdminEntity entity) {
+		this.id = new AdminId(entity.getId());
+		this.name = new Name(entity.getName());
+		this.password = new DigestPassword(entity.getPassword());
+		this.roles = Role.ROLE_ADMIN;
 	}
 
 }

@@ -113,8 +113,7 @@ public class Cart {
 	public Price getTotalPrice() {
 		// fix 毎回 method が呼ばれて再計算している
 		this.totalPrice = new Price(0);
-		List<CartItem> items = this.getItems();
-		for (CartItem item : items) {
+		for (CartItem item : this.getItems()) {
 			this.totalPrice = this.totalPrice.add(item.getTotalPrice());
 		}
 		return this.totalPrice;

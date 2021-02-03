@@ -49,9 +49,6 @@ public class OrderController {
 	 */
 	@GetMapping("/form")
 	public String form(OrderSaveCommand orderSaveCommand, Model model) {
-		/**
-		 * TODO: セッション情報から会員のインスタンスを生成するまでが長い
-		 */
 		MemberSession memberSession = (MemberSession) session.getAttribute(Member.SESSION_NAME);
 		Email email = memberSession.getEmail();
 		MemberEntity memberEntity = memberRepository.findByEmail(email).orElseThrow(NullPointerException::new);

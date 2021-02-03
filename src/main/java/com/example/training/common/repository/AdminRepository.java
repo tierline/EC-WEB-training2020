@@ -2,6 +2,7 @@ package com.example.training.common.repository;
 
 import java.util.Optional;
 
+import com.example.training.common.domain.value.Name;
 import com.example.training.common.entity.AdminEntity;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -18,5 +19,5 @@ public interface AdminRepository {
    * @param name
    * @return 管理者
    */
-  Optional<AdminEntity> findByName(String name);
+  Optional<AdminEntity> findByName(Name name);
 }

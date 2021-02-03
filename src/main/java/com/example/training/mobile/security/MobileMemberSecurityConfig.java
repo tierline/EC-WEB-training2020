@@ -35,6 +35,9 @@ public class MobileMemberSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
+		// http.exceptionHandling().authenticationEntryPoint(authenticationEntryPoint);
+		// sessionが切れた時、ログインページを表示する。
+
 		// @formatter:off
  		http.mvcMatcher("/api/**").authorizeRequests()
  		    .antMatchers("/api/member/login", "/api/member/applicate").permitAll()

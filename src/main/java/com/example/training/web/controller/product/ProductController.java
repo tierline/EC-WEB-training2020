@@ -1,5 +1,6 @@
 package com.example.training.web.controller.product;
 
+import com.example.training.common.domain.value.id.ProductId;
 import com.example.training.common.entity.ProductEntity;
 import com.example.training.common.repository.ProductRepository;
 
@@ -27,9 +28,10 @@ public class ProductController {
 	 * @param model
 	 * @return 商品詳細画面
 	 */
-	@GetMapping("detail/{productId}")
-	public String detail(@PathVariable int productId, Model model) {
-		ProductEntity product = productRepository.findById(productId).orElseThrow(NullPointerException::new);
+	@GetMapping("detail/{id}")
+	public String detail(@PathVariable Long id, Model model) {
+		ProductId productId = new ProductId(id);
+		ProductEntity product = productRepository.findById(productId).orElseThrow(IllegalArgumentException::new);
 		model.addAttribute("product", product);
 		return "product/detail";
 	}

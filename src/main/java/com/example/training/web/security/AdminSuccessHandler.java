@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.example.training.common.domain.Admin;
+import com.example.training.common.domain.value.Name;
 import com.example.training.common.entity.AdminEntity;
 import com.example.training.common.http.AdminSession;
 import com.example.training.common.repository.AdminRepository;
@@ -39,7 +40,7 @@ public class AdminSuccessHandler implements AuthenticationSuccessHandler {
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
 		String name = authentication.getName();
-		AdminEntity adminEntity = adminRepository.findByName(name).orElseThrow();
+		AdminEntity adminEntity = adminRepository.findByName(new Name(name)).orElseThrow();
 		Admin admin = new Admin(adminEntity);
 		AdminSession adminSession = new AdminSession(admin);
 		session.setAttribute(Admin.SESSION_NAME, adminSession);

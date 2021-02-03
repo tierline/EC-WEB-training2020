@@ -3,6 +3,7 @@ package com.example.training.common.http.security;
 import java.util.Optional;
 
 import com.example.training.common.domain.Admin;
+import com.example.training.common.domain.value.Name;
 import com.example.training.common.entity.AdminEntity;
 import com.example.training.common.repository.AdminRepository;
 
@@ -29,7 +30,7 @@ public class LoginAdminDetailsService implements UserDetailsService {
   @Override
   public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
     assert (name != null);
-    Optional<AdminEntity> adminEntity = adminRepository.findByName(name);
+    Optional<AdminEntity> adminEntity = adminRepository.findByName(new Name(name));
     if (adminEntity.isEmpty()) {
       throw new UsernameNotFoundException("名前で管理人が見つけられませんでした。: " + name);
     }

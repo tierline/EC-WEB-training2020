@@ -7,19 +7,19 @@ public enum Role {
 	/**
 	 * 権限の値
 	 */
-	ADMIN_USER, ROLE_USER
+	ROLE_ADMIN, ROLE_USER
 	// class
-//	@Getter
-//	private String value;
-//
-//	/**
-//	 * 基本コンストラクタ
-//	 *
-//	 * @param value
-//	 */
-//	public Role(String value) {
-//		Assertion.isNull(value);
-//		this.value = value;
-//	}
+	// @Getter
+	// private String value;
+	//
+	// /**
+	// * 基本コンストラクタ
+	// *
+	// * @param value
+	// */
+	// public Role(String value) {
+	// Assertion.isNull(value);
+	// this.value = value;
+	// }
 
 }

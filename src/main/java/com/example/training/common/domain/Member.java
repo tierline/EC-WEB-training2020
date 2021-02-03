@@ -80,31 +80,6 @@ public class Member {
 	}
 
 	/**
-	 * 新規会員登録時のコンストラクタ
-	 *
-	 * @param memberApplicationCommand
-	 * @param passwordDigest
-	 */
-//TODO
-	public Member(MemberApplicationCommand memberApplicationCommand, DigestPassword digestPassword) {
-		this.digestPassword = digestPassword;
-		this.email = new Email(memberApplicationCommand.getEmail());
-		this.lastUpdate = new Name("none");
-		this.status = MemberStatus.UNAPPROVED;
-	}
-
-	/*
-	 * mobile版新規登録
-	 */
-	public Member(MemberApplicationCommand memberApplicationCommand, DigestPassword digestPassword,
-			MemberStatus status) {
-		this.digestPassword = digestPassword;
-		this.email = new Email(memberApplicationCommand.getEmail());
-		this.lastUpdate = new Name("none");
-		this.status = status;
-	}
-
-	/**
 	 * 注文時の会員情報更新のためのコンストラクタ
 	 *
 	 * @param order 注文内容
@@ -114,6 +89,29 @@ public class Member {
 		this.phoneNumber = order.getPhoneNumber();
 		this.address = order.getAddress();
 		this.memberId = order.getMemberId();
+	}
+
+	/**
+	 * 新規会員登録時のコンストラクタ
+	 *
+	 * @param command
+	 * @param password
+	 */
+	public Member(MemberApplicationCommand command, DigestPassword password) {
+		this.digestPassword = password;
+		this.email = command.createEmail();
+		this.lastUpdate = new Name("none");
+		this.status = MemberStatus.UNAPPROVED;
+	}
+
+	/*
+	 * mobile版新規登録
+	 */
+	public Member(MemberApplicationCommand command, DigestPassword password, MemberStatus status) {
+		this.digestPassword = password;
+		this.email = command.createEmail();
+		this.lastUpdate = new Name("none");
+		this.status = status;
 	}
 
 	/**

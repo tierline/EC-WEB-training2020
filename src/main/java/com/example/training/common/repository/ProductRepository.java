@@ -3,9 +3,10 @@ package com.example.training.common.repository;
 import java.util.List;
 import java.util.Optional;
 
-import org.apache.ibatis.annotations.Mapper;
-
+import com.example.training.common.domain.value.id.ProductId;
 import com.example.training.common.entity.ProductEntity;
+
+import org.apache.ibatis.annotations.Mapper;
 
 /**
  * 商品リポジトリ
@@ -17,7 +18,7 @@ public interface ProductRepository {
 	/**
 	 * 商品IDで商品を取得する。
 	 */
-	public Optional<ProductEntity> findById(int productId);
+	public Optional<ProductEntity> findById(ProductId id);
 
 	/**
 	 * 単語で商品を取得する。

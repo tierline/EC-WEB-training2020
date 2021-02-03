@@ -13,6 +13,7 @@ import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode(callSuper = false)
 public class LoginAdminDetails extends User {
+
 	private static final long serialVersionUID = 1L;
 	// DBより検索したAdminエンティティ
 	// アプリケーションから利用されるのでフィールドに定義
@@ -33,7 +34,7 @@ public class LoginAdminDetails extends User {
 	}
 
 	private static Collection<? extends GrantedAuthority> createRole() {
-		return AuthorityUtils.commaSeparatedStringToAuthorityList(Role.ADMIN_USER.toString());
+		return AuthorityUtils.commaSeparatedStringToAuthorityList(Role.ROLE_ADMIN.toString());
 	}
 
 }
