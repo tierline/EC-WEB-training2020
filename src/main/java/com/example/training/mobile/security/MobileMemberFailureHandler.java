@@ -12,7 +12,7 @@ import org.springframework.security.web.authentication.AuthenticationFailureHand
 import org.springframework.stereotype.Component;
 
 @Component
-public class MemberFailureHandlerMobile implements AuthenticationFailureHandler {
+public class MobileMemberFailureHandler implements AuthenticationFailureHandler {
 
 	/*
 	 * 認証失敗時 401を返す

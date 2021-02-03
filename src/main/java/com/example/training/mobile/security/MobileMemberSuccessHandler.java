@@ -19,7 +19,7 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import org.springframework.stereotype.Component;
 
 @Component
-public class MemberSuccessHandlerMobile implements AuthenticationSuccessHandler {
+public class MobileMemberSuccessHandler implements AuthenticationSuccessHandler {
 
 	@Autowired
 	protected HttpSession session;
