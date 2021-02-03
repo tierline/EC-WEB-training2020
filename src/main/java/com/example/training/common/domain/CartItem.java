@@ -30,6 +30,16 @@ public class CartItem {
 	}
 
 	/**
+	 * 商品数を指定する基本コンストラクタ。
+	 *
+	 * @param product 商品
+	 */
+	public CartItem(Product product, Quantity quantity) {
+		this.product = product;
+		this.quantity = quantity;
+	}
+
+	/**
 	 * 商品の個数を返す。
 	 *
 	 * @return 商品数
@@ -130,6 +140,7 @@ public class CartItem {
 	}
 
 	/**
+	 * 同じ商品か判定する。
 	 *
 	 * @param product
 	 * @return

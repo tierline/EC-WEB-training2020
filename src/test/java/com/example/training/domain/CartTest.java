@@ -1,11 +1,16 @@
 package com.example.training.domain;
 
+import java.util.Optional;
+
 import com.example.training.common.domain.Cart;
 import com.example.training.common.domain.Product;
+import com.example.training.common.domain.value.Price;
 import com.example.training.common.domain.value.ProductName;
+import com.example.training.common.domain.value.Quantity;
 import com.example.training.common.domain.value.id.ProductId;
 
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -15,51 +20,117 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class CartTest {
 
+  @BeforeAll
+  public void setUp() {
+  }
+
   /**
    * カートが生成できる。
    */
   @Test
-  void create() {
+  void canCreate() {
     Cart cart = new Cart();
-    Assert.assertNotNull(cart);
+    Assertions.assertNotNull(cart);
   }
 
   /**
    * カートに商品が追加できる。
    */
   @Test
-  void add() {
-    Product product = new Product(new ProductId(1L), new ProductName("ガム"));
+  void canAddProduct() {
+    Product p = new Product(new ProductId(1L), new ProductName("ガム"));
     Cart cart = new Cart();
-    cart.add(product);
-    Assert.assertEquals(product, cart.getItem(product).get().getProduct());
+    cart.add(p);
+    Assertions.assertEquals(p, cart.getItem(p).get().getProduct());
   }
 
   /**
    * カートに商品が指定した数量個、追加できる。
    */
   @Test
-  void addWithQuantity() {
-    Product product = new Product(new ProductId(1L), new ProductName("ガム"));
+  void canAddProductWithQuantity() {
+    Product p = new Product(new ProductId(1L), new ProductName("ガム"));
     Cart cart = new Cart();
-    cart.add(product);
-    Assert.assertEquals(1, cart.getItem(product).get().getQuantity().getValue());
+    /**
+     * 空のカートに商品を5つ追加する。
+     */
+    cart.add(p, new Quantity(5));
+    Assertions.assertEquals(5, cart.getItem(p).get().getQuantity().getValue());
+    /**
+     * 同じ商品をさらに5つ追加する。
+     */
+    cart.add(p, new Quantity(5));
+    Assertions.assertEquals(10, cart.getItem(p).get().getQuantity().getValue());
   }
 
-  // /**
-  // * カートから商品を削除できる。
-  // */
-  // @Test
-  // void remove() {
-  // Product product = new Product(new ProductId(1L), new ProductName("ガム"));
-  // Cart cart = new Cart();
-  // cart.add(product);
-  // assertEquals(1, cart.getSize());
-  // cart.remove(product);
-  // assertEquals(0, cart.getSize());
-  // cart.remove(product);
-  // assertEquals(0, cart.getSize());
-  // }
+  /**
+   * カートから商品を削除できる。
+   */
+  @Test
+  void canRemoveProduct() {
+    Product p = new Product(new ProductId(1L), new ProductName("ガム"));
+    Cart cart = new Cart();
+    cart.add(p);
+
+    /**
+     * １つ追加して削除する。
+     */
+    Assertions.assertEquals(1, cart.getSize());
+    cart.remove(p);
+    Assertions.assertEquals(0, cart.getSize());
+    cart.remove(p);
+    Assertions.assertEquals(0, cart.getSize());
+    /**
+     * 5つ追加して削除する。
+     */
+    cart.add(p, new Quantity(5));
+    cart.remove(p);
+    Assertions.assertEquals(0, cart.getSize());
+    Assertions.assertEquals(Optional.empty(), cart.getItem(p));
+  }
+
+  /**
+   * 商品数が変更できる。
+   */
+  @Test
+  void canChangeItemQuantity() {
+    Product p = new Product(new ProductId(1L), new ProductName("ガム"));
+    Cart cart = new Cart();
+    cart.add(p);
+
+    /**
+     * 商品数を 1 から 5 に変更
+     */
+    cart.changeItemQuantity(p, new Quantity(5));
+    Assertions.assertEquals(5, cart.getItem(p).get().getQuantity().getValue());
+
+  }
+
+  /**
+   * カート内商品の合計金額が計算できる。
+   */
+  @Test
+  void canGetTotalPrice() {
+    Product p1 = new Product(new ProductId(1L), new ProductName("ガム"), new Price(100));
+    Product p2 = new Product(new ProductId(2L), new ProductName("チョコ"), new Price(200));
+    Cart cart = new Cart();
+    /**
+     * 100
+     */
+    cart.add(p1);
+    Assertions.assertEquals(100, cart.getTotalPrice());
+    /**
+     * 100 + 200 = 300
+     */
+    cart.add(p2);
+    Assertions.assertEquals(300, cart.getTotalPrice());
+    /**
+     * 300 + 100 + 200 = 600
+     */
+    cart.add(p1);
+    cart.add(p2);
+    Assertions.assertEquals(600, cart.getTotalPrice());
+  }
 
   // /**
   // *
@@ -89,22 +160,4 @@ class CartTest {
   // assertEquals(6, item.getQuantity());
   // }
 
-  // /**
-  // * カート内商品の合計金額が計算できる。
-  // */
-  // @Test
-  // void totalPrice() {
-  // Product product1 = new Product(new ProductId(1L), new ProductName("ガム"), new
-  // Price(20));
-  // Product product2 = new Product(new ProductId(2L), new ProductName("チョコ"), new
-  // Price(200));
-  // Cart cart = new Cart();
-  // cart.add(product1);
-  // assertEquals(20, cart.getTotalPrice());
-  // cart.add(product1);
-  // cart.add(product1);
-  // assertEquals(60, cart.getTotalPrice());
-  // cart.add(product2);
-  // assertEquals(160, cart.getTotalPrice());
-  // }
 }

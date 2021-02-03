@@ -40,7 +40,7 @@ public class Assertion {
 	 * @param value
 	 */
 	public static void length(String value, int min, int max) {
-		assert (value.length() > min || value.length() < max);
+		assert (value.length() >= min && value.length() <= max);
 	}
 
 	/**
@@ -62,7 +62,7 @@ public class Assertion {
 	 * @param value
 	 */
 	public static void range(int value, int min, int max) {
-		assert (value > min || value < max);
+		assert (value >= min && value <= max) : "値の範囲が不正です";
 	}
 
 	/**
@@ -71,7 +71,7 @@ public class Assertion {
 	 * @param value
 	 */
 	public static void range(Long value, Long min, Long max) {
-		assert (value > min || value < max);
+		assert (value >= min && value <= max);
 	}
 
 	/**

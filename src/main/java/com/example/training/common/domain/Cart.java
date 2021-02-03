@@ -46,7 +46,7 @@ public class Cart {
 		if (itemOpt.isPresent()) {
 			itemOpt.get().addQuantity(quantity);
 		} else {
-			items.add(new CartItem(product));
+			items.add(new CartItem(product, quantity));
 		}
 	}
 
@@ -91,15 +91,16 @@ public class Cart {
 	}
 
 	/**
-	 * 商品を取得する。
+	 * カート内に商品があればその商品を取得する。
 	 *
 	 * @param product
 	 * @return
 	 */
 	public Optional<CartItem> getItem(Product product) {
 		for (CartItem item : items) {
-			if (item.equalsProduct(product))
+			if (item.equalsProduct(product)) {
 				return Optional.of(item);
+			}
 		}
 		return Optional.empty();
 	}

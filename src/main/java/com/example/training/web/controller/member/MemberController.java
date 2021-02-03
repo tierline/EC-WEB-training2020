@@ -84,7 +84,7 @@ public class MemberController {
 		if (result.hasErrors()) {
 			return applicate(command, model);
 		}
-		Optional<MemberEntity> memberEntity = memberRepository.findByEmail(command.getEmail());
+		Optional<MemberEntity> memberEntity = memberRepository.findByEmail(command.createEmail());
 		if (memberEntity.isPresent()) {
 			model.addAttribute("errorMessage", messageSource.getMessage("error.applicate.duplicate", null, Locale.JAPAN));
 			return "member/applicate";

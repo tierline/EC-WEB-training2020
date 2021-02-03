@@ -13,7 +13,7 @@ public class Quantity {
 	 * 数量の値
 	 */
 	@Getter
-	private int value;
+	private int value = 0;
 
 	/**
 	 * 数量の最小値
