@@ -10,7 +10,7 @@ import com.example.training.common.domain.value.Quantity;
 import com.example.training.common.domain.value.id.ProductId;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -20,8 +20,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class CartTest {
 
-  @BeforeAll
-  public void setUp() {
+  @BeforeEach
+  void beforeEach() {
+    System.out.println("  JUnit5Test###beforeEach()");
   }
 
   /**

@@ -11,6 +11,8 @@ import org.springframework.boot.test.context.SpringBootTest;
  */
 @SpringBootTest
 public class QuantityTest {
+
+
   /**
    * 数量が生成できる。
    */
