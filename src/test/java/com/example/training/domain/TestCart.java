@@ -17,7 +17,7 @@ import org.springframework.boot.test.context.SpringBootTest;
  * カートのテスト
  */
 @SpringBootTest
-class CartTest {
+class TestCart {
 
   // @BeforeEach
   // void beforeEach() {

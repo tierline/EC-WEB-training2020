@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 /**
  * 注文のテスト
  */
-public class OrderTest {
+public class TestOrder {
 
   /**
    *

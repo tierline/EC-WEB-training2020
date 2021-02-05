@@ -27,7 +27,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-public class OrderServiceTest {
+public class TestOrderService {
 
   @Autowired
   private MemberRepository memberRepository;

@@ -15,7 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest;
  * カート内商品のテスト
  */
 @SpringBootTest
-public class CartItemTest {
+public class TestCartItem {
 
   /**
    * インスタンスが生成できる。
