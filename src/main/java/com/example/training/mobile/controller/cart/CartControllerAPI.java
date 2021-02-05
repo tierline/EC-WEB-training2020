@@ -62,7 +62,6 @@ public class CartControllerAPI {
 	 * カートの商品の数量を変更する。
 	 *
 	 * @param id
-	 * @return
 	 */
 	@PostMapping("/changeQuantity/{id}/{quantity}")
 	public void changeItemQuantity(@PathVariable Long id, @PathVariable int quantity) {
@@ -77,7 +76,6 @@ public class CartControllerAPI {
 	 * カートから特定の商品をすべて削除する。
 	 *
 	 * @param productId
-	 * @return
 	 */
 	@PostMapping("/remove/{id}")
 	public Cart cartFromParticularProductsAllDelete(@PathVariable Long id) {

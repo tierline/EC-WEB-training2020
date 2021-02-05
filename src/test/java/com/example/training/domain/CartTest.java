@@ -10,7 +10,6 @@ import com.example.training.common.domain.value.Quantity;
 import com.example.training.common.domain.value.id.ProductId;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -20,16 +19,16 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class CartTest {
 
-  @BeforeEach
-  void beforeEach() {
-    System.out.println("  JUnit5Test###beforeEach()");
-  }
+  // @BeforeEach
+  // void beforeEach() {
+  // System.out.println(" JUnit5Test###beforeEach()");
+  // }
 
   /**
    * カートが生成できる。
    */
   @Test
-  void canCreate() {
+  void testCreate() {
     Cart cart = new Cart();
     Assertions.assertNotNull(cart);
   }
@@ -38,7 +37,7 @@ class CartTest {
    * カートに商品が追加できる。
    */
   @Test
-  void canAddProduct() {
+  void testAddProduct() {
     Product p = new Product(new ProductId(1L), new ProductName("ガム"));
     Cart cart = new Cart();
     cart.add(p);
@@ -49,7 +48,7 @@ class CartTest {
    * カートに商品が指定した数量個、追加できる。
    */
   @Test
-  void canAddProductWithQuantity() {
+  void testAddProductWithQuantity() {
     Product p = new Product(new ProductId(1L), new ProductName("ガム"));
     Cart cart = new Cart();
     /**
@@ -68,7 +67,7 @@ class CartTest {
    * カートから商品を削除できる。
    */
   @Test
-  void canRemoveProduct() {
+  void testRemoveProduct() {
     Product p = new Product(new ProductId(1L), new ProductName("ガム"));
     Cart cart = new Cart();
     cart.add(p);
@@ -94,7 +93,7 @@ class CartTest {
    * 商品数が変更できる。
    */
   @Test
-  void canChangeItemQuantity() {
+  void testChangeItemQuantity() {
     Product p = new Product(new ProductId(1L), new ProductName("ガム"));
     Cart cart = new Cart();
     cart.add(p);
@@ -111,7 +110,7 @@ class CartTest {
    * カート内商品の合計金額が計算できる。
    */
   @Test
-  void canGetTotalPrice() {
+  void testGetTotalPrice() {
     Product p1 = new Product(new ProductId(1L), new ProductName("ガム"), new Price(100));
     Product p2 = new Product(new ProductId(2L), new ProductName("チョコ"), new Price(200));
     Cart cart = new Cart();
@@ -119,18 +118,18 @@ class CartTest {
      * 100
      */
     cart.add(p1);
-    Assertions.assertEquals(100, cart.getTotalPrice());
+    Assertions.assertEquals(100, cart.getTotalPrice().getValue());
     /**
      * 100 + 200 = 300
      */
     cart.add(p2);
-    Assertions.assertEquals(300, cart.getTotalPrice());
+    Assertions.assertEquals(300, cart.getTotalPrice().getValue());
     /**
      * 300 + 100 + 200 = 600
      */
     cart.add(p1);
     cart.add(p2);
-    Assertions.assertEquals(600, cart.getTotalPrice());
+    Assertions.assertEquals(600, cart.getTotalPrice().getValue());
   }
 
   // /**

@@ -1,5 +1,8 @@
 package com.example.training.common.domain.value;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * テストメソッドのクラス。式が真になることを期待する。
  */
@@ -77,8 +80,9 @@ public class Assertion {
 	/**
 	 * 文字列を正規表現でテストする。
 	 */
-	public static void matches(String value, String regex) {
-		assert (value.matches(regex));
+	public static void matches(String value, Pattern pattern) {
+		Matcher matcher = pattern.matcher(value);
+		assert (matcher.matches());
 	}
 
 }

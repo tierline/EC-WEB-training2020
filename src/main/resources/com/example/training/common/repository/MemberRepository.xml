@@ -10,17 +10,17 @@
 		resultType="com.example.training.common.entity.MemberEntity">
 		SELECT
 		id as memberId,
-		password,
 		email,
-		phone_number,
+		password,
 		last_name,
 		first_name,
+		phone_number,
 		postcode,
 		prefecture,
 		city,
 		block,
-		last_update,
-		status
+		status,
+		last_update
 		FROM
 		MEMBER
 		WHERE
@@ -31,15 +31,16 @@
 		resultType="com.example.training.common.entity.MemberEntity">
 		SELECT id as memberId,
 		email,
-		phone_number,
+		password,
 		last_name,
 		first_name,
-		password,
+		phone_number,
 		postcode,
 		prefecture,
 		city,
 		block,
-		status
+		status,
+		last_update
 		FROM MEMBER WHERE id = "${value}"
 	</select>
 
@@ -61,33 +62,37 @@
 	</select>
 
 	<insert id="save" useGeneratedKeys="true">
+		INSERT INTO MEMBER (email, password, status) VALUES (
+		"${email}",
+		"${password}",
+		"${status}"
+		)
+	</insert>
+
+	<!-- <insert id="save" useGeneratedKeys="true">
 		INSERT INTO MEMBER (email, password, last_update, status) VALUES (
 		"${email.value}",
 		"${digestPassword.value}",
 		"${lastUpdate.value}",
 		"${status}"
 		)
-	</insert>
+	</insert> -->
 
-	<update id="updateByAdmin">
+	<update id="update">
 		UPDATE MEMBER SET
-		last_update=#{lastUpdate.value},
-		status=#{status}
+		email = #{email},
+		last_name = #{lastName},
+		first_name = #{firstName},
+		password = #{password},
+		postcode = #{postcode},
+		prefecture = #{prefecture},
+		city = #{city},
+		block = #{block},
+		phone_number = #{phoneNumber},
+		last_update = #{lastUpdate},
+		status= #{status}
 		WHERE
-		id= #{memberId.value}
-	</update>
-
-	<update id="updateAtOrder">
-		UPDATE MEMBER SET
-		last_name=#{fullName.lastName.value},
-		first_name=#{fullName.firstName.value},
-		phone_number=#{phoneNumber.value},
-		postcode=#{address.postcode.value},
-		prefecture=#{address.prefecture.value},
-		city=#{address.city.value},
-		block=#{address.block.value}
-		WHERE id=
-		#{memberId.value}
+		id= #{memberId}
 	</update>
 
 

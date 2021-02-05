@@ -21,7 +21,7 @@ public class CartItemTest {
    * インスタンスが生成できる。
    */
   @Test
-  void canCreate() {
+  void testCreate() {
     Product p = new Product(new ProductId(1L), new ProductName("ガム"));
     CartItem cartItem = new CartItem(p);
     Assert.assertEquals(cartItem.getProduct(), p);
@@ -32,7 +32,7 @@ public class CartItemTest {
    * 商品数が加算できる。
    */
   @Test
-  void canAddItem() {
+  void testAddItem() {
     Product p = new Product(new ProductId(1L), new ProductName("ガム"));
     CartItem cartItem = new CartItem(p);
     /**
@@ -51,7 +51,7 @@ public class CartItemTest {
    * 商品の合計金額が計算できる。
    */
   @Test
-  void canGetTotalPrice() {
+  void testGetTotalPrice() {
     Product p = new Product(new ProductId(1L), new ProductName("ガム"), new Price(100));
     CartItem cartItem = new CartItem(p);
     /**
@@ -69,7 +69,7 @@ public class CartItemTest {
    * 同じ商品か判定できる。
    */
   @Test
-  void canJudgeProductEquals() {
+  void testJudgeProductEquals() {
     Product p = new Product(new ProductId(1L), new ProductName("ガム"), new Price(100));
     CartItem cartItem = new CartItem(p);
     Assert.assertTrue(cartItem.equalsProduct(p));
@@ -79,7 +79,7 @@ public class CartItemTest {
    * 商品数をゼロにできる。また、商品数がゼロか判定できる。
    */
   @Test
-  void canClearQuantity() {
+  void testClearQuantity() {
     Product p = new Product(new ProductId(1L), new ProductName("ガム"), new Price(100));
     /**
      * 商品数 5 で生成する。

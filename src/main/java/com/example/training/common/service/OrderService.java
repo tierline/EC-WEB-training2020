@@ -6,6 +6,8 @@ import com.example.training.common.domain.Cart;
 import com.example.training.common.domain.Member;
 import com.example.training.common.domain.Order;
 import com.example.training.common.domain.OrderItem;
+import com.example.training.common.domain.value.id.MemberId;
+import com.example.training.common.entity.MemberEntity;
 import com.example.training.common.repository.MemberRepository;
 import com.example.training.common.repository.OrderRepository;
 
@@ -59,8 +61,10 @@ public class OrderService {
 	 * @param order 注文内容
 	 */
 	private void updateMemberByOrder(Order order) {
-		Member member = new Member(order);
-		memberRepository.updateAtOrder(member);
+		MemberId id = order.getMemberId();
+		Member member = new Member(memberRepository.findById(id).orElseThrow());
+		MemberEntity entity = member.createEntityForUpdateAtOrder(order);
+		memberRepository.update(entity);
 	}
 
 }

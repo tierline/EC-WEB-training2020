@@ -2,6 +2,7 @@ package com.example.training.common.service;
 
 import com.example.training.common.domain.Member;
 import com.example.training.common.domain.value.DigestPassword;
+import com.example.training.common.entity.MemberEntity;
 import com.example.training.common.repository.MemberRepository;
 import com.example.training.web.controller.member.MemberApplicationCommand;
 import com.example.training.web.controller.service.DigestPasswordService;
@@ -32,6 +33,7 @@ public class MemberApplicationService {
 		String rawPassword = command.getPassword().toString();
 		DigestPassword password = digestPasswordService.generate(rawPassword);
 		Member member = command.createMember(password);
-		memberRepository.save(member);
+		MemberEntity entity = new MemberEntity(member.getEmail(), member.getDigestPassword(), member.getStatus());
+		memberRepository.save(entity);
 	}
 }

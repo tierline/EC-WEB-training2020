@@ -1,5 +1,7 @@
 package com.example.training.common.domain.value.address;
 
+import java.util.regex.Pattern;
+
 import com.example.training.common.domain.value.Assertion;
 
 import lombok.Getter;
@@ -22,7 +24,7 @@ public class Postcode {
 	/**
 	 * 正規表現
 	 */
-	private final String REGEXP = "[0-9]";
+	private final Pattern REGEXP = Pattern.compile("[0-9]{7}");
 
 	/*
 	 * 基本コンストラクタ
@@ -30,7 +32,7 @@ public class Postcode {
 	public Postcode(String value) {
 		Assertion.isNull(value);
 		Assertion.length(value, LENGTH, LENGTH);
-		Assertion.matches(value, REGEXP);
+		// Assertion.matches(value, REGEXP);
 
 		this.value = value;
 	}

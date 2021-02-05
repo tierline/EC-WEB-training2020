@@ -20,7 +20,6 @@ public class ImagePath {
 	 */
 	public ImagePath(String value) {
 		Assertion.isNull(value);
-		Assertion.matches(value, regex());
 		this.value = value;
 	}
 

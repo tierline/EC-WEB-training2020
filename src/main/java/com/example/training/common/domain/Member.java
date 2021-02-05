@@ -115,23 +115,38 @@ public class Member {
 	}
 
 	/**
-	 * 会員情報編集のためのコンストラクタ
-	 *
-	 * @param memberEditCommand
-	 * @param adminName
-	 * @param memberId
-	 */
-	public Member(MemberEditCommand memberEditCommand, Name adminName, MemberId memberId) {
-		this.memberId = memberId;
-		this.lastUpdate = adminName;
-		this.status = MemberStatus.valueOf(memberEditCommand.getStatus());
-	}
-
-	/**
 	 * デフォルトコンストラクタ
 	 */
 	public Member() {
 
+	}
+
+	/**
+	 * 管理者による会員情報編集のためのメソッド
+	 *
+	 * @param command   会員編集コマンド
+	 * @param adminName 更新管理者名
+	 */
+	public MemberEntity createEntityForUpdateByAdmin(MemberEditCommand command, Name adminName) {
+		this.lastUpdate = adminName;
+		this.status = MemberStatus.valueOf(command.getStatus());
+		MemberEntity entity = new MemberEntity(this);
+		return entity;
+	}
+
+	/**
+	 * 注文処理時の会員情報更新のためのメソッド
+	 *
+	 * @param command   会員編集コマンド
+	 * @param adminName 更新管理者名
+	 */
+	public MemberEntity createEntityForUpdateAtOrder(Order order) {
+		this.fullName = order.getFullName();
+		this.phoneNumber = order.getPhoneNumber();
+		this.address = order.getAddress();
+		this.memberId = order.getMemberId();
+		MemberEntity entity = new MemberEntity(this);
+		return entity;
 	}
 
 }

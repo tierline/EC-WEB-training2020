@@ -78,11 +78,14 @@ public class AdminController {
 	 * 会員情報を編集する。
 	 */
 	@PostMapping("/members/{memberId}/edit")
-	public String edit(@PathVariable MemberId memberId, MemberEditCommand memberEditCommand) {
+	public String edit(@PathVariable MemberId memberId, MemberEditCommand command) {
 		AdminSession adminSession = (AdminSession) session.getAttribute(Admin.SESSION_NAME);
 		Name adminName = adminSession.getName();
-		Member member = new Member(memberEditCommand, adminName, memberId);
-		memberRepository.updateByAdmin(member);
+		MemberEntity entity = memberRepository.findById(memberId).orElseThrow();
+		// TODO 住所などNULLの会員が生成できてしまっている。
+		Member member = new Member(entity);
+		MemberEntity entityForUpdate = member.createEntityForUpdateByAdmin(command, adminName);
+		memberRepository.update(entityForUpdate);
 		return "redirect:/admin/members";
 	}
 

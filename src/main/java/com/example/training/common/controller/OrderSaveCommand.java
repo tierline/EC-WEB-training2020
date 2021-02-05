@@ -106,7 +106,7 @@ public class OrderSaveCommand {
 	/**
 	 * お届け先入力フォームに会員情報をセットする。
 	 *
-	 * @param member 会員
+	 * @param memberDTO 会員
 	 */
 	public void setMemberInfo(MemberDTO memberDTO) {
 		this.lastName = memberDTO.getLastName();

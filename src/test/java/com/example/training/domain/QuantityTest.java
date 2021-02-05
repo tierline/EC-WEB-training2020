@@ -1,9 +1,13 @@
 package com.example.training.domain;
 
+import java.util.List;
+
 import com.example.training.common.domain.value.Quantity;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.boot.test.context.SpringBootTest;
 
 /**
@@ -12,23 +16,32 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 public class QuantityTest {
 
-
   /**
    * 数量が生成できる。
    */
-  @Test
-  void create() {
-    Quantity quantity1 = new Quantity(1);
-    Quantity quantity2 = new Quantity(9999);
-    Assertions.assertEquals(1, quantity1.getValue());
-    Assertions.assertEquals(9999, quantity2.getValue());
+  // @Test
+  @ParameterizedTest
+  @MethodSource("testArgs")
+  void create(Integer ints) {
+    Quantity quantity = new Quantity(ints);
+    Assertions.assertEquals(ints.intValue(), quantity.getValue());
+
+  }
+
+  /**
+   * createテストの引数
+   *
+   * @return
+   */
+  static List<Integer> testArgs() {
+    return List.of(1, 5, 10, 9999);
   }
 
   /**
    * 数量が加算できる。
    */
   @Test
-  void canAdd() {
+  void testAdd() {
     /**
      * 1 + 1 = 2
      */
@@ -56,7 +69,7 @@ public class QuantityTest {
    * 数量が減算できる。
    */
   @Test
-  void canSubtract() {
+  void testSubtract() {
     /**
      * 1 - 1 = 0
      */

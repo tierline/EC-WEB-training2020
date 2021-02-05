@@ -3,7 +3,6 @@ package com.example.training.common.repository;
 import java.util.List;
 import java.util.Optional;
 
-import com.example.training.common.domain.Member;
 import com.example.training.common.domain.value.Email;
 import com.example.training.common.domain.value.id.MemberId;
 import com.example.training.common.entity.MemberEntity;
@@ -36,21 +35,13 @@ public interface MemberRepository {
 	 *
 	 * @param member
 	 */
-	public void save(Member member);
+	public void save(MemberEntity entity);
 
 	/**
-	 * フォーム内容で会員情報を更新する。
+	 * 更新する。
 	 *
-	 * @param memberEditCommand
-	 * @param lastUpdate
+	 * @param entity エンティティ
 	 */
-	public void updateByAdmin(Member member);
-
-	/**
-	 * 注文内容で会員情報を更新する。
-	 *
-	 * @param member 会員
-	 */
-	public void updateAtOrder(Member member);
+	public void update(MemberEntity entity);
 
 }
